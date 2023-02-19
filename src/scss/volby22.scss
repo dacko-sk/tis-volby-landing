@@ -29,11 +29,11 @@ code {
 }
 
 header {
-  background-image: url('./../../public/img/samospravy_color_3_1920_900.png');
+  background-image: url('./../../public/img/parlament_2_color_1920_900.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: 50%;
+  background-position-x: center;
+  background-position-y: 20%;
   position: relative;
   h1 {
     padding: 1.5em 0.5em 2em;
@@ -176,6 +176,24 @@ ul.arrows {
   }
   &.score-unknown {
     background-color: $tis-score-unknown;
+  }
+}
+
+.hover-bg {
+  cursor: pointer;
+  padding: calc(0.5 * var(--bs-gutter-x)) 0;
+  &:hover,
+  &:focus {
+    background-color: $tis-grey;
+    margin: 0 calc(-0.5 * var(--bs-gutter-x));
+    padding: calc(0.5 * var(--bs-gutter-x));
+    h2 {
+      text-decoration: none;
+    }
+  }
+  h2 {
+    color: $tis-orange;
+    text-decoration: underline;
   }
 }
 

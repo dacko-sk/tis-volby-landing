@@ -1,16 +1,16 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { dateFormat, parseWpHtml } from '../../../api/helpers';
+import { dateTimeFormat, parseWpHtml } from '../../../api/helpers';
 
 import Media from '../Media';
 
 function NewsList({ article, clickHandler, keyUpHandler }) {
     return (
-        <Col className="px-0" md={12}>
+        <Col className="" md={12}>
             <div
                 id={article.slug}
-                className="article p-3"
+                className="article hover-bg"
                 onClick={clickHandler}
                 onKeyUp={keyUpHandler}
                 role="link"
@@ -30,7 +30,7 @@ function NewsList({ article, clickHandler, keyUpHandler }) {
                     <Col>
                         <h2>{article.title.rendered}</h2>
                         <div className="article-date my-2">
-                            {dateFormat(article.date)}
+                            {dateTimeFormat(article.date)}
                         </div>
                         {parseWpHtml(article.excerpt.rendered)}
                     </Col>

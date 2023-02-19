@@ -3,14 +3,16 @@ import { setTitle } from '../api/helpers';
 import AlertWithIcon, { icons } from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
 
-const title = 'Zoznam sledovaných volieb';
-
 function Elections() {
-    setTitle(title);
+    setTitle('Prehľad sledovaných volieb');
 
     return (
         <section>
-            <Title>{title}</Title>
+            <Title secondary="volieb">
+                Prehľad
+                <br />
+                sledovaných
+            </Title>
 
             <AlertWithIcon className="mt-4" icon={icons.info} variant="primary">
                 Stránka sa pripravuje.

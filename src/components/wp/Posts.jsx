@@ -18,7 +18,6 @@ import './News.scss';
 
 export const templates = {
     condensed: 'condensed',
-    featured: 'featured',
     list: 'list',
 };
 
@@ -107,7 +106,7 @@ function Posts({
         content = articles.length ? (
             <Row
                 className={`articles ${template}${
-                    template === templates.featured ? ' gy-3' : ''
+                    template === templates.condensed ? ' my-3' : ''
                 }`}
             >
                 {articles}
@@ -118,11 +117,6 @@ function Posts({
             </Alert>
         );
     }
-
-    const title =
-        template === templates.featured && articles.length ? (
-            <h2 className="mb-3">Top {articles.length} kampaní</h2>
-        ) : null;
 
     let nav = null;
     if (showMore || limit) {
@@ -137,7 +131,7 @@ function Posts({
                 </Button>
             </div>
         );
-    } else if (template !== templates.featured) {
+    } else {
         const items = [];
         for (let i = 1; i <= totalPages; i += 1) {
             items.push(
@@ -166,7 +160,6 @@ function Posts({
 
     return (
         <div>
-            {title}
             {content}
             {nav}
         </div>

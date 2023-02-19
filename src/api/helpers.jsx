@@ -33,17 +33,27 @@ export const wholeCurrencyFormat = (value) =>
         maximumFractionDigits: 0,
     });
 
-export const dateFormat = (timestamp) =>
-    new Intl.DateTimeFormat('sk-SK', {
+export const slovakDateFormat = (timestamp, options) =>
+    new Intl.DateTimeFormat('sk-SK', options).format(
+        new Date(typeof timestamp === 'number' ? 1000 * timestamp : timestamp)
+    );
+
+export const dateTimeFormat = (timestamp) =>
+    slovakDateFormat(timestamp, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
         second: 'numeric',
-    }).format(
-        new Date(typeof timestamp === 'number' ? 1000 * timestamp : timestamp)
-    );
+    });
+
+export const dateFormat = (timestamp) =>
+    slovakDateFormat(timestamp, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
 
 export const shortenValue = (value, length, removals) => {
     if (value) {
@@ -159,3 +169,5 @@ export const setTitle = (title) => {
 };
 
 export const scrollToTop = () => window.scrollTo(0, 0);
+
+export const openInNewTab = (url) => window.open(url, '_blank').focus();

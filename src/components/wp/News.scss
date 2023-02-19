@@ -8,17 +8,8 @@
 }
 
 .article {
-  cursor: pointer;
-  &:hover,
-  &:focus {
-    background-color: $tis-grey;
-    h2 {
-      text-decoration: none;
-    }
-  }
-  h2 {
-    color: $tis-orange;
-    text-decoration: underline;
+  p:last-child {
+    margin-bottom: 0;
   }
   .thumb {
     figure {

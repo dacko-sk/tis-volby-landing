@@ -1,16 +1,16 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { dateFormat, parseWpHtml } from '../../../api/helpers';
+import { dateTimeFormat, parseWpHtml } from '../../../api/helpers';
 
 import Media from '../Media';
 
 function NewsCondensed({ article, clickHandler, keyUpHandler }) {
     return (
-        <Col className="d-flex px-0" md={6}>
+        <Col className="d-flex" md={6}>
             <div
                 id={article.slug}
-                className="article p-3"
+                className="article hover-bg"
                 onClick={clickHandler}
                 onKeyUp={keyUpHandler}
                 role="link"
@@ -34,7 +34,7 @@ function NewsCondensed({ article, clickHandler, keyUpHandler }) {
                             {article.title.rendered}
                         </h2>
                         <div className="article-date my-2">
-                            {dateFormat(article.date)}
+                            {dateTimeFormat(article.date)}
                         </div>
                         {parseWpHtml(article.excerpt.rendered)}
                     </Col>

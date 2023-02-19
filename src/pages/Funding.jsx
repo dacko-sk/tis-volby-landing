@@ -8,9 +8,9 @@ function Funding() {
 
     return (
         <section>
-            <Title secondary="a databáza donorov">
+            <Title secondary="donorov">
                 Financovanie politických strán
-                <br />
+                <br />a databáza
             </Title>
 
             <AlertWithIcon className="mt-4" icon={icons.info} variant="primary">
