@@ -26,7 +26,7 @@ function Home() {
             </Title>
 
             <Row className="justify-content-center">
-                <Col className="mb-3" md={8} lg={12} xxl={6}>
+                <Col className="mb-3" md={9} lg={12} xxl={6}>
                     <h2>Nasledujúce voľby</h2>
                     <ElectionPreview
                         img={elections23img}
@@ -36,7 +36,7 @@ function Home() {
                         end="2023-09-30T20:00:00"
                     />
                 </Col>
-                <Col className="mb-3" md={8} lg={12} xxl={6}>
+                <Col className=" mb-3" md={9} lg={12} xxl={6}>
                     <h2>Predchádzajúce voľby</h2>
                     <ElectionPreview
                         img={elections22img}

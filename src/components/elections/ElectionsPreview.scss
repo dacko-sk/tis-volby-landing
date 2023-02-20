@@ -1,41 +1,21 @@
 @use 'sass:map';
 @import './../../scss/variables';
 
+.el-preview-right {
+  container: el-preview-right / inline-size;
+}
+
 .el-preview {
   h2 {
     font-size: calc(1.325rem + 1.1vw);
   }
-}
-
-@media (min-width: map.get($grid-breakpoints, 'sm')) and (max-width: map.get($grid-breakpoints, 'xl')) {
-  .el-preview {
-    .hero-number {
-      font-size: 52px;
-    }
+  .thumb figure {
+    margin: 0;
   }
 }
 
-@media (min-width: map.get($grid-breakpoints, 'lg')) {
-  .el-preview {
-    .thumb {
-      height: 0;
-      overflow: hidden;
-      padding-top: calc(100% * 715 / 1170);
-      position: relative;
-      figure {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        overflow: hidden;
-        img {
-          position: relative;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-      }
-    }
+@container el-preview-right (min-width: 450px) and (max-width: 539px) {
+  .el-preview .hero-number {
+    font-size: 52px;
   }
 }

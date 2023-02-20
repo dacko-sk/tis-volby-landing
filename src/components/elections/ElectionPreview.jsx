@@ -7,6 +7,8 @@ import ElectionsCountdown from './ElectionsCountdown';
 
 import defaultImg from '../../../public/img/tis-logo-blue.png';
 
+import './ElectionsPreview.scss';
+
 function ElectionPreview({
     children,
     img = defaultImg,
@@ -39,7 +41,7 @@ function ElectionPreview({
                         </figure>
                     </div>
                 </Col>
-                <Col className="text-center text-lg-start text-xxl-center">
+                <Col className="el-preview-right text-center text-lg-start text-xxl-center">
                     <h2 className="text-uppercase fw-bold">{title}</h2>
                     <ElectionsCountdown start={start} end={end} />
                     {children}
