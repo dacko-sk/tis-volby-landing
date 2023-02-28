@@ -12,6 +12,7 @@ import './ElectionsPreview.scss';
 function ElectionPreview({
     children,
     img = defaultImg,
+    fadeImg = null,
     link = 'https://volby.transparency.sk/samosprava2022/',
     title = 'Volby 22',
     start,
@@ -34,10 +35,19 @@ function ElectionPreview({
             tabIndex={0}
         >
             <Row className="align-items-center align-items-start">
-                <Col lg={6} xxl={12} className="align-self-start">
-                    <div className="thumb mb-2 mb-lg-0 mb-xxl-2">
+                <Col lg={6} className="align-self-start">
+                    <div
+                        className="img-aspect mb-2 mb-lg-0 mb-xxl-2"
+                        style={{ paddingTop: `${(100 * 715) / 1170}%` }}
+                    >
                         <figure className="text-center text-xxl-start">
-                            <img src={img} alt={title} className="mw-100" />
+                            <img
+                                src={img}
+                                alt={title}
+                                className={`mw-100${
+                                    fadeImg ? ' fade-image' : ''
+                                }`}
+                            />
                         </figure>
                     </div>
                 </Col>

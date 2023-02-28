@@ -6,15 +6,19 @@
 }
 
 .el-preview {
+  box-sizing: content-box;
   h2 {
     font-size: calc(1.325rem + 1.1vw);
   }
   .thumb figure {
     margin: 0;
   }
+  .d-flex > & {
+    width: 100%;
+  }
 }
 
-@container el-preview-right (min-width: 450px) and (max-width: 539px) {
+@container el-preview-right (min-width: 435px) and (max-width: #{map.get($container-max-widths, 'sm')}) {
   .el-preview .hero-number {
     font-size: 52px;
   }

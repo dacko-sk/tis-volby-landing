@@ -1,11 +1,12 @@
 import Countdown from 'react-countdown';
+
 import { dateFormat } from '../../api/helpers';
 
 import './ElectionsCountdown.scss';
 
-function ElectionsCountdown({ start, end }) {
-    const dateStart = new Date(start).getTime();
+function ElectionsCountdown({ start = null, end }) {
     const dateEnd = new Date(end).getTime();
+    const dateStart = start ? new Date(start).getTime() : dateEnd;
     const dateCurrent = new Date().getTime();
 
     // Renderer callback with condition
@@ -36,7 +37,7 @@ function ElectionsCountdown({ start, end }) {
     return dateCurrent > dateEnd ? (
         <div className="elections-countdown">
             <p className="lead mt-3 mb-1">Dátum konania volieb</p>
-            <div className="hero-number">{dateFormat(start)}</div>
+            <div className="hero-number">{dateFormat(end)}</div>
         </div>
     ) : (
         <div className="elections-countdown">

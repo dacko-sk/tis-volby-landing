@@ -7,12 +7,12 @@ import { setTitle } from '../api/helpers';
 import { routes, segments } from '../api/routes';
 
 import { newsCategories } from './News';
-import ElectionPreview from '../components/elections/ElectionPreview';
+import ElectionsPreview from '../components/elections/ElectionsPreview';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
 
-import elections22img from '../../public/img/samosprava22.jpg';
-import elections23img from '../../public/img/parlament23.jpg';
+import img22 from '../../public/img/samosprava22.jpg';
+import img23 from '../../public/img/parlament23.jpg';
 
 function Home() {
     setTitle('Úvod');
@@ -25,21 +25,30 @@ function Home() {
                 volebných
             </Title>
 
+            <Row>
+                <Col xxl={6}>
+                    <h2 className="my-3">Nasledujúce voľby</h2>
+                </Col>
+                <Col xxl={6} className="d-none d-xxl-block">
+                    <h2 className="my-3">Predchádzajúce voľby</h2>
+                </Col>
+            </Row>
             <Row className="justify-content-center">
-                <Col className="mb-3" md={9} lg={12} xxl={6}>
-                    <h2>Nasledujúce voľby</h2>
-                    <ElectionPreview
-                        img={elections23img}
+                <Col className="col-container d-flex" md={9} lg={12} xxl={6}>
+                    <ElectionsPreview
+                        img={img23}
                         link="https://volby.transparency.sk/parlament2023/"
                         title="Parlamentné voľby 2023"
                         start="2023-09-30T07:00:00"
                         end="2023-09-30T20:00:00"
                     />
                 </Col>
-                <Col className=" mb-3" md={9} lg={12} xxl={6}>
-                    <h2>Predchádzajúce voľby</h2>
-                    <ElectionPreview
-                        img={elections22img}
+                <Col className="d-xxl-none">
+                    <h2 className="my-3">Predchádzajúce voľby</h2>
+                </Col>
+                <Col className="col-container d-flex" md={9} lg={12} xxl={6}>
+                    <ElectionsPreview
+                        img={img22}
                         link="https://volby.transparency.sk/samosprava2022/"
                         title="Samosprávne voľby 2022"
                         start="2022-10-29T07:00:00"
@@ -47,7 +56,7 @@ function Home() {
                     />
                 </Col>
             </Row>
-            <div className="buttons text-center">
+            <div className="buttons text-center mt-3">
                 <Button as={Link} to={routes.elections} variant="secondary">
                     Všetky sledované voľby
                 </Button>

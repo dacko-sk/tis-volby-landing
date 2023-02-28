@@ -14,7 +14,6 @@ import Search from './pages/Search';
 
 import Layout from './components/structure/Layout';
 
-import './scss/volby22.scss';
 import './scss/volby-landing.scss';
 
 const queryClient = new QueryClient();

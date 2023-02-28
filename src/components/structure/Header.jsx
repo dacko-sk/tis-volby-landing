@@ -34,9 +34,9 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.news}>
                             Aktuality
                         </Nav.Link>
-                        <Nav.Link as={NavLink} to={routes.funding}>
+                        {/* <Nav.Link as={NavLink} to={routes.funding}>
                             Financovanie
-                        </Nav.Link>
+                        </Nav.Link> */}
                     </Nav>
                     <SearchField />
                     <DonateButton xl />
