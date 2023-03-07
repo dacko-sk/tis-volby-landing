@@ -8,7 +8,7 @@ const appManifest = require('./public/manifest.json');
 
 module.exports = (env, argv) => {
     const isEnvProduction = argv.mode === 'production';
-    const rootPath = `/${homepage && isEnvProduction ? `${homepage}/` : ''}`;
+    const rootPath = homepage && isEnvProduction ? homepage : '/';
 
     const plugins = [
         new HtmlWebpackPlugin({
