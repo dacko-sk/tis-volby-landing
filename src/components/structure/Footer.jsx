@@ -143,6 +143,15 @@ function Footer() {
                             <ul className="arrows">
                                 <li>
                                     <a
+                                        href="https://volby.transparency.sk/parlament2023/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Parlamentné voľby 2023
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
                                         href="https://volby.transparency.sk/samosprava2022/"
                                         target="_blank"
                                         rel="noreferrer"
