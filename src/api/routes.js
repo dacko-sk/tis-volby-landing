@@ -1,3 +1,6 @@
+import has from 'has';
+import siteConfig from '../../package.json';
+
 export const separators = {
     newline: '\n',
     parts: '~',
@@ -6,7 +9,10 @@ export const separators = {
 };
 
 export const segments = {
-    ROOT: '/',
+    ROOT:
+        has(siteConfig, 'homepage') && siteConfig.homepage
+            ? siteConfig.homepage
+            : '/',
     ELECTIONS: 'volby',
     FUNDING: 'financovanie',
     NEWS: 'aktuality',
