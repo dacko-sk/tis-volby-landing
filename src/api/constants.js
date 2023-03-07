@@ -1,3 +1,8 @@
+export const categories = {
+    news22: 858,
+    newsGlobal: 875,
+};
+
 export const colorLightBlue = '#2bace2';
 export const colorDarkBlue = '#1b335f';
 export const colorOrange = '#f06c50';
@@ -10,6 +15,10 @@ export const colors = {
     colorGrey,
 };
 
+export const errors = {
+    loading: 'Chyba pri načítaní dát. Prosím načítajte stránku znovu.',
+};
+
 export const labels = {
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
@@ -19,11 +28,8 @@ export const labels = {
     websiteTitle: 'Voľby',
 };
 
-export const errors = {
-    loading: 'Chyba pri načítaní dát. Prosím načítajte stránku znovu.',
-};
-
 export const constants = {
+    categories,
     colors,
     errors,
     labels,
