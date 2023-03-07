@@ -1,5 +1,6 @@
 export const categories = {
     news22: 858,
+    news23: 877,
     newsGlobal: 875,
 };
 
