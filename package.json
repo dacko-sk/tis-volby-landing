@@ -41,7 +41,7 @@
     "webpack-manifest-plugin": "^5.0.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot --open",
+    "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
   "eslintConfig": {
