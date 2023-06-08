@@ -44,9 +44,7 @@ function ElectionPreview({
                             <img
                                 src={img}
                                 alt={title}
-                                className={`mw-100${
-                                    fadeImg ? ' fade-image' : ''
-                                }`}
+                                className={fadeImg ? 'fade-image' : ''}
                             />
                         </figure>
                     </div>
