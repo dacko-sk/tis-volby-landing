@@ -1,0 +1,12 @@
+@use 'sass:map';
+@import './../../scss/variables';
+
+.donor-search {
+  background-color: $tis-dark-blue;
+  .search-icon a {
+    text-decoration: none;
+  }
+  .btn {
+    --bs-btn-hover-border-color: white;
+  }
+}

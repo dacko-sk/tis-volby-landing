@@ -1,16 +1,17 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { segments } from './api/routes';
+import { segments, separators } from './api/routes';
 
 import ContextProviders from './context/ContextProviders';
 
-import Article from './pages/Article';
-import Elections from './pages/Elections';
-import Funding from './pages/Funding';
+// import Article from './pages/Article';
+// import Elections from './pages/Elections';
+import Donations from './pages/Donations';
+import Donor from './pages/Donor';
 import Home from './pages/Home';
-import News from './pages/News';
-import Search from './pages/Search';
+// import News from './pages/News';
+// import Search from './pages/Search';
 
 import Layout from './components/structure/Layout';
 
@@ -26,23 +27,31 @@ function App() {
                     <Routes>
                         <Route path={segments.ROOT} element={<Layout />}>
                             <Route index element={<Home />} />
-                            <Route
+                            {/* <Route
                                 path={segments.ELECTIONS}
                                 element={<Elections />}
-                            />
-                            <Route path={segments.NEWS} element={<News />} />
+                            /> */}
+                            {/* <Route path={segments.NEWS} element={<News />} /> */}
+                            {/* <Route
+                                path={`${segments.NEWS}${separators.url}:slug`}
+                                element={<Article />}
+                            /> */}
                             <Route
                                 path={segments.FUNDING}
-                                element={<Funding />}
+                                element={<Donations />}
                             />
                             <Route
-                                path={`${segments.NEWS}/:slug`}
-                                element={<Article />}
+                                path={`${segments.FUNDING}${separators.url}:query`}
+                                element={<Donations />}
                             />
                             <Route
-                                path={`${segments.SEARCH}/:query`}
+                                path={`${segments.FUNDING}${separators.url}${segments.DONOR}${separators.url}:id`}
+                                element={<Donor />}
+                            />
+                            {/* <Route
+                                path={`${segments.SEARCH}${separators.url}:query`}
                                 element={<Search />}
-                            />
+                            /> */}
 
                             {/* fallback */}
                             <Route

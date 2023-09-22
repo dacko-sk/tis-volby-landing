@@ -1,15 +1,11 @@
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
 
 import { setTitle } from '../api/helpers';
-import { routes, segments } from '../api/routes';
 
-import { newsCategories } from './News';
+import QuickSearch from '../components/donors/QuickSearch';
 import ElectionsPreview from '../components/elections/ElectionsPreview';
 import Title from '../components/structure/Title';
-import Posts, { templates } from '../components/wp/Posts';
 
 import img22 from '../../public/img/samosprava22.jpg';
 import img23 from '../../public/img/parlament23.jpg';
@@ -24,6 +20,8 @@ function Home() {
                 <br />
                 volebných
             </Title>
+
+            <QuickSearch />
 
             <Row>
                 <Col xxl={6}>
@@ -56,19 +54,19 @@ function Home() {
                     />
                 </Col>
             </Row>
-            <div className="buttons text-center mt-3">
+            {/* <div className="buttons text-center mt-3">
                 <Button as={Link} to={routes.elections} variant="secondary">
                     Všetky sledované voľby
                 </Button>
-            </div>
+            </div> */}
 
-            <h2 className="mt-4">Najnovšie aktuality</h2>
+            {/* <h2 className="mt-4">Najnovšie aktuality</h2>
             <Posts
                 categories={newsCategories}
                 limit={2}
                 section={segments.NEWS}
                 template={templates.condensed}
-            />
+            /> */}
         </section>
     );
 }

@@ -132,7 +132,7 @@ const parserOptions = {
 
 export const parseWpHtml = (html) => parse(html, parserOptions);
 
-export const ecodeHTMLEntities = (rawStr) =>
+export const decodeHTMLEntities = (rawStr) =>
     rawStr
         ? rawStr.replace(
               /&#(\d+);/g,

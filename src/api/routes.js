@@ -2,10 +2,10 @@ import has from 'has';
 import siteConfig from '../../package.json';
 
 export const separators = {
-    newline: '\n',
     parts: '~',
     space: '.',
     url: '/',
+    value: '|',
 };
 
 export const segments = {
@@ -14,6 +14,7 @@ export const segments = {
             ? siteConfig.homepage
             : '/',
     ELECTIONS: 'volby',
+    DONOR: 'donor',
     FUNDING: 'financovanie',
     NEWS: 'aktuality',
     SEARCH: 'vyhladavanie',
@@ -24,9 +25,24 @@ export const routes = {
         segments.ROOT + (page && slug ? page + separators.url + slug : ''),
     articles: (page) => segments.ROOT + (page || ''),
     elections: segments.ROOT + segments.ELECTIONS,
-    funding: segments.ROOT + segments.FUNDING,
+    donor: (id) =>
+        segments.ROOT +
+        segments.FUNDING +
+        (id
+            ? separators.url +
+              segments.DONOR +
+              separators.url +
+              encodeURIComponent(id)
+            : ''),
+    donations: (query) =>
+        segments.ROOT +
+        segments.FUNDING +
+        (query ? separators.url + encodeURIComponent(query) : ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
     search: (query) =>
-        segments.ROOT + (query ? segments.SEARCH + separators.url + query : ''),
+        segments.ROOT +
+        (query
+            ? segments.SEARCH + separators.url + encodeURIComponent(query)
+            : ''),
 };

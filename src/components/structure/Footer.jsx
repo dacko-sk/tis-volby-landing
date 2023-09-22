@@ -10,45 +10,48 @@ import CookieBanner from '../general/CookieBanner';
 import DonateButton from '../general/DonateButton';
 import FbFeed from '../general/FbFeed';
 
-import logoAcf from '../../../public/img/ACF_logo.png';
 import logoEu from '../../../public/img/eu-funded-blue.png';
+import logoEuPontis from '../../../public/img/EÚ.png';
+import logoPontis from '../../../public/img/Logo_Pontis.png';
 import logoTis from '../../../public/img/tis-logo-blue.png';
-import logoVisegrad from '../../../public/img/Visegrad_logo_black.png';
 
 function Footer() {
     return (
         <footer className="mt-auto">
-            <div className="footer-top py-5">
+            <div className="footer-donors my-4">
                 <Container>
                     <h2 className="mb-3 text-center">Donori projektu</h2>
-                    <Row className="justify-content-around gx-md-5">
+                    <Row className="justify-content-around gy-4">
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
-                            xs={12}
-                            md={6}
-                            lg={4}
+                            xs={8}
+                            sm={7}
+                            md={4}
+                            xl={3}
                         >
                             <img
                                 className="mw-100 align-self-center"
-                                src={logoVisegrad}
+                                src={logoEuPontis}
                             />
                         </Col>
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
-                            xs={12}
-                            md={6}
-                            lg={4}
+                            xs={8}
+                            sm={7}
+                            md={4}
+                            xl={3}
                         >
                             <img
                                 className="mw-100 align-self-center"
-                                src={logoAcf}
+                                src={logoPontis}
                             />
                         </Col>
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
-                            xs={12}
-                            md={6}
-                            lg={4}
+                            xs={8}
+                            sm={7}
+                            md={4}
+                            xl={3}
                         >
                             <figure className="align-self-center m-0">
                                 <img className="mw-100" src={logoEu} />
@@ -60,20 +63,10 @@ function Footer() {
                             </figure>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
-                            <p className="donors mt-2 mb-4 fst-italic">
-                                Projekt ‘Aktívnym občianstvom ku kvalitnejšej
-                                samospráve (With Active Citizenship for a Better
-                                Selfgovernment)’ je podporený z programu ACF -
-                                Slovakia, ktorý je financovaný z Finančného
-                                mechanizmu EHP 2014-2021. Správcom programu je
-                                Nadácia Ekopolis v partnerstve s Nadáciou
-                                otvorenej spoločnosti Bratislava a Karpatskou
-                                nadáciou.
-                            </p>
-                        </Col>
-                    </Row>
+                </Container>
+            </div>
+            <div className="footer-top py-5">
+                <Container>
                     <Row>
                         <Col md={6} lg={4}>
                             <h2 className="mb-3">Kontakt</h2>

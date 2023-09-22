@@ -1,9 +1,10 @@
 import { setTitle } from '../api/helpers';
 
-import AlertWithIcon, { icons } from '../components/general/AlertWithIcon';
+import Filters from '../components/donors/Filters';
+import SearchResults from '../components/donors/SearchResults';
 import Title from '../components/structure/Title';
 
-function Funding() {
+function Donations() {
     setTitle('Financovanie politických strán a databáza donorov');
 
     return (
@@ -13,11 +14,11 @@ function Funding() {
                 <br />a databáza
             </Title>
 
-            <AlertWithIcon className="mt-4" icon={icons.info} variant="primary">
-                Stránka sa pripravuje.
-            </AlertWithIcon>
+            <Filters />
+
+            <SearchResults />
         </section>
     );
 }
 
-export default Funding;
+export default Donations;

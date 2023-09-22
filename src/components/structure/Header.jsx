@@ -7,7 +7,7 @@ import { labels } from '../../api/constants';
 import { routes } from '../../api/routes';
 
 import DonateButton from '../general/DonateButton';
-import SearchField from '../general/SearchField';
+// import SearchField from '../general/SearchField';
 
 import logo from '../../../public/img/tis-logo-blue.png';
 
@@ -28,17 +28,17 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.home}>
                             Úvod
                         </Nav.Link>
-                        <Nav.Link as={NavLink} to={routes.elections}>
+                        {/* <Nav.Link as={NavLink} to={routes.elections}>
                             Voľby
-                        </Nav.Link>
-                        <Nav.Link as={NavLink} to={routes.news}>
-                            Aktuality
-                        </Nav.Link>
-                        {/* <Nav.Link as={NavLink} to={routes.funding}>
-                            Financovanie
                         </Nav.Link> */}
+                        {/* <Nav.Link as={NavLink} to={routes.news}>
+                            Aktuality
+                        </Nav.Link> */}
+                        <Nav.Link as={NavLink} to={routes.donations()}>
+                            Databáza donorov
+                        </Nav.Link>
                     </Nav>
-                    <SearchField />
+                    {/* <SearchField /> */}
                     <DonateButton xl />
                 </Navbar.Collapse>
             </Container>

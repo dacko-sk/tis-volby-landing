@@ -23,10 +23,21 @@ export const errors = {
 export const labels = {
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
+    donors: {
+        search: {
+            advanced: 'Podrobné vyhľadávanie',
+            placeholder: 'Zadajte meno donora alebo názov strany',
+            title: 'Vyhľadávanie v databáze donorov',
+        },
+    },
     tis: 'Transparency International Slovensko',
     search: 'Vyhľadávanie',
     showMore: 'Zobraziť viac',
     websiteTitle: 'Voľby',
+};
+
+export const settings = {
+    donateUrl: 'https://transparency.sk/volby',
 };
 
 export const constants = {
@@ -34,6 +45,7 @@ export const constants = {
     colors,
     errors,
     labels,
+    settings,
 };
 
 export default constants;
