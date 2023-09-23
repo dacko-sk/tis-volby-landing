@@ -38,6 +38,23 @@ export const labels = {
 
 export const settings = {
     donateUrl: 'https://transparency.sk/volby',
+    donorsColumns: [
+        'Strana', // 0: Party
+        'Dátum', // 1: Date
+        'Meno a priezvisko', // 2: Person name
+        'ID', // 3: ID
+        'Firma', // 4: Company name
+        'Adresa', // 5: Location
+        'Typ', // 6: Type
+        'Typ bezodpaltného plnenia', // 7: Subtype
+        'Výška príspevku', // 8: Amount
+        'Zdroj', // 9: Link
+        'Príznak', // 10: Flag
+        'Príznak-finančný dar (kumulatívne)', // 11: Flag 1 cumulative
+        'Príznak-pôžička (kumulatívne)', // 12: Flag 2 cumulative
+        'Príznak-bezodplatné plnenie (kumulatívne)', // 13: Flag 3 cumulative
+        'Poznámka', // 14: Note
+    ],
 };
 
 export const constants = {

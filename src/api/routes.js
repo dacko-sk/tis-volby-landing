@@ -5,7 +5,7 @@ export const separators = {
     parts: '~',
     space: '.',
     url: '/',
-    value: '|',
+    value: '_',
 };
 
 export const segments = {
@@ -37,7 +37,11 @@ export const routes = {
     donations: (query) =>
         segments.ROOT +
         segments.FUNDING +
-        (query ? separators.url + encodeURIComponent(query) : ''),
+        (query
+            ? `${separators.url}q${separators.value}${encodeURIComponent(
+                  query
+              )}`
+            : ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
     search: (query) =>

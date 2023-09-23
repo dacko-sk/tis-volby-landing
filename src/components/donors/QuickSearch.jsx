@@ -31,7 +31,7 @@ function QuickSearch() {
                         placeholder={labels.donors.search.placeholder}
                         aria-label={labels.search}
                         aria-describedby="quick-search-icon"
-                        id="search"
+                        id="quicksearch"
                         onChange={handleInputChange}
                         value={searchQuery || ''}
                     />
