@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 
 import { labels } from '../../api/constants';
-import { routes } from '../../api/routes';
+import { routes, separators } from '../../api/routes';
 
 import './Donors.scss';
 
@@ -13,13 +13,17 @@ function QuickSearch() {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState(null);
 
+    const searchLink = routes.donations(
+        `q${separators.value}${encodeURIComponent(searchQuery)}`
+    );
+
     const handleInputChange = (e) => {
         setSearchQuery(e.target.value);
     };
 
     const handleFormSumbit = (e) => {
         e.preventDefault();
-        navigate(routes.donations(searchQuery));
+        navigate(searchLink);
     };
 
     return (
@@ -39,12 +43,12 @@ function QuickSearch() {
                         id="quick-search-icon"
                         className="search-icon"
                     >
-                        <Link to={routes.donations(searchQuery)}>🔍</Link>
+                        <Link to={searchLink}>🔍</Link>
                     </InputGroup.Text>
                 </InputGroup>
                 <Button
                     as={Link}
-                    to={routes.donations(searchQuery)}
+                    to={searchLink}
                     variant="secondary"
                     className="mt-4"
                 >

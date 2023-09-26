@@ -2,10 +2,10 @@ import has from 'has';
 import siteConfig from '../../package.json';
 
 export const separators = {
-    parts: '~',
+    parts: '_',
     space: '.',
     url: '/',
-    value: '_',
+    value: '~',
 };
 
 export const segments = {
@@ -37,11 +37,7 @@ export const routes = {
     donations: (query) =>
         segments.ROOT +
         segments.FUNDING +
-        (query
-            ? `${separators.url}q${separators.value}${encodeURIComponent(
-                  query
-              )}`
-            : ''),
+        (query ? `${separators.url}${query}` : ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
     search: (query) =>
