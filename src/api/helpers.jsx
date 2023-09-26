@@ -55,6 +55,13 @@ export const dateFormat = (timestamp) =>
         day: 'numeric',
     });
 
+export const dateNumericFormat = (timestamp) =>
+    slovakDateFormat(timestamp, {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    });
+
 export const shortenValue = (value, length, removals) => {
     if (value) {
         let shorten = value;

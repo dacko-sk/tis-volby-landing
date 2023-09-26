@@ -1,7 +1,11 @@
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import { currencyFormat, dateFormat, generateRandomString } from './helpers';
+import {
+    currencyFormat,
+    dateNumericFormat,
+    generateRandomString,
+} from './helpers';
 import { separators } from './routes';
 
 export const settings = {
@@ -30,7 +34,7 @@ export const settings = {
             address: 'Adresa',
             type: 'Typ príjmu',
             subtype: 'Typ bezodpaltného plnenia',
-            amount: 'Výška príspevku',
+            amount: 'Suma',
             source: 'Zdroj',
             flag: 'Rizikový príznak',
             notes: 'Poznámka',
@@ -50,7 +54,13 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
         case 'party':
             return sourceColumns[0];
         case 'date':
-            return sourceColumns[1] ? dateFormat(sourceColumns[1]) : '';
+            return (
+                <div className="text-end text-nowrap">
+                    {sourceColumns[1]
+                        ? dateNumericFormat(sourceColumns[1])
+                        : ''}
+                </div>
+            );
         case 'entity':
             return (
                 <OverlayTrigger

@@ -55,7 +55,14 @@ function SearchResults() {
     } else {
         const headerCols = Object.entries(settings.donations.targetColumns).map(
             ([key, header]) => {
-                return <th key={key}>{header}</th>;
+                const className = ['date', 'amount'].includes(key)
+                    ? 'text-end'
+                    : '';
+                return (
+                    <th key={key} className={className}>
+                        {header}
+                    </th>
+                );
             }
         );
         const rows = [];
