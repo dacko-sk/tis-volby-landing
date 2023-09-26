@@ -7,18 +7,19 @@ function PaginationWithGaps({
     className = 'justify-content-center',
     pageClickCallback,
     totalPages,
+    useOffset = false,
 }) {
     const items = [];
-    for (let i = 1; i <= totalPages; i += 1) {
+    for (let pageNum = 1; pageNum <= totalPages; pageNum += 1) {
         if (
             totalPages <= 10 ||
-            i <= 2 ||
-            i >= totalPages - 1 ||
-            (i >= activePage - 1 && i <= activePage + 1)
+            pageNum <= 2 ||
+            pageNum >= totalPages - 1 ||
+            (pageNum >= activePage - 1 && pageNum <= activePage + 1)
         ) {
             if (
                 totalPages > 10 &&
-                i === totalPages - 1 &&
+                pageNum === totalPages - 1 &&
                 activePage <= totalPages - 4
             ) {
                 items.push(
@@ -28,17 +29,18 @@ function PaginationWithGaps({
                 );
             }
 
+            const index = useOffset ? pageNum - 1 : pageNum;
             items.push(
                 <Pagination.Item
-                    active={i === activePage}
-                    key={i}
-                    onClick={pageClickCallback(i)}
+                    active={pageNum === activePage}
+                    key={pageNum}
+                    onClick={pageClickCallback(index, totalPages)}
                 >
-                    {i}
+                    {pageNum}
                 </Pagination.Item>
             );
 
-            if (totalPages > 10 && i === 2 && activePage >= 5) {
+            if (totalPages > 10 && pageNum === 2 && activePage >= 5) {
                 items.push(
                     <li className="pagination-gap" key="gap-after">
                         …

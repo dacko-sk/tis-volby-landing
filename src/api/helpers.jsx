@@ -164,6 +164,9 @@ export const swapName = (name) => {
     return first && second ? `${second} ${first}` : name;
 };
 
+export const generateRandomString = (length) =>
+    [...Array(length ?? 6)].map(() => Math.random().toString(36)[2]).join('');
+
 export const setTitle = (title) => {
     document.title = `${title} : ${labels.websiteTitle} : ${labels.tis}`;
 };

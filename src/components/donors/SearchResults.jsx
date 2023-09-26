@@ -1,28 +1,17 @@
-import Pagination from 'react-bootstrap/Pagination';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { settings } from '../../api/constants';
+import {
+    buildApiQuery,
+    buildUrlQuery,
+    getDonationsColumn,
+    isCompany,
+    settings,
+} from '../../api/dontaions';
 import { routes, separators } from '../../api/routes';
 
 import Loading from '../general/Loading';
-import { currencyFormat } from '../../api/helpers';
-
-const buildApiQuery = (options) => {
-    const filters = [];
-    Object.entries(options).forEach(([param, value]) => {
-        filters.push(`${param}=${value}`);
-    });
-    return filters.join('&');
-};
-
-const buildUrlQuery = (options) => {
-    const filters = [];
-    Object.entries(options).forEach(([param, value]) => {
-        filters.push(param + separators.value + value);
-    });
-    return filters.join(separators.parts);
-};
+import PaginationWithGaps from '../general/PaginationWithGaps';
 
 function SearchResults() {
     const location = useLocation();
@@ -30,10 +19,12 @@ function SearchResults() {
     const params = useParams();
 
     const options = {};
-    (params.query ?? '').split(separators.parts).forEach((pair) => {
-        const [filter, value] = pair.split(separators.value);
-        options[filter] = value;
-    });
+    if ((params.query ?? false) && params.query.length) {
+        params.query.split(separators.parts).forEach((pair) => {
+            const [filter, value] = pair.split(separators.value);
+            options[filter] = value;
+        });
+    }
     const blocksize = options.b ?? false ? Number(options.b) : 50;
     const offset = options.o ?? false ? Number(options.o) : 0;
     const requestQuery = buildApiQuery(options);
@@ -46,9 +37,13 @@ function SearchResults() {
             ).then((response) => response.json())
     );
 
-    const loadPage = (page, totalPages) => (e) => {
-        e.preventDefault();
-        navigate(page, {
+    const pageClickCallback = (i, totalPages) => () => {
+        // copy all options except offset
+        const { o, ...linkOpt } = options;
+        if (i > 0) {
+            linkOpt.o = i;
+        }
+        navigate(routes.donations(buildUrlQuery(linkOpt)), {
             state: { totalPages },
         });
     };
@@ -58,59 +53,31 @@ function SearchResults() {
     if (isLoading || error) {
         table = <Loading error={error} />;
     } else {
-        const headerCols = settings.donations.headers.map((item, ci) => {
-            if (!settings.donations.allowedColumns.includes(ci)) {
-                return null;
+        const headerCols = Object.entries(settings.donations.targetColumns).map(
+            ([key, header]) => {
+                return <th key={key}>{header}</th>;
             }
-            const k = `i${ci}`;
-            return <th key={k}>{item}</th>;
-        });
+        );
         const rows = [];
         if ((data.rows ?? false) && Array.isArray(data.rows)) {
             data.rows.forEach((row, ri) => {
-                const cols = row.map((item, ci) => {
-                    if (!settings.donations.allowedColumns.includes(ci)) {
-                        return null;
+                const cols = Object.keys(settings.donations.targetColumns).map(
+                    (targetColKey) => {
+                        const content = getDonationsColumn(row, targetColKey);
+                        return <td key={targetColKey}>{content}</td>;
                     }
-                    const k = `r${ri}c${ci}`;
-                    let content;
-                    let className;
-                    switch (ci) {
-                        case 6:
-                            content =
-                                settings.donations.types[Number(item)] ?? '';
-                            break;
-                        case 8:
-                            content = currencyFormat(item);
-                            className = 'text-end';
-                            break;
-                        case 9:
-                            content = (
-                                <a
-                                    href={item}
-                                    title="stiahnuť"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    🖹
-                                </a>
-                            );
-                            break;
-                        case 10:
-                            content =
-                                settings.donations.flags[Number(item)] ?? '';
-                            break;
-                        default:
-                            content = item;
-                    }
-                    return (
-                        <td key={k} className={className}>
-                            {content}
-                        </td>
-                    );
-                });
+                );
                 const k = `r${ri}-${row[1]}-${row[2]}-${row[4]}`;
-                rows.push(<tr key={k}>{cols}</tr>);
+                rows.push(
+                    <tr
+                        key={k}
+                        className={`row-${
+                            isCompany(row) ? 'company' : 'person'
+                        }`}
+                    >
+                        {cols}
+                    </tr>
+                );
             });
         }
         table = (
@@ -125,33 +92,15 @@ function SearchResults() {
         numOfPages = Math.ceil(data.total / blocksize);
     }
 
-    let nav = null;
-    const items = [];
-    for (let i = 0; i < numOfPages; i += 1) {
-        // copy all options except offset
-        const { o, ...linkOpt } = options;
-        if (i > 0) {
-            linkOpt.o = i;
-        }
-        const pageLink = routes.donations(buildUrlQuery(linkOpt));
-        items.push(
-            <Pagination.Item
-                key={i}
-                active={i === offset}
-                onClick={loadPage(pageLink, numOfPages)}
-                href={pageLink}
-            >
-                {i + 1}
-            </Pagination.Item>
-        );
-    }
-    if (items.length > 1) {
-        nav = (
-            <Pagination className="justify-content-center mt-4">
-                {items}
-            </Pagination>
-        );
-    }
+    const nav = (
+        <PaginationWithGaps
+            className="justify-content-center mt-4"
+            activePage={offset + 1}
+            totalPages={numOfPages}
+            pageClickCallback={pageClickCallback}
+            useOffset
+        />
+    );
 
     return (
         <section>
