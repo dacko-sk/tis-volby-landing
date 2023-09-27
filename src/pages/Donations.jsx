@@ -31,18 +31,10 @@ function Donations() {
                         : labels.donations.filters.show}
                 </Button>
                 <div className="row gx-3 gy-2">
-                    <aside
-                        className={`col-12 ${
-                            open ? 'col-lg-3 col-xxl-2' : 'd-none'
-                        }`}
-                    >
+                    <aside className={`col-12 ${open ? 'col-lg-3' : 'd-none'}`}>
                         <Filters open={open} />
                     </aside>
-                    <div
-                        className={`col-12${
-                            open ? ' col-lg-9 col-xxl-10' : ''
-                        }`}
-                    >
+                    <div className="col-12 col-lg">
                         <SearchResults />
                     </div>
                 </div>

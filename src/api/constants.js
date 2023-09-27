@@ -29,6 +29,7 @@ export const labels = {
             columns: 'Voliteľné stĺpce',
             hide: 'Skryť nastavenia',
             rows: 'Počet riadkov',
+            search: 'Hľadaný výraz',
             show: 'Rozbaliť nastavenia',
         },
     },

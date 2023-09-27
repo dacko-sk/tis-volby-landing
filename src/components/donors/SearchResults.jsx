@@ -61,9 +61,11 @@ function SearchResults() {
                 let className;
                 switch (key) {
                     case 'amount':
+                    case 'date':
                         className = 'text-end';
                         break;
                     case 'entity':
+                    case 'flag':
                         className = 'text-center';
                         break;
                     default:

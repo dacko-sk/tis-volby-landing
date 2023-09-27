@@ -62,13 +62,13 @@ export const donations = {
         'nepeňažný dar', // 4
         'pôžička', // 5
         'úver', // 6
-        'zmluvné dojednanie', // 7
+        // 'zmluvné dojednanie', // 7
     ],
     allColumns: {
         party: 'Strana',
         date: 'Dátum',
-        name: 'Meno / Názov firmy',
         entity: 'Typ darcu',
+        name: 'Meno / Názov firmy',
         address: 'Adresa',
         type: 'Typ príjmu',
         subtype: 'Typ plnenia',
@@ -93,7 +93,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
             return sourceColumns[0];
         case 'date':
             return (
-                <div className="text-nowrap">
+                <div className="text-end text-nowrap">
                     {sourceColumns[1]
                         ? dateNumericFormat(sourceColumns[1])
                         : ''}

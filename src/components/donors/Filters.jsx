@@ -1,5 +1,8 @@
-import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { useDebouncedCallback } from 'use-debounce';
 
 import {
     buildUrlQuery,
@@ -16,12 +19,18 @@ function Filters() {
 
     const options = parseQueryOptions();
 
-    const party = options.p ?? '';
+    const [query, setQuery] = useState(options.q ?? '');
+
+    const entity = (options.c ?? '') !== '' ? Number(options.c) : '';
+    let types =
+        options.t ?? false
+            ? options.t.split(separators.space).map((item) => Number(item))
+            : [];
     let flags =
         options.f ?? false
             ? options.f.split(separators.space).map((item) => Number(item))
             : [];
-    const entity = (options.c ?? '') !== '' ? Number(options.c) : '';
+    const party = options.p ?? '';
 
     const blocksize = options.b ?? false ? Number(options.b) : 50;
     let allowedColumns =
@@ -29,11 +38,41 @@ function Filters() {
             ? options.a.split(separators.space).map((item) => Number(item))
             : [];
 
-    const updateParty = (e) => {
-        // copy all options except p & o
-        const { p, o, ...linkOpt } = options;
+    const debouncedSearch = useDebouncedCallback((value) => {
+        // copy all options except q & o
+        const { q, o, ...linkOpt } = options;
+        if (value) {
+            linkOpt.q = encodeURIComponent(value);
+        }
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    }, 500);
+
+    const updateQuery = (e) => {
+        setQuery(e.target.value);
+        debouncedSearch(e.target.value);
+    };
+
+    const updateEntity = (e) => {
+        // copy all options except c & o
+        const { c, o, ...linkOpt } = options;
         if (e.target.value !== '') {
-            linkOpt.p = e.target.value;
+            linkOpt.c = Number(e.target.value);
+        }
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    };
+
+    const updateTypes = (e) => {
+        const id = Number(e.target.value);
+        if (e.target.checked) {
+            types.push(id);
+            types.sort((a, b) => a - b);
+        } else {
+            types = types.filter((item) => item !== id);
+        }
+        // copy all options except t & o
+        const { t, o, ...linkOpt } = options;
+        if (types.length) {
+            linkOpt.t = types.join(separators.space);
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
@@ -54,11 +93,11 @@ function Filters() {
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
 
-    const updateEntity = (e) => {
-        // copy all options except c & o
-        const { c, o, ...linkOpt } = options;
+    const updateParty = (e) => {
+        // copy all options except p & o
+        const { p, o, ...linkOpt } = options;
         if (e.target.value !== '') {
-            linkOpt.c = Number(e.target.value);
+            linkOpt.p = e.target.value;
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
@@ -89,32 +128,78 @@ function Filters() {
         <Form id="donations-filters" className="bg-light p-4">
             <div className="mb-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {donations.allColumns.party}
+                    {labels.donations.filters.search}
+                </h6>
+                <InputGroup>
+                    <Form.Control
+                        placeholder={labels.search}
+                        aria-label={labels.search}
+                        aria-describedby="search-icon"
+                        id="donations-search"
+                        onChange={updateQuery}
+                        value={query}
+                    />
+                    <InputGroup.Text
+                        id="search-icon"
+                        className="d-lg-none d-xl-flex"
+                    >
+                        🔍
+                    </InputGroup.Text>
+                </InputGroup>
+            </div>
+
+            <div className="mb-3">
+                <h6 className="fw-bold text-primary text-uppercase">
+                    {donations.allColumns.entity}
                 </h6>
                 <Form.Check
                     key=""
                     inline
                     label={labels.all}
-                    id="party-all"
-                    name="party"
+                    id="entity-all"
+                    name="entity"
                     type="radio"
                     value=""
-                    checked={party === ''}
-                    onChange={updateParty}
+                    checked={entity === ''}
+                    onChange={updateEntity}
                 />
-                {donations.parties.map((p) => (
+                {donations.entities.map((label, index) => (
                     <Form.Check
-                        key={p}
+                        key={label}
                         inline
-                        label={p}
-                        id={`party-${p}`}
-                        name="party"
+                        label={donations.entities[index]}
+                        id={`entity-${label}`}
+                        name="entity"
                         type="radio"
-                        value={p}
-                        checked={party === p}
-                        onChange={updateParty}
+                        value={index}
+                        checked={entity === index}
+                        onChange={updateEntity}
                     />
                 ))}
+            </div>
+
+            <div className="mb-3">
+                <h6 className="fw-bold text-primary text-uppercase">
+                    {donations.allColumns.type}
+                </h6>
+                {donations.types.map((label, index) => {
+                    if (!label) {
+                        return null;
+                    }
+                    return (
+                        <Form.Check
+                            key={label}
+                            inline
+                            label={label}
+                            id={`type-${index}`}
+                            name="type"
+                            type="checkbox"
+                            value={index}
+                            checked={types.includes(index)}
+                            onChange={updateTypes}
+                        />
+                    );
+                })}
             </div>
 
             <div className="mb-3">
@@ -152,30 +237,30 @@ function Filters() {
 
             <div className="mb-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {donations.allColumns.entity}
+                    {donations.allColumns.party}
                 </h6>
                 <Form.Check
                     key=""
                     inline
                     label={labels.all}
-                    id="entity-all"
-                    name="entity"
+                    id="party-all"
+                    name="party"
                     type="radio"
                     value=""
-                    checked={entity === ''}
-                    onChange={updateEntity}
+                    checked={party === ''}
+                    onChange={updateParty}
                 />
-                {donations.entities.map((label, index) => (
+                {donations.parties.map((p) => (
                     <Form.Check
-                        key={label}
+                        key={p}
                         inline
-                        label={donations.entities[index]}
-                        id={`entity-${label}`}
-                        name="entity"
+                        label={p}
+                        id={`party-${p}`}
+                        name="party"
                         type="radio"
-                        value={index}
-                        checked={entity === index}
-                        onChange={updateEntity}
+                        value={p}
+                        checked={party === p}
+                        onChange={updateParty}
                     />
                 ))}
             </div>
