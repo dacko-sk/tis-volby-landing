@@ -3,7 +3,7 @@ import siteConfig from '../../package.json';
 
 export const separators = {
     parts: '_',
-    space: '.',
+    space: '-',
     url: '/',
     value: '~',
 };

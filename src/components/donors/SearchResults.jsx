@@ -1,12 +1,13 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import {
     buildApiQuery,
     buildUrlQuery,
+    donations,
     getDonationsColumn,
     isCompany,
-    settings,
+    parseQueryOptions,
 } from '../../api/dontaions';
 import { routes, separators } from '../../api/routes';
 
@@ -16,17 +17,14 @@ import PaginationWithGaps from '../general/PaginationWithGaps';
 function SearchResults() {
     const location = useLocation();
     const navigate = useNavigate();
-    const params = useParams();
 
-    const options = {};
-    if ((params.query ?? false) && params.query.length) {
-        params.query.split(separators.parts).forEach((pair) => {
-            const [filter, value] = pair.split(separators.value);
-            options[filter] = value;
-        });
-    }
+    const options = parseQueryOptions();
     const blocksize = options.b ?? false ? Number(options.b) : 50;
     const offset = options.o ?? false ? Number(options.o) : 0;
+    const allowedColumns =
+        options.a ?? false
+            ? options.a.split(separators.space).map((item) => Number(item))
+            : [];
     const requestQuery = buildApiQuery(options);
 
     const { isLoading, error, data } = useQuery(
@@ -53,11 +51,24 @@ function SearchResults() {
     if (isLoading || error) {
         table = <Loading error={error} />;
     } else {
-        const headerCols = Object.entries(settings.donations.targetColumns).map(
+        const headerCols = Object.entries(donations.allColumns).map(
             ([key, header]) => {
-                const className = ['date', 'amount'].includes(key)
-                    ? 'text-end'
-                    : '';
+                // skip if the column is optional and not checked in options
+                const optId = donations.optionalColumns.indexOf(key);
+                if (optId > -1 && !allowedColumns.includes(optId)) {
+                    return null;
+                }
+                let className;
+                switch (key) {
+                    case 'amount':
+                        className = 'text-end';
+                        break;
+                    case 'entity':
+                        className = 'text-center';
+                        break;
+                    default:
+                        className = '';
+                }
                 return (
                     <th key={key} className={className}>
                         {header}
@@ -68,19 +79,22 @@ function SearchResults() {
         const rows = [];
         if ((data.rows ?? false) && Array.isArray(data.rows)) {
             data.rows.forEach((row, ri) => {
-                const cols = Object.keys(settings.donations.targetColumns).map(
-                    (targetColKey) => {
-                        const content = getDonationsColumn(row, targetColKey);
-                        return <td key={targetColKey}>{content}</td>;
+                const cols = Object.keys(donations.allColumns).map((key) => {
+                    // skip if the column is optional and not checked in options
+                    const optId = donations.optionalColumns.indexOf(key);
+                    if (optId > -1 && !allowedColumns.includes(optId)) {
+                        return null;
                     }
-                );
+                    const content = getDonationsColumn(row, key);
+                    return <td key={key}>{content}</td>;
+                });
                 const k = `r${ri}-${row[1]}-${row[2]}-${row[4]}`;
                 rows.push(
                     <tr
                         key={k}
                         className={`row-${
                             isCompany(row) ? 'company' : 'person'
-                        }`}
+                        } align-middle`}
                     >
                         {cols}
                     </tr>
@@ -88,12 +102,14 @@ function SearchResults() {
             });
         }
         table = (
-            <table>
-                <thead>
-                    <tr>{headerCols}</tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </table>
+            <div className="table-responsive">
+                <table className="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr className="align-middle">{headerCols}</tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
+            </div>
         );
 
         numOfPages = Math.ceil(data.total / blocksize);
@@ -110,10 +126,10 @@ function SearchResults() {
     );
 
     return (
-        <section>
+        <div id="donations-table">
             {table}
             {nav}
-        </section>
+        </div>
     );
 }
 

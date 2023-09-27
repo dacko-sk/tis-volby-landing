@@ -1,5 +1,6 @@
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import { useParams } from 'react-router-dom';
 
 import {
     currencyFormat,
@@ -8,38 +9,59 @@ import {
 } from './helpers';
 import { separators } from './routes';
 
-export const settings = {
-    donations: {
-        flags: [
-            '',
-            'veľký dar', // 1
-            'veľká pôžička', // 2
-            'vysoké bezodplatné plnenie', // 3
-        ],
-        types: [
-            '',
-            'bezodplatné plnenie', // 1
-            'členský príspevok', // 2
-            'finančný dar', // 3
-            'nepeňažný dar', // 4
-            'pôžička', // 5
-            'úver', // 6
-            'zmluvné dojednanie', // 7
-        ],
-        targetColumns: {
-            party: 'Strana',
-            date: 'Dátum',
-            entity: 'Typ',
-            name: 'Meno / Názov firmy',
-            address: 'Adresa',
-            type: 'Typ príjmu',
-            subtype: 'Typ bezodpaltného plnenia',
-            amount: 'Suma',
-            source: 'Zdroj',
-            flag: 'Rizikový príznak',
-            notes: 'Poznámka',
-        },
+export const donations = {
+    apiParams: [
+        'o', // offset (page number - 1)
+        'b', // block size
+        'c', // 1=company, 0=person, unset=all
+        'a_min', // min amount
+        'a_max', // max amount
+        't_min', // min timestamp
+        't_max', // max timestamp
+        't', // type
+        'f', // flag
+        'p', // party
+        'q', // search query
+        's', // sort
+    ],
+    flags: [
+        '',
+        'veľký dar', // 1
+        'veľká pôžička', // 2
+        'vysoké bezodplatné plnenie', // 3
+    ],
+    types: [
+        '',
+        'bezodplatné plnenie', // 1
+        'členský príspevok', // 2
+        'finančný dar', // 3
+        'nepeňažný dar', // 4
+        'pôžička', // 5
+        'úver', // 6
+        'zmluvné dojednanie', // 7
+    ],
+    allColumns: {
+        party: 'Strana',
+        date: 'Dátum',
+        name: 'Meno / Názov firmy',
+        entity: 'Typ',
+        address: 'Adresa',
+        type: 'Typ príjmu',
+        subtype: 'Typ plnenia',
+        amount: 'Suma',
+        source: 'Zdroj',
+        flag: 'Rizikový príznak',
+        notes: 'Poznámka',
     },
+    optionalColumns: [
+        'address',
+        // 'party',
+        'type',
+        'subtype',
+        'source',
+        'flag',
+        'notes',
+    ],
 };
 
 export const isCompany = (sourceColumns) => {
@@ -55,7 +77,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
             return sourceColumns[0];
         case 'date':
             return (
-                <div className="text-end text-nowrap">
+                <div className="text-nowrap">
                     {sourceColumns[1]
                         ? dateNumericFormat(sourceColumns[1])
                         : ''}
@@ -73,12 +95,12 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                     delayShow={300}
                     delayHide={150}
                 >
-                    <span
-                        className="entity-tooltip"
+                    <div
+                        className="entity-tooltip text-center fs-4"
                         aria-label={company ? 'Firma' : 'Fyzická osoba'}
                     >
                         {company ? '🏢' : '👨‍💼'}
-                    </span>
+                    </div>
                 </OverlayTrigger>
             );
         case 'name':
@@ -86,28 +108,31 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
         case 'address':
             return sourceColumns[5];
         case 'type':
-            return settings.donations.types[Number(sourceColumns[6])] ?? '';
+            return donations.types[Number(sourceColumns[6])] ?? '';
         case 'subtype':
             return sourceColumns[7];
         case 'amount':
             return (
-                <div className="text-end">
+                <div className="text-end text-nowrap">
                     {currencyFormat(sourceColumns[8])}
                 </div>
             );
         case 'source':
             return (
-                <a
-                    href={sourceColumns[9]}
-                    title="stiahnuť"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    🖹
-                </a>
+                <div className="text-center">
+                    <a
+                        href={sourceColumns[9]}
+                        className="text-decoration-none fs-3"
+                        title="stiahnuť"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        🖹
+                    </a>
+                </div>
             );
         case 'flag':
-            return settings.donations.flags[Number(sourceColumns[10])] ?? '';
+            return donations.flags[Number(sourceColumns[10])] ?? '';
         case 'notes':
             return sourceColumns[14];
         default:
@@ -115,10 +140,24 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
     }
 };
 
+export const parseQueryOptions = () => {
+    const params = useParams();
+    const options = {};
+    if ((params.query ?? false) && params.query.length) {
+        params.query.split(separators.parts).forEach((pair) => {
+            const [filter, value] = pair.split(separators.value);
+            options[filter] = value;
+        });
+    }
+    return options;
+};
+
 export const buildApiQuery = (options) => {
     const filters = [];
     Object.entries(options).forEach(([param, value]) => {
-        filters.push(`${param}=${value}`);
+        if (donations.apiParams.includes(param)) {
+            filters.push(`${param}=${value}`);
+        }
     });
     return filters.join('&');
 };
