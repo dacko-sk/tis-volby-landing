@@ -24,11 +24,35 @@ export const donations = {
         'q', // search query
         's', // sort
     ],
+    entities: ['👨‍💼 Fyzická osoba', '🏢 Firma'],
     flags: [
         '',
         'veľký dar', // 1
         'veľká pôžička', // 2
         'vysoké bezodplatné plnenie', // 3
+    ],
+    parties: [
+        'ALIANCIA',
+        'DOBRÁ VOĽBA',
+        'HLAS',
+        'KDH',
+        'KRESŤANSKÁ ÚNIA',
+        'ĽSNS',
+        'MKO',
+        'MOST HÍD',
+        'OĽANO',
+        'PS',
+        'REPUBLIKA',
+        'SAS',
+        'SIEŤ',
+        'SME RODINA',
+        'SMER',
+        'SMK',
+        'SNS',
+        'SPOLU',
+        'TEAM BRATISLAVA',
+        'TEAM KRAJ NITRA',
+        'ZA ĽUDÍ',
     ],
     types: [
         '',
@@ -48,7 +72,7 @@ export const donations = {
         address: 'Adresa',
         type: 'Typ príjmu',
         subtype: 'Typ plnenia',
-        amount: 'Suma',
+        amount: 'Výška príspevku',
         source: 'Zdroj',
         flag: 'Rizikový príznak',
         notes: 'Poznámka',
@@ -88,7 +112,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 <OverlayTrigger
                     overlay={
                         <Tooltip id={generateRandomString()}>
-                            {company ? 'Firma' : 'Fyzická osoba'}
+                            {donations.entities[Number(company)]}
                         </Tooltip>
                     }
                     placement="right"
@@ -97,7 +121,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 >
                     <div
                         className="entity-tooltip text-center fs-4"
-                        aria-label={company ? 'Firma' : 'Fyzická osoba'}
+                        aria-label={donations.entities[Number(company)]}
                     >
                         {company ? '🏢' : '👨‍💼'}
                     </div>

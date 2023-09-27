@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
+import { labels } from '../api/constants';
 import { setTitle } from '../api/helpers';
 
 import Filters from '../components/donors/Filters';
@@ -25,7 +26,9 @@ function Donations() {
 
             <div id="donations">
                 <Button className="mb-2" onClick={toggleFilter}>
-                    {open ? 'Skryť nastavenia' : 'Rozbaliť nastavenia'}
+                    {open
+                        ? labels.donations.filters.hide
+                        : labels.donations.filters.show}
                 </Button>
                 <div className="row gx-3 gy-2">
                     <aside

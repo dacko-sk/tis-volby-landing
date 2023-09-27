@@ -21,8 +21,19 @@ export const errors = {
 };
 
 export const labels = {
+    all: 'Všetko',
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
+    donations: {
+        filters: {
+            columns: 'Voliteľné stĺpce',
+            hide: 'Skryť nastavenia',
+            rows: 'Počet riadkov',
+            party: 'Strana',
+            show: 'Rozbaliť nastavenia',
+            entity: 'Typ darcu',
+        },
+    },
     donors: {
         search: {
             advanced: 'Podrobné vyhľadávanie',
