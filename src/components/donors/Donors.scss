@@ -10,3 +10,15 @@
     --bs-btn-hover-border-color: white;
   }
 }
+
+.badge {
+  &.flag-1 {
+    --bs-border-color: #{$tis-orange};
+  }
+  &.flag-2 {
+    --bs-border-color: #{$tis-dark-blue};
+  }
+  &.flag-3 {
+    --bs-border-color: #{$tis-light-blue};
+  }
+}

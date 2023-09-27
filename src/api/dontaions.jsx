@@ -68,7 +68,7 @@ export const donations = {
         party: 'Strana',
         date: 'Dátum',
         name: 'Meno / Názov firmy',
-        entity: 'Typ',
+        entity: 'Typ darcu',
         address: 'Adresa',
         type: 'Typ príjmu',
         subtype: 'Typ plnenia',
@@ -77,15 +77,7 @@ export const donations = {
         flag: 'Rizikový príznak',
         notes: 'Poznámka',
     },
-    optionalColumns: [
-        'address',
-        // 'party',
-        'type',
-        'subtype',
-        'source',
-        'flag',
-        'notes',
-    ],
+    optionalColumns: ['address', 'type', 'subtype', 'source', 'notes'],
 };
 
 export const isCompany = (sourceColumns) => {
@@ -120,7 +112,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                     delayHide={150}
                 >
                     <div
-                        className="entity-tooltip text-center fs-4"
+                        className="text-center fs-5"
                         aria-label={donations.entities[Number(company)]}
                     >
                         {company ? '🏢' : '👨‍💼'}
@@ -146,7 +138,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 <div className="text-center">
                     <a
                         href={sourceColumns[9]}
-                        className="text-decoration-none fs-3"
+                        className="text-decoration-none fs-4"
                         title="stiahnuť"
                         target="_blank"
                         rel="noreferrer"
@@ -156,7 +148,32 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 </div>
             );
         case 'flag':
-            return donations.flags[Number(sourceColumns[10])] ?? '';
+            // return donations.flags[Number(sourceColumns[10])] ?? '';
+            if (sourceColumns[10]) {
+                const f = donations.flags[Number(sourceColumns[10])];
+                return (
+                    <div className="text-center">
+                        <OverlayTrigger
+                            overlay={
+                                <Tooltip id={generateRandomString()}>
+                                    {f}
+                                </Tooltip>
+                            }
+                            placement="right"
+                            delayShow={300}
+                            delayHide={150}
+                        >
+                            <span
+                                className={`flag-${sourceColumns[10]} badge rounded-pill border bg-light bg-opacity-25 fs-6`}
+                                aria-label={f}
+                            >
+                                🏴
+                            </span>
+                        </OverlayTrigger>
+                    </div>
+                );
+            }
+            return null;
         case 'notes':
             return sourceColumns[14];
         default:

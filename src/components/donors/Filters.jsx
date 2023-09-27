@@ -15,28 +15,50 @@ function Filters() {
     const navigate = useNavigate();
 
     const options = parseQueryOptions();
-    const blocksize = options.b ?? false ? Number(options.b) : 50;
-    const entity = (options.c ?? '') !== '' ? Number(options.c) : '';
+
     const party = options.p ?? '';
+    let flags =
+        options.f ?? false
+            ? options.f.split(separators.space).map((item) => Number(item))
+            : [];
+    const entity = (options.c ?? '') !== '' ? Number(options.c) : '';
+
+    const blocksize = options.b ?? false ? Number(options.b) : 50;
     let allowedColumns =
         options.a ?? false
             ? options.a.split(separators.space).map((item) => Number(item))
             : [];
-
-    const updateEntity = (e) => {
-        // copy all options except c & o
-        const { c, o, ...linkOpt } = options;
-        if (e.target.value !== '') {
-            linkOpt.c = Number(e.target.value);
-        }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
-    };
 
     const updateParty = (e) => {
         // copy all options except p & o
         const { p, o, ...linkOpt } = options;
         if (e.target.value !== '') {
             linkOpt.p = e.target.value;
+        }
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    };
+
+    const updateFlags = (e) => {
+        const id = Number(e.target.value);
+        if (e.target.checked) {
+            flags.push(id);
+            flags.sort((a, b) => a - b);
+        } else {
+            flags = flags.filter((item) => item !== id);
+        }
+        // copy all options except f & o
+        const { f, o, ...linkOpt } = options;
+        if (flags.length) {
+            linkOpt.f = flags.join(separators.space);
+        }
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    };
+
+    const updateEntity = (e) => {
+        // copy all options except c & o
+        const { c, o, ...linkOpt } = options;
+        if (e.target.value !== '') {
+            linkOpt.c = Number(e.target.value);
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
@@ -67,7 +89,7 @@ function Filters() {
         <Form id="donations-filters" className="bg-light p-4">
             <div className="mb-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {labels.donations.filters.party}
+                    {donations.allColumns.party}
                 </h6>
                 <Form.Check
                     key=""
@@ -97,7 +119,40 @@ function Filters() {
 
             <div className="mb-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {labels.donations.filters.entity}
+                    {donations.allColumns.flag}
+                </h6>
+                {donations.flags.map((label, index) => {
+                    if (!label) {
+                        return null;
+                    }
+                    return (
+                        <Form.Check
+                            key={label}
+                            inline
+                            label={
+                                <>
+                                    <span
+                                        className={`flag-${index} badge rounded-pill border bg-light bg-opacity-25`}
+                                    >
+                                        🏴
+                                    </span>
+                                    {` ${label}`}
+                                </>
+                            }
+                            id={`flag-${index}`}
+                            name="flag"
+                            type="checkbox"
+                            value={index}
+                            checked={flags.includes(index)}
+                            onChange={updateFlags}
+                        />
+                    );
+                })}
+            </div>
+
+            <div className="mb-3">
+                <h6 className="fw-bold text-primary text-uppercase">
+                    {donations.allColumns.entity}
                 </h6>
                 <Form.Check
                     key=""

@@ -21,7 +21,7 @@ export const errors = {
 };
 
 export const labels = {
-    all: 'Všetko',
+    all: 'Zobraziť všetko',
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
     donations: {
@@ -29,9 +29,7 @@ export const labels = {
             columns: 'Voliteľné stĺpce',
             hide: 'Skryť nastavenia',
             rows: 'Počet riadkov',
-            party: 'Strana',
             show: 'Rozbaliť nastavenia',
-            entity: 'Typ darcu',
         },
     },
     donors: {
