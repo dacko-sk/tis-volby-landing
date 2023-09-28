@@ -33,16 +33,16 @@ function Filters() {
             : [];
     const party = options.p ?? '';
 
-    const updateQuery = (e) => {
-        const debouncedSearch = useDebouncedCallback((value) => {
-            // copy all options except q & o
-            const { q, o, ...linkOpt } = options;
-            if (value) {
-                linkOpt.q = encodeURIComponent(value);
-            }
-            navigate(routes.donations(buildUrlQuery(linkOpt)));
-        }, 500);
+    const debouncedSearch = useDebouncedCallback((value) => {
+        // copy all options except q & o
+        const { q, o, ...linkOpt } = options;
+        if (value) {
+            linkOpt.q = encodeURIComponent(value);
+        }
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    }, 500);
 
+    const updateQuery = (e) => {
         setQuery(e.target.value);
         debouncedSearch(e.target.value);
     };

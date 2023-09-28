@@ -1,13 +1,13 @@
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import {
     currencyFormat,
     dateNumericFormat,
     generateRandomString,
 } from './helpers';
-import { separators } from './routes';
+import { routes, separators } from './routes';
 
 export const donations = {
     apiParams: [
@@ -24,6 +24,7 @@ export const donations = {
         'q', // search query
         's', // sort
     ],
+    settingsParams: ['a'],
     entities: ['👨‍💼 Fyzická osoba', '🏢 Firma'],
     flags: [
         '',
@@ -120,7 +121,13 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 </OverlayTrigger>
             );
         case 'name':
-            return company ? sourceColumns[4] : sourceColumns[2];
+            return sourceColumns[3] ? (
+                <Link to={routes.donor(sourceColumns[3])}>
+                    {company ? sourceColumns[4] : sourceColumns[2]}
+                </Link>
+            ) : (
+                <span>{company ? sourceColumns[4] : sourceColumns[2]}</span>
+            );
         case 'address':
             return sourceColumns[5];
         case 'type':
@@ -185,9 +192,12 @@ export const parseQueryOptions = () => {
     const params = useParams();
     const options = {};
     if ((params.query ?? false) && params.query.length) {
+        const allowed = [...donations.apiParams, ...donations.settingsParams];
         params.query.split(separators.parts).forEach((pair) => {
             const [filter, value] = pair.split(separators.value);
-            options[filter] = value;
+            if (allowed.includes(filter)) {
+                options[filter] = value;
+            }
         });
     }
     return options;
