@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
+import { labels } from '../../api/constants';
 import {
     buildApiQuery,
     buildUrlQuery,
@@ -11,6 +12,7 @@ import {
 } from '../../api/dontaions';
 import { routes, separators } from '../../api/routes';
 
+import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
 import PaginationWithGaps from '../general/PaginationWithGaps';
 
@@ -103,7 +105,7 @@ function SearchResults() {
                 );
             });
         }
-        table = (
+        table = rows.length ? (
             <div className="table-responsive">
                 <table className="table table-bordered table-hover table-striped">
                     <thead>
@@ -112,6 +114,10 @@ function SearchResults() {
                     <tbody>{rows}</tbody>
                 </table>
             </div>
+        ) : (
+            <AlertWithIcon variant="danger">
+                {labels.donations.search.noData}
+            </AlertWithIcon>
         );
 
         numOfPages = Math.ceil(data.total / blocksize);

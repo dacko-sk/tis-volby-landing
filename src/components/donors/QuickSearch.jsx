@@ -28,11 +28,11 @@ function QuickSearch() {
 
     return (
         <div className="donor-search my-4 p-5">
-            <h2 className="mb-3">{labels.donors.search.title}</h2>
+            <h2 className="mb-3">{labels.donations.search.title}</h2>
             <Form className="" onSubmit={handleFormSumbit}>
                 <InputGroup>
                     <Form.Control
-                        placeholder={labels.donors.search.placeholder}
+                        placeholder={labels.donations.search.placeholder}
                         aria-label={labels.search}
                         aria-describedby="quick-search-icon"
                         id="quicksearch"
@@ -52,7 +52,7 @@ function QuickSearch() {
                     variant="secondary"
                     className="mt-4"
                 >
-                    {labels.donors.search.advanced}
+                    {labels.donations.search.advanced}
                 </Button>
             </Form>
         </div>

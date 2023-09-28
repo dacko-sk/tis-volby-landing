@@ -4,15 +4,16 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useDebouncedCallback } from 'use-debounce';
 
+import { labels } from '../../api/constants';
 import {
     buildUrlQuery,
     donations,
     parseQueryOptions,
 } from '../../api/dontaions';
+import { sortNumbers } from '../../api/helpers';
 import { routes, separators } from '../../api/routes';
 
 import './Donors.scss';
-import { labels } from '../../api/constants';
 
 function Filters() {
     const navigate = useNavigate();
@@ -32,22 +33,16 @@ function Filters() {
             : [];
     const party = options.p ?? '';
 
-    const blocksize = options.b ?? false ? Number(options.b) : 50;
-    let allowedColumns =
-        options.a ?? false
-            ? options.a.split(separators.space).map((item) => Number(item))
-            : [];
-
-    const debouncedSearch = useDebouncedCallback((value) => {
-        // copy all options except q & o
-        const { q, o, ...linkOpt } = options;
-        if (value) {
-            linkOpt.q = encodeURIComponent(value);
-        }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
-    }, 500);
-
     const updateQuery = (e) => {
+        const debouncedSearch = useDebouncedCallback((value) => {
+            // copy all options except q & o
+            const { q, o, ...linkOpt } = options;
+            if (value) {
+                linkOpt.q = encodeURIComponent(value);
+            }
+            navigate(routes.donations(buildUrlQuery(linkOpt)));
+        }, 500);
+
         setQuery(e.target.value);
         debouncedSearch(e.target.value);
     };
@@ -62,15 +57,15 @@ function Filters() {
     };
 
     const updateTypes = (e) => {
+        // copy all options except t & o
+        const { t, o, ...linkOpt } = options;
         const id = Number(e.target.value);
         if (e.target.checked) {
             types.push(id);
-            types.sort((a, b) => a - b);
+            types.sort(sortNumbers(true));
         } else {
             types = types.filter((item) => item !== id);
         }
-        // copy all options except t & o
-        const { t, o, ...linkOpt } = options;
         if (types.length) {
             linkOpt.t = types.join(separators.space);
         }
@@ -78,15 +73,15 @@ function Filters() {
     };
 
     const updateFlags = (e) => {
+        // copy all options except f & o
+        const { f, o, ...linkOpt } = options;
         const id = Number(e.target.value);
         if (e.target.checked) {
             flags.push(id);
-            flags.sort((a, b) => a - b);
+            flags.sort(sortNumbers(true));
         } else {
             flags = flags.filter((item) => item !== id);
         }
-        // copy all options except f & o
-        const { f, o, ...linkOpt } = options;
         if (flags.length) {
             linkOpt.f = flags.join(separators.space);
         }
@@ -102,31 +97,9 @@ function Filters() {
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
 
-    const updateColumns = (e) => {
-        const id = Number(e.target.value);
-        if (e.target.checked) {
-            allowedColumns.push(id);
-            allowedColumns.sort((a, b) => a - b);
-        } else {
-            allowedColumns = allowedColumns.filter((item) => item !== id);
-        }
-        const linkOpt = {
-            ...options,
-            a: allowedColumns.join(separators.space),
-        };
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
-    };
-
-    const updateBlocksize = (e) => {
-        // copy all options except b & o
-        const { b, o, ...linkOpt } = options;
-        linkOpt.b = Number(e.target.value);
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
-    };
-
     return (
         <Form id="donations-filters" className="bg-light p-4">
-            <div className="mb-3">
+            <div>
                 <h6 className="fw-bold text-primary text-uppercase">
                     {labels.donations.filters.search}
                 </h6>
@@ -148,7 +121,7 @@ function Filters() {
                 </InputGroup>
             </div>
 
-            <div className="mb-3">
+            <div className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.entity}
                 </h6>
@@ -178,7 +151,7 @@ function Filters() {
                 ))}
             </div>
 
-            <div className="mb-3">
+            <div className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.type}
                 </h6>
@@ -202,7 +175,7 @@ function Filters() {
                 })}
             </div>
 
-            <div className="mb-3">
+            <div className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.flag}
                 </h6>
@@ -235,7 +208,7 @@ function Filters() {
                 })}
             </div>
 
-            <div className="mb-3">
+            <div className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.party}
                 </h6>
@@ -261,44 +234,6 @@ function Filters() {
                         value={p}
                         checked={party === p}
                         onChange={updateParty}
-                    />
-                ))}
-            </div>
-
-            <div className="mb-3">
-                <h6 className="fw-bold text-primary text-uppercase">
-                    {labels.donations.filters.columns}
-                </h6>
-                {donations.optionalColumns.map((column, index) => (
-                    <Form.Check
-                        key={column}
-                        inline
-                        label={donations.allColumns[column]}
-                        id={`allowed-columns-${column}`}
-                        name="allowed-columns"
-                        type="checkbox"
-                        value={index}
-                        checked={allowedColumns.includes(index)}
-                        onChange={updateColumns}
-                    />
-                ))}
-            </div>
-
-            <div className="mb-3">
-                <h6 className="fw-bold text-primary text-uppercase">
-                    {labels.donations.filters.rows}
-                </h6>
-                {[10, 25, 50, 100].map((b) => (
-                    <Form.Check
-                        key={b}
-                        inline
-                        label={b}
-                        id={`blocksize-${b}`}
-                        name="blocksize"
-                        type="radio"
-                        value={b}
-                        checked={b === blocksize}
-                        onChange={updateBlocksize}
                     />
                 ))}
             </div>

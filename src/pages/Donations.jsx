@@ -6,14 +6,22 @@ import { setTitle } from '../api/helpers';
 
 import Filters from '../components/donors/Filters';
 import SearchResults from '../components/donors/SearchResults';
+import Settings from '../components/donors/Settings';
 import Title from '../components/structure/Title';
 
 function Donations() {
-    const [open, setOpen] = useState(window.screen.width > 991);
+    const [openFilters, setOpenFilters] = useState(window.screen.width > 991);
+    const [openSettings, setOpenSettings] = useState(false);
 
     const toggleFilter = () => {
-        setOpen(!open);
+        setOpenFilters(!openFilters);
     };
+
+    const toggleSettings = () => {
+        setOpenSettings(!openSettings);
+    };
+
+    const tableSize = 12 - (openFilters ? 3 : 0) - (openSettings ? 2 : 0);
 
     setTitle('Financovanie politických strán a databáza donorov');
 
@@ -25,16 +33,37 @@ function Donations() {
             </Title>
 
             <div id="donations">
-                <Button className="mb-2" onClick={toggleFilter}>
-                    {open
-                        ? labels.donations.filters.hide
-                        : labels.donations.filters.show}
-                </Button>
+                <div className="d-flex mb-2">
+                    <Button
+                        onClick={toggleFilter}
+                        variant={`${openFilters ? '' : 'outline-'}primary`}
+                    >
+                        {labels.donations.filters.button}
+                    </Button>
+                    <Button
+                        className="ms-auto"
+                        onClick={toggleSettings}
+                        variant={`${openSettings ? '' : 'outline-'}primary`}
+                    >
+                        {labels.donations.settings.button}
+                    </Button>
+                </div>
                 <div className="row gx-3 gy-2">
-                    <aside className={`col-12 ${open ? 'col-lg-3' : 'd-none'}`}>
-                        <Filters open={open} />
+                    <aside
+                        className={`col-12 ${
+                            openFilters ? 'col-lg-3' : 'd-none'
+                        }`}
+                    >
+                        <Filters />
                     </aside>
-                    <div className="col-12 col-lg">
+                    <aside
+                        className={`col-12 ${
+                            openSettings ? 'col-lg-2 order-lg-last' : 'd-none'
+                        }`}
+                    >
+                        <Settings />
+                    </aside>
+                    <div className={`col-12 col-lg-${tableSize}`}>
                         <SearchResults />
                     </div>
                 </div>

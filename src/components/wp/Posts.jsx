@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
@@ -12,6 +11,7 @@ import { routes, segments } from '../../api/routes';
 
 import NewsCondensed from './templates/NewsCondensed';
 import NewsList from './templates/NewsList';
+import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
 
 import './News.scss';
@@ -112,9 +112,9 @@ function Posts({
                 {articles}
             </Row>
         ) : (
-            <Alert variant="secondary">
-                {noResults ?? 'Neboli nájdené žiadne články.'}
-            </Alert>
+            <AlertWithIcon className="my-4" variant="danger">
+                {noResults ?? labels.news.noData}
+            </AlertWithIcon>
         );
     }
 

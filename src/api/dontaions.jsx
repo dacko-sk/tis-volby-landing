@@ -62,7 +62,7 @@ export const donations = {
         'nepeňažný dar', // 4
         'pôžička', // 5
         'úver', // 6
-        // 'zmluvné dojednanie', // 7
+        'zmluvné dojednanie', // 7
     ],
     allColumns: {
         party: 'Strana',

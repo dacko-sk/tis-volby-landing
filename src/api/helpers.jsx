@@ -147,6 +147,8 @@ export const decodeHTMLEntities = (rawStr) =>
           )
         : '';
 
+export const sortNumbers = (asc) => (a, b) => asc ?? true ? a - b : b - a;
+
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];
 
