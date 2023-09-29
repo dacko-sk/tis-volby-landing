@@ -40,6 +40,9 @@ export const labels = {
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
     donations: {
+        aggFlags: 'Kumulatívne rizikové príznaky',
+        allDonations: 'Jednotlivé príspevky',
+        donorInfo: 'Údaje o darcovi',
         filters: {
             button: 'Filtre',
             search: 'Hľadaný výraz',

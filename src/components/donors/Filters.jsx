@@ -33,6 +33,11 @@ function Filters() {
             : [];
     const party = options.p ?? '';
 
+    const formSubmit = (e) => {
+        // prevent form submit action, all paremeters are set via URL
+        e.preventDefault();
+    };
+
     const debouncedSearch = useDebouncedCallback((value) => {
         // copy all options except q & o
         const { q, o, ...linkOpt } = options;
@@ -98,7 +103,11 @@ function Filters() {
     };
 
     return (
-        <Form id="donations-filters" className="bg-light p-4">
+        <Form
+            id="donations-filters"
+            className="bg-light p-4"
+            onSubmit={formSubmit}
+        >
             <div>
                 <h6 className="fw-bold text-primary text-uppercase">
                     {labels.donations.filters.search}
@@ -140,7 +149,7 @@ function Filters() {
                     <Form.Check
                         key={label}
                         inline
-                        label={donations.entities[index]}
+                        label={`${donations.entityIcons[index]} ${donations.entities[index]}`}
                         id={`entity-${label}`}
                         name="entity"
                         type="radio"

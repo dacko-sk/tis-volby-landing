@@ -1,6 +1,7 @@
+import { Link, useParams } from 'react-router-dom';
+import Badge from 'react-bootstrap/Badge';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { Link, useParams } from 'react-router-dom';
 
 import {
     currencyFormat,
@@ -20,12 +21,14 @@ export const donations = {
         't_max', // max timestamp
         't', // type
         'f', // flag
+        'i', // ID / unqId
         'p', // party
         'q', // search query
         's', // sort
     ],
-    settingsParams: ['a'],
-    entities: ['👨‍💼 Fyzická osoba', '🏢 Firma'],
+    settingsParams: ['v'],
+    entities: ['Fyzická osoba', 'Firma'],
+    entityIcons: ['👨‍💼', '🏢'],
     flags: [
         '',
         'veľký dar', // 1
@@ -65,6 +68,10 @@ export const donations = {
         'úver', // 6
         'zmluvné dojednanie', // 7
     ],
+    aggColumns: {
+        amount: 'Suma príspevkov',
+        parties: 'Podporené strany',
+    },
     allColumns: {
         party: 'Strana',
         date: 'Dátum',
@@ -78,6 +85,7 @@ export const donations = {
         flag: 'Rizikový príznak',
         notes: 'Poznámka',
     },
+    hiddenDonorColumns: ['entity', 'name', 'address'],
     optionalColumns: ['address', 'type', 'subtype', 'source', 'notes'],
 };
 
@@ -116,7 +124,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                         className="text-center fs-5"
                         aria-label={donations.entities[Number(company)]}
                     >
-                        {company ? '🏢' : '👨‍💼'}
+                        {donations.entityIcons[Number(company)]}
                     </div>
                 </OverlayTrigger>
             );
@@ -170,12 +178,13 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                             delayShow={300}
                             delayHide={150}
                         >
-                            <span
-                                className={`flag-${sourceColumns[10]} badge rounded-pill border bg-light bg-opacity-25 fs-6`}
-                                aria-label={f}
+                            <Badge
+                                bg="light"
+                                pill
+                                className={`flag-${sourceColumns[10]} border bg-opacity-25 fs-6`}
                             >
                                 🏴
-                            </span>
+                            </Badge>
                         </OverlayTrigger>
                     </div>
                 );

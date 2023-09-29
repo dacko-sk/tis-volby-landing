@@ -18,23 +18,23 @@ function Settings() {
     const options = parseQueryOptions();
 
     const blocksize = options.b ?? false ? Number(options.b) : 50;
-    let allowedColumns =
-        options.a ?? false
-            ? options.a.split(separators.space).map((item) => Number(item))
+    let visibleColumns =
+        options.v ?? false
+            ? options.v.split(separators.space).map((item) => Number(item))
             : [];
 
     const updateColumns = (e) => {
-        // copy all options except a
-        const { a, ...linkOpt } = options;
+        // copy all options except v
+        const { v, ...linkOpt } = options;
         const id = Number(e.target.value);
         if (e.target.checked) {
-            allowedColumns.push(id);
-            allowedColumns.sort(sortNumbers(true));
+            visibleColumns.push(id);
+            visibleColumns.sort(sortNumbers(true));
         } else {
-            allowedColumns = allowedColumns.filter((item) => item !== id);
+            visibleColumns = visibleColumns.filter((item) => item !== id);
         }
-        if (allowedColumns.length) {
-            linkOpt.a = allowedColumns.join(separators.space);
+        if (visibleColumns.length) {
+            linkOpt.v = visibleColumns.join(separators.space);
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
@@ -57,11 +57,11 @@ function Settings() {
                         key={column}
                         inline
                         label={donations.allColumns[column]}
-                        id={`allowed-columns-${column}`}
-                        name="allowed-columns"
+                        id={`visible-columns-${column}`}
+                        name="visible-columns"
                         type="checkbox"
                         value={index}
-                        checked={allowedColumns.includes(index)}
+                        checked={visibleColumns.includes(index)}
                         onChange={updateColumns}
                     />
                 ))}
