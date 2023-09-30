@@ -10,10 +10,16 @@ import {
     donations,
     parseQueryOptions,
 } from '../../api/dontaions';
-import { sortNumbers } from '../../api/helpers';
+import { currencyFormat, sortNumbers } from '../../api/helpers';
 import { routes, separators } from '../../api/routes';
 
 import './Donors.scss';
+
+const defA = {
+    min: 0,
+    max: 1500000,
+    step: 100,
+};
 
 function Filters() {
     const navigate = useNavigate();
@@ -33,12 +39,18 @@ function Filters() {
             : [];
     const party = options.p ?? '';
 
+    const [amount, setAmount] = useState(
+        options.a ?? false
+            ? options.a.split(separators.space).map((item) => Number(item))
+            : [defA.min, defA.max]
+    );
+
     const formSubmit = (e) => {
         // prevent form submit action, all paremeters are set via URL
         e.preventDefault();
     };
 
-    const debouncedSearch = useDebouncedCallback((value) => {
+    const debounceSearch = useDebouncedCallback((value) => {
         // copy all options except q & o
         const { q, o, ...linkOpt } = options;
         if (value) {
@@ -49,7 +61,7 @@ function Filters() {
 
     const updateQuery = (e) => {
         setQuery(e.target.value);
-        debouncedSearch(e.target.value);
+        debounceSearch(e.target.value);
     };
 
     const updateEntity = (e) => {
@@ -91,6 +103,33 @@ function Filters() {
             linkOpt.f = flags.join(separators.space);
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
+    };
+
+    const debounceParam = useDebouncedCallback((value, param) => {
+        // copy all options except f & o
+        const { o, ...linkOpt } = options;
+        linkOpt[param] = value.join(separators.space);
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    }, 500);
+
+    const updateAmountMin = (e) => {
+        const min = Math.max(
+            Math.min(Number(e.target.value), defA.max - defA.step),
+            defA.min
+        );
+        const a = [min, Math.max(min + defA.step, amount[1])];
+        setAmount(a);
+        debounceParam(a, 'a');
+    };
+
+    const updateAmountMax = (e) => {
+        const max = Math.min(
+            Math.max(Number(e.target.value), defA.step),
+            defA.max
+        );
+        const a = [Math.min(max - defA.step, amount[0]), max];
+        setAmount(a);
+        debounceParam(a, 'a');
     };
 
     const updateParty = (e) => {
@@ -215,6 +254,32 @@ function Filters() {
                         />
                     );
                 })}
+            </div>
+
+            <div className="mt-3">
+                <h6 className="fw-bold text-primary text-uppercase">Suma</h6>
+                <div className="d-flex">
+                    <Form.Label>Od</Form.Label>
+                    <span className="ms-auto">{currencyFormat(amount[0])}</span>
+                </div>
+                <Form.Range
+                    min={defA.min}
+                    max={defA.max}
+                    step={defA.step}
+                    value={amount[0]}
+                    onChange={updateAmountMin}
+                />
+                <div className="d-flex">
+                    <Form.Label>Do</Form.Label>
+                    <span className="ms-auto">{currencyFormat(amount[1])}</span>
+                </div>
+                <Form.Range
+                    min={defA.min}
+                    max={defA.max}
+                    step={defA.step}
+                    value={amount[1]}
+                    onChange={updateAmountMax}
+                />
             </div>
 
             <div className="mt-3">

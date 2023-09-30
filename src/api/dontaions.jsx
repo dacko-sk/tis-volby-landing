@@ -15,10 +15,9 @@ export const donations = {
         'o', // offset (page number - 1)
         'b', // block size
         'c', // 1=company, 0=person, unset=all
-        'a_min', // min amount
-        'a_max', // max amount
-        't_min', // min timestamp
-        't_max', // max timestamp
+        'a', // amount
+        't0', // min timestamp
+        't1', // max timestamp
         't', // type
         'f', // flag
         'i', // ID / unqId
