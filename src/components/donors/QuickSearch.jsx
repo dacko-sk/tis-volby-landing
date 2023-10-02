@@ -14,7 +14,9 @@ function QuickSearch() {
     const [searchQuery, setSearchQuery] = useState(null);
 
     const searchLink = routes.donations(
-        `q${separators.value}${encodeURIComponent(searchQuery)}`
+        searchQuery
+            ? `q${separators.value}${encodeURIComponent(searchQuery)}`
+            : ''
     );
 
     const handleInputChange = (e) => {

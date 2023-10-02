@@ -130,7 +130,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
         case 'name':
             return sourceColumns[3] ? (
                 <Link to={routes.donor(sourceColumns[3])}>
-                    {company ? sourceColumns[4] : sourceColumns[2]}
+                    {(company ? sourceColumns[4] : sourceColumns[2]) || '-'}
                 </Link>
             ) : (
                 <span>{company ? sourceColumns[4] : sourceColumns[2]}</span>
