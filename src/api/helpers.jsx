@@ -62,6 +62,17 @@ export const dateNumericFormat = (timestamp) =>
         day: 'numeric',
     });
 
+export const datePickerFormat = (timestamp) =>
+    timestamp
+        ? new Date(
+              timestamp.toString().length >= 10 ? timestamp * 1000 : timestamp
+          )
+              .toISOString()
+              .split('T')[0]
+        : '';
+
+export const getTimeFromDate = (string) => new Date(string).getTime() / 1000;
+
 export const shortenValue = (value, length, removals) => {
     if (value) {
         let shorten = value;

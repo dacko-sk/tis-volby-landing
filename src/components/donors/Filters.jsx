@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Row from 'react-bootstrap/Row';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { labels } from '../../api/constants';
@@ -10,7 +12,12 @@ import {
     donations,
     parseQueryOptions,
 } from '../../api/dontaions';
-import { currencyFormat, sortNumbers } from '../../api/helpers';
+import {
+    currencyFormat,
+    datePickerFormat,
+    getTimeFromDate,
+    sortNumbers,
+} from '../../api/helpers';
 import { routes, separators } from '../../api/routes';
 
 import './Donors.scss';
@@ -44,6 +51,9 @@ function Filters() {
             ? options.a.split(separators.space).map((item) => Number(item))
             : [defA.min, defA.max]
     );
+    const timestamp = options.d
+        ? options.d.split(separators.space).map((item) => Number(item))
+        : [0, 0];
 
     const formSubmit = (e) => {
         // prevent form submit action, all paremeters are set via URL
@@ -132,6 +142,22 @@ function Filters() {
         debounceParam(a, 'a');
     };
 
+    const updateDateMin = (e) => {
+        // copy all options except d & o
+        const { d, o, ...linkOpt } = options;
+        const min = getTimeFromDate(e.target.value);
+        linkOpt.d = [min, Math.max(min, timestamp[1])].join(separators.space);
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    };
+
+    const updateDateMax = (e) => {
+        // copy all options except d & o
+        const { d, o, ...linkOpt } = options;
+        const max = getTimeFromDate(e.target.value);
+        linkOpt.d = [Math.min(max, timestamp[0]), max].join(separators.space);
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
+    };
+
     const updateParty = (e) => {
         // copy all options except p & o
         const { p, o, ...linkOpt } = options;
@@ -147,11 +173,17 @@ function Filters() {
             className="bg-light p-4"
             onSubmit={formSubmit}
         >
-            <div>
+            <Form.Group>
                 <h6 className="fw-bold text-primary text-uppercase">
                     {labels.donations.filters.search}
                 </h6>
                 <InputGroup>
+                    <Form.Label
+                        htmlFor="donations-search"
+                        className="visually-hidden"
+                    >
+                        {labels.search}
+                    </Form.Label>
                     <Form.Control
                         placeholder={labels.search}
                         aria-label={labels.search}
@@ -160,16 +192,11 @@ function Filters() {
                         onChange={updateQuery}
                         value={query}
                     />
-                    <InputGroup.Text
-                        id="search-icon"
-                        className="d-lg-none d-xl-flex"
-                    >
-                        🔍
-                    </InputGroup.Text>
+                    <InputGroup.Text id="search-icon">🔍</InputGroup.Text>
                 </InputGroup>
-            </div>
+            </Form.Group>
 
-            <div className="mt-3">
+            <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.entity}
                 </h6>
@@ -197,9 +224,9 @@ function Filters() {
                         onChange={updateEntity}
                     />
                 ))}
-            </div>
+            </Form.Group>
 
-            <div className="mt-3">
+            <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.type}
                 </h6>
@@ -221,9 +248,9 @@ function Filters() {
                         />
                     );
                 })}
-            </div>
+            </Form.Group>
 
-            <div className="mt-3">
+            <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.flag}
                 </h6>
@@ -254,15 +281,18 @@ function Filters() {
                         />
                     );
                 })}
-            </div>
+            </Form.Group>
 
-            <div className="mt-3">
+            <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">Suma</h6>
                 <div className="d-flex">
-                    <Form.Label>Od</Form.Label>
+                    <Form.Label htmlFor="amount-min">
+                        {labels.donations.filters.from}
+                    </Form.Label>
                     <span className="ms-auto">{currencyFormat(amount[0])}</span>
                 </div>
                 <Form.Range
+                    id="amount-min"
                     min={defA.min}
                     max={defA.max}
                     step={defA.step}
@@ -270,47 +300,72 @@ function Filters() {
                     onChange={updateAmountMin}
                 />
                 <div className="d-flex">
-                    <Form.Label>Do</Form.Label>
+                    <Form.Label htmlFor="amount-max">
+                        {labels.donations.filters.to}
+                    </Form.Label>
                     <span className="ms-auto">{currencyFormat(amount[1])}</span>
                 </div>
                 <Form.Range
+                    id="amount-max"
                     min={defA.min}
                     max={defA.max}
                     step={defA.step}
                     value={amount[1]}
                     onChange={updateAmountMax}
                 />
-            </div>
+            </Form.Group>
 
-            <div className="mt-3">
+            <Form.Group className="mt-3">
+                <h6 className="fw-bold text-primary text-uppercase">
+                    {donations.allColumns.date}
+                </h6>
+                <Row className="align-items-center">
+                    <Col xs={2}>
+                        <Form.Label htmlFor="date-min" className="my-0">
+                            {labels.donations.filters.from}
+                        </Form.Label>
+                    </Col>
+                    <Col xs={10}>
+                        <Form.Control
+                            id="date-min"
+                            type="date"
+                            value={datePickerFormat(timestamp[0])}
+                            onChange={updateDateMin}
+                        />
+                    </Col>
+                </Row>
+                <Row className="align-items-center mt-2">
+                    <Col xs={2}>
+                        <Form.Label htmlFor="date-max" className="my-0">
+                            {labels.donations.filters.to}
+                        </Form.Label>
+                    </Col>
+                    <Col xs={10}>
+                        <Form.Control
+                            id="date-max"
+                            type="date"
+                            value={datePickerFormat(timestamp[1])}
+                            onChange={updateDateMax}
+                        />
+                    </Col>
+                </Row>
+            </Form.Group>
+
+            <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
                     {donations.allColumns.party}
                 </h6>
-                <Form.Check
-                    key=""
-                    inline
-                    label={labels.all}
-                    id="party-all"
-                    name="party"
-                    type="radio"
-                    value=""
-                    checked={party === ''}
-                    onChange={updateParty}
-                />
-                {donations.parties.map((p) => (
-                    <Form.Check
-                        key={p}
-                        inline
-                        label={p}
-                        id={`party-${p}`}
-                        name="party"
-                        type="radio"
-                        value={p}
-                        checked={party === p}
-                        onChange={updateParty}
-                    />
-                ))}
-            </div>
+                <Form.Select size="sm" onChange={updateParty} value={party}>
+                    <option key="" value="">
+                        {labels.all}
+                    </option>
+                    {donations.parties.map((p) => (
+                        <option key={p} value={p}>
+                            {p}
+                        </option>
+                    ))}
+                </Form.Select>
+            </Form.Group>
         </Form>
     );
 }

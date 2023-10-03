@@ -45,7 +45,9 @@ export const labels = {
         donorInfo: 'Údaje o darcovi',
         filters: {
             button: 'Filtre',
+            from: 'Od',
             search: 'Hľadaný výraz',
+            to: 'Do',
         },
         search: {
             advanced: 'Podrobné vyhľadávanie',

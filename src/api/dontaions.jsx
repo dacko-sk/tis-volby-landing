@@ -16,8 +16,7 @@ export const donations = {
         'b', // block size
         'c', // 1=company, 0=person, unset=all
         'a', // amount
-        't0', // min timestamp
-        't1', // max timestamp
+        'd', // date (timestamp)
         't', // type
         'f', // flag
         'i', // ID / unqId
