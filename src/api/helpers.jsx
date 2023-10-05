@@ -71,7 +71,10 @@ export const datePickerFormat = (timestamp) =>
               .split('T')[0]
         : '';
 
-export const getTimeFromDate = (string) => new Date(string).getTime() / 1000;
+export const getTimeFromDate = (string) => {
+    const t = new Date(string).getTime();
+    return Number.isNaN(t) ? 0 : t / 1000;
+};
 
 export const shortenValue = (value, length, removals) => {
     if (value) {

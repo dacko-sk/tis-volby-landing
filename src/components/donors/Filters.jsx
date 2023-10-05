@@ -122,14 +122,17 @@ function Filters() {
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     }, 500);
 
+    const updateAmount = (minmax) => {
+        setAmount(minmax);
+        debounceParam(minmax, 'a');
+    };
+
     const updateAmountMin = (e) => {
         const min = Math.max(
             Math.min(Number(e.target.value), defA.max - defA.step),
             defA.min
         );
-        const a = [min, Math.max(min + defA.step, amount[1])];
-        setAmount(a);
-        debounceParam(a, 'a');
+        updateAmount([min, Math.max(min + defA.step, amount[1])]);
     };
 
     const updateAmountMax = (e) => {
@@ -137,25 +140,36 @@ function Filters() {
             Math.max(Number(e.target.value), defA.step),
             defA.max
         );
-        const a = [Math.min(max - defA.step, amount[0]), max];
-        setAmount(a);
-        debounceParam(a, 'a');
+        updateAmount([Math.min(max - defA.step, amount[0]), max]);
+    };
+
+    const updateDate = (minmax) => {
+        // copy all options except d & o
+        const { d, o, ...linkOpt } = options;
+        if (minmax[0] || minmax[1]) {
+            linkOpt.d = [minmax[0] || '', minmax[1] || ''].join(
+                separators.space
+            );
+        }
+        navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
 
     const updateDateMin = (e) => {
-        // copy all options except d & o
-        const { d, o, ...linkOpt } = options;
         const min = getTimeFromDate(e.target.value);
-        linkOpt.d = [min, Math.max(min, timestamp[1])].join(separators.space);
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        let max = timestamp[1];
+        if (min && max) {
+            max = Math.max(min, max);
+        }
+        updateDate([min, max]);
     };
 
     const updateDateMax = (e) => {
-        // copy all options except d & o
-        const { d, o, ...linkOpt } = options;
         const max = getTimeFromDate(e.target.value);
-        linkOpt.d = [Math.min(max, timestamp[0]), max].join(separators.space);
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        let min = timestamp[0];
+        if (min && max) {
+            min = Math.min(max, min);
+        }
+        updateDate([min, max]);
     };
 
     const updateParty = (e) => {
