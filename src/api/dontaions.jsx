@@ -1,6 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
+import Col from 'react-bootstrap/Col';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Row from 'react-bootstrap/Row';
+import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 import {
@@ -28,7 +31,7 @@ export const donations = {
     entities: ['Fyzická osoba', 'Firma'],
     entityIcons: ['👨‍💼', '🏢'],
     flags: [
-        '',
+        'žiadne',
         'veľký dar', // 1
         'veľká pôžička', // 2
         'vysoké bezodplatné plnenie', // 3
@@ -85,6 +88,7 @@ export const donations = {
     },
     hiddenDonorColumns: ['entity', 'name', 'address'],
     optionalColumns: ['address', 'type', 'subtype', 'source', 'notes'],
+    defaultSort: `${separators.space}date`,
 };
 
 export const isCompany = (sourceColumns) => {
@@ -95,19 +99,20 @@ export const isCompany = (sourceColumns) => {
 
 export const getDonationsColumn = (sourceColumns, targetColumn) => {
     const company = isCompany(sourceColumns);
+    const name = sourceColumns[company ? 4 : 2].trim();
     switch (targetColumn) {
         case 'party':
             return sourceColumns[0];
         case 'date':
             return (
                 <div className="text-end text-nowrap">
-                    {sourceColumns[1]
+                    {sourceColumns[1].length > 4
                         ? dateNumericFormat(sourceColumns[1])
-                        : ''}
+                        : sourceColumns[1]}
                 </div>
             );
         case 'entity':
-            return (
+            return name ? (
                 <OverlayTrigger
                     overlay={
                         <Tooltip id={generateRandomString()}>
@@ -125,14 +130,14 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                         {donations.entityIcons[Number(company)]}
                     </div>
                 </OverlayTrigger>
+            ) : (
+                ''
             );
         case 'name':
             return sourceColumns[3] ? (
-                <Link to={routes.donor(sourceColumns[3])}>
-                    {(company ? sourceColumns[4] : sourceColumns[2]) || '-'}
-                </Link>
+                <Link to={routes.donor(sourceColumns[3])}>{name || '-'}</Link>
             ) : (
-                <span>{company ? sourceColumns[4] : sourceColumns[2]}</span>
+                <span>{name || '-'}</span>
             );
         case 'address':
             return sourceColumns[5];
@@ -161,7 +166,6 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 </div>
             );
         case 'flag':
-            // return donations.flags[Number(sourceColumns[10])] ?? '';
             if (sourceColumns[10]) {
                 const f = donations.flags[Number(sourceColumns[10])];
                 return (
@@ -227,3 +231,101 @@ export const buildUrlQuery = (options) => {
     });
     return filters.join(separators.parts);
 };
+
+export function FlagBadge({ flag }) {
+    const i = Number(flag);
+    return (
+        <>
+            <Badge
+                bg="light"
+                pill
+                className={`flag-${flag} border bg-opacity-25 fs-2`}
+            >
+                {i ? '🏴' : '✔️'}
+            </Badge>
+            <h5 className="mt-2">{donations.flags[i]}</h5>
+        </>
+    );
+}
+
+export function DonorFlags({ flags = [] }) {
+    return (
+        <Row className="text-center mt-5">
+            {Object.entries(flags).map(([flag, enabled]) => {
+                if (!enabled) {
+                    return null;
+                }
+                return (
+                    <Col key={flag}>
+                        <FlagBadge flag={flag} />
+                    </Col>
+                );
+            })}
+            {!Object.values(flags).includes(true) && (
+                <Col key={0}>
+                    <FlagBadge flag={0} />
+                </Col>
+            )}
+        </Row>
+    );
+}
+
+export function DonorParties({ className = '', parties = [] }) {
+    return (
+        <Stack
+            className={`flex-wrap ${className}`}
+            direction="horizontal"
+            gap={2}
+        >
+            {parties.map((party) => {
+                return (
+                    <Link
+                        key={party}
+                        to={routes.donations(
+                            buildUrlQuery({
+                                p: party,
+                            })
+                        )}
+                    >
+                        <Badge bg="secondary">{party}</Badge>
+                    </Link>
+                );
+            })}
+        </Stack>
+    );
+}
+
+export function SortLink({ column, children }) {
+    const options = parseQueryOptions();
+
+    // copy all options except s & o
+    const { s, o, ...linkOpt } = options;
+    let currentClass;
+    let targetSort;
+    switch (options.s ?? donations.defaultSort) {
+        // current column is sorted ascending, target is descending
+        case column:
+            currentClass = 's-a';
+            targetSort = separators.space + column;
+            break;
+        // current column is sorted descending, target is no sort
+        case separators.space + column:
+            currentClass = 's-d';
+            targetSort = separators.space;
+            break;
+        // other unsorted columns, target is ascending
+        default:
+            targetSort = column;
+    }
+    if (targetSort !== donations.defaultSort) {
+        linkOpt.s = targetSort;
+    }
+    return (
+        <Link
+            className={currentClass}
+            to={routes.donations(buildUrlQuery(linkOpt))}
+        >
+            {children}
+        </Link>
+    );
+}

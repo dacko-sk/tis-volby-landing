@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
-import { buildUrlQuery, donations } from '../api/dontaions';
+import { DonorFlags, DonorParties, donations } from '../api/dontaions';
 import { currencyFormat, setTitle } from '../api/helpers';
 import { routes } from '../api/routes';
 
@@ -73,28 +71,10 @@ function Donor() {
                             <tr>
                                 <th>{donations.aggColumns.parties}</th>
                                 <td>
-                                    <Stack
-                                        className="flex-wrap justify-content-end"
-                                        direction="horizontal"
-                                        gap={2}
-                                    >
-                                        {donorData.parties.map((party) => {
-                                            return (
-                                                <Link
-                                                    key={party}
-                                                    to={routes.donations(
-                                                        buildUrlQuery({
-                                                            p: party,
-                                                        })
-                                                    )}
-                                                >
-                                                    <Badge bg="secondary">
-                                                        {party}
-                                                    </Badge>
-                                                </Link>
-                                            );
-                                        })}
-                                    </Stack>
+                                    <DonorParties
+                                        className="justify-content-end"
+                                        parties={donorData.parties}
+                                    />
                                 </td>
                             </tr>
                             <tr>
@@ -110,29 +90,7 @@ function Donor() {
                     <h2 className="text-lg-center">
                         {labels.donations.aggFlags}
                     </h2>
-                    <Row className="text-center mt-5">
-                        {Object.entries(donorData.flags).map(
-                            ([flag, enabled]) => {
-                                if (!enabled) {
-                                    return null;
-                                }
-                                return (
-                                    <Col key={flag}>
-                                        <Badge
-                                            bg="light"
-                                            pill
-                                            className={`flag-${flag} border bg-opacity-25 fs-2`}
-                                        >
-                                            🏴
-                                        </Badge>
-                                        <h5 className="mt-2">
-                                            {donations.flags[Number(flag)]}
-                                        </h5>
-                                    </Col>
-                                );
-                            }
-                        )}
-                    </Row>
+                    <DonorFlags flags={donorData.flags} />
                 </Col>
             </Row>
         );

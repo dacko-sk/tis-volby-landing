@@ -1,5 +1,10 @@
 import { labels } from '../../api/constants';
-import { donations, getDonationsColumn, isCompany } from '../../api/dontaions';
+import {
+    SortLink,
+    donations,
+    getDonationsColumn,
+    isCompany,
+} from '../../api/dontaions';
 
 import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
@@ -12,6 +17,7 @@ function DonationsTable({
     if (donationsQuery.isLoading || donationsQuery.error) {
         return <Loading error={donationsQuery.error} />;
     }
+
     // show the column if not hidden
     // and (if it is not optional or if it is optional and checked in options)
     const enabledColumns = Object.entries(donations.allColumns).filter(
@@ -37,10 +43,15 @@ function DonationsTable({
         }
         return (
             <th key={key} className={className}>
-                {title}
+                {hiddenColumns.length ? (
+                    title
+                ) : (
+                    <SortLink column={key}>{title}</SortLink>
+                )}
             </th>
         );
     });
+
     const rows = [];
     if (
         (donationsQuery.data.rows ?? false) &&
@@ -64,6 +75,7 @@ function DonationsTable({
             );
         });
     }
+
     return rows.length ? (
         <div className="table-responsive">
             <table className="table table-bordered table-hover table-striped">
