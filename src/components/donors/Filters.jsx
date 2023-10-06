@@ -269,7 +269,7 @@ function Filters() {
                     {donations.allColumns.flag}
                 </h6>
                 {donations.flags.map((label, index) => {
-                    if (!label) {
+                    if (!index) {
                         return null;
                     }
                     return (
