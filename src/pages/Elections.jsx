@@ -42,9 +42,13 @@ function Elections() {
                                     img={img23}
                                     link="https://volby.transparency.sk/parlament2023/"
                                     title="Parlamentné voľby 2023"
-                                    start="2023-09-30T07:00:00"
-                                    end="2023-09-30T20:00:00"
-                                />
+                                    date="2023-09-30"
+                                >
+                                    Parlamentné
+                                    <br />
+                                    voľby{' '}
+                                    <span className="text-secondary">2023</span>
+                                </ElectionsPreview>
                             </Col>
                             <Col
                                 className="col-container d-flex"
@@ -57,8 +61,13 @@ function Elections() {
                                     fadeImg
                                     link="https://volby.transparency.sk/parlament2020/"
                                     title="Parlamentné voľby 2020"
-                                    end="2020-02-28T20:00:00"
-                                />
+                                    date="2020-02-28"
+                                >
+                                    Parlamentné
+                                    <br />
+                                    voľby{' '}
+                                    <span className="text-secondary">2020</span>
+                                </ElectionsPreview>
                             </Col>
                         </Row>
                     </Accordion.Body>
@@ -79,8 +88,13 @@ function Elections() {
                                     fadeImg
                                     link="https://volby.transparency.sk/prezident2019/"
                                     title="Prezidentské voľby 2019"
-                                    end="2019-03-30T20:00:00"
-                                />
+                                    date="2019-03-30"
+                                >
+                                    Prezidentské
+                                    <br />
+                                    voľby{' '}
+                                    <span className="text-secondary">2019</span>
+                                </ElectionsPreview>
                             </Col>
                         </Row>
                     </Accordion.Body>
@@ -100,9 +114,13 @@ function Elections() {
                                     img={img22}
                                     link="https://volby.transparency.sk/samosprava2022/"
                                     title="Samosprávne voľby 2022"
-                                    start="2022-10-29T07:00:00"
-                                    end="2022-10-29T20:00:00"
-                                />
+                                    date="2022-10-29"
+                                >
+                                    Samosprávne
+                                    <br />
+                                    voľby{' '}
+                                    <span className="text-secondary">2022</span>
+                                </ElectionsPreview>
                             </Col>
                         </Row>
                     </Accordion.Body>

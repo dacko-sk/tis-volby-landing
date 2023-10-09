@@ -1,25 +1,6 @@
 @use 'sass:map';
 @import './../../scss/variables';
 
-.el-preview-right {
-  container: el-preview-right / inline-size;
-}
-
 .el-preview {
   box-sizing: content-box;
-  h2 {
-    font-size: calc(1.325rem + 1.1vw);
-  }
-  .thumb figure {
-    margin: 0;
-  }
-  .d-flex > & {
-    width: 100%;
-  }
-}
-
-@container el-preview-right (min-width: 435px) and (max-width: #{map.get($container-max-widths, 'sm')}) {
-  .el-preview .hero-number {
-    font-size: 52px;
-  }
 }
