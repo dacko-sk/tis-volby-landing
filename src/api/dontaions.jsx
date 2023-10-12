@@ -181,9 +181,9 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                             delayHide={150}
                         >
                             <Badge
-                                bg="light"
+                                bg="white"
                                 pill
-                                className={`flag-${sourceColumns[10]} border bg-opacity-25 fs-6`}
+                                className={`flag-${sourceColumns[10]} border fs-6`}
                             >
                                 🏴
                             </Badge>
@@ -232,45 +232,70 @@ export const buildUrlQuery = (options) => {
     return filters.join(separators.parts);
 };
 
-export function FlagBadge({ flag }) {
+export function FlagBadge({ compact = false, flag }) {
     const i = Number(flag);
     return (
         <>
             <Badge
-                bg="light"
+                bg="white"
                 pill
-                className={`flag-${flag} border bg-opacity-25 fs-2`}
+                className={`flag-${flag} border${compact ? '' : ' fs-2'}`}
             >
                 {i ? '🏴' : '✔️'}
             </Badge>
-            <h5 className="mt-2">{donations.flags[i]}</h5>
+            {!compact && <h5 className="mt-2">{donations.flags[i]}</h5>}
         </>
     );
 }
 
-export function DonorFlags({ flags = [] }) {
-    return (
+export function DonorFlags({ compact = false, flags = [] }) {
+    const flagsKeys = !Object.values(flags).includes(true)
+        ? [0]
+        : Object.entries(flags)
+              .map(([flag, enabled]) => {
+                  if (!enabled) {
+                      return null;
+                  }
+                  return flag;
+              })
+              .filter((flag) => flag !== null);
+    return compact ? (
+        <Stack direction="horizontal" gap={2}>
+            {flagsKeys.map((flag) => {
+                return <FlagBadge key={flag} compact={compact} flag={flag} />;
+            })}
+        </Stack>
+    ) : (
         <Row className="text-center mt-5">
-            {Object.entries(flags).map(([flag, enabled]) => {
-                if (!enabled) {
-                    return null;
-                }
+            {flagsKeys.map((flag) => {
                 return (
                     <Col key={flag}>
-                        <FlagBadge flag={flag} />
+                        <FlagBadge compact={compact} flag={flag} />
                     </Col>
                 );
             })}
-            {!Object.values(flags).includes(true) && (
-                <Col key={0}>
-                    <FlagBadge flag={0} />
-                </Col>
-            )}
         </Row>
     );
 }
 
-export function DonorParties({ className = '', parties = [] }) {
+export function DonorParties({
+    className = '',
+    compact = false,
+    parties = [],
+}) {
+    if (compact) {
+        return parties.map((party, index) => {
+            return (
+                <Badge
+                    key={party}
+                    bg="secondary"
+                    className={index > 0 ? 'ms-2' : ''}
+                >
+                    {party}
+                </Badge>
+            );
+        });
+    }
     return (
         <Stack
             className={`flex-wrap ${className}`}
@@ -300,17 +325,17 @@ export function SortLink({ column, children }) {
 
     // copy all options except s & o
     const { s, o, ...linkOpt } = options;
-    let currentClass;
+    let currentClass = 'text-decoration-none';
     let targetSort;
     switch (options.s ?? donations.defaultSort) {
         // current column is sorted ascending, target is descending
         case column:
-            currentClass = 's-a';
+            currentClass += ' s-a';
             targetSort = separators.space + column;
             break;
         // current column is sorted descending, target is no sort
         case separators.space + column:
-            currentClass = 's-d';
+            currentClass += ' s-d';
             targetSort = separators.space;
             break;
         // other unsorted columns, target is ascending

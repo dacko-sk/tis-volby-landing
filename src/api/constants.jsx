@@ -51,7 +51,9 @@ export const labels = {
         },
         search: {
             advanced: 'Podrobné vyhľadávanie',
-            noData: 'Zvoleným filtrom nevyhovujú žiadne príspevky.',
+            noDonations: 'Zvoleným filtrom nevyhovujú žiadne príspevky.',
+            noDonors:
+                'Hľadanému výrazu nezodpovedá žiaden donor. Skúste podrobné vyhľadávanie',
             placeholder: 'Zadajte meno donora alebo názov strany',
             title: 'Vyhľadávanie v databáze donorov',
         },

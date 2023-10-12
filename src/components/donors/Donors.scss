@@ -3,11 +3,36 @@
 
 .donor-search {
   background-color: $tis-dark-blue;
-  .search-icon a {
-    text-decoration: none;
-  }
   .btn {
     --bs-btn-hover-border-color: white;
+  }
+}
+
+.donor-card {
+  $dc-h-gap: 1.5rem;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  & + & {
+    border-top: 1px solid var(--bs-border-color);
+  }
+  &:active,
+  &:focus,
+  &:hover {
+    --bs-light-rgb: #{$tis-light-blue-rgb};
+    --bs-dark-rgb: 255, 255, 255;
+  }
+  & > .hstack {
+    column-gap: $dc-h-gap;
+    row-gap: 0.25rem;
+    & > * {
+      &:after {
+        content: '•';
+        position: absolute;
+        transform: translateX(calc($dc-h-gap / 2 - 50%));
+      }
+      &:last-child:after {
+        content: none;
+      }
+    }
   }
 }
 

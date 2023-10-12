@@ -4,7 +4,7 @@ import { errors } from '../../api/constants';
 
 import './Loading.scss';
 
-function Loading({ small, error }) {
+function Loading({ className, error, small }) {
     const animation = small ? (
         <div className="lds-ellipsis">
             <div />
@@ -30,12 +30,9 @@ function Loading({ small, error }) {
         console.log(error.message);
         message = errors.loading;
     }
+    const heightClass = className || (small ? 'small' : 'big');
     return (
-        <div
-            className={`row justify-content-center loading ${
-                small ? 'small' : 'big'
-            }`}
-        >
+        <div className={`row justify-content-center loading ${heightClass}`}>
             <div className="col-auto align-self-center">
                 {message || animation}
             </div>

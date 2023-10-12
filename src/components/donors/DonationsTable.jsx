@@ -87,7 +87,7 @@ function DonationsTable({
         </div>
     ) : (
         <AlertWithIcon variant="danger">
-            {labels.donations.search.noData}
+            {labels.donations.search.noDonations}
         </AlertWithIcon>
     );
 }

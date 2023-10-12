@@ -5,13 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
+import { labels } from '../api/constants';
 import { DonorFlags, DonorParties, donations } from '../api/dontaions';
 import { currencyFormat, setTitle } from '../api/helpers';
 import { routes } from '../api/routes';
 
 import Title from '../components/structure/Title';
 import Loading from '../components/general/Loading';
-import { labels } from '../api/constants';
 import DonationsTable from '../components/donors/DonationsTable';
 
 function Donor() {

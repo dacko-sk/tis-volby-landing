@@ -3,24 +3,32 @@ import { useNavigate, Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { labels } from '../../api/constants';
 import { routes, separators } from '../../api/routes';
+
+import QuickResults from './QuickResults';
 
 import './Donors.scss';
 
 function QuickSearch() {
     const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState(null);
+    const [inputVal, setInputVal] = useState(null);
+    const [apiQuery, setApiQuery] = useState(null);
 
+    const q = encodeURIComponent(inputVal);
     const searchLink = routes.donations(
-        searchQuery
-            ? `q${separators.value}${encodeURIComponent(searchQuery)}`
-            : ''
+        inputVal ? `q${separators.value}${q}` : ''
     );
 
+    const debounceSearch = useDebouncedCallback((value) => {
+        setApiQuery(value);
+    }, 500);
+
     const handleInputChange = (e) => {
-        setSearchQuery(e.target.value);
+        setInputVal(e.target.value);
+        debounceSearch(e.target.value);
     };
 
     const handleFormSumbit = (e) => {
@@ -39,15 +47,20 @@ function QuickSearch() {
                         aria-describedby="quick-search-icon"
                         id="quicksearch"
                         onChange={handleInputChange}
-                        value={searchQuery || ''}
+                        value={inputVal || ''}
                     />
                     <InputGroup.Text
                         id="quick-search-icon"
                         className="search-icon"
                     >
-                        <Link to={searchLink}>🔍</Link>
+                        <Link to={searchLink} className="text-decoration-none">
+                            🔍
+                        </Link>
                     </InputGroup.Text>
                 </InputGroup>
+
+                <QuickResults query={apiQuery} />
+
                 <Button
                     as={Link}
                     to={searchLink}
