@@ -1,15 +1,9 @@
-import { categories } from '../api/constants';
+import { newsCategories } from '../api/constants';
 import { setTitle } from '../api/helpers';
 import { segments } from '../api/routes';
 
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';
-
-export const newsCategories = [
-    categories.news22,
-    categories.news23,
-    categories.newsGlobal,
-];
 
 const title = 'Aktuality';
 

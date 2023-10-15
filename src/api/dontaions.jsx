@@ -83,11 +83,11 @@ export const donations = {
         subtype: 'Typ plnenia',
         amount: 'Výška príspevku',
         source: 'Zdroj',
-        flag: 'Rizikový príznak',
+        flag: 'Mimoriadny príznak',
         notes: 'Poznámka',
     },
     hiddenDonorColumns: ['entity', 'name', 'address'],
-    optionalColumns: ['address', 'type', 'subtype', 'source', 'notes'],
+    optionalColumns: ['address', 'subtype', 'source', 'notes'],
     defaultSort: `${separators.space}date`,
 };
 

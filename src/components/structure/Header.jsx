@@ -31,11 +31,17 @@ function Header() {
                         {/* <Nav.Link as={NavLink} to={routes.elections}>
                             Voľby
                         </Nav.Link> */}
-                        {/* <Nav.Link as={NavLink} to={routes.news}>
-                            Aktuality
-                        </Nav.Link> */}
                         <Nav.Link as={NavLink} to={routes.donations()}>
                             Databáza donorov
+                        </Nav.Link>
+                        <Nav.Link as={NavLink} to={routes.news}>
+                            Aktuality
+                        </Nav.Link>
+                        <Nav.Link href="https://volby.transparency.sk/parlament2023/">
+                            Voľby 2023
+                        </Nav.Link>
+                        <Nav.Link href="https://volby.transparency.sk/samosprava2022/">
+                            Voľby 2022
                         </Nav.Link>
                     </Nav>
                     {/* <SearchField /> */}

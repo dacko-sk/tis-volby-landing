@@ -4,6 +4,12 @@ export const categories = {
     newsGlobal: 875,
 };
 
+export const newsCategories = [
+    categories.news22,
+    categories.news23,
+    categories.newsGlobal,
+];
+
 export const colorLightBlue = '#2bace2';
 export const colorDarkBlue = '#1b335f';
 export const colorOrange = '#f06c50';
@@ -40,9 +46,9 @@ export const labels = {
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
     donations: {
-        aggFlags: 'Kumulatívne rizikové príznaky',
+        aggFlags: 'Kumulatívne mimoriadne príznaky',
         allDonations: 'Jednotlivé príspevky',
-        donorInfo: 'Údaje o darcovi',
+        donorInfo: 'Údaje o darcovi',
         filters: {
             button: 'Filtre',
             from: 'Od',
@@ -55,7 +61,7 @@ export const labels = {
             noDonors:
                 'Hľadanému výrazu nezodpovedá žiaden donor. Skúste podrobné vyhľadávanie',
             placeholder: 'Zadajte meno donora alebo názov strany',
-            title: 'Vyhľadávanie v databáze donorov',
+            title: 'Vyhľadávanie v databáze donorov',
         },
         settings: {
             button: 'Nastavenia',
@@ -66,6 +72,7 @@ export const labels = {
     news: {
         noData: 'Neboli nájdené žiadne články.',
     },
+    readMore: 'Čítať ďalej…',
     tis: 'Transparency International Slovensko',
     search: 'Vyhľadávanie',
     showMore: 'Zobraziť viac',
@@ -75,14 +82,3 @@ export const labels = {
 export const settings = {
     donateUrl: 'https://transparency.sk/volby',
 };
-
-export const constants = {
-    categories,
-    colors,
-    errors,
-    icons,
-    labels,
-    settings,
-};
-
-export default constants;

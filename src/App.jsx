@@ -5,12 +5,12 @@ import { segments, separators } from './api/routes';
 
 import ContextProviders from './context/ContextProviders';
 
-// import Article from './pages/Article';
+import Article from './pages/Article';
 // import Elections from './pages/Elections';
 import Donations from './pages/Donations';
 import Donor from './pages/Donor';
 import Home from './pages/Home';
-// import News from './pages/News';
+import News from './pages/News';
 // import Search from './pages/Search';
 
 import Layout from './components/structure/Layout';
@@ -31,11 +31,11 @@ function App() {
                                 path={segments.ELECTIONS}
                                 element={<Elections />}
                             /> */}
-                            {/* <Route path={segments.NEWS} element={<News />} /> */}
-                            {/* <Route
+                            <Route path={segments.NEWS} element={<News />} />
+                            <Route
                                 path={`${segments.NEWS}${separators.url}:slug`}
                                 element={<Article />}
-                            /> */}
+                            />
                             <Route
                                 path={segments.FUNDING}
                                 element={<Donations />}
