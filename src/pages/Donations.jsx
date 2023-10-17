@@ -56,9 +56,10 @@ function Donations() {
 
                     <p>
                         Portál umožňuje darcov a veriteľov filtrovať a zoraďovať
-                        podľa preferencií, obsahuje aj údaje o kumulatívnych
-                        sumách poskytnutých subjektami a osobami, ako aj príznak
-                        v prípade darov a bezodplatných plnení nad 10-tisíc
+                        podľa preferencií, napríklad podľa názvu strany či výšky
+                        transakcie. Obsahuje aj údaje o kumulatívnych sumách
+                        poskytnutých subjektami a osobami, ako aj príznak v
+                        prípade darov a bezodplatných plnení nad 10-tisíc
                         a pôžičiek nad 100-tisíc eur (netýka sa bankových
                         úverov). Pri každej transakcii je dostupný aj odkaz
                         na zdrojový dokument s ďalšími dodatočnými informáciami.
