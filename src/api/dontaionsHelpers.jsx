@@ -32,13 +32,8 @@ export const settingsParams = [
     'v', // visible optional columns
 ];
 
-export const hiddenDonorColumns = [[dc.entity], [dc.name], [dc.address]];
-export const optionalColumns = [
-    [dc.address],
-    [dc.subtype],
-    [dc.source],
-    [dc.notes],
-];
+export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
+export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
 export const defaultSort = `${separators.space}date`;
 
