@@ -6,12 +6,19 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { labels } from '../../api/constants';
+import { donationsColumns as dc } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
+    amountSettings,
     buildUrlQuery,
-    donations,
+    columnLabels,
+    entityIcons,
+    entityLabels,
+    flagLabels,
     parseQueryOptions,
-} from '../../api/dontaions';
+    parties,
+    typeLabels,
+} from '../../api/dontaionsHelpers';
 import {
     currencyFormat,
     datePickerFormat,
@@ -21,12 +28,6 @@ import {
 import { routes, separators } from '../../api/routes';
 
 import './Donors.scss';
-
-const defA = {
-    min: 0,
-    max: 1500000,
-    step: 100,
-};
 
 function Filters() {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ function Filters() {
     const [amount, setAmount] = useState(
         options.a ?? false
             ? options.a.split(separators.space).map((item) => Number(item))
-            : [defA.min, defA.max]
+            : [amountSettings.min, amountSettings.max]
     );
     const timestamp = options.d
         ? options.d.split(separators.space).map((item) => Number(item))
@@ -129,18 +130,21 @@ function Filters() {
 
     const updateAmountMin = (e) => {
         const min = Math.max(
-            Math.min(Number(e.target.value), defA.max - defA.step),
-            defA.min
+            Math.min(
+                Number(e.target.value),
+                amountSettings.max - amountSettings.step
+            ),
+            amountSettings.min
         );
-        updateAmount([min, Math.max(min + defA.step, amount[1])]);
+        updateAmount([min, Math.max(min + amountSettings.step, amount[1])]);
     };
 
     const updateAmountMax = (e) => {
         const max = Math.min(
-            Math.max(Number(e.target.value), defA.step),
-            defA.max
+            Math.max(Number(e.target.value), amountSettings.step),
+            amountSettings.max
         );
-        updateAmount([Math.min(max - defA.step, amount[0]), max]);
+        updateAmount([Math.min(max - amountSettings.step, amount[0]), max]);
     };
 
     const updateDate = (minmax) => {
@@ -189,18 +193,18 @@ function Filters() {
         >
             <Form.Group>
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {labels.donations.filters.search}
+                    {t(labels.donations.filters.search)}
                 </h6>
                 <InputGroup>
                     <Form.Label
                         htmlFor="donations-search"
                         className="visually-hidden"
                     >
-                        {labels.search}
+                        {t(labels.search.label)}
                     </Form.Label>
                     <Form.Control
-                        placeholder={labels.search}
-                        aria-label={labels.search}
+                        placeholder={t(labels.search.label)}
+                        aria-label={t(labels.search.label)}
                         aria-describedby="search-icon"
                         id="donations-search"
                         onChange={updateQuery}
@@ -212,12 +216,12 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {donations.allColumns.entity}
+                    {columnLabels[dc.entity]}
                 </h6>
                 <Form.Check
                     key=""
                     inline
-                    label={labels.all}
+                    label={t(labels.all)}
                     id="entity-all"
                     name="entity"
                     type="radio"
@@ -225,11 +229,11 @@ function Filters() {
                     checked={entity === ''}
                     onChange={updateEntity}
                 />
-                {donations.entities.map((label, index) => (
+                {entityLabels.map((label, index) => (
                     <Form.Check
                         key={label}
                         inline
-                        label={`${donations.entityIcons[index]} ${donations.entities[index]}`}
+                        label={`${entityIcons[index]} ${entityLabels[index]}`}
                         id={`entity-${label}`}
                         name="entity"
                         type="radio"
@@ -242,9 +246,9 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {donations.allColumns.type}
+                    {columnLabels[dc.type]}
                 </h6>
-                {donations.types.map((label, index) => {
+                {typeLabels.map((label, index) => {
                     if (!label) {
                         return null;
                     }
@@ -266,9 +270,9 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {donations.allColumns.flag}
+                    {columnLabels[dc.flag]}
                 </h6>
-                {donations.flags.map((label, index) => {
+                {flagLabels.map((label, index) => {
                     if (!index) {
                         return null;
                     }
@@ -298,32 +302,34 @@ function Filters() {
             </Form.Group>
 
             <Form.Group className="mt-3">
-                <h6 className="fw-bold text-primary text-uppercase">Suma</h6>
+                <h6 className="fw-bold text-primary text-uppercase">
+                    {columnLabels[dc.amount]}
+                </h6>
                 <div className="d-flex">
                     <Form.Label htmlFor="amount-min">
-                        {labels.donations.filters.from}
+                        {t(labels.donations.filters.from)}
                     </Form.Label>
                     <span className="ms-auto">{currencyFormat(amount[0])}</span>
                 </div>
                 <Form.Range
                     id="amount-min"
-                    min={defA.min}
-                    max={defA.max}
-                    step={defA.step}
+                    min={amountSettings.min}
+                    max={amountSettings.max}
+                    step={amountSettings.step}
                     value={amount[0]}
                     onChange={updateAmountMin}
                 />
                 <div className="d-flex">
                     <Form.Label htmlFor="amount-max">
-                        {labels.donations.filters.to}
+                        {t(labels.donations.filters.to)}
                     </Form.Label>
                     <span className="ms-auto">{currencyFormat(amount[1])}</span>
                 </div>
                 <Form.Range
                     id="amount-max"
-                    min={defA.min}
-                    max={defA.max}
-                    step={defA.step}
+                    min={amountSettings.min}
+                    max={amountSettings.max}
+                    step={amountSettings.step}
                     value={amount[1]}
                     onChange={updateAmountMax}
                 />
@@ -331,12 +337,12 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {donations.allColumns.date}
+                    {columnLabels[dc.date]}
                 </h6>
                 <Row className="align-items-center">
                     <Col xs={2}>
                         <Form.Label htmlFor="date-min" className="my-0">
-                            {labels.donations.filters.from}
+                            {t(labels.donations.filters.from)}
                         </Form.Label>
                     </Col>
                     <Col xs={10}>
@@ -351,7 +357,7 @@ function Filters() {
                 <Row className="align-items-center mt-2">
                     <Col xs={2}>
                         <Form.Label htmlFor="date-max" className="my-0">
-                            {labels.donations.filters.to}
+                            {t(labels.donations.filters.to)}
                         </Form.Label>
                     </Col>
                     <Col xs={10}>
@@ -367,13 +373,13 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {donations.allColumns.party}
+                    {columnLabels[dc.party]}
                 </h6>
                 <Form.Select size="sm" onChange={updateParty} value={party}>
                     <option key="" value="">
-                        {labels.all}
+                        {t(labels.all)}
                     </option>
-                    {donations.parties.map((p) => (
+                    {parties.map((p) => (
                         <option key={p} value={p}>
                             {p}
                         </option>

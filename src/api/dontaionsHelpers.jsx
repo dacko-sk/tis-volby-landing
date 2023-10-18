@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
+import { donationsColumns as dc } from './constants';
+import { labels, t } from './dictionary';
 import {
     currencyFormat,
     dateNumericFormat,
@@ -13,83 +15,71 @@ import {
 } from './helpers';
 import { routes, separators } from './routes';
 
-export const donations = {
-    apiParams: [
-        'o', // offset (page number - 1)
-        'b', // block size
-        'c', // 1=company, 0=person, unset=all
-        'a', // amount
-        'd', // date (timestamp)
-        't', // type
-        'f', // flag
-        'i', // ID / unqId
-        'p', // party
-        'q', // search query
-        's', // sort
-    ],
-    settingsParams: ['v'],
-    entities: ['Fyzická osoba', 'Firma'],
-    entityIcons: ['👨‍💼', '🏢'],
-    flags: [
-        'žiadne',
-        'veľký dar', // 1
-        'veľká pôžička', // 2
-        'vysoké bezodplatné plnenie', // 3
-    ],
-    parties: [
-        'ALIANCIA',
-        'DOBRÁ VOĽBA',
-        'HLAS',
-        'KDH',
-        'KRESŤANSKÁ ÚNIA',
-        'ĽSNS',
-        'MKO',
-        'MOST HÍD',
-        'OĽANO',
-        'PS',
-        'REPUBLIKA',
-        'SAS',
-        'SIEŤ',
-        'SME RODINA',
-        'SMER',
-        'SMK',
-        'SNS',
-        'SPOLU',
-        'TEAM BRATISLAVA',
-        'TEAM KRAJ NITRA',
-        'ZA ĽUDÍ',
-    ],
-    types: [
-        '',
-        'bezodplatné plnenie', // 1
-        'členský príspevok', // 2
-        'finančný dar', // 3
-        'nepeňažný dar', // 4
-        'pôžička', // 5
-        'úver', // 6
-        'zmluvné dojednanie', // 7
-    ],
-    aggColumns: {
-        amount: 'Suma príspevkov',
-        parties: 'Podporené strany',
-    },
-    allColumns: {
-        party: 'Strana',
-        date: 'Dátum',
-        entity: 'Typ darcu',
-        name: 'Meno / Názov firmy',
-        address: 'Adresa',
-        type: 'Typ príjmu',
-        subtype: 'Typ plnenia',
-        amount: 'Výška príspevku',
-        source: 'Zdroj',
-        flag: 'Mimoriadny príznak',
-        notes: 'Poznámka',
-    },
-    hiddenDonorColumns: ['entity', 'name', 'address'],
-    optionalColumns: ['address', 'subtype', 'source', 'notes'],
-    defaultSort: `${separators.space}date`,
+export const apiParams = [
+    'o', // offset (page number - 1)
+    'b', // block size
+    'c', // 1=company, 0=person, unset=all
+    'a', // amount
+    'd', // date (timestamp)
+    't', // type
+    'f', // flag
+    'i', // ID / unqId
+    'p', // party
+    'q', // search query
+    's', // sort
+];
+export const settingsParams = [
+    'v', // visible optional columns
+];
+
+export const hiddenDonorColumns = [[dc.entity], [dc.name], [dc.address]];
+export const optionalColumns = [
+    [dc.address],
+    [dc.subtype],
+    [dc.source],
+    [dc.notes],
+];
+export const blocksizes = [10, 25, 50, 100];
+export const defaultSort = `${separators.space}date`;
+
+export const columnLabels = Object.keys(dc).reduce((cl, key) => {
+    cl[key] = t(labels.donations.columns[key]);
+    return cl;
+}, {});
+export const typeLabels = t(labels.donations.types);
+export const flagLabels = t(labels.donations.flags);
+export const entityLabels = t(labels.donations.entities);
+export const entityIcons = t(labels.donations.entityIcons);
+
+export const amountSettings = {
+    min: 0,
+    max: 1500000,
+    step: 100,
 };
+
+export const parties = [
+    'ALIANCIA',
+    'DOBRÁ VOĽBA',
+    'HLAS',
+    'KDH',
+    'KRESŤANSKÁ ÚNIA',
+    'ĽSNS',
+    'MKO',
+    'MOST HÍD',
+    'OĽANO',
+    'PS',
+    'REPUBLIKA',
+    'SAS',
+    'SIEŤ',
+    'SME RODINA',
+    'SMER',
+    'SMK',
+    'SNS',
+    'SPOLU',
+    'TEAM BRATISLAVA',
+    'TEAM KRAJ NITRA',
+    'ZA ĽUDÍ',
+];
 
 export const isCompany = (sourceColumns) => {
     return (
@@ -101,9 +91,9 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
     const company = isCompany(sourceColumns);
     const name = sourceColumns[company ? 4 : 2].trim();
     switch (targetColumn) {
-        case 'party':
+        case dc.party:
             return sourceColumns[0];
-        case 'date':
+        case dc.date:
             return (
                 <div className="text-end text-nowrap">
                     {sourceColumns[1].length > 4
@@ -111,12 +101,12 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                         : sourceColumns[1]}
                 </div>
             );
-        case 'entity':
+        case dc.entity:
             return name ? (
                 <OverlayTrigger
                     overlay={
                         <Tooltip id={generateRandomString()}>
-                            {donations.entities[Number(company)]}
+                            {entityLabels[Number(company)]}
                         </Tooltip>
                     }
                     placement="right"
@@ -125,39 +115,39 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 >
                     <div
                         className="text-center fs-5"
-                        aria-label={donations.entities[Number(company)]}
+                        aria-label={entityLabels[Number(company)]}
                     >
-                        {donations.entityIcons[Number(company)]}
+                        {entityIcons[Number(company)]}
                     </div>
                 </OverlayTrigger>
             ) : (
                 ''
             );
-        case 'name':
+        case dc.name:
             return sourceColumns[3] ? (
                 <Link to={routes.donor(sourceColumns[3])}>{name || '-'}</Link>
             ) : (
                 <span>{name || '-'}</span>
             );
-        case 'address':
+        case dc.address:
             return sourceColumns[5];
-        case 'type':
-            return donations.types[Number(sourceColumns[6])] ?? '';
-        case 'subtype':
+        case dc.type:
+            return typeLabels[Number(sourceColumns[6])] ?? '';
+        case dc.subtype:
             return sourceColumns[7];
-        case 'amount':
+        case dc.amount:
             return (
                 <div className="text-end text-nowrap">
                     {currencyFormat(sourceColumns[8])}
                 </div>
             );
-        case 'source':
+        case dc.source:
             return (
                 <div className="text-center">
                     <a
                         href={sourceColumns[9]}
                         className="text-decoration-none fs-4"
-                        title="stiahnuť"
+                        title={t(labels.download)}
                         target="_blank"
                         rel="noreferrer"
                     >
@@ -165,15 +155,14 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                     </a>
                 </div>
             );
-        case 'flag':
+        case dc.flag:
             if (sourceColumns[10]) {
-                const f = donations.flags[Number(sourceColumns[10])];
                 return (
                     <div className="text-center">
                         <OverlayTrigger
                             overlay={
                                 <Tooltip id={generateRandomString()}>
-                                    {f}
+                                    {flagLabels[Number(sourceColumns[10])]}
                                 </Tooltip>
                             }
                             placement="right"
@@ -192,7 +181,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 );
             }
             return null;
-        case 'notes':
+        case dc.notes:
             return sourceColumns[14];
         default:
             return null;
@@ -203,7 +192,7 @@ export const parseQueryOptions = () => {
     const params = useParams();
     const options = {};
     if ((params.query ?? false) && params.query.length) {
-        const allowed = [...donations.apiParams, ...donations.settingsParams];
+        const allowed = [...apiParams, ...settingsParams];
         params.query.split(separators.parts).forEach((pair) => {
             const [filter, value] = pair.split(separators.value);
             if (allowed.includes(filter)) {
@@ -217,7 +206,7 @@ export const parseQueryOptions = () => {
 export const buildApiQuery = (options) => {
     const filters = [];
     Object.entries(options).forEach(([param, value]) => {
-        if (donations.apiParams.includes(param)) {
+        if (apiParams.includes(param)) {
             filters.push(`${param}=${value}`);
         }
     });
@@ -243,7 +232,7 @@ export function FlagBadge({ compact = false, flag }) {
             >
                 {i ? '🏴' : '✔️'}
             </Badge>
-            {!compact && <h5 className="mt-2">{donations.flags[i]}</h5>}
+            {!compact && <h5 className="mt-2">{flagLabels[i]}</h5>}
         </>
     );
 }
@@ -327,7 +316,7 @@ export function SortLink({ column, children }) {
     const { s, o, ...linkOpt } = options;
     let currentClass = 'text-decoration-none';
     let targetSort;
-    switch (options.s ?? donations.defaultSort) {
+    switch (options.s ?? defaultSort) {
         // current column is sorted ascending, target is descending
         case column:
             currentClass += ' s-a';
@@ -342,7 +331,7 @@ export function SortLink({ column, children }) {
         default:
             targetSort = column;
     }
-    if (targetSort !== donations.defaultSort) {
+    if (targetSort !== defaultSort) {
         linkOpt.s = targetSort;
     }
     return (

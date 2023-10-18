@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 
 import './ReadMore.scss';
 
@@ -27,7 +27,7 @@ function ReadMore({ children, id = 'readmore', lines = 2 }) {
                     className="d-block text-center"
                     onClick={toggle}
                 >
-                    {labels.readMore}
+                    {t(labels.readMore)}
                 </a>
             )}
         </div>

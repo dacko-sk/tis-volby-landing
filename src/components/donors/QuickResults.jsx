@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 
 import DonorCard from './DonorCard';
 import Loading from '../general/Loading';
 import AlertWithIcon from '../general/AlertWithIcon';
-import { buildApiQuery } from '../../api/dontaions';
+import { buildApiQuery } from '../../api/dontaionsHelpers';
 
 const maxResults = 5;
 
@@ -36,7 +36,7 @@ function QuickResults({ query }) {
             cards
         ) : (
             <AlertWithIcon variant="danger">
-                {labels.donations.search.noDonors}
+                {t(labels.donations.search.noDonors)}
             </AlertWithIcon>
         );
     }

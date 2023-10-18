@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import Stack from 'react-bootstrap/Stack';
 
-import { DonorFlags, DonorParties, donations } from '../../api/dontaions';
+import {
+    DonorFlags,
+    DonorParties,
+    entityIcons,
+} from '../../api/dontaionsHelpers';
 import { currencyFormat } from '../../api/helpers';
 import { routes } from '../../api/routes';
 
@@ -9,9 +13,7 @@ import './Donors.scss';
 
 function DonorCard({ donorData }) {
     const icon = donorData.name ? (
-        <span className="me-2">
-            {donations.entityIcons[Number(donorData.company)]}
-        </span>
+        <span className="me-2">{entityIcons[Number(donorData.company)]}</span>
     ) : null;
     return (
         <Link

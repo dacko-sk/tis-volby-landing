@@ -3,16 +3,15 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { useDebouncedCallback } from 'use-debounce';
-import has from 'has';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { routes } from '../../api/routes';
 
 function SearchField() {
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const params = useParams();
-    const query = has(params, 'query') ? params.query : null;
+    const query = params.query ?? null;
     const [searchQuery, setSearchQuery] = useState(query);
 
     const debouncedSearch = useDebouncedCallback((value) => {
@@ -39,8 +38,8 @@ function SearchField() {
         <Form className="mt-2 mt-lg-0 mx-0 mx-lg-3" onSubmit={handleFormSumbit}>
             <InputGroup>
                 <Form.Control
-                    placeholder={labels.search}
-                    aria-label={labels.search}
+                    placeholder={t(labels.search.label)}
+                    aria-label={t(labels.search.label)}
                     aria-describedby="search-icon"
                     id="search"
                     onChange={handleInputChange}

@@ -1,6 +1,6 @@
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
-import { labels } from './constants';
+import { labels, t } from './dictionary';
 
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat('sk-SK', options).format(value);
@@ -161,6 +161,60 @@ export const decodeHTMLEntities = (rawStr) =>
           )
         : '';
 
+/**
+ * Break text separated by newline character to react fragments separated with <br/> tag
+ */
+export const nl2r = (text) =>
+    typeof text === 'string'
+        ? text.split('\n').map((fragment, index) => (
+              <span key={`${index}${fragment}`}>
+                  {index > 0 && <br />}
+                  {fragment}
+              </span>
+          ))
+        : text;
+
+/**
+ * Highlight last n words of the sentence in text-secondary (orange) style
+ */
+export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
+    if (isLast ?? true) {
+        wordsAmount = wordsAmount || 1;
+        if (typeof textOrReact === 'string') {
+            const words = textOrReact.split(' ');
+            return (
+                <span key={textOrReact}>
+                    {`${words.slice(0, words.length - wordsAmount).join(' ')} `}
+                    <span className="text-secondary">
+                        {words.slice(-wordsAmount).join(' ')}
+                    </span>
+                </span>
+            );
+        } else if (Array.isArray(textOrReact)) {
+            return textOrReact.map((item, index) =>
+                secondarySentenceEnding(
+                    item,
+                    wordsAmount,
+                    index === textOrReact.length - 1
+                )
+            );
+        } else if (
+            typeof textOrReact === 'object' &&
+            (textOrReact.props.children ?? false)
+        ) {
+            const children = Object.values(textOrReact.props.children);
+            return children.map((child, index) =>
+                secondarySentenceEnding(
+                    child,
+                    wordsAmount,
+                    index === children.length - 1
+                )
+            );
+        }
+    }
+    return textOrReact;
+};
+
 export const sortNumbers = (asc) => (a, b) => asc ?? true ? a - b : b - a;
 
 export const sortByNumericProp = (prop, asc) => (a, b) =>
@@ -191,7 +245,9 @@ export const generateRandomString = (length) =>
     [...Array(length ?? 6)].map(() => Math.random().toString(36)[2]).join('');
 
 export const setTitle = (title) => {
-    document.title = `${title} : ${labels.websiteTitle} : ${labels.tis}`;
+    document.title = `${title} : ${t(labels.elections.title)} : ${t(
+        labels.tis
+    )}`;
 };
 
 export const scrollToTop = () => window.scrollTo(0, 0);

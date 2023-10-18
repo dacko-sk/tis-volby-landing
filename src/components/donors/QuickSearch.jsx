@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { routes, separators } from '../../api/routes';
 
 import QuickResults from './QuickResults';
@@ -38,12 +38,12 @@ function QuickSearch() {
 
     return (
         <div className="donor-search my-4 p-5">
-            <h2 className="mb-3">{labels.donations.search.title}</h2>
+            <h2 className="mb-3">{t(labels.donations.search.title)}</h2>
             <Form className="" onSubmit={handleFormSumbit}>
                 <InputGroup>
                     <Form.Control
-                        placeholder={labels.donations.search.placeholder}
-                        aria-label={labels.search}
+                        placeholder={t(labels.donations.search.placeholder)}
+                        aria-label={t(labels.search.label)}
                         aria-describedby="quick-search-icon"
                         id="quicksearch"
                         onChange={handleInputChange}
@@ -67,7 +67,7 @@ function QuickSearch() {
                     variant="secondary"
                     className="mt-4"
                 >
-                    {labels.donations.search.advanced}
+                    {t(labels.donations.search.advanced)}
                 </Button>
             </Form>
         </div>

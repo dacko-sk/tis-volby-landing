@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { segments, separators } from './api/routes';
+import { languageRoot, segments, separators, urlSegment } from './api/routes';
 
 import ContextProviders from './context/ContextProviders';
 
 import Article from './pages/Article';
-// import Elections from './pages/Elections';
 import Donations from './pages/Donations';
 import Donor from './pages/Donor';
 import Home from './pages/Home';
@@ -25,38 +24,46 @@ function App() {
             <QueryClientProvider client={queryClient}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path={segments.ROOT} element={<Layout />}>
+                        <Route path={languageRoot()} element={<Layout />}>
                             <Route index element={<Home />} />
-                            {/* <Route
-                                path={segments.ELECTIONS}
-                                element={<Elections />}
-                            /> */}
-                            <Route path={segments.NEWS} element={<News />} />
                             <Route
-                                path={`${segments.NEWS}${separators.url}:slug`}
+                                path={urlSegment(segments.NEWS)}
+                                element={<News />}
+                            />
+                            <Route
+                                path={[urlSegment(segments.NEWS), ':slug'].join(
+                                    separators.url
+                                )}
                                 element={<Article />}
                             />
                             <Route
-                                path={segments.FUNDING}
+                                path={urlSegment(segments.FUNDING)}
                                 element={<Donations />}
                             />
                             <Route
-                                path={`${segments.FUNDING}${separators.url}:query`}
+                                path={[
+                                    urlSegment(segments.FUNDING),
+                                    ':query',
+                                ].join(separators.url)}
                                 element={<Donations />}
                             />
                             <Route
-                                path={`${segments.FUNDING}${separators.url}${segments.DONOR}${separators.url}:id`}
+                                path={[
+                                    urlSegment(segments.FUNDING),
+                                    urlSegment(segments.DONOR),
+                                    ':id',
+                                ].join(separators.url)}
                                 element={<Donor />}
                             />
                             {/* <Route
-                                path={`${segments.SEARCH}${separators.url}:query`}
+                                path={`${urlSegment(segments.SEARCH)}${separators.url}:query`}
                                 element={<Search />}
                             /> */}
 
                             {/* fallback */}
                             <Route
                                 path="*"
-                                element={<Navigate to={segments.ROOT} />}
+                                element={<Navigate to={languageRoot()} />}
                             />
                         </Route>
                     </Routes>

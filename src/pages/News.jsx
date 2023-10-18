@@ -1,19 +1,17 @@
 import { newsCategories } from '../api/constants';
+import { labels, t } from '../api/dictionary';
 import { setTitle } from '../api/helpers';
-import { segments } from '../api/routes';
 
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';
 
-const title = 'Aktuality';
-
 function News() {
-    setTitle(title);
+    setTitle(t(labels.news.navTitle));
 
     return (
         <section>
-            <Title>{title}</Title>
-            <Posts categories={newsCategories} section={segments.NEWS} />
+            <Title>{t(labels.news.pageTitle)}</Title>
+            <Posts categories={newsCategories} />
         </section>
     );
 }

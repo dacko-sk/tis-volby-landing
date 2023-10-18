@@ -1,9 +1,9 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { newsCategories } from '../api/constants';
-import { setTitle } from '../api/helpers';
-import { segments } from '../api/routes';
+import { elections as el, links, newsCategories } from '../api/constants';
+import { labels, t } from '../api/dictionary';
+import { nl2r, secondarySentenceEnding as se, setTitle } from '../api/helpers';
 
 import QuickSearch from '../components/donors/QuickSearch';
 import ElectionsPreview from '../components/elections/ElectionsPreview';
@@ -14,14 +14,12 @@ import img22 from '../../public/img/samospravy_color_3_1920_900.png';
 import img23 from '../../public/img/parlament_2_color_1920_900.png';
 
 function Home() {
-    setTitle('Úvod');
+    setTitle(t(labels.home.pageTitle));
 
     return (
         <section>
-            <Title uppercase secondary="kampaní">
-                Monitoring
-                <br />
-                volebných
+            <Title secondaryWords={1} uppercase>
+                {t(labels.home.pageTitle)}
             </Title>
 
             <QuickSearch />
@@ -30,39 +28,29 @@ function Home() {
                 <Col className="col-container d-flex" md={9} lg={6}>
                     <ElectionsPreview
                         img={img23}
-                        link="https://volby.transparency.sk/parlament2023/"
-                        title="Parlamentné voľby 2023"
+                        link={links[el.n23]}
+                        title={t(labels.elections[el.n23])}
                         date="2023-09-30"
                     >
-                        Parlamentné
-                        <br />
-                        voľby <span className="text-secondary">2023</span>
+                        {se(nl2r(t(labels.elections[el.n23])))}
                     </ElectionsPreview>
                 </Col>
                 <Col className="col-container d-flex" md={9} lg={6}>
                     <ElectionsPreview
                         img={img22}
-                        link="https://volby.transparency.sk/samosprava2022/"
-                        title="Samosprávne voľby 2022"
+                        link={links[el.s22]}
+                        title={t(labels.elections[el.s22])}
                         date="2022-10-29"
                     >
-                        Samosprávne
-                        <br />
-                        voľby <span className="text-secondary">2022</span>
+                        {se(nl2r(t(labels.elections[el.s22])))}
                     </ElectionsPreview>
                 </Col>
             </Row>
-            {/* <div className="buttons text-center mt-3">
-                <Button as={Link} to={routes.elections} variant="secondary">
-                    Všetky sledované voľby
-                </Button>
-            </div> */}
 
-            <h2 className="mt-4 text-center">Najnovšie aktuality</h2>
+            <h2 className="mt-4 text-center">{t(labels.news.latest)}</h2>
             <Posts
                 categories={newsCategories}
                 limit={2}
-                section={segments.NEWS}
                 template={templates.condensed}
             />
         </section>

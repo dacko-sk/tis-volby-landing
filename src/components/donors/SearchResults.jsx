@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import {
     buildApiQuery,
     buildUrlQuery,
-    donations,
+    optionalColumns,
     parseQueryOptions,
-} from '../../api/dontaions';
+} from '../../api/dontaionsHelpers';
 import { routes, separators } from '../../api/routes';
 
 import PaginationWithGaps from '../general/PaginationWithGaps';
@@ -23,7 +23,7 @@ function SearchResults() {
         options.v ?? false
             ? options.v
                   .split(separators.space)
-                  .map((item) => donations.optionalColumns[Number(item)])
+                  .map((item) => optionalColumns[Number(item)])
             : [];
     const queryParams = buildApiQuery(options);
 

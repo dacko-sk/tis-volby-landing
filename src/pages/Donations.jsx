@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-import { labels } from '../api/constants';
+import { labels, t } from '../api/dictionary';
 import { setTitle } from '../api/helpers';
 
 import Filters from '../components/donors/Filters';
@@ -24,15 +24,11 @@ function Donations() {
 
     const tableSize = 12 - (openFilters ? 3 : 0) - (openSettings ? 2 : 0);
 
-    setTitle('Financovanie politických strán a databáza donorov');
+    setTitle(t(labels.donors.pageTitle));
 
     return (
         <section>
-            <Title secondary="donorov">
-                Financovanie politických strán
-                <br />
-                a databáza
-            </Title>
+            <Title secondaryWords={1}>{t(labels.donors.pageTitle)}</Title>
 
             <ReadMore id="financovanie-uvod" lines={4}>
                 <>
@@ -93,14 +89,14 @@ function Donations() {
                         onClick={toggleFilter}
                         variant={`${openFilters ? '' : 'outline-'}primary`}
                     >
-                        {labels.donations.filters.button}
+                        {t(labels.donations.filters.button)}
                     </Button>
                     <Button
                         className="ms-auto"
                         onClick={toggleSettings}
                         variant={`${openSettings ? '' : 'outline-'}primary`}
                     >
-                        {labels.donations.settings.button}
+                        {t(labels.donations.settings.button)}
                     </Button>
                 </div>
                 <div className="row gx-3 gy-2">

@@ -1,4 +1,3 @@
-import has from 'has';
 import siteConfig from '../../package.json';
 
 export const separators = {
@@ -8,41 +7,106 @@ export const separators = {
     value: '~',
 };
 
+export const languages = {
+    sk: 'sk',
+    en: 'en',
+};
+
+export const defaultLanguage = Object.values(languages)[0];
+
 export const segments = {
-    ROOT:
-        has(siteConfig, 'homepage') && siteConfig.homepage
-            ? siteConfig.homepage
-            : '/',
-    ELECTIONS: 'volby',
-    DONOR: 'donor',
-    FUNDING: 'financovanie',
-    NEWS: 'aktuality',
-    SEARCH: 'vyhladavanie',
+    ELECTIONS: 'ELECTIONS',
+    DONOR: 'DONOR',
+    FUNDING: 'FUNDING',
+    NEWS: 'NEWS',
+    SEARCH: 'SEARCH',
+};
+
+export const localSegments = {
+    [languages.sk]: {
+        [segments.ELECTIONS]: 'volby',
+        [segments.DONOR]: 'donor',
+        [segments.FUNDING]: 'financovanie',
+        [segments.NEWS]: 'aktuality',
+        [segments.SEARCH]: 'vyhladavanie',
+    },
+    [languages.en]: {
+        [segments.ELECTIONS]: 'elections',
+        [segments.DONOR]: 'donor',
+        [segments.FUNDING]: 'funding',
+        [segments.NEWS]: 'news',
+        [segments.SEARCH]: 'search',
+    },
+};
+
+export const homepage = siteConfig.homepage ?? '/';
+
+export const getCurrentLanguage = () =>
+    document.location.pathname.substring(
+        homepage.length,
+        homepage.length + 2
+    ) === languages.en
+        ? languages.en
+        : languages.sk;
+
+export const languageRoot = (language) =>
+    homepage +
+    ((language || getCurrentLanguage()) === languages.en
+        ? languages.en + separators.url
+        : '');
+
+export const localizePath = (lang, path) => {
+    const cp = path ?? document.location.pathname;
+    const cl = getCurrentLanguage();
+    if (cl === lang) {
+        return cp;
+    }
+    const cr = languageRoot();
+    const cs = cp.substring(cr.length).split(separators.url);
+    const as = Object.entries(localSegments[cl]);
+    const ts = cs.map((segment) => {
+        let tk = null;
+        as.some(([key, translation]) => {
+            if (segment === translation) {
+                tk = key;
+                return true;
+            }
+            return false;
+        });
+        return tk ? localSegments[lang][tk] : segment;
+    });
+    return languageRoot(lang) + ts.join(separators.url);
+};
+
+export const urlSegment = (segment, lang) => {
+    return localSegments[lang || getCurrentLanguage()][segment] ?? '';
 };
 
 export const routes = {
-    article: (page, slug) =>
-        segments.ROOT + (page && slug ? page + separators.url + slug : ''),
-    articles: (page) => segments.ROOT + (page || ''),
-    elections: segments.ROOT + segments.ELECTIONS,
-    donor: (id) =>
-        segments.ROOT +
-        segments.FUNDING +
+    article: (slug, lang) =>
+        languageRoot(lang) +
+        (slug ? urlSegment(segments.NEWS, lang) + separators.url + slug : ''),
+    elections: (lang) => languageRoot() + urlSegment(segments.ELECTIONS, lang),
+    donor: (id, lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
         (id
             ? separators.url +
-              segments.DONOR +
+              urlSegment(segments.DONOR, lang) +
               separators.url +
               encodeURIComponent(id)
             : ''),
-    donations: (query) =>
-        segments.ROOT +
-        segments.FUNDING +
+    donations: (query, lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
         (query ? `${separators.url}${query}` : ''),
-    home: segments.ROOT,
-    news: segments.ROOT + segments.NEWS,
-    search: (query) =>
-        segments.ROOT +
+    home: (lang) => languageRoot(lang),
+    news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
+    search: (query, lang) =>
+        languageRoot(lang) +
         (query
-            ? segments.SEARCH + separators.url + encodeURIComponent(query)
+            ? urlSegment(segments.SEARCH, lang) +
+              separators.url +
+              encodeURIComponent(query)
             : ''),
 };

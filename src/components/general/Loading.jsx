@@ -1,6 +1,4 @@
-import has from 'has';
-
-import { errors } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 
 import './Loading.scss';
 
@@ -26,9 +24,9 @@ function Loading({ className, error, small }) {
         </div>
     );
     let message = null;
-    if (!!error && has(error, 'message')) {
+    if (!!error && (error.message ?? false)) {
         console.log(error.message);
-        message = errors.loading;
+        message = t(labels.errors.loading);
     }
     const heightClass = className || (small ? 'small' : 'big');
     return (

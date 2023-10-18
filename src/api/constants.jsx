@@ -22,6 +22,27 @@ export const colors = {
     colorGrey,
 };
 
+export const donationsColumns = {
+    party: 'party',
+    date: 'date',
+    entity: 'entity',
+    name: 'name',
+    address: 'address',
+    type: 'type',
+    subtype: 'subtype',
+    amount: 'amount',
+    source: 'source',
+    flag: 'flag',
+    notes: 'notes',
+};
+
+export const elections = {
+    n23: 'n23',
+    s22: 's22',
+    n20: 'n20',
+    p19: 'p19',
+};
+
 export const icons = {
     info: {
         alt: 'Info:',
@@ -37,48 +58,10 @@ export const icons = {
     },
 };
 
-export const errors = {
-    loading: 'Chyba pri načítaní dát. Prosím načítajte stránku znovu.',
-};
-
-export const labels = {
-    all: 'Zobraziť všetko',
-    donate: 'Darujte',
-    donateLong: 'Darujte na kontrolu volieb',
-    donations: {
-        aggFlags: 'Kumulatívne mimoriadne príznaky',
-        allDonations: 'Jednotlivé príspevky',
-        donorInfo: 'Údaje o darcovi',
-        filters: {
-            button: 'Filtre',
-            from: 'Od',
-            search: 'Hľadaný výraz',
-            to: 'Do',
-        },
-        search: {
-            advanced: 'Podrobné vyhľadávanie',
-            noDonations: 'Zvoleným filtrom nevyhovujú žiadne príspevky.',
-            noDonors:
-                'Hľadanému výrazu nezodpovedá žiaden donor. Skúste podrobné vyhľadávanie',
-            placeholder: 'Zadajte meno donora alebo názov strany',
-            title: 'Vyhľadávanie v databáze donorov',
-        },
-        settings: {
-            button: 'Nastavenia',
-            columns: 'Voliteľné stĺpce',
-            rows: 'Počet riadkov',
-        },
-    },
-    news: {
-        noData: 'Neboli nájdené žiadne články.',
-    },
-    readMore: 'Čítať ďalej…',
-    tis: 'Transparency International Slovensko',
-    search: 'Vyhľadávanie',
-    showMore: 'Zobraziť viac',
-    websiteTitle: 'Voľby',
-};
-
-export const settings = {
+export const links = {
+    [elections.p19]: 'https://volby.transparency.sk/prezident2019/',
+    [elections.n20]: 'https://volby.transparency.sk/parlament2020/',
+    [elections.s22]: 'https://volby.transparency.sk/samosprava2022/',
+    [elections.n23]: 'https://volby.transparency.sk/parlament2023/',
     donateUrl: 'https://transparency.sk/volby',
 };

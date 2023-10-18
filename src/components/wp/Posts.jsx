@@ -5,9 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { scrollToTop } from '../../api/helpers';
-import { routes, segments } from '../../api/routes';
+import { routes } from '../../api/routes';
 
 import NewsCondensed from './templates/NewsCondensed';
 import NewsList from './templates/NewsList';
@@ -27,7 +27,6 @@ function Posts({
     limit = false,
     noResults,
     search = '',
-    section = segments.NEWS,
     showMore = null,
     template = templates.list,
 }) {
@@ -60,13 +59,13 @@ function Posts({
 
     const navigate = useNavigate();
     const getClickHandler = (article) => () => {
-        navigate(routes.article(section, article.slug), {
+        navigate(routes.article(article.slug), {
             state: { article },
         });
     };
     const getKeyUpHandler = (article) => (event) => {
         if (event.keyCode === 13) {
-            navigate(routes.article(section, article.slug), {
+            navigate(routes.article(article.slug), {
                 state: { article },
             });
         }
@@ -113,7 +112,7 @@ function Posts({
             </Row>
         ) : (
             <AlertWithIcon className="my-4" variant="danger">
-                {noResults ?? labels.news.noData}
+                {noResults ?? t(labels.news.noData)}
             </AlertWithIcon>
         );
     }
@@ -122,12 +121,8 @@ function Posts({
     if (showMore || limit) {
         nav = (
             <div className="buttons mt-3 text-center">
-                <Button
-                    as={Link}
-                    to={routes.articles(section)}
-                    variant="secondary"
-                >
-                    {showMore || labels.showMore}
+                <Button as={Link} to={routes.news()} variant="secondary">
+                    {showMore || t(labels.showMore)}
                 </Button>
             </div>
         );

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import has from 'has';
 
+import { labels, t } from '../api/dictionary';
 import { setTitle } from '../api/helpers';
 import { routes, segments } from '../api/routes';
 
@@ -11,7 +11,7 @@ import Posts from '../components/wp/Posts';
 
 function Search() {
     const params = useParams();
-    const query = has(params, 'query') ? params.query : null;
+    const query = params.query ?? null;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,18 +21,19 @@ function Search() {
         }
     }, [query]);
 
-    setTitle(`Výsledky vyhľadávania výrazu „${query}“`);
+    setTitle(`${t(labels.search.results)} „${query}“`);
 
     return (
         <section className="search-results">
-            <Title multiline secondary={`„${query}“`}>
-                Výsledky vyhľadávania výrazu
+            <Title secondary={`„${query}“`}>
+                {t(labels.search.results)}
+                <br />
             </Title>
 
-            <h2 className="my-4">Aktuality</h2>
+            <h2 className="my-4">{t(labels.news.navTitle)}</h2>
             <Posts
                 categories={newsCategories}
-                noResults="Hľadaný výraz nebol nájdený v žiadnej z aktualít."
+                noResults={t(labels.news.noData)}
                 section={segments.NEWS}
                 search={query}
             />

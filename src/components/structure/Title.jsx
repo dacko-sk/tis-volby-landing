@@ -1,7 +1,15 @@
-function Title({ children, secondary, multiline, uppercase }) {
+import { nl2r, secondarySentenceEnding as se } from '../../api/helpers';
+
+function Title({
+    children,
+    secondary = '',
+    secondaryWords = 0,
+    uppercase = false,
+}) {
     let primaryLength = 0;
     if (typeof children === 'string') {
         primaryLength += children.length;
+        children = nl2r(children);
     } else if (typeof children === 'object') {
         Object.keys(children).forEach((key) => {
             if (typeof children[key] === 'string') {
@@ -16,12 +24,9 @@ function Title({ children, secondary, multiline, uppercase }) {
             }mb-4`}
         >
             <h1 className={uppercase ? 'text-uppercase' : ''}>
-                {children}
+                {secondaryWords ? se(children, secondaryWords) : children}
                 {!!secondary && (
-                    <span className="orange">
-                        {multiline ? <br /> : ' '}
-                        {secondary}
-                    </span>
+                    <span className="text-secondary"> {secondary}</span>
                 )}
             </h1>
         </header>

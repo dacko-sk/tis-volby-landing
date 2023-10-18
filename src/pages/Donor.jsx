@@ -5,8 +5,15 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
-import { labels } from '../api/constants';
-import { DonorFlags, DonorParties, donations } from '../api/dontaions';
+import { donationsColumns as dc } from '../api/constants';
+import { labels, t } from '../api/dictionary';
+import {
+    DonorFlags,
+    DonorParties,
+    columnLabels,
+    entityLabels,
+    hiddenDonorColumns,
+} from '../api/dontaionsHelpers';
 import { currencyFormat, setTitle } from '../api/helpers';
 import { routes } from '../api/routes';
 
@@ -48,28 +55,24 @@ function Donor() {
             <Row>
                 <Col lg={6}>
                     <h2 className="text-lg-center">
-                        {labels.donations.donorInfo}
+                        {t(labels.donations.donorInfo)}
                     </h2>
                     <Table responsive>
                         <tbody>
                             <tr>
-                                <th>{donations.allColumns.entity}</th>
+                                <th>{columnLabels[dc.entity]}</th>
                                 <td className="text-end">
-                                    {
-                                        donations.entities[
-                                            Number(donorData.company)
-                                        ]
-                                    }
+                                    {entityLabels[Number(donorData.company)]}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{donations.allColumns.address}</th>
+                                <th>{columnLabels[dc.address]}</th>
                                 <td className="text-end">
                                     {donorData.location}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{donations.aggColumns.parties}</th>
+                                <th>{t(labels.donations.aggParties)}</th>
                                 <td>
                                     <DonorParties
                                         className="justify-content-end"
@@ -78,7 +81,7 @@ function Donor() {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{donations.aggColumns.amount}</th>
+                                <th>{t(labels.donations.aggAmount)}</th>
                                 <td className="fw-bold text-end">
                                     {currencyFormat(donorData.amount)}
                                 </td>
@@ -88,7 +91,7 @@ function Donor() {
                 </Col>
                 <Col lg={6}>
                     <h2 className="text-lg-center">
-                        {labels.donations.aggFlags}
+                        {t(labels.donations.aggFlags)}
                     </h2>
                     <DonorFlags flags={donorData.flags} />
                 </Col>
@@ -96,21 +99,21 @@ function Donor() {
         );
     }
 
-    setTitle(`Donor ${name}`);
+    setTitle(`${t(labels.donor)} ${name}`);
 
     return (
         <section>
             <Title secondary={name}>
-                Donor
+                {t(labels.donor)}
                 <br />
             </Title>
             {content}
             {dq.data?.rows.length > 0 && (
-                <h2 className="my-4">{labels.donations.allDonations}</h2>
+                <h2 className="my-4">{t(labels.donations.allDonations)}</h2>
             )}
             <DonationsTable
                 donationsQuery={dq}
-                hiddenColumns={donations.hiddenDonorColumns}
+                hiddenColumns={hiddenDonorColumns}
             />
         </section>
     );

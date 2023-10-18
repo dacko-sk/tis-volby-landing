@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
+    blocksizes,
     buildUrlQuery,
-    donations,
+    columnLabels,
+    optionalColumns,
     parseQueryOptions,
-} from '../../api/dontaions';
+} from '../../api/dontaionsHelpers';
 import { sortNumbers } from '../../api/helpers';
 import { routes, separators } from '../../api/routes';
 
@@ -50,13 +52,13 @@ function Settings() {
         <Form id="donations-settings" className="bg-light p-4">
             <div>
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {labels.donations.settings.columns}
+                    {t(labels.donations.settings.columns)}
                 </h6>
-                {donations.optionalColumns.map((column, index) => (
+                {optionalColumns.map((column, index) => (
                     <Form.Check
                         key={column}
                         inline
-                        label={donations.allColumns[column]}
+                        label={columnLabels[column]}
                         id={`visible-columns-${column}`}
                         name="visible-columns"
                         type="checkbox"
@@ -69,9 +71,9 @@ function Settings() {
 
             <div className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {labels.donations.settings.rows}
+                    {t(labels.donations.settings.rows)}
                 </h6>
-                {[10, 25, 50, 100].map((b) => (
+                {blocksizes.map((b) => (
                     <Form.Check
                         key={b}
                         inline

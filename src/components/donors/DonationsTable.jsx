@@ -1,10 +1,12 @@
-import { labels } from '../../api/constants';
+import { donationsColumns as dc } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
     SortLink,
-    donations,
+    columnLabels,
     getDonationsColumn,
     isCompany,
-} from '../../api/dontaions';
+    optionalColumns,
+} from '../../api/dontaionsHelpers';
 
 import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
@@ -12,7 +14,7 @@ import Loading from '../general/Loading';
 function DonationsTable({
     donationsQuery,
     hiddenColumns = [],
-    visibleColumns = donations.optionalColumns,
+    visibleColumns = optionalColumns,
 }) {
     if (donationsQuery.isLoading || donationsQuery.error) {
         return <Loading error={donationsQuery.error} />;
@@ -20,22 +22,22 @@ function DonationsTable({
 
     // show the column if not hidden
     // and (if it is not optional or if it is optional and checked in options)
-    const enabledColumns = Object.entries(donations.allColumns).filter(
-        ([key]) =>
+    const enabledColumns = Object.keys(dc).filter(
+        (key) =>
             !hiddenColumns.includes(key) &&
-            (!donations.optionalColumns.includes(key) ||
-                visibleColumns.includes(key))
+            (!optionalColumns.includes(key) || visibleColumns.includes(key))
     );
-    const headerCols = enabledColumns.map(([key, title]) => {
+    const headerCols = enabledColumns.map((key) => {
+        const title = columnLabels[key];
         let className;
         switch (key) {
-            case 'amount':
-            case 'date':
+            case dc.amount:
+            case dc.date:
                 className = 'text-end';
                 break;
-            case 'entity':
-            case 'flag':
-            case 'source':
+            case dc.entity:
+            case dc.flag:
+            case dc.source:
                 className = 'text-center';
                 break;
             default:
@@ -58,7 +60,7 @@ function DonationsTable({
         Array.isArray(donationsQuery.data.rows)
     ) {
         donationsQuery.data.rows.forEach((row, ri) => {
-            const cols = enabledColumns.map(([key]) => {
+            const cols = enabledColumns.map((key) => {
                 const content = getDonationsColumn(row, key);
                 return <td key={key}>{content}</td>;
             });
@@ -87,7 +89,7 @@ function DonationsTable({
         </div>
     ) : (
         <AlertWithIcon variant="danger">
-            {labels.donations.search.noDonations}
+            {t(labels.donations.search.noDonations)}
         </AlertWithIcon>
     );
 }
