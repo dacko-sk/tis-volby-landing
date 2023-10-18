@@ -43,7 +43,7 @@ function ElectionsPreview({
                                 alt={title}
                                 className={fadeImg ? 'fade-image' : ''}
                             />
-                            <figcaption className="position-absolute start-50 top-50 translate-middle h1 text-uppercase">
+                            <figcaption className="position-absolute start-50 top-50 translate-middle w-100 h1 text-uppercase">
                                 {children}
                             </figcaption>
                         </figure>
