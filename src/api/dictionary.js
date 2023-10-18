@@ -27,7 +27,10 @@ export const labels = {
     ],
     donations: {
         aggAmount: ['Suma príspevkov', 'Sum of donations'],
-        aggFlags: ['Kumulatívne mimoriadne príznaky', 'Aggregated flags'],
+        aggFlags: [
+            'Kumulatívne mimoriadne príznaky',
+            'Aggregated risk indicators',
+        ],
         aggParties: ['Podporené strany', 'Supported parties'],
         allDonations: ['Jednotlivé príspevky', 'Donations'],
         columns: {
@@ -36,11 +39,11 @@ export const labels = {
             [dc.entity]: ['Typ darcu', 'Donor type'],
             [dc.name]: ['Meno / Názov firmy', 'Person / Company name'],
             [dc.address]: ['Adresa', 'Address'],
-            [dc.type]: ['Typ príjmu', 'Type of income'],
+            [dc.type]: ['Typ príjmu', 'Income type'],
             [dc.subtype]: ['Typ plnenia', 'Type of fulfillment'],
             [dc.amount]: ['Výška príspevku', 'Amount'],
             [dc.source]: ['Zdroj', 'Source'],
-            [dc.flag]: ['Mimoriadny príznak', 'Flag'],
+            [dc.flag]: ['Mimoriadny príznak', 'Risk indicator'],
             [dc.notes]: ['Poznámka', 'Note'],
         },
         donorInfo: ['Údaje o darcovi', 'Donor details'],
@@ -63,10 +66,10 @@ export const labels = {
                 'vysoké bezodplatné plnenie', // 3
             ],
             [
-                'none',
-                'high donation', // 1
-                'high loan', // 2
-                'high free fulfillment', // 3
+                'None',
+                'Large donation', // 1
+                'Large loan', // 2
+                'Large in-kind contributions', // 3
             ],
         ],
         search: {
@@ -106,13 +109,13 @@ export const labels = {
             ],
             [
                 '',
-                'free fulfillment', // 1
-                'membership fee', // 2
-                'financial donation', // 3
-                'non-monetary gift', // 4
-                'loan', // 5
-                'credit', // 6
-                'contractual arrangement', // 7
+                'In-kind contribution', // 1
+                'Membership contribution', // 2
+                'Financial donation', // 3
+                'Non-financial donation', // 4
+                'Loan', // 5
+                'Credit', // 6
+                'Contractual donation', // 7
             ],
         ],
     },
@@ -127,9 +130,9 @@ export const labels = {
     download: ['Stiahnuť', 'Download'],
     elections: {
         [el.p19]: ['Prezidentské\nvoľby 2019', 'President\nelections 2019'],
-        [el.n20]: ['Parlamentné\nvoľby 2020', 'Parliament\nelections 2020'],
+        [el.n20]: ['Parlamentné\nvoľby 2020', 'Parliamentary\nelections 2020'],
         [el.s22]: ['Samosprávne\nvoľby 2022', 'Municipal\nelections 2022'],
-        [el.n23]: ['Parlamentné\nvoľby 2023', 'Parliament\nelections 2023'],
+        [el.n23]: ['Parlamentné\nvoľby 2023', 'Parliamentary\nelections 2023'],
         title: ['Voľby', 'Elections'],
     },
     errors: {
