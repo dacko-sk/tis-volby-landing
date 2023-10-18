@@ -150,12 +150,12 @@ export const labels = {
         navTitle: ['Úvod', 'Home'],
         pageTitle: [
             'Monitoring\nvolebných kampaní',
-            'Monitoring of\nelection campaigns',
+            'Slovak elections\ncampaigns monitoring',
         ],
     },
     learnMore: ['Zistiť viac', 'Learn more'],
     news: {
-        latest: ['Najnovšie aktuality', 'Latest News'],
+        latest: ['Najnovšie aktuality', 'Latest News (Slovak only)'],
         navTitle: ['Aktuality', 'News'],
         noData: ['Neboli nájdené žiadne články.', 'No articles found.'],
         pageTitle: ['Aktuality', 'News\n(Slovak only)'],
