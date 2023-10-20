@@ -62,7 +62,8 @@ function Header() {
                             {Object.keys(languages).map((lang) => (
                                 <NavDropdown.Item
                                     key={lang}
-                                    href={localizePath(lang)}
+                                    as={NavLink}
+                                    to={localizePath(lang)}
                                 >
                                     {lang}
                                 </NavDropdown.Item>

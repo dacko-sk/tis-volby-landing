@@ -11,13 +11,10 @@ import { labels, t } from '../../api/dictionary';
 import {
     amountSettings,
     buildUrlQuery,
-    columnLabels,
-    entityIcons,
-    entityLabels,
-    flagLabels,
+    columnLabel,
+    entityIcon,
     parseQueryOptions,
     parties,
-    typeLabels,
 } from '../../api/dontaionsHelpers';
 import {
     currencyFormat,
@@ -216,7 +213,7 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabels[dc.entity]}
+                    {columnLabel(dc.entity)}
                 </h6>
                 <Form.Check
                     key=""
@@ -229,11 +226,11 @@ function Filters() {
                     checked={entity === ''}
                     onChange={updateEntity}
                 />
-                {entityLabels.map((label, index) => (
+                {t(labels.donations.entities).map((label, index) => (
                     <Form.Check
                         key={label}
                         inline
-                        label={`${entityIcons[index]} ${entityLabels[index]}`}
+                        label={`${entityIcon(index)} ${label}`}
                         id={`entity-${label}`}
                         name="entity"
                         type="radio"
@@ -246,9 +243,9 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabels[dc.type]}
+                    {columnLabel(dc.type)}
                 </h6>
-                {typeLabels.map((label, index) => {
+                {t(labels.donations.types).map((label, index) => {
                     if (!label) {
                         return null;
                     }
@@ -270,9 +267,9 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabels[dc.flag]}
+                    {columnLabel(dc.flag)}
                 </h6>
-                {flagLabels.map((label, index) => {
+                {t(labels.donations.flags).map((label, index) => {
                     if (!index) {
                         return null;
                     }
@@ -303,7 +300,7 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabels[dc.amount]}
+                    {columnLabel(dc.amount)}
                 </h6>
                 <div className="d-flex">
                     <Form.Label htmlFor="amount-min">
@@ -337,7 +334,7 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabels[dc.date]}
+                    {columnLabel(dc.date)}
                 </h6>
                 <Row className="align-items-center">
                     <Col xs={2}>
@@ -373,7 +370,7 @@ function Filters() {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabels[dc.party]}
+                    {columnLabel(dc.party)}
                 </h6>
                 <Form.Select size="sm" onChange={updateParty} value={party}>
                     <option key="" value="">

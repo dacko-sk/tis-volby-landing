@@ -10,8 +10,8 @@ import { labels, t } from '../api/dictionary';
 import {
     DonorFlags,
     DonorParties,
-    columnLabels,
-    entityLabels,
+    columnLabel,
+    entityLabel,
     hiddenDonorColumns,
 } from '../api/dontaionsHelpers';
 import { currencyFormat, setTitle } from '../api/helpers';
@@ -60,13 +60,13 @@ function Donor() {
                     <Table responsive>
                         <tbody>
                             <tr>
-                                <th>{columnLabels[dc.entity]}</th>
+                                <th>{columnLabel(dc.entity)}</th>
                                 <td className="text-end">
-                                    {entityLabels[Number(donorData.company)]}
+                                    {entityLabel(Number(donorData.company))}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{columnLabels[dc.address]}</th>
+                                <th>{columnLabel(dc.address)}</th>
                                 <td className="text-end">
                                     {donorData.location}
                                 </td>

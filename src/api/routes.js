@@ -85,7 +85,11 @@ export const urlSegment = (segment, lang) => {
 export const routes = {
     article: (slug, lang) =>
         languageRoot(lang) +
-        (slug ? urlSegment(segments.NEWS, lang) + separators.url + slug : ''),
+        (slug
+            ? urlSegment(segments.NEWS, lang) +
+              separators.url +
+              (slug === true ? ':slug' : slug)
+            : ''),
     elections: (lang) => languageRoot() + urlSegment(segments.ELECTIONS, lang),
     donor: (id, lang) =>
         languageRoot(lang) +
@@ -94,12 +98,12 @@ export const routes = {
             ? separators.url +
               urlSegment(segments.DONOR, lang) +
               separators.url +
-              encodeURIComponent(id)
+              (id === true ? ':id' : encodeURIComponent(id))
             : ''),
     donations: (query, lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +
-        (query ? `${separators.url}${query}` : ''),
+        (query ? separators.url + (query === true ? ':query' : query) : ''),
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
     search: (query, lang) =>

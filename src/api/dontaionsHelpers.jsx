@@ -37,14 +37,14 @@ export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
 export const defaultSort = `${separators.space}date`;
 
-export const columnLabels = Object.keys(dc).reduce((cl, key) => {
-    cl[key] = t(labels.donations.columns[key]);
-    return cl;
-}, {});
-export const typeLabels = t(labels.donations.types);
-export const flagLabels = t(labels.donations.flags);
-export const entityLabels = t(labels.donations.entities);
-export const entityIcons = t(labels.donations.entityIcons);
+export const columnLabel = (key) =>
+    Object.keys(labels.donations.columns).includes(key)
+        ? t(labels.donations.columns[key])
+        : '';
+export const typeLabel = (i) => t(labels.donations.types)[i] ?? '';
+export const flagLabel = (i) => t(labels.donations.flags)[i] ?? '';
+export const entityLabel = (i) => t(labels.donations.entities)[i] ?? '';
+export const entityIcon = (i) => t(labels.donations.entityIcons)[i] ?? '';
 
 export const amountSettings = {
     min: 0,
@@ -101,7 +101,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 <OverlayTrigger
                     overlay={
                         <Tooltip id={generateRandomString()}>
-                            {entityLabels[Number(company)]}
+                            {entityLabel(Number(company))}
                         </Tooltip>
                     }
                     placement="right"
@@ -110,9 +110,9 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 >
                     <div
                         className="text-center fs-5"
-                        aria-label={entityLabels[Number(company)]}
+                        aria-label={entityLabel(Number(company))}
                     >
-                        {entityIcons[Number(company)]}
+                        {entityIcon(Number(company))}
                     </div>
                 </OverlayTrigger>
             ) : (
@@ -127,7 +127,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
         case dc.address:
             return sourceColumns[5];
         case dc.type:
-            return typeLabels[Number(sourceColumns[6])] ?? '';
+            return typeLabel(Number(sourceColumns[6])) ?? '';
         case dc.subtype:
             return sourceColumns[7];
         case dc.amount:
@@ -157,7 +157,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                         <OverlayTrigger
                             overlay={
                                 <Tooltip id={generateRandomString()}>
-                                    {flagLabels[Number(sourceColumns[10])]}
+                                    {flagLabel(Number(sourceColumns[10]))}
                                 </Tooltip>
                             }
                             placement="right"
@@ -227,7 +227,7 @@ export function FlagBadge({ compact = false, flag }) {
             >
                 {i ? '🏴' : '✔️'}
             </Badge>
-            {!compact && <h5 className="mt-2">{flagLabels[i]}</h5>}
+            {!compact && <h5 className="mt-2">{flagLabel(i)}</h5>}
         </>
     );
 }

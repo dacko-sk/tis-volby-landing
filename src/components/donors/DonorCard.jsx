@@ -4,7 +4,7 @@ import Stack from 'react-bootstrap/Stack';
 import {
     DonorFlags,
     DonorParties,
-    entityIcons,
+    entityIcon,
 } from '../../api/dontaionsHelpers';
 import { currencyFormat } from '../../api/helpers';
 import { routes } from '../../api/routes';
@@ -13,7 +13,7 @@ import './Donors.scss';
 
 function DonorCard({ donorData }) {
     const icon = donorData.name ? (
-        <span className="me-2">{entityIcons[Number(donorData.company)]}</span>
+        <span className="me-2">{entityIcon(Number(donorData.company))}</span>
     ) : null;
     return (
         <Link

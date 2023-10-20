@@ -2,7 +2,7 @@ import { donationsColumns as dc } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
 import {
     SortLink,
-    columnLabels,
+    columnLabel,
     getDonationsColumn,
     isCompany,
     optionalColumns,
@@ -28,7 +28,7 @@ function DonationsTable({
             (!optionalColumns.includes(key) || visibleColumns.includes(key))
     );
     const headerCols = enabledColumns.map((key) => {
-        const title = columnLabels[key];
+        const title = columnLabel(key);
         let className;
         switch (key) {
             case dc.amount:

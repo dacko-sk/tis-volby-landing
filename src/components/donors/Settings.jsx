@@ -5,7 +5,7 @@ import { labels, t } from '../../api/dictionary';
 import {
     blocksizes,
     buildUrlQuery,
-    columnLabels,
+    columnLabel,
     optionalColumns,
     parseQueryOptions,
 } from '../../api/dontaionsHelpers';
@@ -58,7 +58,7 @@ function Settings() {
                     <Form.Check
                         key={column}
                         inline
-                        label={columnLabels[column]}
+                        label={columnLabel(column)}
                         id={`visible-columns-${column}`}
                         name="visible-columns"
                         type="checkbox"
