@@ -122,11 +122,11 @@ function Donations() {
 
     const tableSize = 12 - (openFilters ? 3 : 0) - (openSettings ? 2 : 0);
 
-    setTitle(t(labels.donors.pageTitle));
+    setTitle(t(labels.donations.pageTitle));
 
     return (
         <section>
-            <Title secondaryWords={1}>{t(labels.donors.pageTitle)}</Title>
+            <Title secondaryWords={1}>{t(labels.donations.pageTitle)}</Title>
 
             <ReadMore id="financovanie-uvod" lines={4}>
                 {introText[getCurrentLanguage()]}

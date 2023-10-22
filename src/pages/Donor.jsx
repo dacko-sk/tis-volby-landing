@@ -99,12 +99,12 @@ function Donor() {
         );
     }
 
-    setTitle(`${t(labels.donor)} ${name}`);
+    setTitle(`${t(labels.donor.pageTitle)} ${name}`);
 
     return (
         <section>
             <Title secondary={name}>
-                {t(labels.donor)}
+                {t(labels.donor.pageTitle)}
                 <br />
             </Title>
             {content}

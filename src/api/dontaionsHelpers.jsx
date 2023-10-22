@@ -41,7 +41,8 @@ export const columnLabel = (key) =>
     Object.keys(labels.donations.columns).includes(key)
         ? t(labels.donations.columns[key])
         : '';
-export const typeLabel = (i) => t(labels.donations.types)[i] ?? '';
+export const typeLabel = (i, plural) =>
+    t(plural ? labels.donations.typesPlural : labels.donations.types)[i] ?? '';
 export const flagLabel = (i) => t(labels.donations.flags)[i] ?? '';
 export const entityLabel = (i) => t(labels.donations.entities)[i] ?? '';
 export const entityIcon = (i) => t(labels.donations.entityIcons)[i] ?? '';
@@ -52,29 +53,29 @@ export const amountSettings = {
     step: 100,
 };
 
-export const parties = [
-    'ALIANCIA',
-    'DOBRÁ VOĽBA',
-    'HLAS',
-    'KDH',
-    'KRESŤANSKÁ ÚNIA',
-    'ĽSNS',
-    'MKO',
-    'MOST HÍD',
-    'OĽANO',
-    'PS',
-    'REPUBLIKA',
-    'SAS',
-    'SIEŤ',
-    'SME RODINA',
-    'SMER',
-    'SMK',
-    'SNS',
-    'SPOLU',
-    'TEAM BRATISLAVA',
-    'TEAM KRAJ NITRA',
-    'ZA ĽUDÍ',
-];
+export const allParties = {
+    ALIANCIA: 'ALIANCIA',
+    'DOBRA VOLBA': 'DOBRÁ VOĽBA',
+    HLAS: 'HLAS',
+    KDH: 'KDH',
+    'Kresťanská Únia': 'KRESŤANSKÁ ÚNIA',
+    LSNS: 'ĽSNS',
+    MKO: 'MKO',
+    'MOST HID': 'MOST HÍD',
+    OĽANO: 'OĽANO',
+    PS: 'PS',
+    REPUBLIKA: 'REPUBLIKA',
+    SAS: 'SAS',
+    Sieť: 'SIEŤ',
+    'SME RODINA': 'SME RODINA',
+    SMER: 'SMER',
+    SMK: 'SMK',
+    SNS: 'SNS',
+    SPOLU: 'SPOLU',
+    'TEAM BRATISLAVA': 'TEAM BRATISLAVA',
+    'TEAM KRAJ NITRA': 'TEAM KRAJ NITRA',
+    'ZA LUDI': 'ZA ĽUDÍ',
+};
 
 export const isCompany = (sourceColumns) => {
     return (
@@ -87,7 +88,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
     const name = sourceColumns[company ? 4 : 2].trim();
     switch (targetColumn) {
         case dc.party:
-            return sourceColumns[0];
+            return allParties[sourceColumns[0]] ?? sourceColumns[0];
         case dc.date:
             return (
                 <div className="text-end text-nowrap">
@@ -275,7 +276,7 @@ export function DonorParties({
                     bg="secondary"
                     className={index > 0 ? 'ms-2' : ''}
                 >
-                    {party}
+                    {allParties[party] ?? party}
                 </Badge>
             );
         });
@@ -296,7 +297,9 @@ export function DonorParties({
                             })
                         )}
                     >
-                        <Badge bg="secondary">{party}</Badge>
+                        <Badge bg="secondary">
+                            {allParties[party] ?? party}
+                        </Badge>
                     </Link>
                 );
             })}

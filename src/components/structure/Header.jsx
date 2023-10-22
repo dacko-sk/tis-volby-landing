@@ -36,7 +36,7 @@ function Header() {
                             {t(labels.home.navTitle)}
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.donations()}>
-                            {t(labels.donors.navTitle)}
+                            {t(labels.donations.navTitle)}
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.news()}>
                             {t(labels.news.navTitle)}

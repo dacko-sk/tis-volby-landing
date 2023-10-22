@@ -72,6 +72,11 @@ export const labels = {
                 'Large in-kind contributions', // 3
             ],
         ],
+        navTitle: ['Databáza donorov', 'Donors'],
+        pageTitle: [
+            'Financovanie politických strán\na databáza donorov',
+            'Political parties funding\nand donors database',
+        ],
         search: {
             advanced: ['Podrobné vyhľadávanie', 'Advanced search'],
             noDonations: [
@@ -118,13 +123,38 @@ export const labels = {
                 'Contractual donation', // 7
             ],
         ],
+        typesPlural: [
+            [
+                '',
+                'bezodplatné plnenia', // 1
+                'členské príspevky', // 2
+                'finančné dary', // 3
+                'nepeňažné dary', // 4
+                'pôžičky', // 5
+                'úvery', // 6
+                'zmluvné dojednania', // 7
+            ],
+            [
+                '',
+                'In-kind contributions', // 1
+                'Membership contributions', // 2
+                'Financial donations', // 3
+                'Non-financial donations', // 4
+                'Loans', // 5
+                'Credits', // 6
+                'Contractual donations', // 7
+            ],
+        ],
     },
-    donor: ['Donor'],
+    donor: { pageTitle: ['Donor'] },
     donors: {
-        navTitle: ['Databáza donorov', 'Donors'],
-        pageTitle: [
-            'Financovanie politických strán\na databáza donorov',
-            'Political parties funding\nand donors database',
+        disclaimer: [
+            'Zdroj: Výročné správy politických strán 2002 - 2022',
+            'Source: Annual reports of political parties 2002 - 2022',
+        ],
+        top10: [
+            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
+            'Top 10 individual political party donors (2002 - 2022)',
         ],
     },
     download: ['Stiahnuť', 'Download'],

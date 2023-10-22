@@ -1,3 +1,5 @@
+import Table from 'react-bootstrap/Table';
+
 import { donationsColumns as dc } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
 import {
@@ -79,14 +81,12 @@ function DonationsTable({
     }
 
     return rows.length ? (
-        <div className="table-responsive">
-            <table className="table table-bordered table-hover table-striped">
-                <thead>
-                    <tr className="align-middle">{headerCols}</tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </table>
-        </div>
+        <Table responsive bordered hover striped>
+            <thead>
+                <tr className="align-middle">{headerCols}</tr>
+            </thead>
+            <tbody>{rows}</tbody>
+        </Table>
     ) : (
         <AlertWithIcon variant="danger">
             {t(labels.donations.search.noDonations)}

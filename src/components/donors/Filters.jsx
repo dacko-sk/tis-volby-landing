@@ -9,12 +9,12 @@ import { useDebouncedCallback } from 'use-debounce';
 import { donationsColumns as dc } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
 import {
+    allParties,
     amountSettings,
     buildUrlQuery,
     columnLabel,
     entityIcon,
     parseQueryOptions,
-    parties,
 } from '../../api/dontaionsHelpers';
 import {
     currencyFormat,
@@ -376,9 +376,9 @@ function Filters() {
                     <option key="" value="">
                         {t(labels.all)}
                     </option>
-                    {parties.map((p) => (
-                        <option key={p} value={p}>
-                            {p}
+                    {Object.entries(allParties).map(([key, name]) => (
+                        <option key={key} value={key}>
+                            {name}
                         </option>
                     ))}
                 </Form.Select>

@@ -6,6 +6,7 @@ import { labels, t } from '../api/dictionary';
 import { nl2r, secondarySentenceEnding as se, setTitle } from '../api/helpers';
 
 import QuickSearch from '../components/donors/QuickSearch';
+import Top10Donors from '../components/donors/Top10Donors';
 import ElectionsPreview from '../components/elections/ElectionsPreview';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
@@ -24,7 +25,9 @@ function Home() {
 
             <QuickSearch />
 
-            <Row className="justify-content-center">
+            <Top10Donors />
+
+            <Row className="justify-content-center my-4">
                 <Col className="col-container d-flex" md={9} lg={6}>
                     <ElectionsPreview
                         img={img23}
