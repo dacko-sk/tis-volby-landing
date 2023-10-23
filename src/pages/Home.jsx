@@ -26,7 +26,7 @@ function Home() {
             <QuickSearch />
 
             <Top10Donors
-                file="top10individualx"
+                file="top10individual"
                 title={labels.donors.top10individual}
                 disclaimer={labels.donors.disclaimer}
             />
