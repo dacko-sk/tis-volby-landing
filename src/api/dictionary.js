@@ -26,12 +26,6 @@ export const labels = {
         'Donate for elections monitoring',
     ],
     donations: {
-        aggAmount: ['Suma príspevkov', 'Sum of donations'],
-        aggFlags: [
-            'Kumulatívne mimoriadne príznaky',
-            'Aggregated risk indicators',
-        ],
-        aggParties: ['Podporené strany', 'Supported parties'],
         allDonations: ['Jednotlivé príspevky', 'Donations'],
         columns: {
             [dc.party]: ['Strana', 'Party'],
@@ -70,6 +64,20 @@ export const labels = {
                 'Large donation', // 1
                 'Large loan', // 2
                 'Large in-kind contributions', // 3
+            ],
+        ],
+        flagsAggregated: [
+            [
+                'žiadne',
+                'veľké dary súhrnne', // 1
+                'veľké pôžičky súhrnne', // 2
+                'vysoké súhrnné bezodplatné plnenie', // 3
+            ],
+            [
+                'None',
+                'Cummulative large donations', // 1
+                'Cummulative large loans', // 2
+                'Cummulative large in-kind contributionss', // 3
             ],
         ],
         navTitle: ['Databáza donorov', 'Donors'],
@@ -146,15 +154,27 @@ export const labels = {
             ],
         ],
     },
-    donor: { pageTitle: ['Donor'] },
+    donor: {
+        amount: ['Suma príspevkov', 'Sum of donations'],
+        flags: [
+            'Kumulatívne mimoriadne príznaky',
+            'Cummulative risk indicators',
+        ],
+        pageTitle: ['Donor'],
+        parties: ['Podporené strany', 'Supported parties'],
+    },
     donors: {
         disclaimer: [
             'Zdroj: Výročné správy politických strán 2002 - 2022',
             'Source: Annual reports of political parties 2002 - 2022',
         ],
-        top10: [
-            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
+        top10donors: [
+            'Top 10 individuálnych darcov politických strán (2002-2022)',
             'Top 10 individual political party donors (2002 - 2022)',
+        ],
+        top10individual: [
+            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
+            'Top 10 individual political party donors & creditors (2002 - 2022)',
         ],
     },
     download: ['Stiahnuť', 'Download'],

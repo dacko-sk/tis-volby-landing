@@ -44,6 +44,7 @@ export const columnLabel = (key) =>
 export const typeLabel = (i, plural) =>
     t(plural ? labels.donations.typesPlural : labels.donations.types)[i] ?? '';
 export const flagLabel = (i) => t(labels.donations.flags)[i] ?? '';
+export const flagAggLabel = (i) => t(labels.donations.flagsAggregated)[i] ?? '';
 export const entityLabel = (i) => t(labels.donations.entities)[i] ?? '';
 export const entityIcon = (i) => t(labels.donations.entityIcons)[i] ?? '';
 
@@ -228,7 +229,7 @@ export function FlagBadge({ compact = false, flag }) {
             >
                 {i ? '🏴' : '✔️'}
             </Badge>
-            {!compact && <h5 className="mt-2">{flagLabel(i)}</h5>}
+            {!compact && <h5 className="mt-2">{flagAggLabel(i)}</h5>}
         </>
     );
 }

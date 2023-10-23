@@ -72,7 +72,7 @@ function Donor() {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{t(labels.donations.aggParties)}</th>
+                                <th>{t(labels.donor.parties)}</th>
                                 <td>
                                     <DonorParties
                                         className="justify-content-end"
@@ -81,7 +81,7 @@ function Donor() {
                                 </td>
                             </tr>
                             <tr>
-                                <th>{t(labels.donations.aggAmount)}</th>
+                                <th>{t(labels.donor.amount)}</th>
                                 <td className="fw-bold text-end">
                                     {currencyFormat(donorData.amount)}
                                 </td>
@@ -90,9 +90,7 @@ function Donor() {
                     </Table>
                 </Col>
                 <Col lg={6}>
-                    <h2 className="text-lg-center">
-                        {t(labels.donations.aggFlags)}
-                    </h2>
+                    <h2 className="text-lg-center">{t(labels.donor.flags)}</h2>
                     <DonorFlags flags={donorData.flags} />
                 </Col>
             </Row>

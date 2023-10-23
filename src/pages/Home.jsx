@@ -25,7 +25,17 @@ function Home() {
 
             <QuickSearch />
 
-            <Top10Donors />
+            <Top10Donors
+                file="top10individualx"
+                title={labels.donors.top10individual}
+                disclaimer={labels.donors.disclaimer}
+            />
+
+            <Top10Donors
+                file="top10donors"
+                title={labels.donors.top10donors}
+                disclaimer={labels.donors.disclaimer}
+            />
 
             <Row className="justify-content-center my-4">
                 <Col className="col-container d-flex" md={9} lg={6}>

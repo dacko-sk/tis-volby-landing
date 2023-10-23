@@ -14,10 +14,10 @@ import { routes } from '../../api/routes';
 
 import Loading from '../general/Loading';
 
-function Top10Donors() {
-    const { isLoading, error, data } = useQuery(['donors_top10'], () =>
+function Top10Donors({ disclaimer, file, title }) {
+    const { isLoading, error, data } = useQuery([`donors_${file}`], () =>
         fetch(
-            'https://volby.transparency.sk/api/donors/donors_json.php?f=top10'
+            `https://volby.transparency.sk/api/donors/donors_json.php?f=${file}`
         ).then((response) => response.json())
     );
 
@@ -31,13 +31,13 @@ function Top10Donors() {
                     <tr className="align-middle">
                         <th>{t(labels.donor.pageTitle)}</th>
                         <th>{columnLabel(dc.address)}</th>
-                        <th>{t(labels.donations.aggAmount)}</th>
-                        <th>{t(labels.donations.aggParties)}</th>
+                        <th>{t(labels.donor.amount)}</th>
+                        <th>{t(labels.donor.parties)}</th>
                         <th>{columnLabel(dc.type)}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data.rows.map((donorData) => (
+                    {(data.rows ?? []).map((donorData) => (
                         <tr key={donorData.name}>
                             <td>
                                 <Link to={routes.donor(donorData.id)}>
@@ -65,9 +65,9 @@ function Top10Donors() {
 
     return (
         <div>
-            <h2 className="my-4">{t(labels.donors.top10)}</h2>
+            <h2 className="my-4">{t(title)}</h2>
             {content}
-            <em className="disclaimer">{t(labels.donors.disclaimer)}</em>
+            <em className="disclaimer">{t(disclaimer)}</em>
         </div>
     );
 }
