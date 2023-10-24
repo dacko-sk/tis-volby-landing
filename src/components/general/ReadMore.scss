@@ -1,7 +1,7 @@
 .readmore {
   & > div {
     transition: max-height 0.5s ease-in-out;
-    max-height: 500px;
+    max-height: 1024px;
   }
   &.closed > div {
     cursor: pointer;
