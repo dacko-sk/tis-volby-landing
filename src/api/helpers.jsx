@@ -2,6 +2,8 @@ import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
 import { labels, t } from './dictionary';
 
+export const isMobile = window.innerWidth < 576;
+
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat('sk-SK', options).format(value);
 

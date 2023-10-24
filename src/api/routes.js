@@ -1,5 +1,7 @@
 import siteConfig from '../../package.json';
 
+import { isMobile } from './helpers';
+
 export const separators = {
     parts: '_',
     space: '-',
@@ -100,10 +102,16 @@ export const routes = {
               separators.url +
               (id === true ? ':id' : encodeURIComponent(id))
             : ''),
-    donations: (query, lang) =>
-        languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
-        (query ? separators.url + (query === true ? ':query' : query) : ''),
+    donations: (query, lang) => {
+        if (!query && query !== false && isMobile) {
+            query = `b${separators.value}10`;
+        }
+        return (
+            languageRoot(lang) +
+            urlSegment(segments.FUNDING, lang) +
+            (query ? separators.url + (query === true ? ':query' : query) : '')
+        );
+    },
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
     search: (query, lang) =>

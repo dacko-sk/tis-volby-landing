@@ -6,6 +6,7 @@ import {
     blocksizes,
     buildUrlQuery,
     columnLabel,
+    defaultBlocksize,
     optionalColumns,
     parseQueryOptions,
 } from '../../api/dontaionsHelpers';
@@ -19,7 +20,7 @@ function Settings() {
 
     const options = parseQueryOptions();
 
-    const blocksize = options.b ?? false ? Number(options.b) : 50;
+    const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
     let visibleColumns =
         options.v ?? false
             ? options.v.split(separators.space).map((item) => Number(item))

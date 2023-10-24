@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import {
     buildApiQuery,
     buildUrlQuery,
+    defaultBlocksize,
     optionalColumns,
     parseQueryOptions,
 } from '../../api/dontaionsHelpers';
@@ -17,7 +18,7 @@ function SearchResults() {
     const navigate = useNavigate();
 
     const options = parseQueryOptions();
-    const blocksize = options.b ?? false ? Number(options.b) : 50;
+    const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
     const offset = options.o ?? false ? Number(options.o) : 0;
     const visibleColumns =
         options.v ?? false
