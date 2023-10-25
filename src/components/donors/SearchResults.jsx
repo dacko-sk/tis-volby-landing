@@ -26,7 +26,7 @@ function SearchResults() {
                   .split(separators.space)
                   .map((item) => optionalColumns[Number(item)])
             : [];
-    const queryParams = buildApiQuery(options);
+    const queryParams = buildApiQuery({ ...options, b: blocksize });
 
     const dq = useQuery([`donations_${queryParams}`], () =>
         fetch(

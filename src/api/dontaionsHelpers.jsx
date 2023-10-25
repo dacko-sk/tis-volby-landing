@@ -35,7 +35,7 @@ export const settingsParams = [
 export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
 export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
-export const defaultBlocksize = blocksizes[3];
+export const defaultBlocksize = blocksizes[2];
 export const defaultSort = `${separators.space}date`;
 
 export const columnLabel = (key) =>
