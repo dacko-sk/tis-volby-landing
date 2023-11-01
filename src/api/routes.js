@@ -17,7 +17,6 @@ export const languages = {
 export const defaultLanguage = Object.values(languages)[0];
 
 export const segments = {
-    ELECTIONS: 'ELECTIONS',
     DONOR: 'DONOR',
     FUNDING: 'FUNDING',
     NEWS: 'NEWS',
@@ -26,14 +25,12 @@ export const segments = {
 
 export const localSegments = {
     [languages.sk]: {
-        [segments.ELECTIONS]: 'volby',
         [segments.DONOR]: 'donor',
         [segments.FUNDING]: 'financovanie',
         [segments.NEWS]: 'aktuality',
         [segments.SEARCH]: 'vyhladavanie',
     },
     [languages.en]: {
-        [segments.ELECTIONS]: 'elections',
         [segments.DONOR]: 'donor',
         [segments.FUNDING]: 'funding',
         [segments.NEWS]: 'news',
@@ -92,7 +89,6 @@ export const routes = {
               separators.url +
               (slug === true ? ':slug' : slug)
             : ''),
-    elections: (lang) => languageRoot() + urlSegment(segments.ELECTIONS, lang),
     donor: (id, lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +
@@ -119,6 +115,6 @@ export const routes = {
         (query
             ? urlSegment(segments.SEARCH, lang) +
               separators.url +
-              encodeURIComponent(query)
+              (query === true ? ':query' : encodeURIComponent(query))
             : ''),
 };

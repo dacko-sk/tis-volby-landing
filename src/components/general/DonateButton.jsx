@@ -13,7 +13,7 @@ function DonateButton({ className, long, xl }) {
             target="_blank"
             variant="secondary"
         >
-            {t(long ? labels.donateLong : labels.donate)}
+            {t(long ? labels.donate.buttonLong : labels.donate.buttonShort)}
         </Button>
     );
 }

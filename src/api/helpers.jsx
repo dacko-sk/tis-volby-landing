@@ -167,7 +167,7 @@ export const decodeHTMLEntities = (rawStr) =>
  * Break text separated by newline character to react fragments separated with <br/> tag
  */
 export const nl2r = (text) =>
-    typeof text === 'string'
+    typeof text === 'string' && text.includes('\n')
         ? text.split('\n').map((fragment, index) => (
               <span key={`${index}${fragment}`}>
                   {index > 0 && <br />}

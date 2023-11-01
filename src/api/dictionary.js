@@ -20,11 +20,21 @@ export const labels = {
             necessary: ['Nevyhnutné cookies', 'Necessary'],
         },
     },
-    donate: ['Darujte', 'Donate'],
-    donateLong: [
-        'Darujte na kontrolu volieb',
-        'Donate for elections monitoring',
-    ],
+    donate: {
+        buttonShort: ['Darujte', 'Donate'],
+        buttonLong: [
+            'Darujte na kontrolu volieb',
+            'Donate for elections monitoring',
+        ],
+        modalTitle: [
+            'Nenechajme voľby bez kontroly!',
+            `Don't let the elections without watch!`,
+        ],
+        modalText: [
+            'Darujte už od 20 €, aby sme ustrážili férovosť volieb.\nĎakujeme.',
+            'Donate from 20 € to support elections transparency.\nThank you.',
+        ],
+    },
     donations: {
         allDonations: ['Jednotlivé príspevky', 'Donations'],
         columns: {
