@@ -19,7 +19,7 @@ function Home() {
 
     return (
         <section>
-            <Title secondaryWords={1} uppercase>
+            <Title secondaryWords={2} uppercase>
                 {t(labels.home.pageTitle)}
             </Title>
 

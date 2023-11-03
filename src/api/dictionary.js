@@ -209,8 +209,8 @@ export const labels = {
     home: {
         navTitle: ['Úvod', 'Home'],
         pageTitle: [
-            'Monitoring\nvolebných kampaní',
-            'Slovak elections\ncampaigns monitoring',
+            'Monitoring volebných\nkampaní a financovania strán',
+            'Monitoring of elections campaigns and political parties funding',
         ],
     },
     learnMore: ['Zistiť viac', 'Learn more'],
