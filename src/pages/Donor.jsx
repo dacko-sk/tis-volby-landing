@@ -5,17 +5,18 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
-import { donationsColumns as dc } from '../api/constants';
-import { labels, t } from '../api/dictionary';
+import { setTitle } from '../helpers/browser';
+import { donationsColumns as dc } from '../helpers/constants';
+import { labels, t } from '../helpers/dictionary';
 import {
     DonorFlags,
     DonorParties,
     columnLabel,
     entityLabel,
     hiddenDonorColumns,
-} from '../api/dontaionsHelpers';
-import { currencyFormat, setTitle } from '../api/helpers';
-import { routes } from '../api/routes';
+} from '../helpers/dontaions';
+import { currencyFormat } from '../helpers/helpers';
+import { routes } from '../helpers/routes';
 
 import Title from '../components/structure/Title';
 import Loading from '../components/general/Loading';

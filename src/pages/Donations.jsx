@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-import { labels, t } from '../api/dictionary';
-import { setTitle } from '../api/helpers';
-import { getCurrentLanguage, languages } from '../api/routes';
+import { setTitle } from '../helpers/browser';
+import { labels, t } from '../helpers/dictionary';
+import { getCurrentLanguage, languages } from '../helpers/routes';
 
 import Filters from '../components/donors/Filters';
 import SearchResults from '../components/donors/SearchResults';

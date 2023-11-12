@@ -1,6 +1,6 @@
 import siteConfig from '../../package.json';
 
-import { isMobile } from './helpers';
+import { isMobile } from './browser';
 
 export const separators = {
     parts: '_',

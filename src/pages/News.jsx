@@ -1,6 +1,6 @@
-import { newsCategories } from '../api/constants';
-import { labels, t } from '../api/dictionary';
-import { setTitle } from '../api/helpers';
+import { setTitle } from '../helpers/browser';
+import { newsCategories } from '../helpers/constants';
+import { labels, t } from '../helpers/dictionary';
 
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';

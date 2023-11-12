@@ -1,14 +1,14 @@
 import Table from 'react-bootstrap/Table';
 
-import { donationsColumns as dc } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
+import { donationsColumns as dc } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 import {
     SortLink,
     columnLabel,
     getDonationsColumn,
     isCompany,
     optionalColumns,
-} from '../../api/dontaionsHelpers';
+} from '../../helpers/dontaions';
 
 import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';

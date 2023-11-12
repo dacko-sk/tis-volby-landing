@@ -4,8 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { SocialIcon } from 'react-social-icons';
 
-import { colorOrange, elections as el, links } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
+import { colorOrange, elections as el, links } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 
 import CookieBanner from '../general/CookieBanner';
 import DonateButton from '../general/DonateButton';

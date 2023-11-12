@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 
-import { links } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
+import { links } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 
 function DonateButton({ className, long, xl }) {
     return (

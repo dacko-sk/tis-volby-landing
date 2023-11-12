@@ -2,15 +2,11 @@ import { Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import { useQuery } from '@tanstack/react-query';
 
-import { donationsColumns as dc } from '../../api/constants';
-import { currencyFormat } from '../../api/helpers';
-import { labels, t } from '../../api/dictionary';
-import {
-    DonorParties,
-    columnLabel,
-    typeLabel,
-} from '../../api/dontaionsHelpers';
-import { routes } from '../../api/routes';
+import { donationsColumns as dc } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
+import { DonorParties, columnLabel, typeLabel } from '../../helpers/dontaions';
+import { currencyFormat } from '../../helpers/helpers';
+import { routes } from '../../helpers/routes';
 
 import Loading from '../general/Loading';
 

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { labels, t } from '../api/dictionary';
-import { setTitle } from '../api/helpers';
-import { routes, segments } from '../api/routes';
+import { setTitle } from '../helpers/browser';
+import { labels, t } from '../helpers/dictionary';
+import { routes, segments } from '../helpers/routes';
 
 import { newsCategories } from './News';
 import Title from '../components/structure/Title';

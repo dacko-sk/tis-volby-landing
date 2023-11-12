@@ -5,9 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 
-import { labels, t } from '../../api/dictionary';
-import { scrollToTop } from '../../api/helpers';
-import { routes } from '../../api/routes';
+import { scrollToTop } from '../../helpers/browser';
+import { labels, t } from '../../helpers/dictionary';
+import { routes } from '../../helpers/routes';
 
 import NewsCondensed from './templates/NewsCondensed';
 import NewsList from './templates/NewsList';

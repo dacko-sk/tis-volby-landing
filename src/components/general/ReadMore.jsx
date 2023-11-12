@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { labels, t } from '../../api/dictionary';
+import { labels, t } from '../../helpers/dictionary';
 
 import './ReadMore.scss';
 

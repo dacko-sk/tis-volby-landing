@@ -6,8 +6,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { donationsColumns as dc } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
+import { donationsColumns as dc } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 import {
     allParties,
     amountSettings,
@@ -15,14 +15,14 @@ import {
     columnLabel,
     entityIcon,
     parseQueryOptions,
-} from '../../api/dontaionsHelpers';
+} from '../../helpers/dontaions';
 import {
     currencyFormat,
     datePickerFormat,
     getTimeFromDate,
     sortNumbers,
-} from '../../api/helpers';
-import { routes, separators } from '../../api/routes';
+} from '../../helpers/helpers';
+import { routes, separators } from '../../helpers/routes';
 
 import './Donors.scss';
 

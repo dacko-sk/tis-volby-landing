@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { homepage, languageRoot, languages, routes } from './api/routes';
+import { homepage, languageRoot, languages, routes } from './helpers/routes';
 
 import ContextProviders from './context/ContextProviders';
 

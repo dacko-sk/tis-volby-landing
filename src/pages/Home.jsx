@@ -1,9 +1,10 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { elections as el, links, newsCategories } from '../api/constants';
-import { labels, t } from '../api/dictionary';
-import { nl2r, secondarySentenceEnding as se, setTitle } from '../api/helpers';
+import { setTitle } from '../helpers/browser';
+import { elections as el, links, newsCategories } from '../helpers/constants';
+import { labels, t } from '../helpers/dictionary';
+import { nl2r, secondarySentenceEnding as se } from '../helpers/helpers';
 
 import QuickSearch from '../components/donors/QuickSearch';
 import Top10Donors from '../components/donors/Top10Donors';

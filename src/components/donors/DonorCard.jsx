@@ -1,13 +1,9 @@
 import { Link } from 'react-router-dom';
 import Stack from 'react-bootstrap/Stack';
 
-import {
-    DonorFlags,
-    DonorParties,
-    entityIcon,
-} from '../../api/dontaionsHelpers';
-import { currencyFormat } from '../../api/helpers';
-import { routes } from '../../api/routes';
+import { DonorFlags, DonorParties, entityIcon } from '../../helpers/dontaions';
+import { currencyFormat } from '../../helpers/helpers';
+import { routes } from '../../helpers/routes';
 
 import './Donors.scss';
 

@@ -1,5 +1,5 @@
-import { links } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
+import { links } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 
 import banner from '../../../public/img/banner.png';
 

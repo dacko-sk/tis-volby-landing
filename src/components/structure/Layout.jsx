@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { scrollToTop } from '../../api/helpers';
+import { scrollToTop } from '../../helpers/browser';
 
 import Header from './Header';
 import Footer from './Footer';

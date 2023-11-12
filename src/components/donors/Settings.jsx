@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
-import { labels, t } from '../../api/dictionary';
+import { labels, t } from '../../helpers/dictionary';
 import {
     blocksizes,
     buildUrlQuery,
@@ -9,9 +9,9 @@ import {
     defaultBlocksize,
     optionalColumns,
     parseQueryOptions,
-} from '../../api/dontaionsHelpers';
-import { sortNumbers } from '../../api/helpers';
-import { routes, separators } from '../../api/routes';
+} from '../../helpers/dontaions';
+import { sortNumbers } from '../../helpers/helpers';
+import { routes, separators } from '../../helpers/routes';
 
 import './Donors.scss';
 

@@ -1,6 +1,6 @@
 import Alert from 'react-bootstrap/Alert';
 
-import { icons } from '../../api/constants';
+import { icons } from '../../helpers/constants';
 
 function AlertWithIcon({ className, children, variant }) {
     let icon = null;

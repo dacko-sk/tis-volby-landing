@@ -2,8 +2,6 @@ import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
 import { labels, t } from './dictionary';
 
-export const isMobile = window.innerWidth < 576;
-
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat('sk-SK', options).format(value);
 
@@ -245,13 +243,3 @@ export const swapName = (name) => {
 
 export const generateRandomString = (length) =>
     [...Array(length ?? 6)].map(() => Math.random().toString(36)[2]).join('');
-
-export const setTitle = (title) => {
-    document.title = `${title} : ${t(labels.elections.title)} : ${t(
-        labels.tis
-    )}`;
-};
-
-export const scrollToTop = () => window.scrollTo(0, 0);
-
-export const openInNewTab = (url) => window.open(url, '_blank').focus();

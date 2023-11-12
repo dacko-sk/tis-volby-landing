@@ -1,8 +1,8 @@
 import { memo, useEffect } from 'react';
 import { SocialIcon } from 'react-social-icons';
 
-import { colorDarkBlue } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
+import { colorDarkBlue } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 
 import useCookies from '../../context/CookiesContext';
 

@@ -1,7 +1,7 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { dateTimeFormat, parseWpHtml } from '../../../api/helpers';
+import { dateTimeFormat, parseWpHtml } from '../../../helpers/helpers';
 
 import Media from '../Media';
 

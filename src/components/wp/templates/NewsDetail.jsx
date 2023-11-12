@@ -1,4 +1,4 @@
-import { dateFormat, parseWpHtml } from '../../../api/helpers';
+import { dateFormat, parseWpHtml } from '../../../helpers/helpers';
 
 function NewsDetail({ article }) {
     return (

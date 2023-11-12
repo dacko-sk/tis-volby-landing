@@ -1,4 +1,4 @@
-import { nl2r, secondarySentenceEnding as se } from '../../api/helpers';
+import { nl2r, secondarySentenceEnding as se } from '../../helpers/helpers';
 
 function Title({
     children,

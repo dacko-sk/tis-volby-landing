@@ -1,7 +1,8 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { dateFormat, openInNewTab } from '../../api/helpers';
+import { openInNewTab } from '../../helpers/browser';
+import { dateFormat } from '../../helpers/helpers';
 
 import defaultImg from '../../../public/img/tis-logo-blue.png';
 

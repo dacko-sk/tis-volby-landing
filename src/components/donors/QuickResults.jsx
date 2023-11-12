@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { labels, t } from '../../api/dictionary';
+import { labels, t } from '../../helpers/dictionary';
+import { buildApiQuery } from '../../helpers/dontaions';
 
 import DonorCard from './DonorCard';
 import Loading from '../general/Loading';
 import AlertWithIcon from '../general/AlertWithIcon';
-import { buildApiQuery } from '../../api/dontaionsHelpers';
 
 const maxResults = 5;
 

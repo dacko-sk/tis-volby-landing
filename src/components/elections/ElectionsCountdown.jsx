@@ -1,6 +1,6 @@
 import Countdown from 'react-countdown';
 
-import { dateFormat } from '../../api/helpers';
+import { dateFormat } from '../../helpers/helpers';
 
 import './ElectionsCountdown.scss';
 

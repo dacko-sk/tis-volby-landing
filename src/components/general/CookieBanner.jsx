@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-import { labels, t } from '../../api/dictionary';
+import { labels, t } from '../../helpers/dictionary';
 
 import useCookies, {
     generateSetter,

@@ -4,14 +4,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { elections as el, links } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
+import { elections as el, links } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 import {
     getCurrentLanguage,
     languages,
     localizePath,
     routes,
-} from '../../api/routes';
+} from '../../helpers/routes';
 
 import DonateButton from '../general/DonateButton';
 // import SearchField from '../general/SearchField';

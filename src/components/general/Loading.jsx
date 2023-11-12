@@ -1,4 +1,4 @@
-import { labels, t } from '../../api/dictionary';
+import { labels, t } from '../../helpers/dictionary';
 
 import './Loading.scss';
 

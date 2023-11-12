@@ -7,8 +7,8 @@ import {
     defaultBlocksize,
     optionalColumns,
     parseQueryOptions,
-} from '../../api/dontaionsHelpers';
-import { routes, separators } from '../../api/routes';
+} from '../../helpers/dontaions';
+import { routes, separators } from '../../helpers/routes';
 
 import PaginationWithGaps from '../general/PaginationWithGaps';
 import DonationsTable from './DonationsTable';

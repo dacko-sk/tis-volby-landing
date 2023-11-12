@@ -5,8 +5,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { labels, t } from '../../api/dictionary';
-import { routes, separators } from '../../api/routes';
+import { labels, t } from '../../helpers/dictionary';
+import { routes, separators } from '../../helpers/routes';
 
 import QuickResults from './QuickResults';
 
