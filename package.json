@@ -11,8 +11,10 @@
     "react-bootstrap": "^2.7.0",
     "react-countdown": "^2.3.5",
     "react-dom": "^18.2.0",
+    "react-papaparse": "^4.4.0",
     "react-router-dom": "^6.7.0",
     "react-social-icons": "^5.15.0",
+    "recharts": "^2.9.3",
     "use-debounce": "^9.0.3"
   },
   "devDependencies": {
