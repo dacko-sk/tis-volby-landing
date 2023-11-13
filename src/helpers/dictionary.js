@@ -3,6 +3,10 @@ import { getCurrentLanguage, languages } from './routes';
 
 export const labels = {
     all: ['Zobraziť všetko', 'Show all'],
+    charts: {
+        incoming: ['Príjmy', 'Incomes'],
+        outgoing: ['Výdavky', 'Expenses'],
+    },
     contact: ['Kontakt', 'Contact'],
     cookies: {
         accept: ['Prijať všetky', 'Accept all'],
@@ -214,6 +218,7 @@ export const labels = {
         ],
     },
     learnMore: ['Zistiť viac', 'Learn more'],
+    lastUpdate: ['Naposledy aktualizované', 'Last updated on'],
     news: {
         latest: ['Najnovšie aktuality', 'Latest News (Slovak only)'],
         navTitle: ['Aktuality', 'News'],

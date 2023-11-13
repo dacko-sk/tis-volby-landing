@@ -1,7 +1,5 @@
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
-import { labels, t } from './dictionary';
-
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat('sk-SK', options).format(value);
 
@@ -14,6 +12,15 @@ export const pctFormat = (value) => {
     }
     return '';
 };
+
+export const humanPctFormat = (value) =>
+    pctFormat(100 * value, { maximumFractionDigits: 2 });
+
+export const humanPctSignFormat = (value) =>
+    pctFormat(100 * value, {
+        maximumFractionDigits: 2,
+        signDisplay: 'exceptZero',
+    });
 
 export const wholeNumFormat = (value) =>
     slovakFormat(value, {
@@ -31,6 +38,8 @@ export const wholeCurrencyFormat = (value) =>
         style: 'currency',
         currency: 'EUR',
         maximumFractionDigits: 0,
+        // unit: 'million',
+        notation: 'compact',
     });
 
 export const slovakDateFormat = (timestamp, options) =>

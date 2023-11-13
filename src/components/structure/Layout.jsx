@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import { scrollToTop } from '../../helpers/browser';
 
+import useGovData from '../../context/GovDataContext';
+
 import Header from './Header';
 import Footer from './Footer';
 import DonateBanner from '../general/DonateBanner';
@@ -10,6 +12,12 @@ import DonateBanner from '../general/DonateBanner';
 
 function Layout() {
     const { pathname } = useLocation();
+    const { loadAllElections } = useGovData();
+
+    // load gov. funding data on first load
+    useEffect(() => {
+        loadAllElections();
+    }, []);
 
     // send pageview to analytics on route change
     useEffect(() => {

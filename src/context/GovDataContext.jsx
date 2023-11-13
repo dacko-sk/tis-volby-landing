@@ -3,20 +3,27 @@ import { usePapaParse } from 'react-papaparse';
 
 // import all csv files from the govfunds folder via webpack
 const govFiles = require.context('../../public/csv/govfunds', false, /\.csv$/);
-const govFile = (key) => govFiles(key);
 
 const initialState = {
     error: null,
     electionPeriods: {},
+    lastElection: 0,
 };
 
 export const csvKeys = {
+    ELECTION_PERIOD: 'VOLEBNÉ OBDOBIE',
     VOTE_PRICE: 'CENA HLASU',
     SUBSIDY_VOTES: 'PRÍSPEVKY ZA HLASY',
     SUBSIDY_OPERATION: 'PRÍSPEVKY NA ČINNOSŤ',
     SUBSIDY_MANDATE: 'PRÍSPEVKY NA MANDÁT',
     COALITIONS: 'KOALÍCIE',
 };
+
+export const subsidyTypes = [
+    csvKeys.SUBSIDY_MANDATE,
+    csvKeys.SUBSIDY_OPERATION,
+    csvKeys.SUBSIDY_VOTES,
+];
 
 export const processElectionPeriod = (csv) => {
     if (csv.data ?? false) {
@@ -25,8 +32,9 @@ export const processElectionPeriod = (csv) => {
         let currentYears = [];
         csv.data.forEach((row) => {
             switch (row[0]) {
+                case csvKeys.ELECTION_PERIOD:
                 case csvKeys.VOTE_PRICE:
-                    ep[csvKeys.VOTE_PRICE] = row[1];
+                    ep[row[0]] = Number(row[1]);
                     break;
                 case csvKeys.SUBSIDY_VOTES:
                 case csvKeys.SUBSIDY_OPERATION:
@@ -91,6 +99,7 @@ export const GovDataProvider = function ({ children }) {
     const loadAllElections = () => {
         const csvFiles = govFiles.keys();
         const electionPeriods = {};
+        let lastElection = 0;
         let error = null;
         Promise.all(
             csvFiles.map(
@@ -105,6 +114,10 @@ export const GovDataProvider = function ({ children }) {
                                 const data = processElectionPeriod(csv);
                                 if (data) {
                                     electionPeriods[key] = data;
+                                    lastElection = Math.max(
+                                        lastElection,
+                                        data[csvKeys.ELECTION_PERIOD] ?? 0
+                                    );
                                 } else {
                                     error = `Data read error in file ${key}`;
                                 }
@@ -118,7 +131,7 @@ export const GovDataProvider = function ({ children }) {
         )
             .then((results) => {
                 if (results.length === csvFiles.length && !error) {
-                    setGovData({ ...govData, electionPeriods });
+                    setGovData({ ...govData, electionPeriods, lastElection });
                 } else {
                     csvLoadingError(error || 'Failed to load all files');
                 }
@@ -128,35 +141,40 @@ export const GovDataProvider = function ({ children }) {
             });
     };
 
-    const getTotals = (party) => {
+    const getYears = (period, type, party) => {
         const years = {};
         Object.values(govData.electionPeriods).forEach((ep) => {
-            [
-                csvKeys.SUBSIDY_MANDATE,
-                csvKeys.SUBSIDY_OPERATION,
-                csvKeys.SUBSIDY_VOTES,
-            ].forEach((type) => {
-                let parties;
-                if (party) {
-                    parties = ep[type][party] ?? [];
-                } else {
-                    parties = Object.values(ep[type]);
-                }
-                parties.forEach((party) => {
-                    Object.entries(party).forEach(([year, subsidy]) => {
-                        years[year] = (years[year] ?? 0) + subsidy;
+            if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
+                (type ? [type] : subsidyTypes).forEach((st) => {
+                    let parties;
+                    if (party) {
+                        parties = ep[st][party] ?? [];
+                    } else {
+                        parties = Object.values(ep[st]);
+                    }
+                    parties.forEach((party) => {
+                        Object.entries(party).forEach(([year, subsidy]) => {
+                            years[year] = (years[year] ?? 0) + subsidy;
+                        });
                     });
                 });
-            });
+            }
         });
         return years;
     };
+
+    const getTotals = (period, type, party) =>
+        Object.values(getYears(period, type, party)).reduce(
+            (sum, currentValue) => sum + currentValue,
+            0
+        );
 
     const value = useMemo(
         () => ({
             govData,
             setGovData,
             loadAllElections,
+            getYears,
             getTotals,
         }),
         [govData]
