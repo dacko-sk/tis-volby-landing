@@ -69,17 +69,12 @@ const parserOptions = {
 
 export const parseWpHtml = (html) => parse(html, parserOptions);
 
-export const processArticles = (data) => {
-    const articles = [];
-    data.forEach((article) => {
-        articles.push({
-            ...article,
-            title: {
-                ...article.title,
-                // fix titles
-                rendered: decodeHTMLEntities(article.title.rendered),
-            },
-        });
-    });
-    return articles;
-};
+export const processArticles = (data) =>
+    data.map((article) => ({
+        ...article,
+        title: {
+            ...article.title,
+            // fix titles
+            rendered: decodeHTMLEntities(article.title.rendered),
+        },
+    }));
