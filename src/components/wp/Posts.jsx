@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import { scrollToTop } from '../../helpers/browser';
 import { labels, t } from '../../helpers/dictionary';
 import { routes } from '../../helpers/routes';
+import { processArticles } from '../../helpers/wp';
 
 import NewsCondensed from './templates/NewsCondensed';
 import NewsList from './templates/NewsList';
@@ -82,7 +83,7 @@ function Posts({
     if (isLoading || error) {
         content = <Loading error={error} />;
     } else {
-        data.forEach((article) => {
+        processArticles(data).forEach((article) => {
             articles.push(
                 template === templates.condensed ? (
                     <NewsCondensed

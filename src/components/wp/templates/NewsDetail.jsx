@@ -1,4 +1,5 @@
-import { dateFormat, parseWpHtml } from '../../../helpers/helpers';
+import { dateFormat } from '../../../helpers/helpers';
+import { parseWpHtml } from '../../../helpers/wp';
 
 function NewsDetail({ article }) {
     return (

@@ -1,6 +1,6 @@
 import { setTitle } from '../helpers/browser';
-import { newsCategories } from '../helpers/constants';
 import { labels, t } from '../helpers/dictionary';
+import { newsCategories } from '../helpers/wp';
 
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';

@@ -1,15 +1,3 @@
-export const categories = {
-    news22: 858,
-    news23: 877,
-    newsGlobal: 875,
-};
-
-export const newsCategories = [
-    categories.news22,
-    categories.news23,
-    categories.newsGlobal,
-];
-
 export const colorLightBlue = '#2bace2';
 export const colorDarkBlue = '#1b335f';
 export const colorOrange = '#f06c50';

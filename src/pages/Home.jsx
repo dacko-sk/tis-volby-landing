@@ -2,9 +2,10 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import { setTitle } from '../helpers/browser';
-import { elections as el, links, newsCategories } from '../helpers/constants';
+import { elections as el, links } from '../helpers/constants';
 import { labels, t } from '../helpers/dictionary';
 import { nl2r, secondarySentenceEnding as se } from '../helpers/helpers';
+import { newsCategories } from '../helpers/wp';
 
 import QuickSearch from '../components/donors/QuickSearch';
 import Top10Donors from '../components/donors/Top10Donors';

@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 import { routes, segments } from '../helpers/routes';
+import { newsCategories } from '../helpers/wp';
 
-import { newsCategories } from './News';
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';
 
