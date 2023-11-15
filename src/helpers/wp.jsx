@@ -57,11 +57,6 @@ const parserOptions = {
             return <img {...props} />;
         }
         if (name === 'a') {
-            if (attribs && attribs.rel && attribs.rel.startsWith('lightbox')) {
-                // remove lightbox links
-                // will recursively run parser on children
-                return domToReact(children, parserOptions);
-            }
             if (
                 children.length &&
                 children[0].type === 'text' &&
@@ -69,6 +64,23 @@ const parserOptions = {
             ) {
                 // remove "continue reading" links to WP domain
                 return <></>;
+            }
+            if (attribs) {
+                if (attribs.rel && attribs.rel.startsWith('lightbox')) {
+                    // remove lightbox links
+                    // will recursively run parser on children
+                    return domToReact(children, parserOptions);
+                }
+                if (attribs.href.startsWith('http://')) {
+                    const props = {
+                        ...attributesToProps(attribs),
+                        // force http links to https
+                        href: attribs.href.replace('http://', 'https://'),
+                    };
+                    return (
+                        <a {...props}>{domToReact(children, parserOptions)}</a>
+                    );
+                }
             }
         }
         if (name === 'figure') {
