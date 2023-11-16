@@ -35,8 +35,8 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.home()}>
                             {t(labels.home.navTitle)}
                         </Nav.Link>
-                        <Nav.Link as={NavLink} to={routes.donations()}>
-                            {t(labels.donations.navTitle)}
+                        <Nav.Link as={NavLink} to={routes.funding()}>
+                            {t(labels.funding.navTitle)}
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.news()}>
                             {t(labels.news.navTitle)}

@@ -2,6 +2,14 @@ import { donationsColumns as dc, elections as el } from './constants';
 import { getCurrentLanguage, languages } from './routes';
 
 export const labels = {
+    accounts: {
+        navTitle: ['Transparentné účty', 'Transparent accounts'],
+        navTitleShort: ['Účty', 'Accounts'],
+        pageTitle: [
+            'Archív\ntransparentných účtov',
+            'Transparentaccounts archive',
+        ],
+    },
     all: ['Zobraziť všetko', 'Show all'],
     charts: {
         incoming: ['Príjmy', 'Incomes'],
@@ -94,10 +102,11 @@ export const labels = {
                 'Cummulative large in-kind contributionss', // 3
             ],
         ],
-        navTitle: ['Databáza donorov', 'Donors'],
+        navTitle: ['Databáza donorov', 'Donors database'],
+        navTitleShort: ['Donori', 'Donors'],
         pageTitle: [
-            'Financovanie politických strán\na databáza donorov',
-            'Political parties funding\nand donors database',
+            'Vyhľadávanie\nv databáze donorov',
+            'Search\nin donors database',
         ],
         search: {
             advanced: ['Podrobné vyhľadávanie', 'Advanced search'],
@@ -210,6 +219,22 @@ export const labels = {
         'Please accept Functional Cookies in Cookies Settings in order to show Facebook feed',
     ],
     followUs: ['Sledujte nás', 'Follow us'],
+    funding: {
+        navTitle: ['Financovanie', 'Funding'],
+        overview: ['Prehľad', 'Overview'],
+        pageTitle: [
+            'Financovanie\npolitických strán',
+            'Political\nparties funding',
+        ],
+    },
+    government: {
+        navTitle: ['Štátne príspevky', 'Government subsidies'],
+        navTitleShort: ['Štát', 'Government'],
+        pageTitle: [
+            'Financovanie\nzo štátnych príspevkov',
+            'Government subsidies',
+        ],
+    },
     home: {
         navTitle: ['Úvod', 'Home'],
         pageTitle: [

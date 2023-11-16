@@ -8,8 +8,9 @@ import { getCurrentLanguage, languages } from '../helpers/routes';
 import Filters from '../components/donors/Filters';
 import SearchResults from '../components/donors/SearchResults';
 import Settings from '../components/donors/Settings';
-import Title from '../components/structure/Title';
 import ReadMore from '../components/general/ReadMore';
+import FundingNav from '../components/structure/FundingNav';
+import Title from '../components/structure/Title';
 
 const introText = {
     [languages.sk]: (
@@ -127,6 +128,8 @@ function Donations() {
     return (
         <section>
             <Title secondaryWords={1}>{t(labels.donations.pageTitle)}</Title>
+
+            <FundingNav />
 
             <ReadMore id="financovanie-uvod" lines={4}>
                 {introText[getCurrentLanguage()]}

@@ -17,23 +17,35 @@ export const languages = {
 export const defaultLanguage = Object.values(languages)[0];
 
 export const segments = {
+    ACCOUNTS: 'ACCOUNTS',
     DONOR: 'DONOR',
+    DONATIONS: 'DONATIONS',
     FUNDING: 'FUNDING',
+    GOVERNMENT: 'GOVERNMENT',
     NEWS: 'NEWS',
+    PARTY: 'PARTY',
     SEARCH: 'SEARCH',
 };
 
 export const localSegments = {
     [languages.sk]: {
+        [segments.ACCOUNTS]: 'ucty',
         [segments.DONOR]: 'donor',
+        [segments.DONATIONS]: 'donori',
         [segments.FUNDING]: 'financovanie',
+        [segments.GOVERNMENT]: 'stat',
         [segments.NEWS]: 'aktuality',
+        [segments.PARTY]: 'strana',
         [segments.SEARCH]: 'vyhladavanie',
     },
     [languages.en]: {
+        [segments.ACCOUNTS]: 'accounts',
         [segments.DONOR]: 'donor',
+        [segments.DONATIONS]: 'donations',
         [segments.FUNDING]: 'funding',
+        [segments.GOVERNMENT]: 'government',
         [segments.NEWS]: 'news',
+        [segments.PARTY]: 'party',
         [segments.SEARCH]: 'search',
     },
 };
@@ -82,6 +94,11 @@ export const urlSegment = (segment, lang) => {
 };
 
 export const routes = {
+    accounts: (lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.ACCOUNTS, lang),
     article: (slug, lang) =>
         languageRoot(lang) +
         (slug
@@ -105,9 +122,17 @@ export const routes = {
         return (
             languageRoot(lang) +
             urlSegment(segments.FUNDING, lang) +
+            separators.url +
+            urlSegment(segments.DONATIONS, lang) +
             (query ? separators.url + (query === true ? ':query' : query) : '')
         );
     },
+    funding: (lang) => languageRoot(lang) + urlSegment(segments.FUNDING, lang),
+    government: (lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.GOVERNMENT, lang),
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
     search: (query, lang) =>
