@@ -1,6 +1,7 @@
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 
+import FundingSources from '../components/funding/FundingSources';
 import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
 
@@ -13,7 +14,9 @@ function Funding() {
 
             <FundingNav />
 
-            <div id="funding">funding</div>
+            <div id="funding">
+                <FundingSources />
+            </div>
         </section>
     );
 }

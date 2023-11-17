@@ -14,6 +14,7 @@ export const labels = {
     charts: {
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
+        sum: ['Suma', 'Sum'],
     },
     contact: ['Kontakt', 'Contact'],
     cookies: {
@@ -191,6 +192,7 @@ export const labels = {
             'Zdroj: Výročné správy politických strán 2002 - 2022',
             'Source: Annual reports of political parties 2002 - 2022',
         ],
+        title: ['Darcovia a veritelia', 'Donors & creditors'],
         top10donors: [
             'Top 10 individuálnych darcov politických strán (2002-2022)',
             'Top 10 individual political party donors (2002 - 2022)',
@@ -226,6 +228,11 @@ export const labels = {
             'Financovanie\npolitických strán',
             'Political\nparties funding',
         ],
+        sourcesDisclaimer: [
+            'Pomer financovania politických strán medzi súkromným a štátnym financovaním v rokoch 2002 - 2023',
+            'Political parties funding distribution between dontations and government subsidies in years 2002 - 2023.',
+        ],
+        sourcesTitle: ['Zdroje financovania', 'Funding sources'],
     },
     government: {
         navTitle: ['Štátne príspevky', 'Government subsidies'],
@@ -233,6 +240,18 @@ export const labels = {
         pageTitle: [
             'Financovanie\nzo štátnych príspevkov',
             'Government subsidies',
+        ],
+        totalDisclaimer: [
+            'Súčet štátnych príspevkov všetkých strán v rokoch 2002 - 2023.',
+            'Sum of government subsidies to all political parties in the years 2002 - 2023.',
+        ],
+        yearsDisclaimer: [
+            'Súčet štátnych príspevkov všetkých strán v jednotlivých kalendárnych rokoch od 3. do 8. volebn0ho obdobia.',
+            'Sum of government subsidies to all political parties in the particular year between 3rd & 8th election periods.',
+        ],
+        yearsTitle: [
+            'Štátne príspevky po rokoch.',
+            'Government subsidies by years.',
         ],
     },
     home: {

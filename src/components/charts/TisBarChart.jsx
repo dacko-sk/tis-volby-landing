@@ -61,7 +61,7 @@ export const columnVariants = {
     subsidies: [
         {
             key: 'incoming',
-            name: `Príspevky`,
+            name: labels.government.navTitle,
             color: colors.colorDarkBlue,
         },
     ],
