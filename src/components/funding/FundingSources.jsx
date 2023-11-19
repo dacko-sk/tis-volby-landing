@@ -1,18 +1,16 @@
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { colorDarkBlue, colorOrange } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { buildApiQuery, defaultBlocksize } from '../../helpers/dontaions';
-import { currencyFormat } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
 import useGovData from '../../context/GovDataContext';
 
 import TisPieChart from '../charts/TisPieChart';
+import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
 function FundingSources({ party }) {
@@ -33,7 +31,7 @@ function FundingSources({ party }) {
 
     const donationsSum = dq.data?.sum ?? 0;
 
-    const formatPie = {
+    const sourcesPie = {
         data: [
             {
                 name: t(labels.donors.title),
@@ -48,7 +46,7 @@ function FundingSources({ party }) {
         ],
         nameKey: 'name',
         dataKey: 'value',
-        label: t(labels.charts.sum),
+        label: t(labels.charts.amount),
     };
 
     return (
@@ -57,49 +55,28 @@ function FundingSources({ party }) {
                 <TisPieChart
                     currency
                     lastUpdate={false}
-                    pie={formatPie}
+                    pie={sourcesPie}
                     percent={false}
                     subtitle={t(labels.funding.sourcesDisclaimer)}
                     title={t(labels.funding.sourcesTitle)}
                 />
             </Col>
             <Col xl={6}>
-                <div className="total-spending text-center">
-                    <h2>{t(labels.donors.title)}</h2>
-                    <div className="hero-number">
-                        {currencyFormat(donationsSum)}
-                        <em className="disclaimer">
-                            {t(labels.government.totalDisclaimer)}
-                        </em>
-                    </div>
-                    <div className="buttons mt-3">
-                        <Button
-                            as={Link}
-                            to={routes.donations()}
-                            variant="secondary"
-                        >
-                            {t(labels.learnMore)}
-                        </Button>
-                    </div>
-                </div>
-                <div className="total-spending text-center mt-4">
-                    <h2>{t(labels.government.navTitle)}</h2>
-                    <div className="hero-number">
-                        {currencyFormat(govSum)}
-                        <em className="disclaimer">
-                            {t(labels.government.totalDisclaimer)}
-                        </em>
-                    </div>
-                    <div className="buttons mt-3">
-                        <Button
-                            as={Link}
-                            to={routes.government()}
-                            variant="secondary"
-                        >
-                            {t(labels.learnMore)}
-                        </Button>
-                    </div>
-                </div>
+                <HeroNumber
+                    button={t(labels.learnMore)}
+                    disclaimer={t(labels.donors.totalDisclaimer)}
+                    link={routes.donations()}
+                    number={donationsSum}
+                    title={t(labels.donors.title)}
+                />
+                <HeroNumber
+                    className="mt-4"
+                    button={t(labels.learnMore)}
+                    disclaimer={t(labels.government.totalDisclaimer)}
+                    link={routes.government()}
+                    number={govSum}
+                    title={t(labels.government.navTitle)}
+                />
             </Col>
         </Row>
     );

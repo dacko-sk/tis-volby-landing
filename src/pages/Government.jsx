@@ -3,6 +3,7 @@ import { labels, t } from '../helpers/dictionary';
 
 import { subsidyTypes } from '../context/GovDataContext';
 
+import ElectionPeriods from '../components/funding/ElectionPeriods';
 import YearsChart from '../components/funding/YearsChart';
 import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
@@ -18,6 +19,8 @@ function Government() {
 
             <div id="government">
                 <YearsChart subsidyTypes={subsidyTypes} />
+
+                <ElectionPeriods />
             </div>
         </section>
     );

@@ -14,9 +14,9 @@ export const labels = {
     },
     all: ['Zobraziť všetko', 'Show all'],
     charts: {
+        amount: ['Suma', 'Amount'],
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
-        sum: ['Suma', 'Sum'],
     },
     contact: ['Kontakt', 'Contact'],
     cookies: {
@@ -203,6 +203,10 @@ export const labels = {
             'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
             'Top 10 individual political party donors & creditors (2002 - 2022)',
         ],
+        totalDisclaimer: [
+            'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2023.',
+            'Sum of donations from individual donors to all political parties in the years 2002 - 2023.',
+        ],
     },
     download: ['Stiahnuť', 'Download'],
     elections: {
@@ -240,6 +244,11 @@ export const labels = {
         [gst.SUBSIDY_MANDATE]: ['Príspevky na mandát', 'Mandate subsidy'],
         [gst.SUBSIDY_OPERATION]: ['Príspevky na činnosť', 'Operations subsidy'],
         [gst.SUBSIDY_VOTES]: ['Príspevky za hlasy', 'Subsidy for votes'],
+        electionPeriod: [
+            'Volebné obdobie č. %i (%i - %i)',
+            'Election period no. %i (%i - %i)',
+        ],
+        electionPeriods: ['Volebné obdobia', 'Election periods'],
         navTitle: ['Štátne príspevky', 'Government subsidies'],
         navTitleShort: ['Štát', 'Government'],
         pageTitle: [
@@ -250,6 +259,11 @@ export const labels = {
             'Súčet štátnych príspevkov všetkých strán v rokoch 2002 - 2023.',
             'Sum of government subsidies to all political parties in the years 2002 - 2023.',
         ],
+        totalPeriodDisclaimer: [
+            'Súčet štátnych príspevkov všetkých strán vo volebnom období.',
+            'Sum of government subsidies to all political parties in the election period.',
+        ],
+        totalPeriodTitle: ['Suma príspevkov', 'Sum of subsidies'],
         yearsDisclaimer: [
             'Súčet štátnych príspevkov všetkých strán v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
             'Sum of government subsidies to all political parties in the particular year between 3rd & 8th election periods.',
@@ -298,13 +312,23 @@ export const labels = {
     webDev: ['Webové riešenie', 'Web development'],
 };
 
-export const t = (label) => {
+export const t = (label, replacements) => {
+    let tl = label;
     if (Array.isArray(label)) {
-        const fallback = label[0] ?? '';
+        tl = label[0] ?? '';
         if (getCurrentLanguage() === languages.en) {
-            return label[1] ?? fallback;
+            tl = label[1] ?? tl;
         }
-        return fallback;
+    } else if (labels[label] ?? false) {
+        return t(labels[label], replacements);
     }
-    return label;
+    if (Array.isArray(replacements)) {
+        // Use a regular expression to match placeholders (%s or %i)
+        tl = tl.replace(/%[dfis]/g, (match) => {
+            // Replace %s with the next string from the array
+            // Return the placeholder if no replacement is available
+            return replacements.length > 0 ? replacements.shift() : match;
+        });
+    }
+    return tl;
 };

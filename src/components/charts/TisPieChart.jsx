@@ -85,7 +85,7 @@ function TisPieChart({
                     {disclaimer}
                 </LastUpdateTag>
             )}
-            <div className="chart-outer mt-3">
+            <div className="chart-outer">
                 <div className="chart">
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>

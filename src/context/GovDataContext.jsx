@@ -1,6 +1,8 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { usePapaParse } from 'react-papaparse';
+
 import { colors } from '../helpers/constants';
+import { sortByNumericProp } from '../helpers/helpers';
 
 // import all csv files from the govfunds folder via webpack
 const govFiles = require.context('../../public/csv/govfunds', false, /\.csv$/);
@@ -148,6 +150,16 @@ export const GovDataProvider = function ({ children }) {
             });
     };
 
+    const getElectionPeriods = (asc) =>
+        Object.values(govData.electionPeriods).sort(
+            sortByNumericProp(csvKeys.ELECTION_PERIOD, asc)
+        );
+
+    const getElectionPeriodData = (period) =>
+        getElectionPeriods().find(
+            (ep) => period === ep[csvKeys.ELECTION_PERIOD]
+        );
+
     const getYears = (period, type, party) => {
         const years = {};
         Object.values(govData.electionPeriods).forEach((ep) => {
@@ -176,13 +188,21 @@ export const GovDataProvider = function ({ children }) {
             0
         );
 
+    const getElectionPeriodYears = (period) => {
+        const years = Object.keys(getYears(period));
+        return [Math.min(...years), Math.max(...years)];
+    };
+
     const value = useMemo(
         () => ({
             govData,
             setGovData,
-            loadAllElections,
+            getElectionPeriods,
+            getElectionPeriodData,
+            getElectionPeriodYears,
             getYears,
             getTotals,
+            loadAllElections,
         }),
         [govData]
     );
