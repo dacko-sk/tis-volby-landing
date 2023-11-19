@@ -1,6 +1,8 @@
 import { donationsColumns as dc, elections as el } from './constants';
 import { getCurrentLanguage, languages } from './routes';
 
+import { csvKeys as gst } from '../context/GovDataContext';
+
 export const labels = {
     accounts: {
         navTitle: ['Transparentné účty', 'Transparent accounts'],
@@ -235,6 +237,9 @@ export const labels = {
         sourcesTitle: ['Zdroje financovania', 'Funding sources'],
     },
     government: {
+        [gst.SUBSIDY_MANDATE]: ['Príspevky na mandát', 'Mandate subsidy'],
+        [gst.SUBSIDY_OPERATION]: ['Príspevky na činnosť', 'Operations subsidy'],
+        [gst.SUBSIDY_VOTES]: ['Príspevky za hlasy', 'Subsidy for votes'],
         navTitle: ['Štátne príspevky', 'Government subsidies'],
         navTitleShort: ['Štát', 'Government'],
         pageTitle: [
@@ -246,7 +251,7 @@ export const labels = {
             'Sum of government subsidies to all political parties in the years 2002 - 2023.',
         ],
         yearsDisclaimer: [
-            'Súčet štátnych príspevkov všetkých strán v jednotlivých kalendárnych rokoch od 3. do 8. volebn0ho obdobia.',
+            'Súčet štátnych príspevkov všetkých strán v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
             'Sum of government subsidies to all political parties in the particular year between 3rd & 8th election periods.',
         ],
         yearsTitle: [

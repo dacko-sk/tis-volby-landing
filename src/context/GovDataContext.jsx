@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { usePapaParse } from 'react-papaparse';
+import { colors } from '../helpers/constants';
 
 // import all csv files from the govfunds folder via webpack
 const govFiles = require.context('../../public/csv/govfunds', false, /\.csv$/);
@@ -24,6 +25,12 @@ export const subsidyTypes = [
     csvKeys.SUBSIDY_OPERATION,
     csvKeys.SUBSIDY_VOTES,
 ];
+
+export const subsidyColors = {
+    [csvKeys.SUBSIDY_MANDATE]: colors.colorLightBlue,
+    [csvKeys.SUBSIDY_OPERATION]: colors.colorDarkBlue,
+    [csvKeys.SUBSIDY_VOTES]: colors.colorOrange,
+};
 
 export const processElectionPeriod = (csv) => {
     if (csv.data ?? false) {
