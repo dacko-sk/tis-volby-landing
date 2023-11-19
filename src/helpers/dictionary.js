@@ -249,21 +249,31 @@ export const labels = {
             'Election period no. %i (%i - %i)',
         ],
         electionPeriods: ['Volebné obdobia', 'Election periods'],
+        epTotal: ['Suma príspevkov', 'Sum of subsidies'],
+        epTotalDisclaimer: [
+            'Súčet štátnych príspevkov všetkých strán vo volebnom období.',
+            'Sum of government subsidies to all political parties in the election period.',
+        ],
         navTitle: ['Štátne príspevky', 'Government subsidies'],
         navTitleShort: ['Štát', 'Government'],
         pageTitle: [
             'Financovanie\nzo štátnych príspevkov',
             'Government subsidies',
         ],
+        subsidyTypes: ['Druhy príspevkov', 'Types of subsidies'],
         totalDisclaimer: [
             'Súčet štátnych príspevkov všetkých strán v rokoch 2002 - 2023.',
             'Sum of government subsidies to all political parties in the years 2002 - 2023.',
         ],
-        totalPeriodDisclaimer: [
-            'Súčet štátnych príspevkov všetkých strán vo volebnom období.',
-            'Sum of government subsidies to all political parties in the election period.',
+        votePrice: ['Cena jedného hlasu', 'Single vote price'],
+        votePriceDisclaimer: [
+            '1 % z priemernej mesačnej mzdy za rok %i',
+            '1 % of average monthly salary in year %i.',
         ],
-        totalPeriodTitle: ['Suma príspevkov', 'Sum of subsidies'],
+        votePriceDisclaimerOld: [
+            '60 SKK / 1,99 € za 1 hlas (do roku 2006 alebo konca 3. volebného obdobia)',
+            '60 SKK / €1.99 per 1 vote (until 2006 or end of 3rd election period)',
+        ],
         yearsDisclaimer: [
             'Súčet štátnych príspevkov všetkých strán v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
             'Sum of government subsidies to all political parties in the particular year between 3rd & 8th election periods.',

@@ -37,7 +37,7 @@ function ElectionPeriods() {
         const period = ep[csvKeys.ELECTION_PERIOD];
         const fromTo = getElectionPeriodYears(period);
 
-        let epContent;
+        let epContent = null;
         if (open.includes(period)) {
             const sourcesData = subsidyTypes.map((type) => ({
                 name: t(labels.government[type]),
@@ -52,28 +52,35 @@ function ElectionPeriods() {
             };
             epContent = (
                 <Row>
-                    <Col xl={6} className="order-xl-last">
+                    <Col xl={6} className="mb-4 mb-xl-0 order-xl-last">
                         <HeroNumber
-                            className="mt-0 mt-xl-5"
-                            disclaimer={t(
-                                labels.government.totalPeriodDisclaimer
-                            )}
+                            disclaimer={t(labels.government.epTotalDisclaimer)}
                             number={getTotals(period)}
-                            title={t(labels.government.totalPeriodTitle)}
+                            title={t(labels.government.epTotal)}
+                        />
+                        <HeroNumber
+                            className="mt-4"
+                            disclaimer={t(
+                                period > 3
+                                    ? labels.government.votePriceDisclaimer
+                                    : labels.government.votePriceDisclaimerOld,
+                                [fromTo[0] - 1]
+                            )}
+                            number={ep[csvKeys.VOTE_PRICE]}
+                            title={t(labels.government.votePrice)}
                         />
                     </Col>
-                    <Col xl={6}>
+                    <Col xl={6} className="text-center">
                         <TisPieChart
                             currency
                             lastUpdate={false}
                             pie={sourcesPie}
                             percent={false}
+                            title={t(labels.government.subsidyTypes)}
                         />
                     </Col>
                 </Row>
             );
-        } else {
-            epContent = null;
         }
 
         return (

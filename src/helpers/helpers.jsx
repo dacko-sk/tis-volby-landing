@@ -1,5 +1,7 @@
+import { getCurrentLocale } from './routes';
+
 export const slovakFormat = (value, options) =>
-    new Intl.NumberFormat('sk-SK', options).format(value);
+    new Intl.NumberFormat(getCurrentLocale(), options).format(value);
 
 export const numFormat = (value) => slovakFormat(value, {});
 
@@ -37,11 +39,11 @@ export const wholeCurrencyFormat = (value) =>
         currency: 'EUR',
         maximumFractionDigits: 0,
         // unit: 'million',
-        notation: 'compact',
+        // notation: 'compact',
     });
 
 export const slovakDateFormat = (timestamp, options) =>
-    new Intl.DateTimeFormat('sk-SK', options).format(
+    new Intl.DateTimeFormat(getCurrentLocale(), options).format(
         new Date(typeof timestamp === 'number' ? 1000 * timestamp : timestamp)
     );
 
