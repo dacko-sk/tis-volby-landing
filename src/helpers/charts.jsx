@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import { Sector } from 'recharts';
 
 import { isMobile } from './browser';
+import { labels, t } from './dictionary';
 import { shortenValue } from './helpers';
 import { routes, separators } from './routes';
+
+const tooltipSeparator = ' : ';
 
 export const horizontalYaxisWidth = 80;
 export const verticalYaxisWidth = isMobile ? 120 : 180;
@@ -98,25 +101,91 @@ export const CustomLabel = (showName, formatPercent, formatter) =>
         );
     };
 
-export const CustomTooltip = (dataKeys, dataLabels, formatter) =>
+export const BarsTooltip = (bars, formatter) =>
+    function ({ active, payload }) {
+        if (active && payload && payload.length) {
+            console.log(payload);
+            const stackedBars = bars.some((bar) => !!(bar.stackId ?? false));
+            const dataPoint = payload[0].payload;
+            let sum = 0;
+            return (
+                <div className="recharts-default-tooltip">
+                    <p className="recharts-tooltip-label fw-bold">
+                        {dataPoint.name}
+                    </p>
+                    <ul className="recharts-tooltip-item-list">
+                        {bars.map((bar) => {
+                            if (!Number.isNaN(dataPoint[bar.key] ?? NaN)) {
+                                sum += dataPoint[bar.key];
+                                return (
+                                    <li
+                                        key={bar.key}
+                                        className="recharts-tooltip-item"
+                                        style={{ color: bar.color }}
+                                    >
+                                        <span className="recharts-tooltip-item-name">
+                                            {t(bar.name)}
+                                        </span>
+                                        <span className="recharts-tooltip-item-separator">
+                                            {tooltipSeparator}
+                                        </span>
+                                        <span className="recharts-tooltip-item-value fw-bold">
+                                            {formatter(dataPoint[bar.key])}
+                                        </span>
+                                    </li>
+                                );
+                            }
+                        })}
+                        {stackedBars && (
+                            <li
+                                key="sum"
+                                className="recharts-tooltip-item fw-bold"
+                            >
+                                <span className="recharts-tooltip-item-name">
+                                    {t(labels.charts.sum)}
+                                </span>
+                                <span className="recharts-tooltip-item-separator">
+                                    {tooltipSeparator}
+                                </span>
+                                <span className="recharts-tooltip-item-value">
+                                    {formatter(sum)}
+                                </span>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            );
+        }
+
+        return null;
+    };
+
+export const PieTooltip = (dataKeys, dataLabels, formatter) =>
     function ({ active, payload }) {
         if (active && payload && payload.length) {
             return (
                 <div className="recharts-default-tooltip">
-                    <div
-                        className="fw-bold"
+                    <p
+                        className="recharts-tooltip-label fw-bold"
                         style={{ color: payload[0].payload.color }}
                     >
                         {payload[0].payload.name}
-                    </div>
-                    {dataKeys.map((key, index) => (
-                        <div key={key}>
-                            {dataLabels[index]}:{' '}
-                            <strong>
-                                {formatter(payload[0].payload[key])}
-                            </strong>
-                        </div>
-                    ))}
+                    </p>
+                    <ul className="recharts-tooltip-item-list">
+                        {dataKeys.map((key, index) => (
+                            <li className="recharts-tooltip-item" key={key}>
+                                <span className="recharts-tooltip-item-name">
+                                    {dataLabels[index]}
+                                </span>
+                                <span className="recharts-tooltip-item-separator">
+                                    {tooltipSeparator}
+                                </span>
+                                <span className="recharts-tooltip-item-value fw-bold">
+                                    {formatter(payload[0].payload[key])}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             );
         }

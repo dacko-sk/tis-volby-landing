@@ -39,7 +39,7 @@ export const wholeCurrencyFormat = (value) =>
         currency: 'EUR',
         maximumFractionDigits: 0,
         // unit: 'million',
-        // notation: 'compact',
+        notation: 'compact',
     });
 
 export const slovakDateFormat = (timestamp, options) =>

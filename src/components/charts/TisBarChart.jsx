@@ -14,6 +14,7 @@ import {
 } from 'recharts';
 
 import {
+    BarsTooltip,
     horizontalYaxisWidth,
     prepareAvgDeltaPctData,
     shortChartNames,
@@ -136,6 +137,7 @@ function TisBarChart({
         fill: '#333',
         fontSize: tickFontSize,
     };
+    const tooltipContent = BarsTooltip(bars, tooltipNumFormat);
 
     const refLine = diffFromAverage ? (
         <ReferenceLine
@@ -236,6 +238,7 @@ function TisBarChart({
                                 />
                             )}
                             <Tooltip
+                                content={tooltipContent}
                                 formatter={tooltipNumFormat}
                                 labelFormatter={tooltipNameFormat}
                             />

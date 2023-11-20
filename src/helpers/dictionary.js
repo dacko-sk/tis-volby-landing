@@ -17,6 +17,7 @@ export const labels = {
         amount: ['Suma', 'Amount'],
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
+        sum: ['Spolu', 'Sum'],
     },
     contact: ['Kontakt', 'Contact'],
     cookies: {

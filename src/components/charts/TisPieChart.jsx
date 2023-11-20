@@ -13,7 +13,7 @@ import {
     preparePctData,
     ActiveShape,
     CustomLabel,
-    CustomTooltip,
+    PieTooltip,
     InactiveShape,
 } from '../../helpers/charts';
 import {
@@ -60,7 +60,7 @@ function TisPieChart({
     }
 
     const label = CustomLabel(nameLabels, percent, formatter);
-    const tooltip = CustomTooltip(dataKeys, dataLabels, formatter);
+    const tooltip = PieTooltip(dataKeys, dataLabels, formatter);
 
     const pieClick = (segmentProps, segmentKey) => {
         setActiveSegment(segmentKey === activeSegment ? null : segmentKey);
