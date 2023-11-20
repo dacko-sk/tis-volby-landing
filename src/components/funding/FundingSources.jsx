@@ -14,9 +14,9 @@ import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
 function FundingSources({ party }) {
-    const { getTotals, govData } = useGovData();
+    const { getAggTotals, govData } = useGovData();
 
-    const govSum = getTotals(null, null, party);
+    const govSum = getAggTotals(null, null, party);
 
     const queryParams = buildApiQuery({ b: defaultBlocksize });
     const dq = useQuery([`donations_${queryParams}`], () =>

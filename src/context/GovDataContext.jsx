@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useState } from 'react';
 import { usePapaParse } from 'react-papaparse';
 
 import { colors } from '../helpers/constants';
-import { sortByNumericProp } from '../helpers/helpers';
+import { sortByNumericProp, sumOfValues } from '../helpers/helpers';
 
 // import all csv files from the govfunds folder via webpack
 const govFiles = require.context('../../public/csv/govfunds', false, /\.csv$/);
@@ -23,9 +23,9 @@ export const csvKeys = {
 };
 
 export const subsidyTypes = [
-    csvKeys.SUBSIDY_MANDATE,
-    csvKeys.SUBSIDY_OPERATION,
     csvKeys.SUBSIDY_VOTES,
+    csvKeys.SUBSIDY_OPERATION,
+    csvKeys.SUBSIDY_MANDATE,
 ];
 
 export const subsidyColors = {
@@ -160,7 +160,7 @@ export const GovDataProvider = function ({ children }) {
             (ep) => period === ep[csvKeys.ELECTION_PERIOD]
         );
 
-    const getYears = (period, type, party) => {
+    const getAggYears = (period, type, party) => {
         const years = {};
         Object.values(govData.electionPeriods).forEach((ep) => {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
@@ -171,8 +171,8 @@ export const GovDataProvider = function ({ children }) {
                     } else {
                         parties = Object.values(ep[st]);
                     }
-                    parties.forEach((party) => {
-                        Object.entries(party).forEach(([year, subsidy]) => {
+                    parties.forEach((p) => {
+                        Object.entries(p).forEach(([year, subsidy]) => {
                             years[year] = (years[year] ?? 0) + subsidy;
                         });
                     });
@@ -182,14 +182,47 @@ export const GovDataProvider = function ({ children }) {
         return years;
     };
 
-    const getTotals = (period, type, party) =>
-        Object.values(getYears(period, type, party)).reduce(
-            (sum, currentValue) => sum + currentValue,
-            0
+    const getAggTotals = (period, type, party) =>
+        sumOfValues(getAggYears(period, type, party));
+
+    const getPartiesYears = (period, type, party) => {
+        const parties = {};
+        Object.values(govData.electionPeriods).forEach((ep) => {
+            if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
+                (type ? [type] : subsidyTypes).forEach((st) => {
+                    let epStParties;
+                    if (party && (ep[st][party] ?? false)) {
+                        epStParties = [party, ep[st][party]];
+                    } else {
+                        epStParties = Object.entries(ep[st]);
+                    }
+                    epStParties.forEach(([partyName, years]) => {
+                        if (!(parties[partyName] ?? false)) {
+                            parties[partyName] = {};
+                        }
+                        parties[partyName][st] = years;
+                    });
+                });
+            }
+        });
+        return parties;
+    };
+
+    const getPartiesTotals = (period, type, party) => {
+        const parties = {};
+        Object.entries(getPartiesYears(period, type, party)).forEach(
+            ([partyName, subsidyTypes]) => {
+                parties[partyName] = {};
+                Object.entries(subsidyTypes).forEach(([st, years]) => {
+                    parties[partyName][st] = sumOfValues(years);
+                });
+            }
         );
+        return parties;
+    };
 
     const getElectionPeriodYears = (period) => {
-        const years = Object.keys(getYears(period));
+        const years = Object.keys(getAggYears(period));
         return [Math.min(...years), Math.max(...years)];
     };
 
@@ -200,8 +233,10 @@ export const GovDataProvider = function ({ children }) {
             getElectionPeriods,
             getElectionPeriodData,
             getElectionPeriodYears,
-            getYears,
-            getTotals,
+            getAggYears,
+            getAggTotals,
+            getPartiesYears,
+            getPartiesTotals,
             loadAllElections,
         }),
         [govData]

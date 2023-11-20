@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import { labels, t } from '../../helpers/dictionary';
+import { sortByNumericProp, sumOfValues } from '../../helpers/helpers';
 
 import useGovData, {
     csvKeys,
@@ -11,13 +12,19 @@ import useGovData, {
     subsidyTypes,
 } from '../../context/GovDataContext';
 
+import TisBarChart, { subsidyBars } from '../charts/TisBarChart';
 import TisPieChart from '../charts/TisPieChart';
 import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
 function ElectionPeriods() {
-    const { getElectionPeriods, getElectionPeriodYears, getTotals, govData } =
-        useGovData();
+    const {
+        getElectionPeriods,
+        getElectionPeriodYears,
+        getAggTotals,
+        getPartiesTotals,
+        govData,
+    } = useGovData();
 
     const [open, setOpen] = useState([]);
 
@@ -41,7 +48,7 @@ function ElectionPeriods() {
         if (open.includes(period)) {
             const sourcesData = subsidyTypes.map((type) => ({
                 name: t(labels.government[type]),
-                value: getTotals(period, type),
+                value: getAggTotals(period, type),
                 color: subsidyColors[type],
             }));
             const sourcesPie = {
@@ -50,36 +57,68 @@ function ElectionPeriods() {
                 dataKey: 'value',
                 label: t(labels.charts.amount),
             };
+
+            const parties = {};
+            Object.entries(getPartiesTotals(period)).forEach(
+                ([partyName, st]) => {
+                    if (!(parties[partyName] ?? false)) {
+                        parties[partyName] = {
+                            ...st,
+                            name: partyName,
+                            total: sumOfValues(st),
+                        };
+                    }
+                }
+            );
+            const columns = Object.values(parties).sort(
+                sortByNumericProp('total')
+            );
+
             epContent = (
-                <Row>
-                    <Col xl={6} className="mb-4 mb-xl-0 order-xl-last">
-                        <HeroNumber
-                            disclaimer={t(labels.government.epTotalDisclaimer)}
-                            number={getTotals(period)}
-                            title={t(labels.government.epTotal)}
-                        />
-                        <HeroNumber
-                            className="mt-4"
-                            disclaimer={t(
-                                period > 3
-                                    ? labels.government.votePriceDisclaimer
-                                    : labels.government.votePriceDisclaimerOld,
-                                [fromTo[0] - 1]
-                            )}
-                            number={ep[csvKeys.VOTE_PRICE]}
-                            title={t(labels.government.votePrice)}
-                        />
-                    </Col>
-                    <Col xl={6} className="text-center">
-                        <TisPieChart
-                            currency
-                            lastUpdate={false}
-                            pie={sourcesPie}
-                            percent={false}
-                            title={t(labels.government.subsidyTypes)}
-                        />
-                    </Col>
-                </Row>
+                <>
+                    <Row>
+                        <Col xl={6} className="mb-4 mb-xl-0 order-xl-last">
+                            <HeroNumber
+                                disclaimer={t(
+                                    labels.government.epTotalDisclaimer
+                                )}
+                                number={getAggTotals(period)}
+                                title={t(labels.government.epTotal)}
+                            />
+                            <HeroNumber
+                                className="mt-4"
+                                disclaimer={t(
+                                    period > 3
+                                        ? labels.government.votePriceDisclaimer
+                                        : labels.government
+                                              .votePriceDisclaimerOld,
+                                    [fromTo[0] - 1]
+                                )}
+                                number={ep[csvKeys.VOTE_PRICE]}
+                                title={t(labels.government.votePrice)}
+                            />
+                        </Col>
+                        <Col xl={6} className="text-center">
+                            <TisPieChart
+                                currency
+                                lastUpdate={false}
+                                pie={sourcesPie}
+                                percent={false}
+                                title={t(labels.government.subsidyTypes)}
+                            />
+                        </Col>
+                    </Row>
+                    <TisBarChart
+                        className="mb-4"
+                        bars={subsidyBars(subsidyTypes)}
+                        currency
+                        data={columns}
+                        lastUpdate={false}
+                        subtitle={t(labels.government.partiesTotalDisclaimer)}
+                        title={t(labels.government.partiesTotal)}
+                        vertical
+                    />
+                </>
             );
         }
 

@@ -174,6 +174,9 @@ export const sortNumbers = (asc) => (a, b) => asc ?? true ? a - b : b - a;
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];
 
+export const sumOfValues = (obj) =>
+    Object.values(obj).reduce((sum, val) => sum + val, 0);
+
 export const removeAccentsFromString = (str) =>
     str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
 

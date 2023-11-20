@@ -104,7 +104,6 @@ export const CustomLabel = (showName, formatPercent, formatter) =>
 export const BarsTooltip = (bars, formatter) =>
     function ({ active, payload }) {
         if (active && payload && payload.length) {
-            console.log(payload);
             const stackedBars = bars.some((bar) => !!(bar.stackId ?? false));
             const dataPoint = payload[0].payload;
             let sum = 0;
@@ -115,7 +114,10 @@ export const BarsTooltip = (bars, formatter) =>
                     </p>
                     <ul className="recharts-tooltip-item-list">
                         {bars.map((bar) => {
-                            if (!Number.isNaN(dataPoint[bar.key] ?? NaN)) {
+                            if (
+                                !Number.isNaN(dataPoint[bar.key] ?? NaN) &&
+                                dataPoint[bar.key] > 0
+                            ) {
                                 sum += dataPoint[bar.key];
                                 return (
                                     <li

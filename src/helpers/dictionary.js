@@ -261,6 +261,14 @@ export const labels = {
             'Financovanie\nzo štátnych príspevkov',
             'Government subsidies',
         ],
+        partiesTotal: [
+            'Rozdelenie príspevkov medzi politické strany',
+            'Distribution of sunsidies between political parties',
+        ],
+        partiesTotalDisclaimer: [
+            'Súhrnný objem príspevkov pre jednotlivé politické strany za celé volebné obdobie',
+            'Amount of subsidies in the election period for the particular political party',
+        ],
         subsidyTypes: ['Druhy príspevkov', 'Types of subsidies'],
         totalDisclaimer: [
             'Súčet štátnych príspevkov všetkých strán v rokoch 2002 - 2023.',

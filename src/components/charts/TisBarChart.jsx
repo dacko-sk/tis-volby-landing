@@ -33,6 +33,8 @@ import {
 } from '../../helpers/helpers';
 import { separators } from '../../helpers/routes';
 
+import { subsidyColors } from '../../context/GovDataContext';
+
 import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';
 import LastUpdateTag from '../general/LastUpdateTag';
@@ -40,25 +42,6 @@ import LastUpdateTag from '../general/LastUpdateTag';
 import './Charts.scss';
 
 export const columnVariants = {
-    inOut: [
-        {
-            key: 'outgoing',
-            name: labels.charts.outgoing,
-            color: colors.colorOrange,
-        },
-        {
-            key: 'incoming',
-            name: labels.charts.incoming,
-            color: colors.colorDarkBlue,
-        },
-    ],
-    spending: [
-        {
-            key: 'outgoing',
-            name: labels.charts.outgoing,
-            color: colors.colorLightBlue,
-        },
-    ],
     subsidies: [
         {
             key: 'incoming',
@@ -68,9 +51,19 @@ export const columnVariants = {
     ],
 };
 
+export const subsidyBars = (subsidyTypes) =>
+    Array.isArray(subsidyTypes) && subsidyTypes.length
+        ? subsidyTypes.map((type) => ({
+              key: type,
+              name: labels.government[type],
+              color: subsidyColors[type],
+              stackId: 'govtypes',
+          }))
+        : columnVariants.subsidies;
+
 function TisBarChart({
     barHeight,
-    bars = columnVariants.inOut,
+    bars = columnVariants.subsidies,
     buttonLink,
     buttonText,
     children,
