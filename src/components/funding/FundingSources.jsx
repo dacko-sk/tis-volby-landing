@@ -34,7 +34,7 @@ function FundingSources({ party }) {
     const sourcesPie = {
         data: [
             {
-                name: t(labels.donors.title),
+                name: t(labels.donations.title),
                 value: donationsSum,
                 color: colorDarkBlue,
             },
@@ -63,15 +63,15 @@ function FundingSources({ party }) {
             </Col>
             <Col xl={6}>
                 <HeroNumber
-                    button={t(labels.learnMore)}
-                    disclaimer={t(labels.donors.totalDisclaimer)}
+                    button={t(labels.donations.learnMore)}
+                    disclaimer={t(labels.donations.totalDisclaimer)}
                     link={routes.donations()}
                     number={donationsSum}
-                    title={t(labels.donors.title)}
+                    title={t(labels.donations.title)}
                 />
                 <HeroNumber
                     className="mt-4"
-                    button={t(labels.learnMore)}
+                    button={t(labels.government.learnMore)}
                     disclaimer={t(labels.government.totalDisclaimer)}
                     link={routes.government()}
                     number={govSum}

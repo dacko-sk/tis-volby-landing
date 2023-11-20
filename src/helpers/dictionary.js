@@ -17,7 +17,7 @@ export const labels = {
         amount: ['Suma', 'Amount'],
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
-        sum: ['Spolu', 'Sum'],
+        sum: ['Spolu', 'Total'],
     },
     contact: ['Kontakt', 'Contact'],
     cookies: {
@@ -66,6 +66,10 @@ export const labels = {
             [dc.flag]: ['Mimoriadny príznak', 'Risk indicator'],
             [dc.notes]: ['Poznámka', 'Note'],
         },
+        disclaimer: [
+            'Zdroj: Výročné správy politických strán 2002 - 2022',
+            'Source: Annual reports of political parties 2002 - 2022',
+        ],
         donorInfo: ['Údaje o darcovi', 'Donor details'],
         entities: [
             ['Fyzická osoba', 'Firma'],
@@ -106,6 +110,7 @@ export const labels = {
                 'Cummulative large in-kind contributionss', // 3
             ],
         ],
+        learnMore: ['Zistiť viac o darcoch', 'Find out more about donors'],
         navTitle: ['Databáza donorov', 'Donors database'],
         navTitleShort: ['Donori', 'Donors'],
         pageTitle: [
@@ -136,6 +141,19 @@ export const labels = {
             columns: ['Voliteľné stĺpce', 'Optional columns'],
             rows: ['Počet riadkov', 'Number of rows'],
         },
+        title: ['Darcovia a veritelia', 'Donors & creditors'],
+        top10donors: [
+            'Top 10 individuálnych darcov politických strán (2002-2022)',
+            'Top 10 individual political party donors (2002 - 2022)',
+        ],
+        top10individual: [
+            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
+            'Top 10 individual political party donors & creditors (2002 - 2022)',
+        ],
+        totalDisclaimer: [
+            'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2023.',
+            'Sum of donations from individual donors to all political parties in the years 2002 - 2023.',
+        ],
         types: [
             [
                 '',
@@ -190,25 +208,6 @@ export const labels = {
         pageTitle: ['Donor'],
         parties: ['Podporené strany', 'Supported parties'],
     },
-    donors: {
-        disclaimer: [
-            'Zdroj: Výročné správy politických strán 2002 - 2022',
-            'Source: Annual reports of political parties 2002 - 2022',
-        ],
-        title: ['Darcovia a veritelia', 'Donors & creditors'],
-        top10donors: [
-            'Top 10 individuálnych darcov politických strán (2002-2022)',
-            'Top 10 individual political party donors (2002 - 2022)',
-        ],
-        top10individual: [
-            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
-            'Top 10 individual political party donors & creditors (2002 - 2022)',
-        ],
-        totalDisclaimer: [
-            'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2023.',
-            'Sum of donations from individual donors to all political parties in the years 2002 - 2023.',
-        ],
-    },
     download: ['Stiahnuť', 'Download'],
     elections: {
         [el.p19]: ['Prezidentské\nvoľby 2019', 'President\nelections 2019'],
@@ -252,8 +251,12 @@ export const labels = {
         electionPeriods: ['Volebné obdobia', 'Election periods'],
         epTotal: ['Suma príspevkov', 'Sum of subsidies'],
         epTotalDisclaimer: [
-            'Súčet štátnych príspevkov všetkých strán vo volebnom období.',
-            'Sum of government subsidies to all political parties in the election period.',
+            'Súčet príspevkov vyplatených všetkým stranám vo volebnom období.',
+            'Sum of subsidies paid to all parties in the election period.',
+        ],
+        learnMore: [
+            'Zistiť viac o štátnych príspevkoch',
+            'Find out more about government subsidies',
         ],
         navTitle: ['Štátne príspevky', 'Government subsidies'],
         navTitleShort: ['Štát', 'Government'],
@@ -263,7 +266,7 @@ export const labels = {
         ],
         partiesTotal: [
             'Rozdelenie príspevkov medzi politické strany',
-            'Distribution of sunsidies between political parties',
+            'Distribution of subsidies between political parties',
         ],
         partiesTotalDisclaimer: [
             'Súhrnný objem príspevkov pre jednotlivé politické strany za celé volebné obdobie',
@@ -271,8 +274,8 @@ export const labels = {
         ],
         subsidyTypes: ['Druhy príspevkov', 'Types of subsidies'],
         totalDisclaimer: [
-            'Súčet štátnych príspevkov všetkých strán v rokoch 2002 - 2023.',
-            'Sum of government subsidies to all political parties in the years 2002 - 2023.',
+            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám od 3. do 8. volebného obdobia.',
+            'Sum of government subsidies paid to all political parties between 3rd & 8th election periods.',
         ],
         votePrice: ['Cena jedného hlasu', 'Single vote price'],
         votePriceDisclaimer: [
@@ -283,14 +286,15 @@ export const labels = {
             '60 SKK / 1,99 € za 1 hlas (do roku 2006 alebo konca 3. volebného obdobia)',
             '60 SKK / €1.99 per 1 vote (until 2006 or end of 3rd election period)',
         ],
+        yearsAllDisclaimer: [
+            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
+            'Sum of government subsidies paid to all political parties in the particular year between 3rd & 8th election periods.',
+        ],
         yearsDisclaimer: [
-            'Súčet štátnych príspevkov všetkých strán v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
-            'Sum of government subsidies to all political parties in the particular year between 3rd & 8th election periods.',
+            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch volebného obdobia.',
+            'Sum of government subsidies paid to all political parties in the particular year of the election period.',
         ],
-        yearsTitle: [
-            'Štátne príspevky po rokoch.',
-            'Government subsidies by years.',
-        ],
+        yearsTitle: ['Príspevky po rokoch', 'Subsidies by years'],
     },
     home: {
         navTitle: ['Úvod', 'Home'],

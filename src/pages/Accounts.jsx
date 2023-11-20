@@ -5,7 +5,7 @@ import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
 
 function Accounts() {
-    setTitle(t(labels.donations.pageTitle));
+    setTitle(t(labels.accounts.pageTitle));
 
     return (
         <section>

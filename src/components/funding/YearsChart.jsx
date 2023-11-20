@@ -8,9 +8,8 @@ import TisBarChart, {
     subsidyBars,
 } from '../charts/TisBarChart';
 
-function YearsChart({ electionPeriod, lastElection, party }) {
+function YearsChart({ className, electionPeriod, lastElection, party }) {
     const { getAggYears, govData } = useGovData();
-    const bars = subsidyBars(subsidyTypes.slice().reverse());
 
     // parse data
     const years = {};
@@ -34,12 +33,16 @@ function YearsChart({ electionPeriod, lastElection, party }) {
 
     return (
         <TisBarChart
-            className="mb-4"
-            bars={bars}
+            className={className}
+            bars={subsidyBars(subsidyTypes.slice().reverse(), !electionPeriod)}
             currency
             data={columns}
-            subtitle={t(labels.government.yearsDisclaimer)}
-            timestamp="2023-09-30T23:59:59"
+            lastUpdate={false}
+            subtitle={t(
+                electionPeriod
+                    ? labels.government.yearsDisclaimer
+                    : labels.government.yearsAllDisclaimer
+            )}
             title={t(labels.government.yearsTitle)}
         />
     );

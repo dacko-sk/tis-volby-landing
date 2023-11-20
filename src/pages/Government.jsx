@@ -1,15 +1,13 @@
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 
-import { subsidyTypes } from '../context/GovDataContext';
-
 import ElectionPeriods from '../components/funding/ElectionPeriods';
 import YearsChart from '../components/funding/YearsChart';
 import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
 
 function Government() {
-    setTitle(t(labels.donations.pageTitle));
+    setTitle(t(labels.government.pageTitle));
 
     return (
         <section>

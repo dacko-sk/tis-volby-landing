@@ -29,14 +29,14 @@ function Home() {
 
             <Top10Donors
                 file="top10individual"
-                title={labels.donors.top10individual}
-                disclaimer={labels.donors.disclaimer}
+                title={labels.donations.top10individual}
+                disclaimer={labels.donations.disclaimer}
             />
 
             <Top10Donors
                 file="top10donors"
-                title={labels.donors.top10donors}
-                disclaimer={labels.donors.disclaimer}
+                title={labels.donations.top10donors}
+                disclaimer={labels.donations.disclaimer}
             />
 
             <Row className="justify-content-center my-4">

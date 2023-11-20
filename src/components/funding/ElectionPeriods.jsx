@@ -12,6 +12,7 @@ import useGovData, {
     subsidyTypes,
 } from '../../context/GovDataContext';
 
+import YearsChart from './YearsChart';
 import TisBarChart, { subsidyBars } from '../charts/TisBarChart';
 import TisPieChart from '../charts/TisPieChart';
 import HeroNumber from '../general/HeroNumber';
@@ -108,9 +109,12 @@ function ElectionPeriods() {
                             />
                         </Col>
                     </Row>
+
+                    <YearsChart className="mt-4" electionPeriod={period} />
+
                     <TisBarChart
-                        className="mb-4"
-                        bars={subsidyBars(subsidyTypes)}
+                        className="mt-4"
+                        bars={subsidyBars(subsidyTypes, true)}
                         currency
                         data={columns}
                         lastUpdate={false}
@@ -138,7 +142,7 @@ function ElectionPeriods() {
     };
 
     return (
-        <div>
+        <div className="mt-4">
             <h2>{t(labels.government.electionPeriods)}</h2>
             <Accordion
                 className="mt-4"

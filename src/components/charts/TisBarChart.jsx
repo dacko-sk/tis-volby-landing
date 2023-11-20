@@ -51,13 +51,13 @@ export const columnVariants = {
     ],
 };
 
-export const subsidyBars = (subsidyTypes) =>
+export const subsidyBars = (subsidyTypes, stacked) =>
     Array.isArray(subsidyTypes) && subsidyTypes.length
         ? subsidyTypes.map((type) => ({
               key: type,
               name: labels.government[type],
               color: subsidyColors[type],
-              stackId: 'govtypes',
+              stackId: stacked ? 'govtypes' : null,
           }))
         : columnVariants.subsidies;
 

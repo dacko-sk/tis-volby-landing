@@ -104,7 +104,6 @@ export const CustomLabel = (showName, formatPercent, formatter) =>
 export const BarsTooltip = (bars, formatter) =>
     function ({ active, payload }) {
         if (active && payload && payload.length) {
-            const stackedBars = bars.some((bar) => !!(bar.stackId ?? false));
             const dataPoint = payload[0].payload;
             let sum = 0;
             return (
@@ -138,7 +137,7 @@ export const BarsTooltip = (bars, formatter) =>
                                 );
                             }
                         })}
-                        {stackedBars && (
+                        {bars.length > 0 && (
                             <li
                                 key="sum"
                                 className="recharts-tooltip-item fw-bold"
