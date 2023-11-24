@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import { donationsColumns as dc } from './constants';
+import { donationsColumns as dc, partyAliases, partyAlias } from './constants';
 import { labels, t } from './dictionary';
 import {
     currencyFormat,
@@ -36,7 +36,7 @@ export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
 export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
 export const defaultBlocksize = blocksizes[2];
-export const defaultSort = `${separators.space}date`;
+export const defaultSort = `${separators.numbers}date`;
 
 export const columnLabel = (key) =>
     Object.keys(labels.donations.columns).includes(key)
@@ -55,30 +55,6 @@ export const amountSettings = {
     step: 100,
 };
 
-export const allParties = {
-    ALIANCIA: 'ALIANCIA',
-    'DOBRA VOLBA': 'DOBRÁ VOĽBA',
-    HLAS: 'HLAS',
-    KDH: 'KDH',
-    'Kresťanská Únia': 'KRESŤANSKÁ ÚNIA',
-    LSNS: 'ĽSNS',
-    MKO: 'MKO',
-    'MOST HID': 'MOST HÍD',
-    OĽANO: 'OĽANO',
-    PS: 'PS',
-    REPUBLIKA: 'REPUBLIKA',
-    SAS: 'SAS',
-    Sieť: 'SIEŤ',
-    'SME RODINA': 'SME RODINA',
-    SMER: 'SMER',
-    SMK: 'SMK',
-    SNS: 'SNS',
-    SPOLU: 'SPOLU',
-    'TEAM BRATISLAVA': 'TEAM BRATISLAVA',
-    'TEAM KRAJ NITRA': 'TEAM KRAJ NITRA',
-    'ZA LUDI': 'ZA ĽUDÍ',
-};
-
 export const isCompany = (sourceColumns) => {
     return (
         sourceColumns[3].substr(0, 1) === 'Y' || sourceColumns[4].trim().length
@@ -90,7 +66,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
     const name = sourceColumns[company ? 4 : 2].trim();
     switch (targetColumn) {
         case dc.party:
-            return allParties[sourceColumns[0]] ?? sourceColumns[0];
+            return partyAlias(sourceColumns[0]);
         case dc.date:
             return (
                 <div className="text-end text-nowrap">
@@ -205,7 +181,13 @@ export const buildApiQuery = (options) => {
     const filters = [];
     Object.entries(options).forEach(([param, value]) => {
         if (apiParams.includes(param)) {
-            filters.push(`${param}=${value}`);
+            filters.push(
+                `${param}=${
+                    param === 'p'
+                        ? partyAliases(value).join(separators.array)
+                        : value
+                }`
+            );
         }
     });
     return filters.join('&');
@@ -278,7 +260,7 @@ export function DonorParties({
                     bg="secondary"
                     className={index > 0 ? 'ms-2' : ''}
                 >
-                    {allParties[party] ?? party}
+                    {partyAlias(party)}
                 </Badge>
             );
         });
@@ -290,18 +272,10 @@ export function DonorParties({
             gap={2}
         >
             {parties.map((party) => {
+                const partyName = partyAlias(party);
                 return (
-                    <Link
-                        key={party}
-                        to={routes.donations(
-                            buildUrlQuery({
-                                p: party,
-                            })
-                        )}
-                    >
-                        <Badge bg="secondary">
-                            {allParties[party] ?? party}
-                        </Badge>
+                    <Link key={partyName} to={routes.party(partyName)}>
+                        <Badge bg="secondary">{partyName}</Badge>
                     </Link>
                 );
             })}
@@ -320,12 +294,12 @@ export function SortLink({ column, children }) {
         // current column is sorted ascending, target is descending
         case column:
             currentClass += ' s-a';
-            targetSort = separators.space + column;
+            targetSort = separators.numbers + column;
             break;
         // current column is sorted descending, target is no sort
-        case separators.space + column:
+        case separators.numbers + column:
             currentClass += ' s-d';
-            targetSort = separators.space;
+            targetSort = separators.numbers;
             break;
         // other unsorted columns, target is ascending
         default:

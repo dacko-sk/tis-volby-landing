@@ -14,6 +14,7 @@ import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
 
 function DonationsTable({
+    className,
     donationsQuery,
     hiddenColumns = [],
     visibleColumns = optionalColumns,
@@ -80,17 +81,21 @@ function DonationsTable({
         });
     }
 
-    return rows.length ? (
-        <Table responsive bordered hover striped>
-            <thead>
-                <tr className="align-middle">{headerCols}</tr>
-            </thead>
-            <tbody>{rows}</tbody>
-        </Table>
-    ) : (
-        <AlertWithIcon variant="danger">
-            {t(labels.donations.search.noDonations)}
-        </AlertWithIcon>
+    return (
+        <div className={className}>
+            {rows.length ? (
+                <Table responsive bordered hover striped>
+                    <thead>
+                        <tr className="align-middle">{headerCols}</tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </Table>
+            ) : (
+                <AlertWithIcon variant="danger">
+                    {t(labels.donations.search.noDonations)}
+                </AlertWithIcon>
+            )}
+        </div>
     );
 }
 

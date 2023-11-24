@@ -174,6 +174,9 @@ export const sortNumbers = (asc) => (a, b) => asc ?? true ? a - b : b - a;
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];
 
+export const sortAlphabetically = (asc) => (a, b) =>
+    asc ?? true ? a.localeCompare(b) : b.localeCompare(a);
+
 export const sumOfValues = (obj) =>
     Object.values(obj).reduce((sum, val) => sum + val, 0);
 

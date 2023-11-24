@@ -14,9 +14,7 @@ function Funding() {
 
             <FundingNav />
 
-            <div id="funding">
-                <FundingSources />
-            </div>
+            <FundingSources />
         </section>
     );
 }

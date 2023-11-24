@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 
 import { labels, t } from '../../helpers/dictionary';
 import { sortByNumericProp, sumOfValues } from '../../helpers/helpers';
+import { separators } from '../../helpers/routes';
 
 import useGovData, {
     csvKeys,
@@ -65,7 +66,7 @@ function ElectionPeriods() {
                     if (!(parties[partyName] ?? false)) {
                         parties[partyName] = {
                             ...st,
-                            name: partyName,
+                            name: partyName + separators.newline + 'party',
                             total: sumOfValues(st),
                         };
                     }
@@ -110,8 +111,6 @@ function ElectionPeriods() {
                         </Col>
                     </Row>
 
-                    <YearsChart className="mt-4" electionPeriod={period} />
-
                     <TisBarChart
                         className="mt-4"
                         bars={subsidyBars(subsidyTypes, true)}
@@ -122,6 +121,8 @@ function ElectionPeriods() {
                         title={t(labels.government.partiesTotal)}
                         vertical
                     />
+
+                    <YearsChart className="mt-4" electionPeriod={period} />
                 </>
             );
         }

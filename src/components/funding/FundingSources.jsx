@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { colorDarkBlue, colorOrange } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
-import { buildApiQuery, defaultBlocksize } from '../../helpers/dontaions';
+import { buildApiQuery } from '../../helpers/dontaions';
 import { routes } from '../../helpers/routes';
 
 import useGovData from '../../context/GovDataContext';
@@ -14,15 +14,21 @@ import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
 function FundingSources({ party }) {
-    const { getAggTotals, govData } = useGovData();
+    const { getAggTotals } = useGovData();
 
     const govSum = getAggTotals(null, null, party);
 
-    const queryParams = buildApiQuery({ b: defaultBlocksize });
-    const dq = useQuery([`donations_${queryParams}`], () =>
-        fetch(
-            `https://volby.transparency.sk/api/donors/donations.php?${queryParams}`
-        ).then((response) => response.json())
+    const options = {};
+    if (party) {
+        options.p = party;
+    }
+    const queryParams = buildApiQuery(options);
+    const dq = useQuery(
+        [`donations_${party ? `party_${party}` : 'all_parties'}`],
+        () =>
+            fetch(
+                `https://volby.transparency.sk/api/donors/donations.php?${queryParams}`
+            ).then((response) => response.json())
     );
 
     if (dq.isLoading || dq.error) {

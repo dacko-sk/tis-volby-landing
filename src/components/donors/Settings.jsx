@@ -23,7 +23,7 @@ function Settings() {
     const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
     let visibleColumns =
         options.v ?? false
-            ? options.v.split(separators.space).map((item) => Number(item))
+            ? options.v.split(separators.numbers).map((item) => Number(item))
             : [];
 
     const updateColumns = (e) => {
@@ -37,7 +37,7 @@ function Settings() {
             visibleColumns = visibleColumns.filter((item) => item !== id);
         }
         if (visibleColumns.length) {
-            linkOpt.v = visibleColumns.join(separators.space);
+            linkOpt.v = visibleColumns.join(separators.numbers);
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };

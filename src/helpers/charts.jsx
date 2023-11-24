@@ -18,8 +18,9 @@ export const tooltipNameFormat = (value) => {
 
 export const tickLabel = (value) => {
     const parts = value.split(separators.newline);
-    return parts.length > 1 ? (
-        <Link to={routes.party(parts[0], parts[1])}>{parts[0]}</Link>
+    // if tick label consist of name + \n + route name - create link to that route
+    return parts.length > 1 && typeof routes[parts[1]] === 'function' ? (
+        <Link to={routes[parts[1]](parts[0])}>{parts[0]}</Link>
     ) : (
         value
     );

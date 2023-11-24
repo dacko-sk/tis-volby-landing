@@ -13,6 +13,7 @@ import Funding from './pages/Funding';
 import Government from './pages/Government';
 import Home from './pages/Home';
 import News from './pages/News';
+import Party from './pages/Party';
 
 import Layout from './components/structure/Layout';
 
@@ -36,6 +37,7 @@ function App() {
                                     [routes.donations(false, lang), Donations],
                                     [routes.donations(true, lang), Donations],
                                     [routes.donor(true, lang), Donor],
+                                    [routes.party(true, lang), Party],
                                     [routes.government(lang), Government],
                                     [routes.accounts(lang), Accounts],
                                     [routes.news(lang), News],

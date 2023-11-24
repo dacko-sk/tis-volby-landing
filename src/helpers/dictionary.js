@@ -315,6 +315,9 @@ export const labels = {
         title: ['Newsletter'],
         subscribe: ['Prihlásiť sa na newsletter', 'Subscribe to Newsletter'],
     },
+    party: {
+        pageTitle: ['Strana', 'Party'],
+    },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
     readMore: ['Čítať ďalej…', 'Read more…'],
     tis: [

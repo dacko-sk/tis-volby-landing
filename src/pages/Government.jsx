@@ -15,11 +15,9 @@ function Government() {
 
             <FundingNav />
 
-            <div id="government">
-                <YearsChart />
+            <YearsChart />
 
-                <ElectionPeriods />
-            </div>
+            <ElectionPeriods />
         </section>
     );
 }

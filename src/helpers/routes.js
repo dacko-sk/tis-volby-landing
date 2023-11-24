@@ -3,8 +3,11 @@ import siteConfig from '../../package.json';
 import { isMobile } from './browser';
 
 export const separators = {
+    array: '|',
     parts: '_',
-    space: '-',
+    newline: '\n',
+    numbers: '-',
+    space: '.',
     url: '/',
     value: '~',
 };
@@ -142,6 +145,17 @@ export const routes = {
         urlSegment(segments.GOVERNMENT, lang),
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
+    party: (slug, lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        (slug
+            ? separators.url +
+              urlSegment(segments.PARTY, lang) +
+              separators.url +
+              (slug === true
+                  ? ':slug'
+                  : encodeURIComponent(slug.replaceAll(' ', separators.space)))
+            : ''),
     search: (query, lang) =>
         languageRoot(lang) +
         (query

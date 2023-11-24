@@ -6,10 +6,9 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { donationsColumns as dc } from '../../helpers/constants';
+import { donationsColumns as dc, allParties } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import {
-    allParties,
     amountSettings,
     buildUrlQuery,
     columnLabel,
@@ -36,21 +35,21 @@ function Filters() {
     const entity = (options.c ?? '') !== '' ? Number(options.c) : '';
     let types =
         options.t ?? false
-            ? options.t.split(separators.space).map((item) => Number(item))
+            ? options.t.split(separators.numbers).map((item) => Number(item))
             : [];
     let flags =
         options.f ?? false
-            ? options.f.split(separators.space).map((item) => Number(item))
+            ? options.f.split(separators.numbers).map((item) => Number(item))
             : [];
     const party = options.p ?? '';
 
     const [amount, setAmount] = useState(
         options.a ?? false
-            ? options.a.split(separators.space).map((item) => Number(item))
+            ? options.a.split(separators.numbers).map((item) => Number(item))
             : [amountSettings.min, amountSettings.max]
     );
     const timestamp = options.d
-        ? options.d.split(separators.space).map((item) => Number(item))
+        ? options.d.split(separators.numbers).map((item) => Number(item))
         : [0, 0];
 
     const formSubmit = (e) => {
@@ -92,7 +91,7 @@ function Filters() {
             types = types.filter((item) => item !== id);
         }
         if (types.length) {
-            linkOpt.t = types.join(separators.space);
+            linkOpt.t = types.join(separators.numbers);
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
@@ -108,21 +107,21 @@ function Filters() {
             flags = flags.filter((item) => item !== id);
         }
         if (flags.length) {
-            linkOpt.f = flags.join(separators.space);
+            linkOpt.f = flags.join(separators.numbers);
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     };
 
-    const debounceParam = useDebouncedCallback((value, param) => {
+    const debounceArrNumParam = useDebouncedCallback((value, param) => {
         // copy all options except f & o
         const { o, ...linkOpt } = options;
-        linkOpt[param] = value.join(separators.space);
+        linkOpt[param] = value.join(separators.numbers);
         navigate(routes.donations(buildUrlQuery(linkOpt)));
     }, 500);
 
     const updateAmount = (minmax) => {
         setAmount(minmax);
-        debounceParam(minmax, 'a');
+        debounceArrNumParam(minmax, 'a');
     };
 
     const updateAmountMin = (e) => {
@@ -149,7 +148,7 @@ function Filters() {
         const { d, o, ...linkOpt } = options;
         if (minmax[0] || minmax[1]) {
             linkOpt.d = [minmax[0] || '', minmax[1] || ''].join(
-                separators.space
+                separators.numbers
             );
         }
         navigate(routes.donations(buildUrlQuery(linkOpt)));
@@ -376,9 +375,9 @@ function Filters() {
                     <option key="" value="">
                         {t(labels.all)}
                     </option>
-                    {Object.entries(allParties).map(([key, name]) => (
-                        <option key={key} value={key}>
-                            {name}
+                    {allParties.map((party) => (
+                        <option key={party} value={party}>
+                            {party}
                         </option>
                     ))}
                 </Form.Select>

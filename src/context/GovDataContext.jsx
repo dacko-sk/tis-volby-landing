@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { usePapaParse } from 'react-papaparse';
 
-import { colors } from '../helpers/constants';
+import { colors, partyAlias } from '../helpers/constants';
 import { sortByNumericProp, sumOfValues } from '../helpers/helpers';
 
 // import all csv files from the govfunds folder via webpack
@@ -61,7 +61,7 @@ export const processElectionPeriod = (csv) => {
                     break;
                 default:
                     if (currentDataSet) {
-                        const partyName = row[0];
+                        const partyName = partyAlias(row[0]);
                         if (partyName) {
                             const party = {};
                             if (currentDataSet === csvKeys.COALITIONS) {
@@ -165,9 +165,11 @@ export const GovDataProvider = function ({ children }) {
         Object.values(govData.electionPeriods).forEach((ep) => {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
                 (type ? [type] : subsidyTypes).forEach((st) => {
-                    let parties;
+                    let parties = [];
                     if (party) {
-                        parties = ep[st][party] ?? [];
+                        if (ep[st][party] ?? false) {
+                            parties = [ep[st][party]];
+                        }
                     } else {
                         parties = Object.values(ep[st]);
                     }
@@ -190,9 +192,11 @@ export const GovDataProvider = function ({ children }) {
         Object.values(govData.electionPeriods).forEach((ep) => {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
                 (type ? [type] : subsidyTypes).forEach((st) => {
-                    let epStParties;
-                    if (party && (ep[st][party] ?? false)) {
-                        epStParties = [party, ep[st][party]];
+                    let epStParties = [];
+                    if (party) {
+                        if (ep[st][party] ?? false) {
+                            epStParties = [party, ep[st][party]];
+                        }
                     } else {
                         epStParties = Object.entries(ep[st]);
                     }
