@@ -23,7 +23,7 @@ function SearchResults() {
     const visibleColumns =
         options.v ?? false
             ? options.v
-                  .split(separators.numbers)
+                  .split(separators.space)
                   .map((item) => optionalColumns[Number(item)])
             : [];
     const queryParams = buildApiQuery({ ...options, b: blocksize });

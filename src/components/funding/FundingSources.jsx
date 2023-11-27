@@ -2,20 +2,24 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useQuery } from '@tanstack/react-query';
 
-import { colorDarkBlue, colorOrange } from '../../helpers/constants';
+import { partyChartLabel } from '../../helpers/charts';
+import { colorDarkBlue, colorOrange, colors } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { buildApiQuery } from '../../helpers/dontaions';
-import { routes } from '../../helpers/routes';
+import { isCoalition } from '../../helpers/parties';
+import { routes, segments } from '../../helpers/routes';
 
 import useGovData from '../../context/GovDataContext';
 
+import TisBarChart from '../charts/TisBarChart';
 import TisPieChart from '../charts/TisPieChart';
 import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
 function FundingSources({ party }) {
-    const { getAggTotals } = useGovData();
+    const { getAggTotals, getCoalitionMembers } = useGovData();
 
+    const coalition = isCoalition(party);
     const govSum = getAggTotals(null, null, party);
 
     const options = {};
@@ -37,49 +41,92 @@ function FundingSources({ party }) {
 
     const donationsSum = dq.data?.sum ?? 0;
 
-    const sourcesPie = {
-        data: [
-            {
-                name: t(labels.donations.title),
-                value: donationsSum,
-                color: colorDarkBlue,
-            },
-            {
-                name: t(labels.government.navTitle),
-                value: govSum,
-                color: colorOrange,
-            },
-        ],
-        nameKey: 'name',
-        dataKey: 'value',
-        label: t(labels.charts.amount),
-    };
+    let chart;
+    if (coalition) {
+        const palette = Object.values(colors);
+        chart = Object.entries(getCoalitionMembers(party)).map(
+            ([period, members]) => {
+                return (
+                    <TisBarChart
+                        key={period}
+                        bars={Object.keys(members).map((member, index) => ({
+                            key: member + index,
+                            name: member,
+                            color: palette[index],
+                            stackId: 'coalition',
+                        }))}
+                        data={Object.entries(members).map(
+                            ([member, share], index) => ({
+                                name: partyChartLabel(member),
+                                [member + index]: govSum * share,
+                            })
+                        )}
+                        currency
+                        lastUpdate={false}
+                        showSum={false}
+                        title={t(labels.party.coalitionMembers, [period])}
+                        vertical
+                    />
+                );
+            }
+        );
+    } else {
+        const sourcesPie = {
+            data: [
+                {
+                    name: t(labels.donations.title),
+                    value: donationsSum,
+                    color: colorDarkBlue,
+                },
+                {
+                    name: t(labels.government.navTitle),
+                    value: govSum,
+                    color: colorOrange,
+                },
+            ],
+            nameKey: 'name',
+            dataKey: 'value',
+            label: t(labels.charts.amount),
+        };
+
+        chart = (
+            <TisPieChart
+                currency
+                lastUpdate={false}
+                pie={sourcesPie}
+                percent={false}
+                subtitle={t(labels.funding.sourcesDisclaimer)}
+                title={t(labels.funding.sourcesTitle)}
+            />
+        );
+    }
 
     return (
         <Row>
+            <Col xl={6}>{chart}</Col>
             <Col xl={6}>
-                <TisPieChart
-                    currency
-                    lastUpdate={false}
-                    pie={sourcesPie}
-                    percent={false}
-                    subtitle={t(labels.funding.sourcesDisclaimer)}
-                    title={t(labels.funding.sourcesTitle)}
-                />
-            </Col>
-            <Col xl={6}>
-                <HeroNumber
-                    button={t(labels.donations.learnMore)}
-                    disclaimer={t(labels.donations.totalDisclaimer)}
-                    link={routes.donations()}
-                    number={donationsSum}
-                    title={t(labels.donations.title)}
-                />
+                {!coalition && (
+                    <HeroNumber
+                        button={t(labels.donations.learnMore)}
+                        disclaimer={t(labels.donations.totalDisclaimer)}
+                        link={
+                            party
+                                ? routes.party(party, segments.DONATIONS)
+                                : routes.donations()
+                        }
+                        number={donationsSum}
+                        title={t(labels.donations.title)}
+                    />
+                )}
                 <HeroNumber
                     className="mt-4"
                     button={t(labels.government.learnMore)}
                     disclaimer={t(labels.government.totalDisclaimer)}
-                    link={routes.government()}
+                    link={
+                        party
+                            ? routes.party(party, segments.GOVERNMENT)
+                            : routes.government()
+                    }
                     number={govSum}
                     title={t(labels.government.navTitle)}
                 />

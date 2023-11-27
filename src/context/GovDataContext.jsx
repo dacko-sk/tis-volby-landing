@@ -1,8 +1,9 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { usePapaParse } from 'react-papaparse';
 
-import { colors, partyAlias } from '../helpers/constants';
+import { colors } from '../helpers/constants';
 import { sortByNumericProp, sumOfValues } from '../helpers/helpers';
+import { partyAlias } from '../helpers/parties';
 
 // import all csv files from the govfunds folder via webpack
 const govFiles = require.context('../../public/csv/govfunds', false, /\.csv$/);
@@ -162,7 +163,7 @@ export const GovDataProvider = function ({ children }) {
 
     const getAggYears = (period, type, party) => {
         const years = {};
-        Object.values(govData.electionPeriods).forEach((ep) => {
+        getElectionPeriods().forEach((ep) => {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
                 (type ? [type] : subsidyTypes).forEach((st) => {
                     let parties = [];
@@ -189,7 +190,7 @@ export const GovDataProvider = function ({ children }) {
 
     const getPartiesYears = (period, type, party) => {
         const parties = {};
-        Object.values(govData.electionPeriods).forEach((ep) => {
+        getElectionPeriods().forEach((ep) => {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
                 (type ? [type] : subsidyTypes).forEach((st) => {
                     let epStParties = [];
@@ -225,6 +226,23 @@ export const GovDataProvider = function ({ children }) {
         return parties;
     };
 
+    const getCoalitionMembers = (party) => {
+        const electionPeriods = {};
+        if (party) {
+            getElectionPeriods().forEach((ep) => {
+                Object.entries(ep[csvKeys.COALITIONS] ?? []).forEach(
+                    ([coalition, members]) => {
+                        if (party === coalition) {
+                            electionPeriods[ep[csvKeys.ELECTION_PERIOD]] =
+                                members;
+                        }
+                    }
+                );
+            });
+        }
+        return electionPeriods;
+    };
+
     const getElectionPeriodYears = (period) => {
         const years = Object.keys(getAggYears(period));
         return [Math.min(...years), Math.max(...years)];
@@ -241,6 +259,7 @@ export const GovDataProvider = function ({ children }) {
             getAggTotals,
             getPartiesYears,
             getPartiesTotals,
+            getCoalitionMembers,
             loadAllElections,
         }),
         [govData]

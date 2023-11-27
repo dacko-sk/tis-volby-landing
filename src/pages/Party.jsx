@@ -1,50 +1,49 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import Nav from 'react-bootstrap/Nav';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 
-import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
-import { buildApiQuery, hiddenDonorColumns } from '../helpers/dontaions';
-import { separators } from '../helpers/routes';
+import { isCoalition } from '../helpers/parties';
+import { routes, segments, separators } from '../helpers/routes';
 
-import DonationsTable from '../components/donors/DonationsTable';
-import FundingSources from '../components/funding/FundingSources';
 import Title from '../components/structure/Title';
 
 function Party() {
     const params = useParams();
     const partyName = (params.slug ?? '').replaceAll(separators.space, ' ');
-    const navigate = useNavigate();
-
-    const options = {
-        p: partyName,
-    };
-    const queryParams = buildApiQuery(options);
-    const dq = useQuery([`donations_party_${partyName}`], () =>
-        fetch(
-            `https://volby.transparency.sk/api/donors/donations.php?${queryParams}`
-        ).then((response) => response.json())
-    );
-
-    setTitle(`${t(labels.party.pageTitle)} ${partyName}`);
+    const coalition = isCoalition(partyName);
 
     return (
         <section>
             <Title secondary={partyName}>
-                {t(labels.party.pageTitle)}
+                {t(coalition ? labels.party.coalition : labels.party.pageTitle)}
                 <br />
             </Title>
 
-            <FundingSources party={partyName} />
+            <div className="tabs-scrollable">
+                <Nav variant="tabs">
+                    <Nav.Link as={NavLink} to={routes.party(partyName)} end>
+                        {t(labels.funding.overview)}
+                    </Nav.Link>
+                    {!coalition && (
+                        <Nav.Link
+                            as={NavLink}
+                            to={routes.party(partyName, segments.DONATIONS)}
+                        >
+                            {t(labels.donations.navTitle)}
+                        </Nav.Link>
+                    )}
+                    <Nav.Link
+                        as={NavLink}
+                        to={routes.party(partyName, segments.GOVERNMENT)}
+                    >
+                        {t(labels.government.navTitle)}
+                    </Nav.Link>
+                </Nav>
+            </div>
 
-            {dq.data?.rows.length > 0 && (
-                <h2 className="mt-4">{t(labels.donations.allDonations)}</h2>
-            )}
-
-            <DonationsTable
-                className="mt-4"
-                donationsQuery={dq}
-                hiddenColumns={hiddenDonorColumns}
-            />
+            <div className="tab-content my-4">
+                <Outlet context={partyName} />
+            </div>
         </section>
     );
 }

@@ -18,7 +18,6 @@ import {
     horizontalYaxisWidth,
     prepareAvgDeltaPctData,
     shortChartNames,
-    tooltipNameFormat,
     verticalYaxisWidth,
 } from '../../helpers/charts';
 import { colors } from '../../helpers/constants';
@@ -75,6 +74,7 @@ function TisBarChart({
     lastUpdate = true,
     percent = false,
     scrollable = false,
+    showSum = true,
     subtitle,
     timestamp,
     title,
@@ -130,7 +130,7 @@ function TisBarChart({
         fill: '#333',
         fontSize: tickFontSize,
     };
-    const tooltipContent = BarsTooltip(bars, tooltipNumFormat);
+    const tooltipContent = BarsTooltip(bars, showSum, tooltipNumFormat);
 
     const refLine = diffFromAverage ? (
         <ReferenceLine
@@ -230,11 +230,7 @@ function TisBarChart({
                                     width={horizontalYaxisWidth}
                                 />
                             )}
-                            <Tooltip
-                                content={tooltipContent}
-                                formatter={tooltipNumFormat}
-                                labelFormatter={tooltipNameFormat}
-                            />
+                            <Tooltip content={tooltipContent} />
                             <Legend />
                             {refLine}
                             {barElements}

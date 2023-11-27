@@ -39,9 +39,11 @@ function YearsChart({ className, electionPeriod, lastElection, party }) {
             data={columns}
             lastUpdate={false}
             subtitle={t(
-                electionPeriod
-                    ? labels.government.yearsDisclaimer
-                    : labels.government.yearsAllDisclaimer
+                labels.government[
+                    `yearsDisclaimer${party ? 'Party' : ''}${
+                        electionPeriod ? '' : 'All'
+                    }`
+                ]
             )}
             title={t(labels.government.yearsTitle)}
         />

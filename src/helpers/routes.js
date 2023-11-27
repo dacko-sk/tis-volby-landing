@@ -6,8 +6,7 @@ export const separators = {
     array: '|',
     parts: '_',
     newline: '\n',
-    numbers: '-',
-    space: '.',
+    space: '-',
     url: '/',
     value: '~',
 };
@@ -41,7 +40,7 @@ export const localSegments = {
         [segments.DONOR]: 'donor',
         [segments.DONATIONS]: 'donori',
         [segments.FUNDING]: 'financovanie',
-        [segments.GOVERNMENT]: 'stat',
+        [segments.GOVERNMENT]: 'statne-prispevky',
         [segments.NEWS]: 'aktuality',
         [segments.PARTY]: 'strana',
         [segments.SEARCH]: 'vyhladavanie',
@@ -145,7 +144,7 @@ export const routes = {
         urlSegment(segments.GOVERNMENT, lang),
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
-    party: (slug, lang) =>
+    party: (slug, subpage, lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +
         (slug
@@ -154,7 +153,10 @@ export const routes = {
               separators.url +
               (slug === true
                   ? ':slug'
-                  : encodeURIComponent(slug.replaceAll(' ', separators.space)))
+                  : encodeURIComponent(
+                        slug.replaceAll(' ', separators.space)
+                    )) +
+              (subpage ? separators.url + urlSegment(subpage, lang) : '')
             : ''),
     search: (query, lang) =>
         languageRoot(lang) +

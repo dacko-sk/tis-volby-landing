@@ -26,6 +26,8 @@ export const tickLabel = (value) => {
     );
 };
 
+export const partyChartLabel = (party) => party + separators.newline + 'party';
+
 export const shortChartNames = (name) => shortenValue(name, isMobile ? 30 : 60);
 
 export const preparePctData = (data, keys) => {
@@ -102,7 +104,7 @@ export const CustomLabel = (showName, formatPercent, formatter) =>
         );
     };
 
-export const BarsTooltip = (bars, formatter) =>
+export const BarsTooltip = (bars, showSum, valueFormatter) =>
     function ({ active, payload }) {
         if (active && payload && payload.length) {
             const dataPoint = payload[0].payload;
@@ -110,7 +112,7 @@ export const BarsTooltip = (bars, formatter) =>
             return (
                 <div className="recharts-default-tooltip">
                     <p className="recharts-tooltip-label fw-bold">
-                        {dataPoint.name}
+                        {tooltipNameFormat(t(dataPoint.name))}
                     </p>
                     <ul className="recharts-tooltip-item-list">
                         {bars.map((bar) => {
@@ -126,19 +128,19 @@ export const BarsTooltip = (bars, formatter) =>
                                         style={{ color: bar.color }}
                                     >
                                         <span className="recharts-tooltip-item-name">
-                                            {t(bar.name)}
+                                            {tooltipNameFormat(t(bar.name))}
                                         </span>
                                         <span className="recharts-tooltip-item-separator">
                                             {tooltipSeparator}
                                         </span>
                                         <span className="recharts-tooltip-item-value fw-bold">
-                                            {formatter(dataPoint[bar.key])}
+                                            {valueFormatter(dataPoint[bar.key])}
                                         </span>
                                     </li>
                                 );
                             }
                         })}
-                        {bars.length > 0 && (
+                        {showSum && bars.length > 0 && (
                             <li
                                 key="sum"
                                 className="recharts-tooltip-item fw-bold"
@@ -150,7 +152,7 @@ export const BarsTooltip = (bars, formatter) =>
                                     {tooltipSeparator}
                                 </span>
                                 <span className="recharts-tooltip-item-value">
-                                    {formatter(sum)}
+                                    {valueFormatter(sum)}
                                 </span>
                             </li>
                         )}

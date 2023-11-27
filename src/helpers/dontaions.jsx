@@ -6,13 +6,14 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import { donationsColumns as dc, partyAliases, partyAlias } from './constants';
+import { donationsColumns as dc } from './constants';
 import { labels, t } from './dictionary';
 import {
     currencyFormat,
     dateNumericFormat,
     generateRandomString,
 } from './helpers';
+import { partyAlias, partyAliases } from './parties';
 import { routes, separators } from './routes';
 
 export const apiParams = [
@@ -36,7 +37,7 @@ export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
 export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
 export const defaultBlocksize = blocksizes[2];
-export const defaultSort = `${separators.numbers}date`;
+export const defaultSort = `${separators.space}date`;
 
 export const columnLabel = (key) =>
     Object.keys(labels.donations.columns).includes(key)
@@ -294,12 +295,12 @@ export function SortLink({ column, children }) {
         // current column is sorted ascending, target is descending
         case column:
             currentClass += ' s-a';
-            targetSort = separators.numbers + column;
+            targetSort = separators.space + column;
             break;
         // current column is sorted descending, target is no sort
-        case separators.numbers + column:
+        case separators.space + column:
             currentClass += ' s-d';
-            targetSort = separators.numbers;
+            targetSort = separators.space;
             break;
         // other unsorted columns, target is ascending
         default:

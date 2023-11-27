@@ -254,6 +254,10 @@ export const labels = {
             'Súčet príspevkov vyplatených všetkým stranám vo volebnom období.',
             'Sum of subsidies paid to all parties in the election period.',
         ],
+        epTotalDisclaimerParty: [
+            'Súčet príspevkov vyplatených strane vo volebnom období.',
+            'Sum of subsidies paid to the party in the election period.',
+        ],
         learnMore: [
             'Zistiť viac o štátnych príspevkoch',
             'Find out more about government subsidies',
@@ -286,13 +290,21 @@ export const labels = {
             '60 SKK / 1,99 € za 1 hlas (do roku 2006 alebo konca 3. volebného obdobia)',
             '60 SKK / €1.99 per 1 vote (until 2006 or end of 3rd election period)',
         ],
-        yearsAllDisclaimer: [
-            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
-            'Sum of government subsidies paid to all political parties in the particular year between 3rd & 8th election periods.',
-        ],
         yearsDisclaimer: [
             'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch volebného obdobia.',
             'Sum of government subsidies paid to all political parties in the particular year of the election period.',
+        ],
+        yearsDisclaimerAll: [
+            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
+            'Sum of government subsidies paid to all political parties in the particular year between 3rd & 8th election periods.',
+        ],
+        yearsDisclaimerParty: [
+            'Súčet štátnych príspevkov vyplatených politickej strane v jednotlivých kalendárnych rokoch volebného obdobia.',
+            'Sum of government subsidies paid to the party in the particular year of the election period.',
+        ],
+        yearsDisclaimerPartyAll: [
+            'Súčet štátnych príspevkov vyplatených politickej strane v jednotlivých kalendárnych rokoch od 3. do 8. volebného obdobia.',
+            'Sum of government subsidies paid to the party in the particular year between 3rd & 8th election periods.',
         ],
         yearsTitle: ['Príspevky po rokoch', 'Subsidies by years'],
     },
@@ -316,6 +328,11 @@ export const labels = {
         subscribe: ['Prihlásiť sa na newsletter', 'Subscribe to Newsletter'],
     },
     party: {
+        coalition: ['Koalícia', 'Coalition'],
+        coalitionMembers: [
+            'Zloženie koalície v %i. volebnom období',
+            'Coalition members in election period no. %i',
+        ],
         pageTitle: ['Strana', 'Party'],
     },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
