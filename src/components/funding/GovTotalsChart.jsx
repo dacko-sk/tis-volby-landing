@@ -25,7 +25,7 @@ function GovTotalsChart({ limit, period }) {
     });
     const totals = Object.values(parties).sort(sortByNumericProp('total'));
 
-    return (
+    return totals.length ? (
         <>
             <TisBarChart
                 className="mt-4"
@@ -33,10 +33,14 @@ function GovTotalsChart({ limit, period }) {
                 currency
                 data={limit ? totals.slice(0, limit) : totals}
                 lastUpdate={false}
-                subtitle={t(labels.government.partiesTotalDisclaimer)}
+                subtitle={t(
+                    labels.government[
+                        `partiesTotal${period ? 'Period' : ''}Disclaimer`
+                    ]
+                )}
                 title={t(
                     labels.government[
-                        `partiesTotal${limit ? '' : 'All'}${
+                        `partiesTotal${!limit && !period ? 'All' : ''}${
                             period ? 'Period' : ''
                         }`
                     ],
@@ -56,7 +60,7 @@ function GovTotalsChart({ limit, period }) {
                 </div>
             )}
         </>
-    );
+    ) : null;
 }
 
 export default GovTotalsChart;

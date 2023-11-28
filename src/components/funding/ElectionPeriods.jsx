@@ -3,9 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { partyChartLabel } from '../../helpers/charts';
 import { labels, t } from '../../helpers/dictionary';
-import { sortByNumericProp, sumOfValues } from '../../helpers/helpers';
 
 import useGovData, {
     csvKeys,
@@ -13,8 +11,8 @@ import useGovData, {
     subsidyTypes,
 } from '../../context/GovDataContext';
 
-import YearsChart from './YearsChart';
-import TisBarChart, { subsidyBars } from '../charts/TisBarChart';
+import GovTotalsChart from './GovTotalsChart';
+import GovYearsChart from './GovYearsChart';
 import TisPieChart from '../charts/TisPieChart';
 import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
@@ -24,7 +22,6 @@ function ElectionPeriods({ party }) {
         getElectionPeriods,
         getElectionPeriodYears,
         getAggTotals,
-        getPartiesTotals,
         govData,
     } = useGovData();
 
@@ -61,25 +58,6 @@ function ElectionPeriods({ party }) {
                     dataKey: 'value',
                     label: t(labels.charts.amount),
                 };
-
-                let epParties;
-                if (!party) {
-                    const parties = {};
-                    Object.entries(getPartiesTotals(period)).forEach(
-                        ([partyName, st]) => {
-                            if (!(parties[partyName] ?? false)) {
-                                parties[partyName] = {
-                                    ...st,
-                                    name: partyChartLabel(partyName),
-                                    total: sumOfValues(st),
-                                };
-                            }
-                        }
-                    );
-                    epParties = Object.values(parties).sort(
-                        sortByNumericProp('total')
-                    );
-                }
 
                 epContent = (
                     <>
@@ -121,26 +99,12 @@ function ElectionPeriods({ party }) {
                             </Col>
                         </Row>
 
-                        {epParties && (
-                            <TisBarChart
-                                className="mt-4"
-                                bars={subsidyBars(true)}
-                                currency
-                                data={epParties}
-                                lastUpdate={false}
-                                subtitle={t(
-                                    labels.government
-                                        .partiesTotalPeriodDisclaimer
-                                )}
-                                title={t(labels.government.partiesTotalPeriod)}
-                                vertical
-                            />
-                        )}
+                        <GovTotalsChart period={period} />
 
-                        <YearsChart
+                        <GovYearsChart
                             className="mt-4"
-                            electionPeriod={period}
                             party={party}
+                            period={period}
                         />
                     </>
                 );

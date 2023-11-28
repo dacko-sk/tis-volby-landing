@@ -3,8 +3,8 @@ import { useOutletContext } from 'react-router-dom';
 import { setTitle } from '../../helpers/browser';
 import { labels, t } from '../../helpers/dictionary';
 
-import YearsChart from '../../components/funding/YearsChart';
 import ElectionPeriods from '../../components/funding/ElectionPeriods';
+import GovYearsChart from '../../components/funding/GovYearsChart';
 
 function PartyGovernment() {
     const partyName = useOutletContext();
@@ -13,7 +13,7 @@ function PartyGovernment() {
 
     return (
         <>
-            <YearsChart party={partyName} />
+            <GovYearsChart party={partyName} />
             <ElectionPeriods party={partyName} />
         </>
     );

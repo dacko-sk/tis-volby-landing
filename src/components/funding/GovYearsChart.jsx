@@ -8,15 +8,14 @@ import TisBarChart, {
     subsidyBars,
 } from '../charts/TisBarChart';
 
-function YearsChart({ className, electionPeriod, lastElection, party }) {
+function GovYearsChart({ className, lastElection, party, period }) {
     const { getAggYears, govData } = useGovData();
 
-    // parse data
     const years = {};
     subsidyTypes.forEach((type) => {
         Object.entries(
             getAggYears(
-                lastElection ? govData.lastElection : electionPeriod,
+                lastElection ? govData.lastElection : period,
                 type,
                 party
             )
@@ -34,14 +33,14 @@ function YearsChart({ className, electionPeriod, lastElection, party }) {
     return (
         <TisBarChart
             className={className}
-            bars={subsidyBars(!electionPeriod, !electionPeriod)}
+            bars={subsidyBars(!period, !period)}
             currency
             data={columns}
             lastUpdate={false}
             subtitle={t(
                 labels.government[
                     `yearsDisclaimer${party ? 'Party' : ''}${
-                        electionPeriod ? '' : 'All'
+                        period ? '' : 'All'
                     }`
                 ]
             )}
@@ -50,4 +49,4 @@ function YearsChart({ className, electionPeriod, lastElection, party }) {
     );
 }
 
-export default YearsChart;
+export default GovYearsChart;

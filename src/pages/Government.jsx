@@ -3,7 +3,7 @@ import { labels, t } from '../helpers/dictionary';
 
 import ElectionPeriods from '../components/funding/ElectionPeriods';
 import GovTotalsChart from '../components/funding/GovTotalsChart';
-import YearsChart from '../components/funding/YearsChart';
+import GovYearsChart from '../components/funding/GovYearsChart';
 import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
 
@@ -16,7 +16,7 @@ function Government() {
 
             <FundingNav />
 
-            <YearsChart />
+            <GovYearsChart />
 
             <GovTotalsChart />
 
