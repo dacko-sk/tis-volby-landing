@@ -205,7 +205,13 @@ export const GovDataProvider = function ({ children }) {
                         if (!(parties[partyName] ?? false)) {
                             parties[partyName] = {};
                         }
-                        parties[partyName][st] = years;
+                        if (!(parties[partyName][st] ?? false)) {
+                            parties[partyName][st] = {};
+                        }
+                        Object.entries(years).forEach(([year, subsidy]) => {
+                            parties[partyName][st][year] =
+                                (parties[partyName][st][year] ?? 0) + subsidy;
+                        });
                     });
                 });
             }

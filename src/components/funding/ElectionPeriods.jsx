@@ -124,14 +124,15 @@ function ElectionPeriods({ party }) {
                         {epParties && (
                             <TisBarChart
                                 className="mt-4"
-                                bars={subsidyBars(subsidyTypes, true)}
+                                bars={subsidyBars(true)}
                                 currency
                                 data={epParties}
                                 lastUpdate={false}
                                 subtitle={t(
-                                    labels.government.partiesTotalDisclaimer
+                                    labels.government
+                                        .partiesTotalPeriodDisclaimer
                                 )}
-                                title={t(labels.government.partiesTotal)}
+                                title={t(labels.government.partiesTotalPeriod)}
                                 vertical
                             />
                         )}

@@ -269,12 +269,24 @@ export const labels = {
             'Government subsidies',
         ],
         partiesTotal: [
+            'Top %i politických strán financovaných zo štátnych príspevkov',
+            'Top %i political parties funded by government subsidies',
+        ],
+        partiesTotalAll: [
+            'Rebríček politických strán',
+            'Ranking of political parties',
+        ],
+        partiesTotalDisclaimer: [
+            'Súhrnný objem príspevkov zo štátneho rozpočtu vyplatených jednotlivým politickým stranám od 3. do 8. volebného obdobia (2002 - 2023).',
+            'Aggregated amount of subsidies paid by the government to the particular political party between 3rd & 8th election periods (2002 - 2023).',
+        ],
+        partiesTotalPeriod: [
             'Rozdelenie príspevkov medzi politické strany',
             'Distribution of subsidies between political parties',
         ],
-        partiesTotalDisclaimer: [
-            'Súhrnný objem príspevkov pre jednotlivé politické strany za celé volebné obdobie',
-            'Amount of subsidies in the election period for the particular political party',
+        partiesTotalPeriodDisclaimer: [
+            'Súhrnný objem príspevkov vyplatených jednotlivým politickým stranám za celé volebné obdobie.',
+            'Aggregated amount of subsidies paid to the particular political party in the election period.',
         ],
         subsidyTypes: ['Druhy príspevkov', 'Types of subsidies'],
         totalDisclaimer: [

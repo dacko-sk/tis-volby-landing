@@ -12,11 +12,12 @@ import { isMobile } from '../../helpers/browser';
 import {
     preparePctData,
     ActiveShape,
-    CustomLabel,
+    PieLabel,
     PieTooltip,
     InactiveShape,
 } from '../../helpers/charts';
 import {
+    currencyFormat,
     humanPctFormat,
     numFormat,
     wholeCurrencyFormat,
@@ -54,13 +55,15 @@ function TisPieChart({
     }
     const data = percent ? preparePctData(pie.data, dataKeys) : pie.data;
 
-    let formatter = humanPctFormat;
+    let labelFormatter = humanPctFormat;
+    let tooltipFormatter = humanPctFormat;
     if (!percent) {
-        formatter = currency ? wholeCurrencyFormat : numFormat;
+        labelFormatter = currency ? wholeCurrencyFormat : numFormat;
+        tooltipFormatter = currency ? currencyFormat : numFormat;
     }
 
-    const label = CustomLabel(nameLabels, percent, formatter);
-    const tooltip = PieTooltip(dataKeys, dataLabels, formatter);
+    const label = PieLabel(nameLabels, percent, labelFormatter);
+    const tooltip = PieTooltip(dataKeys, dataLabels, tooltipFormatter);
 
     const pieClick = (segmentProps, segmentKey) => {
         setActiveSegment(segmentKey === activeSegment ? null : segmentKey);
@@ -155,10 +158,7 @@ function TisPieChart({
                                     };
                                 })}
                             />
-                            <Tooltip
-                                formatter={percent ? humanPctFormat : numFormat}
-                                content={tooltip}
-                            />
+                            <Tooltip content={tooltip} />
                         </PieChart>
                     </ResponsiveContainer>
                 </div>

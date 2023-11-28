@@ -34,7 +34,7 @@ function YearsChart({ className, electionPeriod, lastElection, party }) {
     return (
         <TisBarChart
             className={className}
-            bars={subsidyBars(subsidyTypes.slice().reverse(), !electionPeriod)}
+            bars={subsidyBars(!electionPeriod, !electionPeriod)}
             currency
             data={columns}
             lastUpdate={false}

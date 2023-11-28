@@ -120,7 +120,7 @@ function FundingSources({ party }) {
                 )}
                 <HeroNumber
                     className="mt-4"
-                    button={t(labels.government.learnMore)}
+                    button={govSum ? t(labels.government.learnMore) : null}
                     disclaimer={t(labels.government.totalDisclaimer)}
                     link={
                         party

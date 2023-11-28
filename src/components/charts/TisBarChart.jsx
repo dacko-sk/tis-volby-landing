@@ -32,7 +32,7 @@ import {
 } from '../../helpers/helpers';
 import { separators } from '../../helpers/routes';
 
-import { subsidyColors } from '../../context/GovDataContext';
+import { subsidyColors, subsidyTypes } from '../../context/GovDataContext';
 
 import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';
@@ -50,15 +50,13 @@ export const columnVariants = {
     ],
 };
 
-export const subsidyBars = (subsidyTypes, stacked) =>
-    Array.isArray(subsidyTypes) && subsidyTypes.length
-        ? subsidyTypes.map((type) => ({
-              key: type,
-              name: labels.government[type],
-              color: subsidyColors[type],
-              stackId: stacked ? 'govtypes' : null,
-          }))
-        : columnVariants.subsidies;
+export const subsidyBars = (stacked, reversed) =>
+    (reversed ? subsidyTypes.slice().reverse() : subsidyTypes).map((type) => ({
+        key: type,
+        name: labels.government[type],
+        color: subsidyColors[type],
+        stackId: stacked ? 'govtypes' : null,
+    }));
 
 function TisBarChart({
     barHeight,

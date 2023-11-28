@@ -76,7 +76,7 @@ export const prepareAvgDeltaPctData = (data, keys) => {
     return pctData;
 };
 
-export const CustomLabel = (showName, formatPercent, formatter) =>
+export const PieLabel = (showName, formatPercent, formatter) =>
     function ({ cx, cy, fill, midAngle, outerRadius, name, percent, value }) {
         const RADIAN = Math.PI / 180;
 
@@ -128,7 +128,7 @@ export const BarsTooltip = (bars, showSum, valueFormatter) =>
                                         style={{ color: bar.color }}
                                     >
                                         <span className="recharts-tooltip-item-name">
-                                            {tooltipNameFormat(t(bar.name))}
+                                            {t(bar.name)}
                                         </span>
                                         <span className="recharts-tooltip-item-separator">
                                             {tooltipSeparator}

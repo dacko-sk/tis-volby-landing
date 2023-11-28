@@ -5,12 +5,16 @@ import { labels, t } from '../helpers/dictionary';
 import { isCoalition } from '../helpers/parties';
 import { routes, segments, separators } from '../helpers/routes';
 
+import useGovData from '../context/GovDataContext';
+
 import Title from '../components/structure/Title';
 
 function Party() {
     const params = useParams();
     const partyName = (params.slug ?? '').replaceAll(separators.space, ' ');
     const coalition = isCoalition(partyName);
+
+    const { getAggTotals } = useGovData();
 
     return (
         <section>
@@ -32,12 +36,14 @@ function Party() {
                             {t(labels.donations.navTitle)}
                         </Nav.Link>
                     )}
-                    <Nav.Link
-                        as={NavLink}
-                        to={routes.party(partyName, segments.GOVERNMENT)}
-                    >
-                        {t(labels.government.navTitle)}
-                    </Nav.Link>
+                    {getAggTotals(null, null, partyName) > 0 && (
+                        <Nav.Link
+                            as={NavLink}
+                            to={routes.party(partyName, segments.GOVERNMENT)}
+                        >
+                            {t(labels.government.navTitle)}
+                        </Nav.Link>
+                    )}
                 </Nav>
             </div>
 
