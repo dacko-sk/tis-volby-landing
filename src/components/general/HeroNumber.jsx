@@ -18,7 +18,7 @@ function HeroNumber({
         <div className={className + ' text-center'}>
             {title && <h2>{title}</h2>}
             <div className="hero-number">
-                {currencyFormat(number)}
+                {Number.isNaN(Number(number)) ? number : currencyFormat(number)}
                 {lastUpdate ? (
                     <LastUpdateTag timestamp={lastUpdate}>
                         {disclaimer}

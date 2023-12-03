@@ -99,7 +99,7 @@ function ElectionPeriods({ party }) {
                             </Col>
                         </Row>
 
-                        <GovTotalsChart period={period} />
+                        {!party && <GovTotalsChart period={period} />}
 
                         <GovYearsChart
                             className="mt-4"

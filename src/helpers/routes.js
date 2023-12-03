@@ -6,7 +6,8 @@ export const separators = {
     array: '|',
     parts: '_',
     newline: '\n',
-    space: '-',
+    numbers: '-',
+    space: '.',
     url: '/',
     value: '~',
 };

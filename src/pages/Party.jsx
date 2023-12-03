@@ -1,7 +1,9 @@
 import Nav from 'react-bootstrap/Nav';
 import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../helpers/dictionary';
+import { buildApiQuery } from '../helpers/dontaions';
 import { isCoalition } from '../helpers/parties';
 import { routes, segments, separators } from '../helpers/routes';
 
@@ -16,6 +18,17 @@ function Party() {
 
     const { getAggTotals } = useGovData();
 
+    const options = {
+        p: partyName,
+    };
+    const queryParams = buildApiQuery(options);
+    const { data: dqData } = useQuery([`donations_party_${partyName}`], () =>
+        fetch(
+            `https://volby.transparency.sk/api/donors/donations.php?${queryParams}`
+        ).then((response) => response.json())
+    );
+    const donationsSum = dqData?.sum ?? 0;
+
     return (
         <section>
             <Title secondary={partyName}>
@@ -28,7 +41,7 @@ function Party() {
                     <Nav.Link as={NavLink} to={routes.party(partyName)} end>
                         {t(labels.funding.overview)}
                     </Nav.Link>
-                    {!coalition && (
+                    {!coalition && donationsSum > 0 && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.party(partyName, segments.DONATIONS)}

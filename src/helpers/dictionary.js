@@ -113,6 +113,10 @@ export const labels = {
         learnMore: ['Zistiť viac o darcoch', 'Find out more about donors'],
         navTitle: ['Databáza donorov', 'Donors database'],
         navTitleShort: ['Donori', 'Donors'],
+        noData: [
+            'Pre túto stranu sme doposiaľ nespracovali dáta o darcoch z výročných správ.',
+            `Donors data haven't been analysed for this party yet.`,
+        ],
         pageTitle: [
             'Vyhľadávanie\nv databáze donorov',
             'Search\nin donors database',
@@ -153,6 +157,10 @@ export const labels = {
         totalDisclaimer: [
             'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2023.',
             'Sum of donations from individual donors to all political parties in the years 2002 - 2023.',
+        ],
+        totalDisclaimerParty: [
+            'Súčet príspevkov od individuálnych darcov strany v rokoch 2002 - 2023.',
+            'Sum of donations from individual donors of political party in the years 2002 - 2023.',
         ],
         types: [
             [
@@ -235,8 +243,12 @@ export const labels = {
             'Political\nparties funding',
         ],
         sourcesDisclaimer: [
-            'Pomer financovania politických strán medzi súkromným a štátnym financovaním v rokoch 2002 - 2023',
+            'Pomer financovania politických strán medzi súkromným a štátnym financovaním v rokoch 2002 - 2023.',
             'Political parties funding distribution between dontations and government subsidies in years 2002 - 2023.',
+        ],
+        sourcesDisclaimerParty: [
+            'Pomer medzi súkromným a štátnym financovaním strany v rokoch 2002 - 2023.',
+            'Party funding distribution between dontations and government subsidies in years 2002 - 2023.',
         ],
         sourcesTitle: ['Zdroje financovania', 'Funding sources'],
     },
@@ -292,6 +304,10 @@ export const labels = {
         totalDisclaimer: [
             'Súčet štátnych príspevkov vyplatených všetkým politickým stranám od 3. do 8. volebného obdobia.',
             'Sum of government subsidies paid to all political parties between 3rd & 8th election periods.',
+        ],
+        totalDisclaimerParty: [
+            'Súčet štátnych príspevkov vyplatených politickej strane od 3. do 8. volebného obdobia.',
+            'Sum of government subsidies paid to the political party between 3rd & 8th election periods.',
         ],
         votePrice: ['Cena jedného hlasu', 'Single vote price'],
         votePriceDisclaimer: [

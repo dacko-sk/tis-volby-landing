@@ -37,7 +37,7 @@ export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
 export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
 export const defaultBlocksize = blocksizes[2];
-export const defaultSort = `${separators.space}date`;
+export const defaultSort = `${separators.numbers}date`;
 
 export const columnLabel = (key) =>
     Object.keys(labels.donations.columns).includes(key)
@@ -295,12 +295,12 @@ export function SortLink({ column, children }) {
         // current column is sorted ascending, target is descending
         case column:
             currentClass += ' s-a';
-            targetSort = separators.space + column;
+            targetSort = separators.numbers + column;
             break;
         // current column is sorted descending, target is no sort
-        case separators.space + column:
+        case separators.numbers + column:
             currentClass += ' s-d';
-            targetSort = separators.space;
+            targetSort = separators.numbers;
             break;
         // other unsorted columns, target is ascending
         default:

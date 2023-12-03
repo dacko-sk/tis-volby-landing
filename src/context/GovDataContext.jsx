@@ -167,16 +167,33 @@ export const GovDataProvider = function ({ children }) {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
                 (type ? [type] : subsidyTypes).forEach((st) => {
                     let parties = [];
+                    let multiplier;
                     if (party) {
                         if (ep[st][party] ?? false) {
                             parties = [ep[st][party]];
+                        } else if (ep[csvKeys.COALITIONS] ?? false) {
+                            Object.entries(ep[csvKeys.COALITIONS]).some(
+                                ([coalition, members]) =>
+                                    Object.entries(members).some(
+                                        ([member, share]) => {
+                                            if (partyAlias(member) === party) {
+                                                parties = [ep[st][coalition]];
+                                                multiplier = share;
+                                                return true;
+                                            }
+                                            return false;
+                                        }
+                                    )
+                            );
                         }
                     } else {
                         parties = Object.values(ep[st]);
                     }
                     parties.forEach((p) => {
                         Object.entries(p).forEach(([year, subsidy]) => {
-                            years[year] = (years[year] ?? 0) + subsidy;
+                            years[year] =
+                                (years[year] ?? 0) +
+                                (multiplier ? multiplier * subsidy : subsidy);
                         });
                     });
                 });

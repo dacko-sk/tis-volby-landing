@@ -3,7 +3,12 @@ import Row from 'react-bootstrap/Row';
 import { useQuery } from '@tanstack/react-query';
 
 import { partyChartLabel } from '../../helpers/charts';
-import { colorDarkBlue, colorOrange, colors } from '../../helpers/constants';
+import {
+    colorDarkBlue,
+    colorOrange,
+    colors,
+    links,
+} from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { buildApiQuery } from '../../helpers/dontaions';
 import { isCoalition } from '../../helpers/parties';
@@ -70,7 +75,7 @@ function FundingSources({ party }) {
                 );
             }
         );
-    } else {
+    } else if (donationsSum) {
         const sourcesPie = {
             data: [
                 {
@@ -95,8 +100,20 @@ function FundingSources({ party }) {
                 lastUpdate={false}
                 pie={sourcesPie}
                 percent={false}
-                subtitle={t(labels.funding.sourcesDisclaimer)}
+                subtitle={t(
+                    labels.funding[`sourcesDisclaimer${party ? 'Party' : ''}`]
+                )}
                 title={t(labels.funding.sourcesTitle)}
+            />
+        );
+    } else {
+        chart = (
+            <HeroNumber
+                button={t(labels.donate.buttonLong)}
+                disclaimer={t(labels.donations.noData)}
+                link={links.donateUrl}
+                number="N/A"
+                title={t(labels.donations.title)}
             />
         );
     }
@@ -105,10 +122,15 @@ function FundingSources({ party }) {
         <Row>
             <Col xl={6}>{chart}</Col>
             <Col xl={6}>
-                {!coalition && (
+                {!coalition && donationsSum > 0 && (
                     <HeroNumber
+                        className="mb-4"
                         button={t(labels.donations.learnMore)}
-                        disclaimer={t(labels.donations.totalDisclaimer)}
+                        disclaimer={t(
+                            labels.donations[
+                                `totalDisclaimer${party ? 'Party' : ''}`
+                            ]
+                        )}
                         link={
                             party
                                 ? routes.party(party, segments.DONATIONS)
@@ -119,9 +141,12 @@ function FundingSources({ party }) {
                     />
                 )}
                 <HeroNumber
-                    className="mt-4"
                     button={govSum ? t(labels.government.learnMore) : null}
-                    disclaimer={t(labels.government.totalDisclaimer)}
+                    disclaimer={t(
+                        labels.government[
+                            `totalDisclaimer${party ? 'Party' : ''}`
+                        ]
+                    )}
                     link={
                         party
                             ? routes.party(party, segments.GOVERNMENT)
