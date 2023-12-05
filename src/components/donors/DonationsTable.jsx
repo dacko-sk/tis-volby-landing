@@ -9,13 +9,14 @@ import {
     isCompany,
     optionalColumns,
 } from '../../helpers/dontaions';
+import { routes } from '../../helpers/routes';
 
 import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
 
 function DonationsTable({
-    className,
     donationsQuery,
+    route = routes.donations(),
     hiddenColumns = [],
     visibleColumns = optionalColumns,
 }) {
@@ -48,11 +49,9 @@ function DonationsTable({
         }
         return (
             <th key={key} className={className}>
-                {hiddenColumns.length ? (
-                    title
-                ) : (
-                    <SortLink column={key}>{title}</SortLink>
-                )}
+                <SortLink column={key} route={route}>
+                    {title}
+                </SortLink>
             </th>
         );
     });
@@ -81,21 +80,17 @@ function DonationsTable({
         });
     }
 
-    return (
-        <div className={className}>
-            {rows.length ? (
-                <Table responsive bordered hover striped>
-                    <thead>
-                        <tr className="align-middle">{headerCols}</tr>
-                    </thead>
-                    <tbody>{rows}</tbody>
-                </Table>
-            ) : (
-                <AlertWithIcon variant="danger">
-                    {t(labels.donations.search.noDonations)}
-                </AlertWithIcon>
-            )}
-        </div>
+    return rows.length ? (
+        <Table responsive bordered hover striped>
+            <thead>
+                <tr className="align-middle">{headerCols}</tr>
+            </thead>
+            <tbody>{rows}</tbody>
+        </Table>
+    ) : (
+        <AlertWithIcon variant="danger">
+            {t(labels.donations.search.noDonations)}
+        </AlertWithIcon>
     );
 }
 

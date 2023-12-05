@@ -1,23 +1,19 @@
-import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
 import { labels, t } from '../../helpers/dictionary';
 import {
     blocksizes,
-    buildUrlQuery,
     columnLabel,
     defaultBlocksize,
     optionalColumns,
     parseQueryOptions,
 } from '../../helpers/dontaions';
 import { sortNumbers } from '../../helpers/helpers';
-import { routes, separators } from '../../helpers/routes';
+import { separators } from '../../helpers/routes';
 
 import './Donors.scss';
 
-function Settings() {
-    const navigate = useNavigate();
-
+function Settings({ hiddenColumns = [], updateRouteQuery }) {
     const options = parseQueryOptions();
 
     const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
@@ -39,14 +35,14 @@ function Settings() {
         if (visibleColumns.length) {
             linkOpt.v = visibleColumns.join(separators.numbers);
         }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     };
 
     const updateBlocksize = (e) => {
         // copy all options except b & o
         const { b, o, ...linkOpt } = options;
         linkOpt.b = Number(e.target.value);
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     };
 
     return (
@@ -55,19 +51,21 @@ function Settings() {
                 <h6 className="fw-bold text-primary text-uppercase">
                     {t(labels.donations.settings.columns)}
                 </h6>
-                {optionalColumns.map((column, index) => (
-                    <Form.Check
-                        key={column}
-                        inline
-                        label={columnLabel(column)}
-                        id={`visible-columns-${column}`}
-                        name="visible-columns"
-                        type="checkbox"
-                        value={index}
-                        checked={visibleColumns.includes(index)}
-                        onChange={updateColumns}
-                    />
-                ))}
+                {optionalColumns.map((column, index) =>
+                    hiddenColumns.includes(column) ? null : (
+                        <Form.Check
+                            key={column}
+                            checked={visibleColumns.includes(index)}
+                            id={`visible-columns-${column}`}
+                            inline
+                            label={columnLabel(column)}
+                            name="visible-columns"
+                            onChange={updateColumns}
+                            type="checkbox"
+                            value={index}
+                        />
+                    )
+                )}
             </div>
 
             <div className="mt-3">
@@ -77,14 +75,14 @@ function Settings() {
                 {blocksizes.map((b) => (
                     <Form.Check
                         key={b}
+                        checked={b === blocksize}
+                        id={`blocksize-${b}`}
                         inline
                         label={b}
-                        id={`blocksize-${b}`}
                         name="blocksize"
+                        onChange={updateBlocksize}
                         type="radio"
                         value={b}
-                        checked={b === blocksize}
-                        onChange={updateBlocksize}
                     />
                 ))}
             </div>

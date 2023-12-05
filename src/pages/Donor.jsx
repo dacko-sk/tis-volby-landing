@@ -16,11 +16,12 @@ import {
     hiddenDonorColumns,
 } from '../helpers/dontaions';
 import { currencyFormat } from '../helpers/helpers';
+import { allParties } from '../helpers/parties';
 import { routes } from '../helpers/routes';
 
 import Title from '../components/structure/Title';
 import Loading from '../components/general/Loading';
-import DonationsTable from '../components/donors/DonationsTable';
+import SearchResults from '../components/donors/SearchResults';
 
 function Donor() {
     const params = useParams();
@@ -30,12 +31,6 @@ function Donor() {
     const aq = useQuery([`donor_${id}`], () =>
         fetch(
             `https://volby.transparency.sk/api/donors/donors.php?i=${id}`
-        ).then((response) => response.json())
-    );
-
-    const dq = useQuery([`donations_${id}`], () =>
-        fetch(
-            `https://volby.transparency.sk/api/donors/donations.php?i=${id}&b=200`
         ).then((response) => response.json())
     );
 
@@ -107,12 +102,12 @@ function Donor() {
                 <br />
             </Title>
             {content}
-            {dq.data?.rows.length > 0 && (
-                <h2 className="my-4">{t(labels.donations.allDonations)}</h2>
-            )}
-            <DonationsTable
-                donationsQuery={dq}
+            <h2 className="my-4">{t(labels.donations.allDonations)}</h2>
+            <SearchResults
                 hiddenColumns={hiddenDonorColumns}
+                parties={aq.data?.rows[0].parties ?? allParties}
+                queryOptions={{ i: id }}
+                route={routes.donor(id)}
             />
         </section>
     );

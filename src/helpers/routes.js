@@ -103,6 +103,25 @@ export const urlSegment = (segment, lang) => {
     return localSegments[lang || getCurrentLanguage()][segment] ?? '';
 };
 
+export const buildUrlQuery = (options) => {
+    const filters = [];
+    Object.entries(options).forEach(([param, value]) => {
+        filters.push(param + separators.value + value);
+    });
+    return filters.join(separators.parts);
+};
+
+export const queries = {
+    donations: (query) => {
+        if (!query && query !== false && isMobile) {
+            query = `b${separators.value}10`;
+        }
+        return query
+            ? separators.url + (query === true ? ':query' : query)
+            : '';
+    },
+};
+
 export const routes = {
     accounts: (lang) =>
         languageRoot(lang) +
@@ -125,18 +144,11 @@ export const routes = {
               separators.url +
               (id === true ? ':id' : encodeURIComponent(id))
             : ''),
-    donations: (query, lang) => {
-        if (!query && query !== false && isMobile) {
-            query = `b${separators.value}10`;
-        }
-        return (
-            languageRoot(lang) +
-            urlSegment(segments.FUNDING, lang) +
-            separators.url +
-            urlSegment(segments.DONATIONS, lang) +
-            (query ? separators.url + (query === true ? ':query' : query) : '')
-        );
-    },
+    donations: (lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.DONATIONS, lang),
     funding: (lang) => languageRoot(lang) + urlSegment(segments.FUNDING, lang),
     government: (lang) =>
         languageRoot(lang) +
@@ -166,4 +178,9 @@ export const routes = {
               separators.url +
               (query === true ? ':query' : encodeURIComponent(query))
             : ''),
+};
+
+export const rwq = {
+    donations: (route, queryOptions) =>
+        route + queries.donations(buildUrlQuery(queryOptions)),
 };

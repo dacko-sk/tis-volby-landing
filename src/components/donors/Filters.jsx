@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -10,7 +9,6 @@ import { donationsColumns as dc } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import {
     amountSettings,
-    buildUrlQuery,
     columnLabel,
     entityIcon,
     parseQueryOptions,
@@ -22,13 +20,15 @@ import {
     sortNumbers,
 } from '../../helpers/helpers';
 import { allParties } from '../../helpers/parties';
-import { routes, separators } from '../../helpers/routes';
+import { separators } from '../../helpers/routes';
 
 import './Donors.scss';
 
-function Filters() {
-    const navigate = useNavigate();
-
+function Filters({
+    hiddenColumns = [],
+    parties = allParties,
+    updateRouteQuery,
+}) {
     const options = parseQueryOptions();
 
     const [query, setQuery] = useState(options.q ?? '');
@@ -64,7 +64,7 @@ function Filters() {
         if (value) {
             linkOpt.q = encodeURIComponent(value);
         }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     }, 500);
 
     const updateQuery = (e) => {
@@ -78,7 +78,7 @@ function Filters() {
         if (e.target.value !== '') {
             linkOpt.c = Number(e.target.value);
         }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     };
 
     const updateTypes = (e) => {
@@ -94,7 +94,7 @@ function Filters() {
         if (types.length) {
             linkOpt.t = types.join(separators.numbers);
         }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     };
 
     const updateFlags = (e) => {
@@ -110,14 +110,14 @@ function Filters() {
         if (flags.length) {
             linkOpt.f = flags.join(separators.numbers);
         }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     };
 
     const debounceArrNumParam = useDebouncedCallback((value, param) => {
         // copy all options except f & o
         const { o, ...linkOpt } = options;
         linkOpt[param] = value.join(separators.numbers);
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     }, 500);
 
     const updateAmount = (minmax) => {
@@ -152,7 +152,7 @@ function Filters() {
                 separators.numbers
             );
         }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     };
 
     const updateDateMin = (e) => {
@@ -179,7 +179,7 @@ function Filters() {
         if (e.target.value !== '') {
             linkOpt.p = e.target.value;
         }
-        navigate(routes.donations(buildUrlQuery(linkOpt)));
+        updateRouteQuery(linkOpt);
     };
 
     return (
@@ -211,35 +211,37 @@ function Filters() {
                 </InputGroup>
             </Form.Group>
 
-            <Form.Group className="mt-3">
-                <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabel(dc.entity)}
-                </h6>
-                <Form.Check
-                    key=""
-                    inline
-                    label={t(labels.all)}
-                    id="entity-all"
-                    name="entity"
-                    type="radio"
-                    value=""
-                    checked={entity === ''}
-                    onChange={updateEntity}
-                />
-                {t(labels.donations.entities).map((label, index) => (
+            {!hiddenColumns.includes(dc.entity) && (
+                <Form.Group className="mt-3">
+                    <h6 className="fw-bold text-primary text-uppercase">
+                        {columnLabel(dc.entity)}
+                    </h6>
                     <Form.Check
-                        key={label}
+                        key=""
                         inline
-                        label={`${entityIcon(index)} ${label}`}
-                        id={`entity-${label}`}
+                        label={t(labels.all)}
+                        id="entity-all"
                         name="entity"
                         type="radio"
-                        value={index}
-                        checked={entity === index}
+                        value=""
+                        checked={entity === ''}
                         onChange={updateEntity}
                     />
-                ))}
-            </Form.Group>
+                    {t(labels.donations.entities).map((label, index) => (
+                        <Form.Check
+                            key={label}
+                            inline
+                            label={`${entityIcon(index)} ${label}`}
+                            id={`entity-${label}`}
+                            name="entity"
+                            type="radio"
+                            value={index}
+                            checked={entity === index}
+                            onChange={updateEntity}
+                        />
+                    ))}
+                </Form.Group>
+            )}
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
@@ -368,21 +370,23 @@ function Filters() {
                 </Row>
             </Form.Group>
 
-            <Form.Group className="mt-3">
-                <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabel(dc.party)}
-                </h6>
-                <Form.Select size="sm" onChange={updateParty} value={party}>
-                    <option key="" value="">
-                        {t(labels.all)}
-                    </option>
-                    {allParties.map((party) => (
-                        <option key={party} value={party}>
-                            {party}
+            {!hiddenColumns.includes(dc.party) && parties.length > 1 && (
+                <Form.Group className="mt-3">
+                    <h6 className="fw-bold text-primary text-uppercase">
+                        {columnLabel(dc.party)}
+                    </h6>
+                    <Form.Select size="sm" onChange={updateParty} value={party}>
+                        <option key="" value="">
+                            {t(labels.all)}
                         </option>
-                    ))}
-                </Form.Select>
-            </Form.Group>
+                        {parties.map((party) => (
+                            <option key={party} value={party}>
+                                {party}
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
+            )}
         </Form>
     );
 }

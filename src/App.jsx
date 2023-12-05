@@ -5,8 +5,10 @@ import {
     homepage,
     languageRoot,
     languages,
+    queries,
     routes,
     segments,
+    separators,
     urlSegment,
 } from './helpers/routes';
 
@@ -44,9 +46,18 @@ function App() {
                                 [
                                     [routes.home(lang), Home],
                                     [routes.funding(lang), Funding],
-                                    [routes.donations(false, lang), Donations],
-                                    [routes.donations(true, lang), Donations],
+                                    [routes.donations(lang), Donations],
+                                    [
+                                        routes.donations(lang) +
+                                            queries.donations(true),
+                                        Donations,
+                                    ],
                                     [routes.donor(true, lang), Donor],
+                                    [
+                                        routes.donor(true, lang) +
+                                            queries.donations(true),
+                                        Donor,
+                                    ],
                                     [
                                         routes.party(true, '', lang),
                                         Party,
@@ -55,6 +66,11 @@ function App() {
                                             [
                                                 segments.DONATIONS,
                                                 PartyDonations,
+                                            ],
+                                            [
+                                                segments.DONATIONS,
+                                                PartyDonations,
+                                                queries.donations(true),
                                             ],
                                             [
                                                 segments.GOVERNMENT,
@@ -73,23 +89,31 @@ function App() {
                                         element={<Page />}
                                     >
                                         {(subpages ?? []).map(
-                                            ([subSegment, SubPage]) => (
-                                                <Route
-                                                    key={path + subSegment}
-                                                    index={
-                                                        subSegment ? null : true
-                                                    }
-                                                    path={
-                                                        subSegment
-                                                            ? urlSegment(
-                                                                  subSegment,
-                                                                  lang
-                                                              )
-                                                            : null
-                                                    }
-                                                    element={<SubPage />}
-                                                />
-                                            )
+                                            ([subSegment, SubPage, suffix]) => {
+                                                if (subSegment) {
+                                                    const subPath =
+                                                        urlSegment(
+                                                            subSegment,
+                                                            lang
+                                                        ) + (suffix ?? '');
+                                                    return (
+                                                        <Route
+                                                            key={path + subPath}
+                                                            path={subPath}
+                                                            element={
+                                                                <SubPage />
+                                                            }
+                                                        />
+                                                    );
+                                                }
+                                                return (
+                                                    <Route
+                                                        key={path + 'index'}
+                                                        index={true}
+                                                        element={<SubPage />}
+                                                    />
+                                                );
+                                            }
                                         )}
                                     </Route>
                                 ))

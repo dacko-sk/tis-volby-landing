@@ -14,7 +14,7 @@ import {
     generateRandomString,
 } from './helpers';
 import { partyAlias, partyAliases } from './parties';
-import { routes, separators } from './routes';
+import { routes, rwq, separators } from './routes';
 
 export const apiParams = [
     'o', // offset (page number - 1)
@@ -34,6 +34,7 @@ export const settingsParams = [
 ];
 
 export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
+export const hiddenPartyColumns = [dc.party];
 export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
 export const defaultBlocksize = blocksizes[2];
@@ -194,14 +195,6 @@ export const buildApiQuery = (options) => {
     return filters.join('&');
 };
 
-export const buildUrlQuery = (options) => {
-    const filters = [];
-    Object.entries(options).forEach(([param, value]) => {
-        filters.push(param + separators.value + value);
-    });
-    return filters.join(separators.parts);
-};
-
 export function FlagBadge({ compact = false, flag }) {
     const i = Number(flag);
     return (
@@ -284,7 +277,7 @@ export function DonorParties({
     );
 }
 
-export function SortLink({ column, children }) {
+export function SortLink({ column, children, route = routes.donations() }) {
     const options = parseQueryOptions();
 
     // copy all options except s & o
@@ -310,10 +303,7 @@ export function SortLink({ column, children }) {
         linkOpt.s = targetSort;
     }
     return (
-        <Link
-            className={currentClass}
-            to={routes.donations(buildUrlQuery(linkOpt))}
-        >
+        <Link className={currentClass} to={rwq.donations(route, linkOpt)}>
             {children}
         </Link>
     );

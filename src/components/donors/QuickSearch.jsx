@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { labels, t } from '../../helpers/dictionary';
-import { routes, separators } from '../../helpers/routes';
+import { routes, rwq } from '../../helpers/routes';
 
 import QuickResults from './QuickResults';
 
@@ -18,9 +18,7 @@ function QuickSearch() {
     const [apiQuery, setApiQuery] = useState(null);
 
     const q = encodeURIComponent(inputVal);
-    const searchLink = routes.donations(
-        inputVal ? `q${separators.value}${q}` : ''
-    );
+    const searchLink = rwq.donations(routes.donations(), inputVal ? { q } : {});
 
     const debounceSearch = useDebouncedCallback((value) => {
         setApiQuery(value);
