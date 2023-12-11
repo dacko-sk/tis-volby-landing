@@ -32,7 +32,7 @@ function Party() {
     return (
         <section>
             <Title secondary={partyName}>
-                {t(coalition ? labels.party.coalition : labels.party.pageTitle)}
+                {t(coalition ? labels.parties.coalition : labels.parties.party)}
                 <br />
             </Title>
 

@@ -355,13 +355,14 @@ export const labels = {
         title: ['Newsletter'],
         subscribe: ['Prihlásiť sa na newsletter', 'Subscribe to Newsletter'],
     },
-    party: {
+    parties: {
         coalition: ['Koalícia', 'Coalition'],
         coalitionMembers: [
             'Zloženie koalície v %i. volebnom období',
             'Coalition members in election period no. %i',
         ],
-        pageTitle: ['Strana', 'Party'],
+        navTitle: ['Strany', 'Parties'],
+        party: ['Strana', 'Party'],
     },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
     readMore: ['Čítať ďalej…', 'Read more…'],

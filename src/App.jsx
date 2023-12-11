@@ -8,7 +8,6 @@ import {
     queries,
     routes,
     segments,
-    separators,
     urlSegment,
 } from './helpers/routes';
 
@@ -22,6 +21,7 @@ import Funding from './pages/Funding';
 import Government from './pages/Government';
 import Home from './pages/Home';
 import News from './pages/News';
+import Parties from './pages/Parties';
 import Party from './pages/Party';
 import PartyDonations from './pages/party/PartyDonations';
 import PartyGovernment from './pages/party/PartyGovernment';
@@ -58,6 +58,9 @@ function App() {
                                             queries.donations(true),
                                         Donor,
                                     ],
+                                    [routes.government(lang), Government],
+                                    [routes.accounts(lang), Accounts],
+                                    [routes.parties(lang), Parties],
                                     [
                                         routes.party(true, '', lang),
                                         Party,
@@ -78,8 +81,6 @@ function App() {
                                             ],
                                         ],
                                     ],
-                                    [routes.government(lang), Government],
-                                    [routes.accounts(lang), Accounts],
                                     [routes.news(lang), News],
                                     [routes.article(true, lang), Article],
                                 ].map(([path, Page, subpages]) => (

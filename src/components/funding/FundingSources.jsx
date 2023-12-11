@@ -69,7 +69,7 @@ function FundingSources({ party }) {
                         currency
                         lastUpdate={false}
                         showSum={false}
-                        title={t(labels.party.coalitionMembers, [period])}
+                        title={t(labels.parties.coalitionMembers, [period])}
                         vertical
                     />
                 );

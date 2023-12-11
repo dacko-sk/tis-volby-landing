@@ -31,7 +31,7 @@ export const segments = {
     FUNDING: 'FUNDING',
     GOVERNMENT: 'GOVERNMENT',
     NEWS: 'NEWS',
-    PARTY: 'PARTY',
+    PARTIES: 'PARTIES',
     SEARCH: 'SEARCH',
 };
 
@@ -43,7 +43,7 @@ export const localSegments = {
         [segments.FUNDING]: 'financovanie',
         [segments.GOVERNMENT]: 'statne-prispevky',
         [segments.NEWS]: 'aktuality',
-        [segments.PARTY]: 'strana',
+        [segments.PARTIES]: 'strany',
         [segments.SEARCH]: 'vyhladavanie',
     },
     [languages.en]: {
@@ -53,7 +53,7 @@ export const localSegments = {
         [segments.FUNDING]: 'funding',
         [segments.GOVERNMENT]: 'government',
         [segments.NEWS]: 'news',
-        [segments.PARTY]: 'party',
+        [segments.PARTIES]: 'parties',
         [segments.SEARCH]: 'search',
     },
 };
@@ -157,20 +157,15 @@ export const routes = {
         urlSegment(segments.GOVERNMENT, lang),
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
+    parties: (lang) => languageRoot(lang) + urlSegment(segments.PARTIES, lang),
     party: (slug, subpage, lang) =>
         languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
-        (slug
-            ? separators.url +
-              urlSegment(segments.PARTY, lang) +
-              separators.url +
-              (slug === true
-                  ? ':slug'
-                  : encodeURIComponent(
-                        slug.replaceAll(' ', separators.space)
-                    )) +
-              (subpage ? separators.url + urlSegment(subpage, lang) : '')
-            : ''),
+        urlSegment(segments.PARTIES, lang) +
+        separators.url +
+        (slug === true
+            ? ':slug'
+            : encodeURIComponent(slug.replaceAll(' ', separators.space))) +
+        (subpage ? separators.url + urlSegment(subpage, lang) : ''),
     search: (query, lang) =>
         languageRoot(lang) +
         (query
