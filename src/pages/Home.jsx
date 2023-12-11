@@ -10,7 +10,7 @@ import { newsCategories } from '../helpers/wp';
 import QuickSearch from '../components/donors/QuickSearch';
 import Top10Donors from '../components/donors/Top10Donors';
 import ElectionsPreview from '../components/elections/ElectionsPreview';
-import GovTotalsChart from '../components/funding/GovTotalsChart';
+import PartiesFundingChart from '../components/funding/PartiesFundingChart';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
 
@@ -28,7 +28,7 @@ function Home() {
 
             <QuickSearch />
 
-            <GovTotalsChart limit={10} />
+            <PartiesFundingChart limit={10} />
 
             <Top10Donors
                 file="top10individual"

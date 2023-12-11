@@ -17,16 +17,20 @@ export const tooltipNameFormat = (value) => {
 };
 
 export const tickLabel = (value) => {
-    const parts = value.split(separators.newline);
+    const args = value.split(separators.newline);
     // if tick label consist of name + \n + route name - create link to that route
-    return parts.length > 1 && typeof routes[parts[1]] === 'function' ? (
-        <Link to={routes[parts[1]](parts[0])}>{parts[0]}</Link>
-    ) : (
-        value
-    );
+    if (args.length > 1) {
+        // remove 2nd argument (route name) from array, use the rest as arguments for the routing fn
+        const route = args.splice(1, 1)[0];
+        if (typeof routes[route] === 'function') {
+            return <Link to={routes[route](...args)}>{args[0]}</Link>;
+        }
+    }
+    return value;
 };
 
-export const partyChartLabel = (party) => party + separators.newline + 'party';
+export const partyChartLabel = (party, segment) =>
+    [party, 'party', ...(segment ? [segment] : [])].join(separators.newline);
 
 export const shortChartNames = (name) => shortenValue(name, isMobile ? 30 : 60);
 

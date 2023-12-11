@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { partyChartLabel } from '../../helpers/charts';
 import { labels, t } from '../../helpers/dictionary';
 import { sortByNumericProp, sumOfValues } from '../../helpers/helpers';
-import { routes } from '../../helpers/routes';
+import { routes, segments } from '../../helpers/routes';
 
 import useGovData from '../../hooks/GovData';
 
@@ -18,7 +18,7 @@ function GovTotalsChart({ limit, period }) {
         if (!(parties[partyName] ?? false)) {
             parties[partyName] = {
                 ...st,
-                name: partyChartLabel(partyName),
+                name: partyChartLabel(partyName, segments.GOVERNMENT),
                 total: sumOfValues(st),
             };
         }

@@ -71,6 +71,7 @@ export const labels = {
             'Source: Annual reports of political parties 2002 - 2022',
         ],
         donorInfo: ['Údaje o darcovi', 'Donor details'],
+        dac: ['Darcovia a veritelia', 'Donors & creditors'],
         entities: [
             ['Fyzická osoba', 'Firma'],
             ['Person', 'Company'],
@@ -236,19 +237,35 @@ export const labels = {
     ],
     followUs: ['Sledujte nás', 'Follow us'],
     funding: {
+        learnMore: [
+            'Zistiť viac o financovaní',
+            'Find out more about subsidies',
+        ],
         navTitle: ['Financovanie', 'Funding'],
         overview: ['Prehľad', 'Overview'],
         pageTitle: [
             'Financovanie\npolitických strán',
             'Political\nparties funding',
         ],
+        partiesTotal: [
+            'Top %i politických strán podľa príjmov',
+            'Top %i political parties by subsidies',
+        ],
+        partiesTotalAll: [
+            'Rebríček politických strán podľa príjmov',
+            'Political parties ranking by subsidies',
+        ],
+        partiesTotalDisclaimer: [
+            'Príjmy politických strán zo súkromných a štátnych zdrojov od 3. do 8. volebného obdobia (2002 - 2023).',
+            'Incomes of political parties from donations and government subsidies between 3rd & 8th election periods (2002 - 2023).',
+        ],
         sourcesDisclaimer: [
-            'Pomer financovania politických strán medzi súkromným a štátnym financovaním v rokoch 2002 - 2023.',
-            'Political parties funding distribution between dontations and government subsidies in years 2002 - 2023.',
+            'Pomer príjmov všetkých politických strán medzi súkromnými a štátnymi zdrojmi od 3. do 8. volebného obdobia (2002 - 2023).',
+            'All parties incomes distribution between dontations and government subsidies between 3rd & 8th election periods (2002 - 2023).',
         ],
         sourcesDisclaimerParty: [
-            'Pomer medzi súkromným a štátnym financovaním strany v rokoch 2002 - 2023.',
-            'Party funding distribution between dontations and government subsidies in years 2002 - 2023.',
+            'Pomer príjmov medzi súkromnými a štátnymi zdrojmi strany od 3. do 8. volebného obdobia (2002 - 2023).',
+            'Party incomes distribution between dontations and government subsidies between 3rd & 8th election periods (2002 - 2023).',
         ],
         sourcesTitle: ['Zdroje financovania', 'Funding sources'],
     },
@@ -269,10 +286,6 @@ export const labels = {
         epTotalDisclaimerParty: [
             'Súčet príspevkov vyplatených strane vo volebnom období.',
             'Sum of subsidies paid to the party in the election period.',
-        ],
-        learnMore: [
-            'Zistiť viac o štátnych príspevkoch',
-            'Find out more about government subsidies',
         ],
         navTitle: ['Štátne príspevky', 'Government subsidies'],
         navTitleShort: ['Štát', 'Government'],
@@ -356,12 +369,17 @@ export const labels = {
         subscribe: ['Prihlásiť sa na newsletter', 'Subscribe to Newsletter'],
     },
     parties: {
+        allDisclaimer: [
+            'Abecedný zoznam strán a koalícií, pre ktoré sú dostupné dáta o financovaní zo štátneho rozpočtu alebo máme spracované dáta o darcoch v databáze donorov.',
+            'Parties & coalitions with available data of government subsidies or with processed donor database. The list is sorted alphabetically.',
+        ],
         coalition: ['Koalícia', 'Coalition'],
         coalitionMembers: [
             'Zloženie koalície v %i. volebnom období',
             'Coalition members in election period no. %i',
         ],
         navTitle: ['Strany', 'Parties'],
+        pageTitle: ['Strany a koalície', 'Parties & coalitions'],
         party: ['Strana', 'Party'],
     },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],

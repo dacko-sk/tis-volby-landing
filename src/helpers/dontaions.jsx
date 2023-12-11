@@ -14,7 +14,7 @@ import {
     generateRandomString,
 } from './helpers';
 import { partyAlias, partyAliases } from './parties';
-import { routes, rwq, separators } from './routes';
+import { routes, rwq, segments, separators } from './routes';
 
 export const apiParams = [
     'o', // offset (page number - 1)
@@ -268,7 +268,10 @@ export function DonorParties({
             {parties.map((party) => {
                 const partyName = partyAlias(party);
                 return (
-                    <Link key={partyName} to={routes.party(partyName)}>
+                    <Link
+                        key={partyName}
+                        to={routes.party(partyName, segments.DONATIONS)}
+                    >
                         <Badge bg="secondary">{partyName}</Badge>
                     </Link>
                 );
