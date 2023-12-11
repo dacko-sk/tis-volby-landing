@@ -7,7 +7,7 @@ import { buildApiQuery } from '../helpers/dontaions';
 import { isCoalition } from '../helpers/parties';
 import { routes, segments, separators } from '../helpers/routes';
 
-import useGovData from '../context/GovDataContext';
+import useGovData from '../hooks/GovData';
 
 import Title from '../components/structure/Title';
 

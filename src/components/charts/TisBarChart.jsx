@@ -32,7 +32,7 @@ import {
 } from '../../helpers/helpers';
 import { separators } from '../../helpers/routes';
 
-import { subsidyColors, subsidyTypes } from '../../context/GovDataContext';
+import { subsidyColors, subsidyTypes } from '../../hooks/GovData';
 
 import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';

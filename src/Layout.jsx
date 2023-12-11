@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { scrollToTop } from '../../helpers/browser';
+import { scrollToTop } from './helpers/browser';
 
-import useGovData from '../../context/GovDataContext';
+import useGovData from './hooks/GovData';
 
-import Header from './Header';
-import Footer from './Footer';
-import DonateBanner from '../general/DonateBanner';
-// import DonateModal from '../general/DonateModal';
+import Header from './components/structure/Header';
+import Footer from './components/structure/Footer';
+import DonateBanner from './components/general/DonateBanner';
+// import DonateModal from './components/general/DonateModal';
 
 function Layout() {
     const { pathname } = useLocation();

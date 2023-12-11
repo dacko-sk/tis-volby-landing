@@ -1,7 +1,7 @@
 import { labels, t } from '../../helpers/dictionary';
 import { sortByNumericProp } from '../../helpers/helpers';
 
-import useGovData, { subsidyTypes } from '../../context/GovDataContext';
+import useGovData, { subsidyTypes } from '../../hooks/GovData';
 
 import TisBarChart, {
     columnVariants,

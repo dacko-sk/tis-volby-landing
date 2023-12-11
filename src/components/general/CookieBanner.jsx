@@ -11,7 +11,7 @@ import { labels, t } from '../../helpers/dictionary';
 import useCookies, {
     generateSetter,
     setAnaliticsStorage,
-} from '../../context/CookiesContext';
+} from '../../hooks/Cookies';
 
 import './CookieBanner.scss';
 

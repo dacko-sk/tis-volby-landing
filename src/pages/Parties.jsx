@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 import { sortAlphabetically } from '../helpers/helpers';
-import { useDonationsData } from '../helpers/hooks';
 import { routes } from '../helpers/routes';
 
-import useGovData from '../context/GovDataContext';
+import useGovData from '../hooks/GovData';
+import { useDonationsData } from '../hooks/Queries';
 
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';

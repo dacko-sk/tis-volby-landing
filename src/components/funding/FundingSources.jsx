@@ -14,7 +14,7 @@ import { buildApiQuery } from '../../helpers/dontaions';
 import { isCoalition } from '../../helpers/parties';
 import { routes, segments } from '../../helpers/routes';
 
-import useGovData from '../../context/GovDataContext';
+import useGovData from '../../hooks/GovData';
 
 import TisBarChart from '../charts/TisBarChart';
 import TisPieChart from '../charts/TisPieChart';

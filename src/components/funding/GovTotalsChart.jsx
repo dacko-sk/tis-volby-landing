@@ -6,7 +6,7 @@ import { labels, t } from '../../helpers/dictionary';
 import { sortByNumericProp, sumOfValues } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
-import useGovData from '../../context/GovDataContext';
+import useGovData from '../../hooks/GovData';
 
 import TisBarChart, { subsidyBars } from '../charts/TisBarChart';
 

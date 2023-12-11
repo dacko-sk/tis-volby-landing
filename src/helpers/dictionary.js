@@ -1,7 +1,7 @@
 import { donationsColumns as dc, elections as el } from './constants';
 import { getCurrentLanguage, languages } from './routes';
 
-import { csvKeys as gst } from '../context/GovDataContext';
+import { csvKeys as gst } from '../hooks/GovData';
 
 export const labels = {
     accounts: {

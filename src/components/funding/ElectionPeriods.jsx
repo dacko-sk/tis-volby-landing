@@ -9,7 +9,7 @@ import useGovData, {
     csvKeys,
     subsidyColors,
     subsidyTypes,
-} from '../../context/GovDataContext';
+} from '../../hooks/GovData';
 
 import GovTotalsChart from './GovTotalsChart';
 import GovYearsChart from './GovYearsChart';

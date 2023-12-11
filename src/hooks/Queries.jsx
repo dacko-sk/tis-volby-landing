@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { partyAlias } from './parties';
+import { partyAlias } from '../helpers/parties';
 
 export const useDonationsData = () =>
     useQuery({
