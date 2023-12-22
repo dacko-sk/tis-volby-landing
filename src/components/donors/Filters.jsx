@@ -17,18 +17,14 @@ import {
     currencyFormat,
     datePickerFormat,
     getTimeFromDate,
+    sortAlphabetically,
     sortNumbers,
 } from '../../helpers/helpers';
-import { allParties } from '../../helpers/parties';
 import { separators } from '../../helpers/routes';
 
 import './Donors.scss';
 
-function Filters({
-    hiddenColumns = [],
-    parties = allParties,
-    updateRouteQuery,
-}) {
+function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
     const options = parseQueryOptions();
 
     const [query, setQuery] = useState(options.q ?? '');
@@ -379,7 +375,7 @@ function Filters({
                         <option key="" value="">
                             {t(labels.all)}
                         </option>
-                        {parties.map((party) => (
+                        {parties.sort(sortAlphabetically()).map((party) => (
                             <option key={party} value={party}>
                                 {party}
                             </option>

@@ -44,8 +44,14 @@ export const columnVariants = {
     funding: [
         {
             key: 'donations',
-            name: labels.donations.dac,
+            name: labels.donations.donations,
             color: colors.colorDarkBlue,
+            stackId: 'funding',
+        },
+        {
+            key: 'credits',
+            name: labels.donations.credits,
+            color: colors.colorLightBlue,
             stackId: 'funding',
         },
         {

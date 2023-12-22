@@ -1,7 +1,5 @@
-import { sortAlphabetically } from './helpers';
-
 const parties = [
-    ['ALIANCIA', 'MKO', 'Spolupatričnosť'],
+    ['ALIANCIA', 'Spolupatričnosť'],
     ['DOBRÁ VOĽBA', 'DOBRA VOLBA', 'Dobrá voľba'],
     ['HLAS'],
     ['HZDS', 'LS-HZDS', 'LS - HZDS'],
@@ -18,6 +16,7 @@ const parties = [
     ['MOST-HÍD', 'MOST HID', 'MOST - HID', 'Most - Híd'],
     ['SLOVENSKO', 'OĽANO', 'OĽaNO - NOVA', 'OĽaNO'],
     ['PS'],
+    ['PS a SPOLU', 'Koalícia Progresívne Slovensko a SPOLU'],
     ['REPUBLIKA'],
     ['SAS', 'SaS'],
     ['SDKÚ', 'SDKU', 'SDKU-DS', 'SDKU - DS'],
@@ -32,15 +31,9 @@ const parties = [
     ['ZA ĽUDÍ', 'ZA LUDI', 'Za ľudí'],
 ];
 
-const coalitions = [['PS a SPOLU', 'Koalícia Progresívne Slovensko a SPOLU']];
-
-export const allParties = parties
-    .map((pa) => pa[0])
-    .sort(sortAlphabetically(true));
-
 export const partyAliases = (party) => {
     let aliases;
-    [...parties, ...coalitions].some((pa) => {
+    parties.some((pa) => {
         if (pa.includes(party)) {
             aliases = pa;
             return true;

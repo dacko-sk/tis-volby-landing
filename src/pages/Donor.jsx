@@ -16,7 +16,6 @@ import {
     hiddenDonorColumns,
 } from '../helpers/dontaions';
 import { currencyFormat } from '../helpers/helpers';
-import { allParties } from '../helpers/parties';
 import { routes } from '../helpers/routes';
 
 import Title from '../components/structure/Title';
@@ -105,7 +104,7 @@ function Donor() {
             <h2 className="my-4">{t(labels.donations.allDonations)}</h2>
             <SearchResults
                 hiddenColumns={hiddenDonorColumns}
-                parties={aq.data?.rows[0].parties ?? allParties}
+                parties={aq.data?.rows[0].parties ?? []}
                 queryOptions={{ i: id }}
                 route={routes.donor(id)}
             />

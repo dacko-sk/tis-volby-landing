@@ -2,18 +2,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // import { partyChartLabel } from '../../helpers/charts';
-import {
-    colorDarkBlue,
-    colorOrange,
-    // colors,
-    links,
-} from '../../helpers/constants';
+import { colors, links } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 // import { partyAlias } from '../../helpers/parties';
 import { routes, segments } from '../../helpers/routes';
 
 import useGovData from '../../hooks/GovData';
-import { useDonationsData } from '../../hooks/Queries';
+import { pdKeys, usePartiesDonationsData } from '../../hooks/Queries';
 
 // import TisBarChart from '../charts/TisBarChart';
 import TisPieChart from '../charts/TisPieChart';
@@ -22,7 +17,7 @@ import Loading from '../general/Loading';
 import PartiesTiles from '../parties/PartiesTiles';
 
 function FundingSources({ party }) {
-    const { data, isLoading, error } = useDonationsData();
+    const { data, isLoading, error } = usePartiesDonationsData();
     const { getAggTotals, getCoalitionMembers, getExtremes, isCoalition } =
         useGovData();
 
@@ -33,15 +28,16 @@ function FundingSources({ party }) {
     const coalition = isCoalition(party);
     const govSum = getAggTotals(null, null, party);
 
-    const donationsSum = Object.entries(data).reduce(
-        (sum, [partyName, donationsSum]) => {
-            if (!party || party === partyName) {
-                return sum + donationsSum;
-            }
-            return sum;
-        },
-        0
-    );
+    const sum = {
+        [pdKeys.DONATIONS]: 0,
+        [pdKeys.CREDITS]: 0,
+    };
+    Object.entries(data).forEach(([partyName, partyData]) => {
+        if (!party || party === partyName) {
+            sum[pdKeys.DONATIONS] += partyData[pdKeys.DONATIONS];
+            sum[pdKeys.CREDITS] += partyData[pdKeys.CREDITS];
+        }
+    });
 
     let chart;
     if (coalition) {
@@ -80,18 +76,23 @@ function FundingSources({ party }) {
                 );
             }
         );
-    } else if (donationsSum) {
+    } else if (sum[pdKeys.DONATIONS] || sum[pdKeys.CREDITS]) {
         const sourcesPie = {
             data: [
                 {
-                    name: t(labels.donations.title),
-                    value: donationsSum,
-                    color: colorDarkBlue,
+                    name: t(labels.donations.donations),
+                    value: sum[pdKeys.DONATIONS],
+                    color: colors.colorDarkBlue,
+                },
+                {
+                    name: t(labels.donations.credits),
+                    value: sum[pdKeys.CREDITS],
+                    color: colors.colorLightBlue,
                 },
                 {
                     name: t(labels.government.navTitle),
                     value: govSum,
-                    color: colorOrange,
+                    color: colors.colorOrange,
                 },
             ],
             nameKey: 'name',
@@ -119,7 +120,7 @@ function FundingSources({ party }) {
                 disclaimer={t(labels.donations.noData)}
                 link={links.donateUrl}
                 number="N/A"
-                title={t(labels.donations.title)}
+                title={t(labels.donations.dac)}
             />
         );
     }
@@ -128,7 +129,7 @@ function FundingSources({ party }) {
         <Row>
             <Col xl={6}>{chart}</Col>
             <Col xl={6} className="mt-4 mt-xl-0">
-                {!coalition && donationsSum > 0 && (
+                {!coalition && sum[pdKeys.DONATIONS] > 0 && (
                     <HeroNumber
                         className="mb-4"
                         button={t(labels.donations.learnMore)}
@@ -142,8 +143,8 @@ function FundingSources({ party }) {
                                 ? routes.party(party, segments.DONATIONS)
                                 : routes.donations()
                         }
-                        number={donationsSum}
-                        title={t(labels.donations.title)}
+                        number={sum[pdKeys.DONATIONS] + sum[pdKeys.CREDITS]}
+                        title={t(labels.donations.dac)}
                     />
                 )}
                 <HeroNumber

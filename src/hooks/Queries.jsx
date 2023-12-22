@@ -2,7 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import { partyAlias } from '../helpers/parties';
 
-export const useDonationsData = () =>
+export const pdKeys = {
+    DONATIONS: 'donations',
+    CREDITS: 'credits',
+};
+
+export const usePartiesDonationsData = () =>
     useQuery({
         queryKey: ['all_parties_totals'],
         queryFn: () =>
@@ -13,10 +18,15 @@ export const useDonationsData = () =>
         select: (data) => {
             const parties = {};
             Object.entries(data.parties ?? {}).forEach(
-                ([partyName, donations]) => {
-                    parties[partyAlias(partyName)] = donations;
+                ([partyName, partyData]) => {
+                    parties[partyAlias(partyName)] = partyData;
                 }
             );
             return parties;
         },
     });
+
+export const allDonationsParties = () => {
+    const { data, isLoading, error } = usePartiesDonationsData();
+    return isLoading || error ? [] : Object.keys(data);
+};

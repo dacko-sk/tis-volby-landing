@@ -66,12 +66,14 @@ export const labels = {
             [dc.flag]: ['Mimoriadny príznak', 'Risk indicator'],
             [dc.notes]: ['Poznámka', 'Note'],
         },
+        credits: ['Úvery a pôžičky', 'Credits & loans'],
         disclaimer: [
             'Zdroj: Výročné správy politických strán 2002 - 2022',
             'Source: Annual reports of political parties 2002 - 2022',
         ],
         donorInfo: ['Údaje o darcovi', 'Donor details'],
-        dac: ['Darcovia a veritelia', 'Donors & creditors'],
+        dac: ['Dary, úvery a pôžičky', 'Donations, credits & loans'],
+        donations: ['Dary', 'Donations'],
         entities: [
             ['Fyzická osoba', 'Firma'],
             ['Person', 'Company'],
@@ -146,7 +148,6 @@ export const labels = {
             columns: ['Voliteľné stĺpce', 'Optional columns'],
             rows: ['Počet riadkov', 'Number of rows'],
         },
-        title: ['Darcovia a veritelia', 'Donors & creditors'],
         top10donors: [
             'Top 10 individuálnych darcov politických strán (2002 - 2022)',
             'Top 10 individual political party donors (2002 - 2022)',

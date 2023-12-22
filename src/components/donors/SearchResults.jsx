@@ -10,8 +10,9 @@ import {
     optionalColumns,
     parseQueryOptions,
 } from '../../helpers/dontaions';
-import { allParties } from '../../helpers/parties';
 import { routes, rwq, separators } from '../../helpers/routes';
+
+import { allDonationsParties } from '../../hooks/Queries';
 
 import PaginationWithGaps from '../general/PaginationWithGaps';
 import DonationsTable from './DonationsTable';
@@ -20,7 +21,7 @@ import Settings from './Settings';
 
 function SearchResults({
     hiddenColumns = [],
-    parties = allParties,
+    parties = allDonationsParties(),
     queryOptions = {},
     route = routes.donations(),
 }) {

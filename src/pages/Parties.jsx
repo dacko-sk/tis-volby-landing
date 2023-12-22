@@ -3,23 +3,17 @@ import { labels, t } from '../helpers/dictionary';
 import { sortAlphabetically } from '../helpers/helpers';
 
 import useGovData from '../hooks/GovData';
-import { useDonationsData } from '../hooks/Queries';
+import { allDonationsParties } from '../hooks/Queries';
 
 import AlertWithIcon from '../components/general/AlertWithIcon';
-import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 import PartiesTiles from '../components/parties/PartiesTiles';
 
 function Parties() {
-    const { data, isLoading, error } = useDonationsData();
     const { getPartiesTotals } = useGovData();
 
-    if (isLoading || error) {
-        return <Loading error={error} />;
-    }
-
     const allParties = Array.from(
-        new Set([...Object.keys(data), ...Object.keys(getPartiesTotals())])
+        new Set([...allDonationsParties(), ...Object.keys(getPartiesTotals())])
     ).sort(sortAlphabetically());
 
     setTitle(t(labels.parties.navTitle));

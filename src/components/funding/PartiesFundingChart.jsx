@@ -7,13 +7,13 @@ import { sortByNumericProp, sumOfValues } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
 import useGovData from '../../hooks/GovData';
-import { useDonationsData } from '../../hooks/Queries';
+import { pdKeys, usePartiesDonationsData } from '../../hooks/Queries';
 
 import TisBarChart, { columnVariants } from '../charts/TisBarChart';
 import Loading from '../general/Loading';
 
 function PartiesFundingChart({ limit }) {
-    const { data, isLoading, error } = useDonationsData();
+    const { data, isLoading, error } = usePartiesDonationsData();
     const { getPartiesTotals, getExtremes } = useGovData();
 
     if (isLoading || error) {
@@ -32,15 +32,17 @@ function PartiesFundingChart({ limit }) {
         parties[partyName].government = amount;
         parties[partyName].total += amount;
     });
-    Object.entries(data).forEach(([partyName, donationsSum]) => {
+    Object.entries(data).forEach(([partyName, partyData]) => {
         if (!(parties[partyName] ?? false)) {
             parties[partyName] = {
                 name: partyChartLabel(partyName),
                 total: 0,
             };
         }
-        parties[partyName].donations = donationsSum;
-        parties[partyName].total += donationsSum;
+        parties[partyName].donations = partyData[pdKeys.DONATIONS];
+        parties[partyName].credits = partyData[pdKeys.CREDITS];
+        parties[partyName].total +=
+            partyData[pdKeys.DONATIONS] + partyData[pdKeys.CREDITS];
     });
     const totals = Object.values(parties).sort(sortByNumericProp('total'));
 
