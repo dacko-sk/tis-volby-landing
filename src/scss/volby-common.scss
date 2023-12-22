@@ -319,7 +319,7 @@ footer h2 {
 }
 
 @media (min-width: map.get($grid-breakpoints, 'sm')) {
-  .tiles > * {
+  .tiles.compact > * {
     max-width: 50%;
   }
 }
@@ -330,7 +330,7 @@ footer h2 {
       padding: 1.25em 0.5em 1.5em;
     }
   }
-  .tiles > * {
+  .tiles.compact > * {
     max-width: 33.33333333%;
   }
 }
@@ -345,7 +345,7 @@ footer h2 {
   #search {
     max-width: 10em;
   }
-  .tiles > * {
+  .tiles.compact > * {
     max-width: 25%;
   }
 }
@@ -375,7 +375,7 @@ footer h2 {
   header {
     min-height: 350px;
   }
-  .tiles > * {
+  .tiles.compact > * {
     max-width: 20%;
   }
 }

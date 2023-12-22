@@ -185,7 +185,10 @@ export const GovDataProvider = function ({ children }) {
                                 ([coalition, members]) =>
                                     Object.entries(members).some(
                                         ([member, share]) => {
-                                            if (member === party) {
+                                            if (
+                                                member === party &&
+                                                !Number.isNaN(share)
+                                            ) {
                                                 parties = [ep[st][coalition]];
                                                 multiplier = share;
                                                 return true;
@@ -249,21 +252,25 @@ export const GovDataProvider = function ({ children }) {
                                 const years = ep[st][coalition];
                                 Object.entries(members).forEach(
                                     ([member, share]) => {
-                                        if (!(parties[member] ?? false)) {
-                                            parties[member] = {};
-                                        }
-                                        if (!(parties[member][sk] ?? false)) {
-                                            parties[member][sk] = {};
-                                        }
-                                        Object.entries(years).forEach(
-                                            ([year, subsidy]) => {
-                                                parties[member][sk][year] =
-                                                    (parties[member][sk][
-                                                        year
-                                                    ] ?? 0) +
-                                                    share * subsidy;
+                                        if (!Number.isNaN(share)) {
+                                            if (!(parties[member] ?? false)) {
+                                                parties[member] = {};
                                             }
-                                        );
+                                            if (
+                                                !(parties[member][sk] ?? false)
+                                            ) {
+                                                parties[member][sk] = {};
+                                            }
+                                            Object.entries(years).forEach(
+                                                ([year, subsidy]) => {
+                                                    parties[member][sk][year] =
+                                                        (parties[member][sk][
+                                                            year
+                                                        ] ?? 0) +
+                                                        share * subsidy;
+                                                }
+                                            );
+                                        }
                                     }
                                 );
                             }

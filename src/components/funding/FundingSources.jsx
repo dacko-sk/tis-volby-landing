@@ -1,78 +1,82 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useQuery } from '@tanstack/react-query';
 
-import { partyChartLabel } from '../../helpers/charts';
+// import { partyChartLabel } from '../../helpers/charts';
 import {
     colorDarkBlue,
     colorOrange,
-    colors,
+    // colors,
     links,
 } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
-import { buildApiQuery } from '../../helpers/dontaions';
-import { partyAlias } from '../../helpers/parties';
+// import { partyAlias } from '../../helpers/parties';
 import { routes, segments } from '../../helpers/routes';
 
 import useGovData from '../../hooks/GovData';
+import { useDonationsData } from '../../hooks/Queries';
 
-import TisBarChart from '../charts/TisBarChart';
+// import TisBarChart from '../charts/TisBarChart';
 import TisPieChart from '../charts/TisPieChart';
 import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
+import PartiesTiles from '../parties/PartiesTiles';
 
 function FundingSources({ party }) {
+    const { data, isLoading, error } = useDonationsData();
     const { getAggTotals, getCoalitionMembers, getExtremes, isCoalition } =
         useGovData();
+
+    if (isLoading || error) {
+        return <Loading error={error} />;
+    }
 
     const coalition = isCoalition(party);
     const govSum = getAggTotals(null, null, party);
 
-    const options = {};
-    if (party) {
-        options.p = party;
-    }
-    const queryParams = buildApiQuery(options);
-    const dq = useQuery(
-        [`donations_${party ? `party_${party}` : 'all_parties'}`],
-        () =>
-            fetch(
-                `https://volby.transparency.sk/api/donors/donations.php?${queryParams}`
-            ).then((response) => response.json())
+    const donationsSum = Object.entries(data).reduce(
+        (sum, [partyName, donationsSum]) => {
+            if (!party || party === partyName) {
+                return sum + donationsSum;
+            }
+            return sum;
+        },
+        0
     );
-
-    if (dq.isLoading || dq.error) {
-        return <Loading error={dq.error} />;
-    }
-
-    const donationsSum = dq.data?.sum ?? 0;
 
     let chart;
     if (coalition) {
-        const palette = Object.values(colors);
+        // const palette = Object.values(colors);
         chart = Object.entries(getCoalitionMembers(party)).map(
             ([period, members]) => {
                 return (
-                    <TisBarChart
-                        key={period}
-                        bars={Object.keys(members).map((member, index) => ({
-                            key: member + index,
-                            name: partyAlias(member),
-                            color: palette[index],
-                            stackId: 'coalition',
-                        }))}
-                        data={Object.entries(members).map(
-                            ([member, share], index) => ({
-                                name: partyChartLabel(partyAlias(member)),
-                                [member + index]: govSum * share,
-                            })
-                        )}
-                        currency
-                        lastUpdate={false}
-                        showSum={false}
-                        title={t(labels.parties.coalitionMembers, [period])}
-                        vertical
-                    />
+                    <div key={period}>
+                        <h2 className="mb-3">
+                            {t(labels.parties.coalitionMembers, [period])}
+                        </h2>
+                        <PartiesTiles
+                            parties={Object.keys(members)}
+                            compact={false}
+                        />
+                        {/* <TisBarChart
+                            className="mt-4"
+                            bars={Object.keys(members).map((member, index) => ({
+                                key: member + index,
+                                name: member,
+                                color: palette[index],
+                                stackId: 'coalition',
+                            }))}
+                            data={Object.entries(members).map(
+                                ([member, share], index) => ({
+                                    name: partyChartLabel(member),
+                                    [member + index]: govSum * share,
+                                })
+                            )}
+                            currency
+                            lastUpdate={false}
+                            showSum={false}
+                            vertical
+                        /> */}
+                    </div>
                 );
             }
         );
@@ -123,7 +127,7 @@ function FundingSources({ party }) {
     return (
         <Row>
             <Col xl={6}>{chart}</Col>
-            <Col xl={6}>
+            <Col xl={6} className="mt-4 mt-xl-0">
                 {!coalition && donationsSum > 0 && (
                     <HeroNumber
                         className="mb-4"

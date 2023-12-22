@@ -1,7 +1,7 @@
 {
   "name": "tis-volby-landing",
   "version": "1.0.0",
-  "homepage": "/",
+  "homepage": "/demo/",
   "dependencies": {
     "@tanstack/react-query": "^4.23.0",
     "bootstrap": "^5.2.3",

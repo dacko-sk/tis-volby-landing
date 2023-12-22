@@ -7,7 +7,7 @@ export const useDonationsData = () =>
         queryKey: ['all_parties_totals'],
         queryFn: () =>
             fetch(
-                'https://volby.transparency.sk/api/donors/reload_parties.php'
+                'https://volby.transparency.sk/api/donors/donors_json.php?f=all_parties'
             ).then((response) => response.json()),
         refetchOnMount: false,
         select: (data) => {

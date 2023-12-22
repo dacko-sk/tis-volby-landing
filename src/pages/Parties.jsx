@@ -1,11 +1,6 @@
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
-
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 import { sortAlphabetically } from '../helpers/helpers';
-import { routes } from '../helpers/routes';
 
 import useGovData from '../hooks/GovData';
 import { useDonationsData } from '../hooks/Queries';
@@ -13,10 +8,11 @@ import { useDonationsData } from '../hooks/Queries';
 import AlertWithIcon from '../components/general/AlertWithIcon';
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
+import PartiesTiles from '../components/parties/PartiesTiles';
 
 function Parties() {
     const { data, isLoading, error } = useDonationsData();
-    const { getPartiesTotals, isCoalition } = useGovData();
+    const { getPartiesTotals } = useGovData();
 
     if (isLoading || error) {
         return <Loading error={error} />;
@@ -36,30 +32,7 @@ function Parties() {
                 {t(labels.parties.allDisclaimer)}
             </AlertWithIcon>
 
-            <Row className="tiles gx-4 gy-4">
-                {allParties.map((partyName) => {
-                    const coalition = isCoalition(partyName);
-                    return (
-                        <Col key={partyName} className="d-flex" sm>
-                            <Link
-                                to={routes.party(partyName)}
-                                className={`d-flex flex-column justify-content-center w-100 cat-${
-                                    coalition ? 'regional' : 'local'
-                                }`}
-                            >
-                                <div className="type">
-                                    {t(
-                                        coalition
-                                            ? labels.parties.coalition
-                                            : ''
-                                    )}
-                                </div>
-                                <h3 className="m-0">{partyName}</h3>
-                            </Link>
-                        </Col>
-                    );
-                })}
-            </Row>
+            <PartiesTiles parties={allParties} />
         </section>
     );
 }
