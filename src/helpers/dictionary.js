@@ -312,6 +312,10 @@ export const labels = {
             'Súčet príspevkov vyplatených strane vo volebnom období.',
             'Sum of subsidies paid to the party in the election period.',
         ],
+        learnMore: [
+            'Zistiť viac o štátnych príspevkoch',
+            'Find out more about government subsidies',
+        ],
         navTitle: ['Štátne príspevky', 'Government subsidies'],
         navTitleShort: ['Štát', 'Government'],
         pageTitle: [
