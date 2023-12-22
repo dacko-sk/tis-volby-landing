@@ -32,7 +32,7 @@ import {
 } from '../../helpers/helpers';
 import { separators } from '../../helpers/routes';
 
-import { subsidyColors, subsidyTypes } from '../../hooks/GovData';
+import { csvKeys, subsidyColors, subsidyTypes } from '../../hooks/GovData';
 
 import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';
@@ -64,13 +64,32 @@ export const columnVariants = {
     ],
 };
 
-export const subsidyBars = (stacked, reversed) =>
-    (reversed ? subsidyTypes.slice().reverse() : subsidyTypes).map((type) => ({
-        key: type,
-        name: labels.government[type],
-        color: subsidyColors[type],
-        stackId: stacked ? 'govtypes' : null,
-    }));
+export const subsidyBars = (stacked, reversed, data) => {
+    const st = reversed ? subsidyTypes.slice().reverse() : subsidyTypes;
+    const bars = [
+        ...st.map((type) => ({
+            key: type,
+            name: labels.government[type].short,
+            longName: labels.government[type].long,
+            color: subsidyColors[type].paid,
+            stackId: stacked ? 'govtypes' : null,
+        })),
+        ...st.map((type) => ({
+            key: type + csvKeys.ESTIMATE,
+            name: labels.government[type].est,
+            longName: labels.government[type].estLong,
+            color: subsidyColors[type].est,
+            stackId: stacked ? 'govtypes' : null,
+        })),
+    ];
+    // show legend only for bars which have some values in data points
+    if (data) {
+        return bars.filter((bar) =>
+            data.some((dataPoint) => dataPoint[bar.key] ?? false)
+        );
+    }
+    return bars;
+};
 
 function TisBarChart({
     barHeight,

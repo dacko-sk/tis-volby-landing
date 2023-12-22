@@ -11,7 +11,7 @@ import {
 } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { buildApiQuery } from '../../helpers/dontaions';
-import { isCoalition } from '../../helpers/parties';
+import { partyAlias } from '../../helpers/parties';
 import { routes, segments } from '../../helpers/routes';
 
 import useGovData from '../../hooks/GovData';
@@ -22,7 +22,8 @@ import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
 function FundingSources({ party }) {
-    const { getAggTotals, getCoalitionMembers } = useGovData();
+    const { getAggTotals, getCoalitionMembers, getExtremes, isCoalition } =
+        useGovData();
 
     const coalition = isCoalition(party);
     const govSum = getAggTotals(null, null, party);
@@ -56,13 +57,13 @@ function FundingSources({ party }) {
                         key={period}
                         bars={Object.keys(members).map((member, index) => ({
                             key: member + index,
-                            name: member,
+                            name: partyAlias(member),
                             color: palette[index],
                             stackId: 'coalition',
                         }))}
                         data={Object.entries(members).map(
                             ([member, share], index) => ({
-                                name: partyChartLabel(member),
+                                name: partyChartLabel(partyAlias(member)),
                                 [member + index]: govSum * share,
                             })
                         )}
@@ -101,7 +102,8 @@ function FundingSources({ party }) {
                 pie={sourcesPie}
                 percent={false}
                 subtitle={t(
-                    labels.funding[`sourcesDisclaimer${party ? 'Party' : ''}`]
+                    labels.funding[`sourcesDisclaimer${party ? 'Party' : ''}`],
+                    Object.values(getExtremes())
                 )}
                 title={t(labels.funding.sourcesTitle)}
             />
@@ -145,7 +147,8 @@ function FundingSources({ party }) {
                     disclaimer={t(
                         labels.government[
                             `totalDisclaimer${party ? 'Party' : ''}`
-                        ]
+                        ],
+                        Object.values(getExtremes())
                     )}
                     link={
                         party

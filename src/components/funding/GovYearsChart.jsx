@@ -1,31 +1,31 @@
 import { labels, t } from '../../helpers/dictionary';
 import { sortByNumericProp } from '../../helpers/helpers';
 
-import useGovData, { subsidyTypes } from '../../hooks/GovData';
+import useGovData, { csvKeys, subsidyTypes } from '../../hooks/GovData';
 
-import TisBarChart, {
-    columnVariants,
-    subsidyBars,
-} from '../charts/TisBarChart';
+import TisBarChart, { subsidyBars } from '../charts/TisBarChart';
 
-function GovYearsChart({ className, lastElection, party, period }) {
-    const { getAggYears, govData } = useGovData();
+function GovYearsChart({ className, party, period }) {
+    const { getAggYears, getExtremes } = useGovData();
 
     const years = {};
     subsidyTypes.forEach((type) => {
-        Object.entries(
-            getAggYears(
-                lastElection ? govData.lastElection : period,
-                type,
-                party
-            )
-        ).forEach(([year, subsidy]) => {
+        const { paid, est } = getAggYears(period, type, party);
+        Object.entries(paid).forEach(([year, subsidy]) => {
             if (!(years[year] ?? false)) {
                 years[year] = {
                     name: year,
                 };
             }
-            years[year][type ?? columnVariants.subsidies[0].key] = subsidy;
+            years[year][type] = subsidy;
+        });
+        Object.entries(est).forEach(([year, subsidy]) => {
+            if (!(years[year] ?? false)) {
+                years[year] = {
+                    name: year,
+                };
+            }
+            years[year][type + csvKeys.ESTIMATE] = subsidy;
         });
     });
     const columns = Object.values(years).sort(sortByNumericProp('name', true));
@@ -33,7 +33,7 @@ function GovYearsChart({ className, lastElection, party, period }) {
     return (
         <TisBarChart
             className={className}
-            bars={subsidyBars(!period, !period)}
+            bars={subsidyBars(!period, !period, columns)}
             currency
             data={columns}
             lastUpdate={false}
@@ -42,7 +42,8 @@ function GovYearsChart({ className, lastElection, party, period }) {
                     `yearsDisclaimer${party ? 'Party' : ''}${
                         period ? '' : 'All'
                     }`
-                ]
+                ],
+                Object.values(getExtremes())
             )}
             title={t(labels.government.yearsTitle)}
         />

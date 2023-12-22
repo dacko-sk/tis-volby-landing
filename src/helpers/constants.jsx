@@ -1,12 +1,18 @@
 export const colorLightBlue = '#2bace2';
+export const colorLightBlueDs = '#b9c6cc';
 export const colorDarkBlue = '#1b335f';
+export const colorDarkBlueDs = '#79869d';
 export const colorOrange = '#f06c50';
+export const colorOrangeDs = '#a9a4a4';
 export const colorGrey = '#e9f2f9';
 
 export const colors = {
     colorLightBlue,
     colorDarkBlue,
     colorOrange,
+    colorLightBlueDs,
+    colorDarkBlueDs,
+    colorOrangeDs,
     colorGrey,
 };
 

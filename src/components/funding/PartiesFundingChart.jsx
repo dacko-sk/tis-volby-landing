@@ -14,7 +14,7 @@ import Loading from '../general/Loading';
 
 function PartiesFundingChart({ limit }) {
     const { data, isLoading, error } = useDonationsData();
-    const { getPartiesTotals } = useGovData();
+    const { getPartiesTotals, getExtremes } = useGovData();
 
     if (isLoading || error) {
         return <Loading error={error} />;
@@ -52,7 +52,10 @@ function PartiesFundingChart({ limit }) {
                 currency
                 data={limit ? totals.slice(0, limit) : totals}
                 lastUpdate={false}
-                subtitle={t(labels.funding.partiesTotalDisclaimer)}
+                subtitle={t(
+                    labels.funding.partiesTotalDisclaimer,
+                    Object.values(getExtremes())
+                )}
                 title={t(
                     labels.funding[`partiesTotal${!limit ? 'All' : ''}`],
                     limit ? [limit] : []

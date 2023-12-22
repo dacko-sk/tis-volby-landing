@@ -132,7 +132,7 @@ export const BarsTooltip = (bars, showSum, valueFormatter) =>
                                         style={{ color: bar.color }}
                                     >
                                         <span className="recharts-tooltip-item-name">
-                                            {t(bar.name)}
+                                            {t(bar.longName ?? bar.name)}
                                         </span>
                                         <span className="recharts-tooltip-item-separator">
                                             {tooltipSeparator}
@@ -177,7 +177,7 @@ export const PieTooltip = (dataKeys, dataLabels, formatter) =>
                         className="recharts-tooltip-label fw-bold"
                         style={{ color: payload[0].payload.color }}
                     >
-                        {payload[0].payload.name}
+                        {payload[0].payload.longName ?? payload[0].payload.name}
                     </p>
                     <ul className="recharts-tooltip-item-list">
                         {dataKeys.map((key, index) => (

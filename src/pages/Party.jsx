@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../helpers/dictionary';
 import { buildApiQuery } from '../helpers/dontaions';
-import { isCoalition } from '../helpers/parties';
 import { routes, segments, separators } from '../helpers/routes';
 
 import useGovData from '../hooks/GovData';
@@ -13,10 +12,10 @@ import Title from '../components/structure/Title';
 
 function Party() {
     const params = useParams();
+    const { getAggTotals, isCoalition } = useGovData();
+
     const partyName = (params.slug ?? '').replaceAll(separators.space, ' ');
     const coalition = isCoalition(partyName);
-
-    const { getAggTotals } = useGovData();
 
     const options = {
         p: partyName,

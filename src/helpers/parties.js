@@ -51,6 +51,3 @@ export const partyAliases = (party) => {
 };
 
 export const partyAlias = (party) => (party ? partyAliases(party)[0] : '');
-
-export const isCoalition = (party) =>
-    coalitions.some((pa) => pa.includes(party));

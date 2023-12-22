@@ -11,7 +11,7 @@ import useGovData from '../../hooks/GovData';
 import TisBarChart, { subsidyBars } from '../charts/TisBarChart';
 
 function GovTotalsChart({ limit, period }) {
-    const { getPartiesTotals } = useGovData();
+    const { getPartiesTotals, getExtremes } = useGovData();
 
     const parties = {};
     Object.entries(getPartiesTotals(period)).forEach(([partyName, st]) => {
@@ -24,19 +24,21 @@ function GovTotalsChart({ limit, period }) {
         }
     });
     const totals = Object.values(parties).sort(sortByNumericProp('total'));
+    const columns = limit ? totals.slice(0, limit) : totals;
 
     return totals.length ? (
         <>
             <TisBarChart
                 className="mt-4"
-                bars={subsidyBars(true)}
+                bars={subsidyBars(true, false, columns)}
                 currency
-                data={limit ? totals.slice(0, limit) : totals}
+                data={columns}
                 lastUpdate={false}
                 subtitle={t(
                     labels.government[
                         `partiesTotal${period ? 'Period' : ''}Disclaimer`
-                    ]
+                    ],
+                    Object.values(getExtremes())
                 )}
                 title={t(
                     labels.government[

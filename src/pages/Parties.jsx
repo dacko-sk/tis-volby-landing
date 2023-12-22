@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 import { sortAlphabetically } from '../helpers/helpers';
-import { isCoalition } from '../helpers/parties';
 import { routes } from '../helpers/routes';
 
 import useGovData from '../hooks/GovData';
@@ -17,7 +16,7 @@ import Title from '../components/structure/Title';
 
 function Parties() {
     const { data, isLoading, error } = useDonationsData();
-    const { getPartiesTotals } = useGovData();
+    const { getPartiesTotals, isCoalition } = useGovData();
 
     if (isLoading || error) {
         return <Loading error={error} />;

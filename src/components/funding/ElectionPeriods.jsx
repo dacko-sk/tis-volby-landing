@@ -21,6 +21,7 @@ function ElectionPeriods({ party }) {
     const {
         getElectionPeriods,
         getElectionPeriodYears,
+        getExtremes,
         getAggTotals,
         govData,
     } = useGovData();
@@ -28,13 +29,14 @@ function ElectionPeriods({ party }) {
     const [open, setOpen] = useState([]);
 
     // make last elections accordion opened once data are loaded
+    const { lastEP } = getExtremes();
     useEffect(() => {
-        if (govData.lastElection) {
-            setOpen([govData.lastElection]);
+        if (lastEP) {
+            setOpen([lastEP]);
         }
-    }, [govData.lastElection]);
+    }, [lastEP]);
 
-    if (!govData.lastElection || govData.error) {
+    if (!lastEP || govData.error) {
         // waiting for data or error in loding
         return <Loading error={govData.error} />;
     }
@@ -47,11 +49,21 @@ function ElectionPeriods({ party }) {
         if (epTotal) {
             let epContent = null;
             if (open.includes(period)) {
-                const sourcesData = subsidyTypes.map((type) => ({
-                    name: t(labels.government[type]),
-                    value: getAggTotals(period, type, party),
-                    color: subsidyColors[type],
-                }));
+                const sourcesData = subsidyTypes.map((type) =>
+                    ep[csvKeys.ESTIMATE]
+                        ? {
+                              name: t(labels.government[type].est),
+                              longName: t(labels.government[type].estLong),
+                              value: getAggTotals(period, type, party),
+                              color: subsidyColors[type].est,
+                          }
+                        : {
+                              name: t(labels.government[type].short),
+                              longName: t(labels.government[type].long),
+                              value: getAggTotals(period, type, party),
+                              color: subsidyColors[type].paid,
+                          }
+                );
                 const sourcesPie = {
                     data: sourcesData,
                     nameKey: 'name',
