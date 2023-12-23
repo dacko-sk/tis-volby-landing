@@ -55,9 +55,15 @@ export const columnVariants = {
             stackId: 'funding',
         },
         {
-            key: 'government',
+            key: 'paid',
             name: labels.government.navTitle,
             color: colors.colorOrange,
+            stackId: 'funding',
+        },
+        {
+            key: 'est',
+            name: labels.government.estimate,
+            color: colors.colorOrangeDs,
             stackId: 'funding',
         },
     ],

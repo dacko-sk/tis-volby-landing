@@ -6,7 +6,7 @@ import { labels, t } from '../../helpers/dictionary';
 import { sortByNumericProp, sumOfValues } from '../../helpers/helpers';
 import { routes, segments } from '../../helpers/routes';
 
-import useGovData from '../../hooks/GovData';
+import useGovData, { csvKeys } from '../../hooks/GovData';
 
 import TisBarChart, { subsidyBars } from '../charts/TisBarChart';
 
@@ -14,13 +14,20 @@ function GovTotalsChart({ limit, period }) {
     const { getPartiesTotals, getExtremes } = useGovData();
 
     const parties = {};
-    Object.entries(getPartiesTotals(period)).forEach(([partyName, st]) => {
+    Object.entries(getPartiesTotals(period)).forEach(([partyName, stages]) => {
         if (!(parties[partyName] ?? false)) {
+            // paid subsidies
+            const paid = stages.paid ?? {};
             parties[partyName] = {
-                ...st,
+                ...paid,
                 name: partyChartLabel(partyName, segments.GOVERNMENT),
-                total: sumOfValues(st),
+                total: sumOfValues(paid),
             };
+            // future subsidies estimates
+            Object.entries(stages.est ?? {}).forEach(([key, amount]) => {
+                parties[partyName][key + csvKeys.ESTIMATE] = amount;
+                parties[partyName].total += amount;
+            });
         }
     });
     const totals = Object.values(parties).sort(sortByNumericProp('total'));

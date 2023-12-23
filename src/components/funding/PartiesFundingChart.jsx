@@ -21,16 +21,18 @@ function PartiesFundingChart({ limit }) {
     }
 
     const parties = {};
-    Object.entries(getPartiesTotals()).forEach(([partyName, subsidyTypes]) => {
+    Object.entries(getPartiesTotals()).forEach(([partyName, stages]) => {
         if (!(parties[partyName] ?? false)) {
             parties[partyName] = {
                 name: partyChartLabel(partyName),
                 total: 0,
             };
         }
-        const amount = sumOfValues(subsidyTypes);
-        parties[partyName].government = amount;
-        parties[partyName].total += amount;
+        Object.entries(stages).forEach(([stage, subsidyTypes]) => {
+            const amount = sumOfValues(subsidyTypes);
+            parties[partyName][stage] = amount;
+            parties[partyName].total += amount;
+        });
     });
     Object.entries(data).forEach(([partyName, partyData]) => {
         if (!(parties[partyName] ?? false)) {

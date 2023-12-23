@@ -257,16 +257,16 @@ export const labels = {
             'Political parties ranking by subsidies',
         ],
         partiesTotalDisclaimer: [
-            'Príjmy politických strán zo súkromných a štátnych zdrojov od %i. do %i. volebného obdobia (%i - %i).',
-            'Incomes of political parties from donations and government subsidies between election periods no. %i & %i (%i - %i).',
+            'Príjmy politických strán zo súkromných a štátnych zdrojov od %i. do %i. volebného obdobia (%i - %i). Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',
+            'Incomes of political parties from donations and government subsidies between election periods no. %i & %i (%i - %i). In current election period we show estimate of future government subsidies.',
         ],
         sourcesDisclaimer: [
-            'Pomer príjmov všetkých politických strán medzi súkromnými a štátnymi zdrojmi od %i. do %i. volebného obdobia (%i - %i).',
-            'All parties incomes distribution between dontations and government subsidies between election periods no. %i & %i (%i - %i).',
+            'Pomer príjmov všetkých politických strán medzi súkromnými a štátnymi zdrojmi od %i. do %i. volebného obdobia (%i - %i). Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',
+            'All parties incomes distribution between dontations and government subsidies between election periods no. %i & %i (%i - %i). In current election period we show estimate of future government subsidies.',
         ],
         sourcesDisclaimerParty: [
-            'Pomer príjmov medzi súkromnými a štátnymi zdrojmi strany od %i. do %i. volebného obdobia (%i - %i).',
-            'Party incomes distribution between dontations and government subsidies between election periods no. %i & %i (%i - %i).',
+            'Pomer príjmov medzi súkromnými a štátnymi zdrojmi strany od %i. do %i. volebného obdobia (%i - %i). Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',
+            'Party incomes distribution between dontations and government subsidies between election periods no. %i & %i (%i - %i). In current election period we show estimate of future government subsidies.',
         ],
         sourcesTitle: ['Zdroje financovania', 'Funding sources'],
     },
@@ -312,6 +312,7 @@ export const labels = {
             'Súčet príspevkov vyplatených strane vo volebnom období.',
             'Sum of subsidies paid to the party in the election period.',
         ],
+        estimate: ['Št. príspevky (odhad)', 'Gov. subsidies (estimate)'],
         learnMore: [
             'Zistiť viac o štátnych príspevkoch',
             'Find out more about government subsidies',
@@ -331,8 +332,8 @@ export const labels = {
             'Ranking of political parties',
         ],
         partiesTotalDisclaimer: [
-            'Súhrnný objem príspevkov zo štátneho rozpočtu vyplatených jednotlivým politickým stranám od %i. do %i. volebného obdobia (%i - %i).',
-            'Aggregated amount of subsidies paid by the government to the particular political party between election periods no. %i & %i (%i - %i).',
+            'Súhrnný objem príspevkov zo štátneho rozpočtu vyplatených jednotlivým politickým stranám od %i. do %i. volebného obdobia (%i - %i). Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',
+            'Aggregated amount of subsidies paid by the government to the particular political party between election periods no. %i & %i (%i - %i). In current election period we show estimate of future government subsidies.',
         ],
         partiesTotalPeriod: [
             'Rozdelenie príspevkov medzi politické strany',
@@ -365,16 +366,16 @@ export const labels = {
             'Sum of government subsidies paid to all political parties in the particular year of the election period.',
         ],
         yearsDisclaimerAll: [
-            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch od %i. do %i. volebného obdobia.',
-            'Sum of government subsidies paid to all political parties in the particular year between election periods no. %i & %i.',
+            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch od %i. do %i. volebného obdobia. Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',
+            'Sum of government subsidies paid to all political parties in the particular year between election periods no. %i & %i. In current election period we show estimate of future government subsidies.',
         ],
         yearsDisclaimerParty: [
             'Súčet štátnych príspevkov vyplatených politickej strane v jednotlivých kalendárnych rokoch volebného obdobia.',
             'Sum of government subsidies paid to the party in the particular year of the election period.',
         ],
         yearsDisclaimerPartyAll: [
-            'Súčet štátnych príspevkov vyplatených politickej strane v jednotlivých kalendárnych rokoch od %i. do %i. volebného obdobia.',
-            'Sum of government subsidies paid to the party in the particular year between election periods no. %i & %i.',
+            'Súčet štátnych príspevkov vyplatených politickej strane v jednotlivých kalendárnych rokoch od %i. do %i. volebného obdobia. Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',
+            'Sum of government subsidies paid to the party in the particular year between election periods no. %i & %i. In current election period we show estimate of future government subsidies.',
         ],
         yearsTitle: ['Príspevky po rokoch', 'Subsidies by years'],
     },

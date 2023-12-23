@@ -26,7 +26,8 @@ function FundingSources({ party }) {
     }
 
     const coalition = isCoalition(party);
-    const govSum = getAggTotals(null, null, party);
+    const { paid, est } = getAggTotals(null, null, party);
+    const govSum = paid + est;
 
     const sum = {
         [pdKeys.DONATIONS]: 0,
@@ -91,8 +92,13 @@ function FundingSources({ party }) {
                 },
                 {
                     name: t(labels.government.navTitle),
-                    value: govSum,
+                    value: paid,
                     color: colors.colorOrange,
+                },
+                {
+                    name: t(labels.government.estimate),
+                    value: est,
+                    color: colors.colorOrangeDs,
                 },
             ],
             nameKey: 'name',

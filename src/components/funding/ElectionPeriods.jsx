@@ -44,7 +44,8 @@ function ElectionPeriods({ party }) {
     const accordions = getElectionPeriods().map((ep) => {
         const period = ep[csvKeys.ELECTION_PERIOD];
         const fromTo = getElectionPeriodYears(period);
-        const epTotal = getAggTotals(period, null, party);
+        const { paid, est } = getAggTotals(period, null, party);
+        const epTotal = paid + est;
 
         if (epTotal) {
             let epContent = null;
@@ -54,13 +55,13 @@ function ElectionPeriods({ party }) {
                         ? {
                               name: t(labels.government[type].est),
                               longName: t(labels.government[type].estLong),
-                              value: getAggTotals(period, type, party),
+                              value: getAggTotals(period, type, party).est,
                               color: subsidyColors[type].est,
                           }
                         : {
                               name: t(labels.government[type].short),
                               longName: t(labels.government[type].long),
-                              value: getAggTotals(period, type, party),
+                              value: getAggTotals(period, type, party).paid,
                               color: subsidyColors[type].paid,
                           }
                 );

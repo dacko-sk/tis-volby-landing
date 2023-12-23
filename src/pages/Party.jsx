@@ -27,6 +27,7 @@ function Party() {
         ).then((response) => response.json())
     );
     const donationsSum = dqData?.sum ?? 0;
+    const { paid, est } = getAggTotals(null, null, partyName);
 
     return (
         <section>
@@ -48,7 +49,7 @@ function Party() {
                             {t(labels.donations.navTitle)}
                         </Nav.Link>
                     )}
-                    {getAggTotals(null, null, partyName) > 0 && (
+                    {paid + est > 0 && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.party(partyName, segments.GOVERNMENT)}

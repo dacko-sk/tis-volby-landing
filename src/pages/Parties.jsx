@@ -10,10 +10,10 @@ import Title from '../components/structure/Title';
 import PartiesTiles from '../components/parties/PartiesTiles';
 
 function Parties() {
-    const { getPartiesTotals } = useGovData();
+    const { allGovParties } = useGovData();
 
     const allParties = Array.from(
-        new Set([...allDonationsParties(), ...Object.keys(getPartiesTotals())])
+        new Set([...allDonationsParties(), ...allGovParties])
     ).sort(sortAlphabetically());
 
     setTitle(t(labels.parties.navTitle));

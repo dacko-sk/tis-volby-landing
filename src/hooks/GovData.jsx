@@ -216,16 +216,15 @@ export const GovDataProvider = function ({ children }) {
 
     const getAggTotals = (period, type, party) => {
         const { paid, est } = getAggYears(period, type, party);
-        return sumOfValues(paid) + sumOfValues(est);
+        return { paid: sumOfValues(paid), est: sumOfValues(est) };
     };
 
     const getPartiesYears = (period, type, party) => {
         const parties = {};
         getElectionPeriods().forEach((ep) => {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
+                const stage = ep[csvKeys.ESTIMATE] ? 'est' : 'paid';
                 (type ? [type] : subsidyTypes).forEach((st) => {
-                    const sk =
-                        st + (ep[csvKeys.ESTIMATE] ? csvKeys.ESTIMATE : '');
                     let epStParties = [];
                     if (party) {
                         if (ep[st][party] ?? false) {
@@ -238,12 +237,16 @@ export const GovDataProvider = function ({ children }) {
                         if (!(parties[partyName] ?? false)) {
                             parties[partyName] = {};
                         }
-                        if (!(parties[partyName][sk] ?? false)) {
-                            parties[partyName][sk] = {};
+                        if (!(parties[partyName][stage] ?? false)) {
+                            parties[partyName][stage] = {};
+                        }
+                        if (!(parties[partyName][stage][st] ?? false)) {
+                            parties[partyName][stage][st] = {};
                         }
                         Object.entries(years).forEach(([year, subsidy]) => {
-                            parties[partyName][sk][year] =
-                                (parties[partyName][sk][year] ?? 0) + subsidy;
+                            parties[partyName][stage][st][year] =
+                                (parties[partyName][stage][st][year] ?? 0) +
+                                subsidy;
                         });
                     });
                     if (!party) {
@@ -257,16 +260,30 @@ export const GovDataProvider = function ({ children }) {
                                                 parties[member] = {};
                                             }
                                             if (
-                                                !(parties[member][sk] ?? false)
+                                                !(
+                                                    parties[member][stage] ??
+                                                    false
+                                                )
                                             ) {
-                                                parties[member][sk] = {};
+                                                parties[member][stage] = {};
+                                            }
+                                            if (
+                                                !(
+                                                    parties[member][stage][
+                                                        st
+                                                    ] ?? false
+                                                )
+                                            ) {
+                                                parties[member][stage][st] = {};
                                             }
                                             Object.entries(years).forEach(
                                                 ([year, subsidy]) => {
-                                                    parties[member][sk][year] =
-                                                        (parties[member][sk][
-                                                            year
-                                                        ] ?? 0) +
+                                                    parties[member][stage][st][
+                                                        year
+                                                    ] =
+                                                        (parties[member][stage][
+                                                            st
+                                                        ][year] ?? 0) +
                                                         share * subsidy;
                                                 }
                                             );
@@ -285,10 +302,13 @@ export const GovDataProvider = function ({ children }) {
     const getPartiesTotals = (period, type, party) => {
         const parties = {};
         Object.entries(getPartiesYears(period, type, party)).forEach(
-            ([partyName, subsidyTypes]) => {
+            ([partyName, stages]) => {
                 parties[partyName] = {};
-                Object.entries(subsidyTypes).forEach(([st, years]) => {
-                    parties[partyName][st] = sumOfValues(years);
+                Object.entries(stages).forEach(([stage, subsidyTypes]) => {
+                    parties[partyName][stage] = {};
+                    Object.entries(subsidyTypes).forEach(([st, years]) => {
+                        parties[partyName][stage][st] = sumOfValues(years);
+                    });
                 });
             }
         );
@@ -334,6 +354,8 @@ export const GovDataProvider = function ({ children }) {
         return { firstEP, lastEP, firstYear, lastYear };
     };
 
+    const allGovParties = Object.keys(getPartiesTotals());
+
     const value = useMemo(
         () => ({
             govData,
@@ -349,6 +371,7 @@ export const GovDataProvider = function ({ children }) {
             getCoalitionMembers,
             isCoalition,
             loadAllElections,
+            allGovParties,
         }),
         [govData]
     );
