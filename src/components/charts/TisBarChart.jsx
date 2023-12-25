@@ -41,6 +41,20 @@ import LastUpdateTag from '../general/LastUpdateTag';
 import './Charts.scss';
 
 export const columnVariants = {
+    donations: [
+        {
+            key: 'donations',
+            name: labels.donations.donations,
+            color: colors.colorDarkBlue,
+            stackId: 'funding',
+        },
+        {
+            key: 'credits',
+            name: labels.donations.credits,
+            color: colors.colorLightBlue,
+            stackId: 'funding',
+        },
+    ],
     funding: [
         {
             key: 'donations',

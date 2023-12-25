@@ -156,6 +156,14 @@ export const labels = {
             'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
             'Top 10 individual political party donors & creditors (2002 - 2022)',
         ],
+        topParties: [
+            'Rebríček politických strán podľa výšky neštátnych príjmov',
+            'Political parties ranking by non-government incomes',
+        ],
+        topPartiesDisclaimer: [
+            'Súčet príspevkov od individuálnych darcov v rokoch 2002 - 2023.',
+            'Sum of donations from individual donors in the years 2002 - 2023.',
+        ],
         totalDisclaimer: [
             'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2023.',
             'Sum of donations from individual donors to all political parties in the years 2002 - 2023.',
