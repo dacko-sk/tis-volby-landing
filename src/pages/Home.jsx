@@ -31,12 +31,14 @@ function Home() {
             <PartiesFundingChart limit={10} />
 
             <Top10Donors
+                // https://volby.transparency.sk/api/donors/donors.php?c=0&b=10&t=2-3-4
                 file="top10individual"
                 title={labels.donations.top10individual}
                 disclaimer={labels.donations.disclaimer}
             />
 
             <Top10Donors
+                // https://volby.transparency.sk/api/donors/donors.php?c=0&b=10&t=2-3-4
                 file="top10donors"
                 title={labels.donations.top10donors}
                 disclaimer={labels.donations.disclaimer}

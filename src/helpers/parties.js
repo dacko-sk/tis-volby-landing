@@ -19,7 +19,7 @@ const parties = [
     ['PS a SPOLU', 'Koalícia Progresívne Slovensko a SPOLU'],
     ['REPUBLIKA'],
     ['SAS', 'SaS'],
-    ['SDKÚ', 'SDKU', 'SDKU-DS', 'SDKU - DS'],
+    ['SDKÚ', 'SDKU', 'SDKÚ-DS', 'SDKU-DS', 'SDKÚ - DS', 'SDKU - DS'],
     ['SIEŤ', 'Sieť', '#SIEŤ'],
     ['SME RODINA', 'SME RODINA - Boris Kollár'],
     ['SMER', 'SMER - SD'],
