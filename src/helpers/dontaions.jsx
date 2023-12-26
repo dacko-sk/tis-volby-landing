@@ -164,6 +164,12 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
     }
 };
 
+// sort donor parties object (containing party:amount keys) by donation amount
+export const getSortedDonorParties = (parties) =>
+    Object.entries(parties)
+        .sort((a, b) => b[1] - a[1])
+        .map(([party]) => party);
+
 export const parseQueryOptions = () => {
     const params = useParams();
     const options = {};
@@ -244,10 +250,10 @@ export function DonorFlags({ compact = false, flags = [] }) {
 export function DonorParties({
     className = '',
     compact = false,
-    parties = [],
+    parties = {},
 }) {
     if (compact) {
-        return parties.map((party, index) => {
+        return getSortedDonorParties(parties).map((party, index) => {
             return (
                 <Badge
                     key={party}
@@ -265,7 +271,7 @@ export function DonorParties({
             direction="horizontal"
             gap={2}
         >
-            {parties.map((party) => {
+            {getSortedDonorParties(parties).map((party) => {
                 const partyName = partyAlias(party);
                 return (
                     <Link

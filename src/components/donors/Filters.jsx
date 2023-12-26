@@ -20,6 +20,7 @@ import {
     sortAlphabetically,
     sortNumbers,
 } from '../../helpers/helpers';
+import { partyAlias } from '../../helpers/parties';
 import { separators } from '../../helpers/routes';
 
 import './Donors.scss';
@@ -375,11 +376,14 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
                         <option key="" value="">
                             {t(labels.all)}
                         </option>
-                        {parties.sort(sortAlphabetically()).map((party) => (
-                            <option key={party} value={party}>
-                                {party}
-                            </option>
-                        ))}
+                        {parties.sort(sortAlphabetically()).map((party) => {
+                            const partyName = partyAlias(party);
+                            return (
+                                <option key={partyName} value={partyName}>
+                                    {partyName}
+                                </option>
+                            );
+                        })}
                     </Form.Select>
                 </Form.Group>
             )}
