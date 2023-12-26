@@ -161,16 +161,16 @@ export const labels = {
             'Political parties ranking by non-government incomes',
         ],
         topPartiesDisclaimer: [
-            'Súčet príspevkov od individuálnych darcov v rokoch 2002 - 2023.',
-            'Sum of donations from individual donors in the years 2002 - 2023.',
+            'Súčet príspevkov od individuálnych darcov v rokoch 2002 - 2022.',
+            'Sum of donations from individual donors in the years 2002 - 2022.',
         ],
         totalDisclaimer: [
-            'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2023.',
-            'Sum of donations from individual donors to all political parties in the years 2002 - 2023.',
+            'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2022.',
+            'Sum of donations from individual donors to all political parties in the years 2002 - 2022.',
         ],
         totalDisclaimerParty: [
-            'Súčet príspevkov od individuálnych darcov strany v rokoch 2002 - 2023.',
-            'Sum of donations from individual donors of political party in the years 2002 - 2023.',
+            'Súčet príspevkov od individuálnych darcov strany v rokoch 2002 - 2022.',
+            'Sum of donations from individual donors of political party in the years 2002 - 2022.',
         ],
         types: [
             [
@@ -370,8 +370,8 @@ export const labels = {
             '60 SKK / €1.99 per 1 vote (until 2006 or end of 3rd election period)',
         ],
         yearsDisclaimer: [
-            'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch volebného obdobia.',
-            'Sum of government subsidies paid to all political parties in the particular year of the election period.',
+            'Súčet štátnych príspevkov vyplácaných všetkým politickým stranám v jednotlivých kalendárnych rokoch volebného obdobia (odhad na základe počtu mesiacov volebného obdobia v danom roku).',
+            'Sum of government subsidies paid to all political parties in the particular year of the election period (estimate based on amount of months in the election period).',
         ],
         yearsDisclaimerAll: [
             'Súčet štátnych príspevkov vyplatených všetkým politickým stranám v jednotlivých kalendárnych rokoch od %i. do %i. volebného obdobia. Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',

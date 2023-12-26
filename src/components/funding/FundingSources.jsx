@@ -1,16 +1,13 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-// import { partyChartLabel } from '../../helpers/charts';
 import { colors, links } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
-// import { partyAlias } from '../../helpers/parties';
 import { routes, segments } from '../../helpers/routes';
 
 import useGovData from '../../hooks/GovData';
 import { pdKeys, usePartiesDonationsData } from '../../hooks/Queries';
 
-// import TisBarChart from '../charts/TisBarChart';
 import TisPieChart from '../charts/TisPieChart';
 import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
@@ -42,7 +39,6 @@ function FundingSources({ party }) {
 
     let chart;
     if (coalition) {
-        // const palette = Object.values(colors);
         chart = Object.entries(getCoalitionMembers(party)).map(
             ([period, members]) => {
                 return (
@@ -54,25 +50,6 @@ function FundingSources({ party }) {
                             parties={Object.keys(members)}
                             compact={false}
                         />
-                        {/* <TisBarChart
-                            className="mt-4"
-                            bars={Object.keys(members).map((member, index) => ({
-                                key: member + index,
-                                name: member,
-                                color: palette[index],
-                                stackId: 'coalition',
-                            }))}
-                            data={Object.entries(members).map(
-                                ([member, share], index) => ({
-                                    name: partyChartLabel(member),
-                                    [member + index]: govSum * share,
-                                })
-                            )}
-                            currency
-                            lastUpdate={false}
-                            showSum={false}
-                            vertical
-                        /> */}
                     </div>
                 );
             }
@@ -100,7 +77,10 @@ function FundingSources({ party }) {
                     value: est,
                     color: colors.colorOrangeDs,
                 },
-            ],
+            ].filter(
+                // show only non-zero segments
+                (segment) => segment.value
+            ),
             nameKey: 'name',
             dataKey: 'value',
             label: t(labels.charts.amount),

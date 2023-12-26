@@ -14,7 +14,7 @@ const parties = [
     ],
     ['MKO'],
     ['MOST-HÍD', 'MOST HID', 'MOST - HID', 'Most - Híd'],
-    ['SLOVENSKO', 'OĽANO', 'OĽaNO - NOVA', 'OĽaNO'],
+    ['SLOVENSKO (OĽANO)', 'OĽANO', 'OĽaNO - NOVA', 'OĽaNO'],
     ['PS'],
     ['PS a SPOLU', 'Koalícia Progresívne Slovensko a SPOLU'],
     ['REPUBLIKA'],
