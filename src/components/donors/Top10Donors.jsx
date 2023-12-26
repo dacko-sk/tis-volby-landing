@@ -43,7 +43,14 @@ function Top10Donors({ disclaimer, file, title }) {
                             <td>{donorData.location}</td>
                             <td>{currencyFormat(donorData.amount)}</td>
                             <td>
-                                <DonorParties parties={donorData.parties} />
+                                <DonorParties
+                                    // sort parties by donation size
+                                    parties={Object.entries(
+                                        donorData.partiesAmounts
+                                    )
+                                        .sort((a, b) => b[1] - a[1])
+                                        .map(([key]) => key)}
+                                />
                             </td>
                             <td>
                                 {Object.entries(donorData.types)
