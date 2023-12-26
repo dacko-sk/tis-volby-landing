@@ -9,7 +9,7 @@ function ContextProviders({ children }) {
     return (
         <QueryClientProvider client={queryClient}>
             <GovDataProvider>
-                <CookiesProvider>{children}</CookiesProvider>;
+                <CookiesProvider>{children}</CookiesProvider>
             </GovDataProvider>
         </QueryClientProvider>
     );
