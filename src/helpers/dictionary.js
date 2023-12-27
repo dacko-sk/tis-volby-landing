@@ -336,8 +336,8 @@ export const labels = {
             'Top %i political parties funded by government subsidies',
         ],
         partiesTotalAll: [
-            'Rebríček politických strán',
-            'Ranking of political parties',
+            'Rebríček politických strán podľa výšky štátnych príspevkov',
+            'Ranking of political parties by government subsidies',
         ],
         partiesTotalDisclaimer: [
             'Súhrnný objem príspevkov zo štátneho rozpočtu vyplatených jednotlivým politickým stranám od %i. do %i. volebného obdobia (%i - %i). Za aktuálne volebné obdobie uvádzame odhad budúcich štátnych príspevkov.',
