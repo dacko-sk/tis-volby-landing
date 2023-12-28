@@ -219,89 +219,66 @@ export const GovDataProvider = function ({ children }) {
         return { paid: sumOfValues(paid), est: sumOfValues(est) };
     };
 
-    const getPartiesYears = (period, type, party) => {
+    const getPartiesYears = (period, type) => {
+        const decompose = !period;
         const parties = {};
         getElectionPeriods().forEach((ep) => {
             if (!period || ep[csvKeys.ELECTION_PERIOD] === period) {
                 const stage = ep[csvKeys.ESTIMATE] ? 'est' : 'paid';
                 (type ? [type] : subsidyTypes).forEach((st) => {
-                    let epStParties = [];
-                    if (party) {
-                        if (ep[st][party] ?? false) {
-                            epStParties = [party, ep[st][party]];
+                    Object.entries(ep[st]).forEach(([partyName, years]) => {
+                        // by default the party itself is the only member of subsidy
+                        let membersShares = [[partyName, null]];
+                        // in case this is a coalition which can be decomposed, we add subsidies to the members instead
+                        if (decompose) {
+                            let coalitionMembers;
+                            Object.entries(ep[csvKeys.COALITIONS] ?? []).some(
+                                ([coalition, members]) => {
+                                    if (coalition === partyName) {
+                                        coalitionMembers = members;
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            );
+                            if (coalitionMembers) {
+                                // check if all members have known shares
+                                const canBeDecomposed = !Object.values(
+                                    coalitionMembers
+                                ).some((share) => Number.isNaN(share));
+                                if (canBeDecomposed) {
+                                    membersShares =
+                                        Object.entries(coalitionMembers);
+                                }
+                            }
                         }
-                    } else {
-                        epStParties = Object.entries(ep[st]);
-                    }
-                    epStParties.forEach(([partyName, years]) => {
-                        if (!(parties[partyName] ?? false)) {
-                            parties[partyName] = {};
-                        }
-                        if (!(parties[partyName][stage] ?? false)) {
-                            parties[partyName][stage] = {};
-                        }
-                        if (!(parties[partyName][stage][st] ?? false)) {
-                            parties[partyName][stage][st] = {};
-                        }
-                        Object.entries(years).forEach(([year, subsidy]) => {
-                            parties[partyName][stage][st][year] =
-                                (parties[partyName][stage][st][year] ?? 0) +
-                                subsidy;
+                        membersShares.forEach(([memberName, share]) => {
+                            if (!(parties[memberName] ?? false)) {
+                                parties[memberName] = {};
+                            }
+                            if (!(parties[memberName][stage] ?? false)) {
+                                parties[memberName][stage] = {};
+                            }
+                            if (!(parties[memberName][stage][st] ?? false)) {
+                                parties[memberName][stage][st] = {};
+                            }
+                            Object.entries(years).forEach(([year, subsidy]) => {
+                                parties[memberName][stage][st][year] =
+                                    (parties[memberName][stage][st][year] ??
+                                        0) +
+                                    (share ? share * subsidy : subsidy);
+                            });
                         });
                     });
-                    if (!party) {
-                        Object.entries(ep[csvKeys.COALITIONS] ?? []).forEach(
-                            ([coalition, members]) => {
-                                const years = ep[st][coalition];
-                                Object.entries(members).forEach(
-                                    ([member, share]) => {
-                                        if (!Number.isNaN(share)) {
-                                            if (!(parties[member] ?? false)) {
-                                                parties[member] = {};
-                                            }
-                                            if (
-                                                !(
-                                                    parties[member][stage] ??
-                                                    false
-                                                )
-                                            ) {
-                                                parties[member][stage] = {};
-                                            }
-                                            if (
-                                                !(
-                                                    parties[member][stage][
-                                                        st
-                                                    ] ?? false
-                                                )
-                                            ) {
-                                                parties[member][stage][st] = {};
-                                            }
-                                            Object.entries(years).forEach(
-                                                ([year, subsidy]) => {
-                                                    parties[member][stage][st][
-                                                        year
-                                                    ] =
-                                                        (parties[member][stage][
-                                                            st
-                                                        ][year] ?? 0) +
-                                                        share * subsidy;
-                                                }
-                                            );
-                                        }
-                                    }
-                                );
-                            }
-                        );
-                    }
                 });
             }
         });
         return parties;
     };
 
-    const getPartiesTotals = (period, type, party) => {
+    const getPartiesTotals = (period, type) => {
         const parties = {};
-        Object.entries(getPartiesYears(period, type, party)).forEach(
+        Object.entries(getPartiesYears(period, type)).forEach(
             ([partyName, stages]) => {
                 parties[partyName] = {};
                 Object.entries(stages).forEach(([stage, subsidyTypes]) => {
