@@ -144,7 +144,7 @@ export const BarsTooltip = (bars, showSum, valueFormatter) =>
                                 );
                             }
                         })}
-                        {showSum && bars.length > 0 && (
+                        {showSum && bars.length > 1 && (
                             <li
                                 key="sum"
                                 className="recharts-tooltip-item fw-bold"

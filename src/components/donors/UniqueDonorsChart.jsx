@@ -7,7 +7,7 @@ import { pdKeys, usePartiesDonationsData } from '../../hooks/Queries';
 import TisBarChart, { columnVariants } from '../charts/TisBarChart';
 import Loading from '../general/Loading';
 
-function PartiesDonationsChart() {
+function UniqueDonorsChart() {
     const { data, isLoading, error } = usePartiesDonationsData();
 
     if (isLoading || error) {
@@ -18,25 +18,22 @@ function PartiesDonationsChart() {
     Object.entries(data).forEach(([partyName, partyData]) => {
         parties[partyName] = {
             name: partyChartLabel(partyName),
-            [pdKeys.DONATIONS]: partyData[pdKeys.DONATIONS],
-            [pdKeys.CREDITS]: partyData[pdKeys.CREDITS],
-            total: partyData[pdKeys.DONATIONS] + partyData[pdKeys.CREDITS],
+            unique: partyData[pdKeys.UNIQUE],
         };
     });
-    const totals = Object.values(parties).sort(sortByNumericProp('total'));
+    const totals = Object.values(parties).sort(sortByNumericProp('unique'));
 
     return (
         <TisBarChart
             className="mt-4"
-            bars={columnVariants.donations}
-            currency
+            bars={columnVariants.uniqueDonors}
             data={totals}
             lastUpdate={false}
-            subtitle={t(labels.donations.topPartiesDisclaimer)}
-            title={t(labels.donations.topParties)}
+            subtitle={t(labels.donations.uniqueDonorsDisclaimer)}
+            title={t(labels.donations.uniqueDonors)}
             vertical
         />
     );
 }
 
-export default PartiesDonationsChart;
+export default UniqueDonorsChart;

@@ -5,6 +5,7 @@ import { partyAlias } from '../helpers/parties';
 export const pdKeys = {
     DONATIONS: 'donations',
     CREDITS: 'credits',
+    UNIQUE: 'unique',
 };
 
 export const usePartiesDonationsData = () =>

@@ -33,6 +33,7 @@ import {
 import { separators } from '../../helpers/routes';
 
 import { csvKeys, subsidyColors, subsidyTypes } from '../../hooks/GovData';
+import { pdKeys } from '../../hooks/Queries';
 
 import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';
@@ -43,13 +44,13 @@ import './Charts.scss';
 export const columnVariants = {
     donations: [
         {
-            key: 'donations',
+            key: pdKeys.DONATIONS,
             name: labels.donations.donations,
             color: colors.colorDarkBlue,
             stackId: 'funding',
         },
         {
-            key: 'credits',
+            key: pdKeys.CREDITS,
             name: labels.donations.credits,
             color: colors.colorLightBlue,
             stackId: 'funding',
@@ -57,13 +58,13 @@ export const columnVariants = {
     ],
     funding: [
         {
-            key: 'donations',
+            key: pdKeys.DONATIONS,
             name: labels.donations.donations,
             color: colors.colorDarkBlue,
             stackId: 'funding',
         },
         {
-            key: 'credits',
+            key: pdKeys.CREDITS,
             name: labels.donations.credits,
             color: colors.colorLightBlue,
             stackId: 'funding',
@@ -86,6 +87,13 @@ export const columnVariants = {
             key: 'incoming',
             name: labels.government.navTitle,
             color: colors.colorDarkBlue,
+        },
+    ],
+    uniqueDonors: [
+        {
+            key: pdKeys.UNIQUE,
+            name: labels.donations.uniqueDonors,
+            color: colors.colorOrange,
         },
     ],
 };

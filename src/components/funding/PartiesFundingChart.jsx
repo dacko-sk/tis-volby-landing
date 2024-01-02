@@ -41,8 +41,8 @@ function PartiesFundingChart({ limit }) {
                 total: 0,
             };
         }
-        parties[partyName].donations = partyData[pdKeys.DONATIONS];
-        parties[partyName].credits = partyData[pdKeys.CREDITS];
+        parties[partyName][pdKeys.DONATIONS] = partyData[pdKeys.DONATIONS];
+        parties[partyName][pdKeys.CREDITS] = partyData[pdKeys.CREDITS];
         parties[partyName].total +=
             partyData[pdKeys.DONATIONS] + partyData[pdKeys.CREDITS];
     });

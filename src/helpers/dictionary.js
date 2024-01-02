@@ -216,6 +216,14 @@ export const labels = {
                 'Contractual donations', // 7
             ],
         ],
+        uniqueDonors: [
+            'Počet unikátnych darcov a veriteľov',
+            'Amount of unique donors & creditors',
+        ],
+        uniqueDonorsDisclaimer: [
+            'Unikátni individuálni darcovia a veriteľia všetkých strán v rokoch 2002 - 2022.',
+            'Unique individual donors & creditors of political parties in the years 2002 - 2022.',
+        ],
     },
     donor: {
         amount: ['Suma príspevkov', 'Sum of donations'],
