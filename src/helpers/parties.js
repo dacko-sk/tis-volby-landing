@@ -2,7 +2,7 @@ const parties = [
     ['ALIANCIA', 'Spolupatričnosť'],
     ['DOBRÁ VOĽBA', 'DOBRA VOLBA', 'Dobrá voľba'],
     ['HLAS'],
-    ['HZDS', 'LS-HZDS', 'LS - HZDS'],
+    ['ĽS-HZDS', 'ĽS - HZDS', 'HZDS'],
     ['KDH'],
     ['KÚ', 'Kresťanská Únia'],
     ['KSS'],
