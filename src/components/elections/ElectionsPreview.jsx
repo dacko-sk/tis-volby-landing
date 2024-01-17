@@ -1,7 +1,7 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { openInNewTab } from '../../helpers/browser';
+import { openUrl } from '../../helpers/browser';
 import { dateFormat } from '../../helpers/helpers';
 
 import defaultImg from '../../../public/img/tis-logo-blue.png';
@@ -17,11 +17,11 @@ function ElectionsPreview({
     title = '',
 }) {
     const getClickHandler = (url) => () => {
-        openInNewTab(url);
+        openUrl(url);
     };
     const getKeyUpHandler = (url) => (event) => {
         if (event.keyCode === 13) {
-            openInNewTab(url);
+            openUrl(url);
         }
     };
     return (
