@@ -3,6 +3,9 @@
 
 .donor-search {
   background-color: $tis-dark-blue;
+  h2 {
+    color: $tis-light-blue;
+  }
   .btn {
     --bs-btn-hover-border-color: white;
   }
