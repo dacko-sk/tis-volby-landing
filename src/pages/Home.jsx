@@ -18,7 +18,7 @@ import PartiesFundingChart from '../components/funding/PartiesFundingChart';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
 
-import img23 from '../../public/img/parlament_2_color_1920_900.png';
+import imgE24 from '../../public/img/foto_europarlament_tasr_duotone_1920_1026.jpg';
 import imgP24 from '../../public/img/foto_palac_okraje_duotone_8_1920_900.jpg';
 
 function Home() {
@@ -34,9 +34,16 @@ function Home() {
                 <Row className="text-center">
                     <Col lg={6}>
                         <h2>{t(labels.elections[el.p24])}</h2>
-                        {getCurrentLanguage() === languages.sk
-                            ? 'Spustili sme novú podstránku venovanú Prezidentským voľbám 2024.'
-                            : 'We launched new subpage dedicated to President elections in 2024.'}
+                        <p>
+                            {getCurrentLanguage() === languages.sk
+                                ? 'Spustili sme novú podstránku venovanú Prezidentským voľbám 2024.'
+                                : 'We launched new subpage dedicated to President elections in 2024.'}
+                        </p>
+                        <ElectionsCountdown
+                            start="2024-03-23T07:00:00"
+                            end="2024-03-23T22:00:00"
+                            noHeader
+                        />
                         <div className="buttons mt-3">
                             <Button href={links[el.p24]} variant="secondary">
                                 {t(labels.elections[el.p24])}
@@ -44,10 +51,22 @@ function Home() {
                         </div>
                     </Col>
                     <Col className="mt-4 mt-lg-0" lg={6}>
+                        <h2>{t(labels.elections[el.e24])}</h2>
+                        <p>
+                            {getCurrentLanguage() === languages.sk
+                                ? 'Spustili sme novú podstránku venovanú Európskym voľbám 2024.'
+                                : 'We launched new subpage dedicated to European elections in 2024.'}
+                        </p>
                         <ElectionsCountdown
-                            start="2024-03-23T07:00:00"
-                            end="2024-03-23T22:00:00"
+                            start="2024-06-08T07:00:00"
+                            end="2024-06-08T22:00:00"
+                            noHeader
                         />
+                        <div className="buttons mt-3">
+                            <Button href={links[el.e24]} variant="secondary">
+                                {t(labels.elections[el.e24])}
+                            </Button>
+                        </div>
                     </Col>
                 </Row>
             </Alert>
@@ -83,12 +102,12 @@ function Home() {
                 </Col>
                 <Col className="col-container d-flex" md={9} lg={6}>
                     <ElectionsPreview
-                        img={img23}
-                        link={links[el.n23]}
-                        title={t(labels.elections[el.n23])}
-                        date="2023-09-30"
+                        img={imgE24}
+                        link={links[el.e24]}
+                        title={t(labels.elections[el.e24])}
+                        date="2024-06-08"
                     >
-                        {se(nl2r(t(labels.elections[el.n23])))}
+                        {se(nl2r(t(labels.elections[el.e24])))}
                     </ElectionsPreview>
                 </Col>
             </Row>

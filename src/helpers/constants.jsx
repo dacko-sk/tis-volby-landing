@@ -31,6 +31,7 @@ export const donationsColumns = {
 };
 
 export const elections = {
+    e24: 'e24',
     p24: 'p24',
     n23: 'n23',
     s22: 's22',
@@ -58,6 +59,7 @@ export const links = {
     [elections.n20]: 'https://volby.transparency.sk/parlament2020/',
     [elections.s22]: 'https://volby.transparency.sk/samosprava2022/',
     [elections.n23]: 'https://volby.transparency.sk/parlament2023/',
+    [elections.e24]: 'https://volby.transparency.sk/euro2024/',
     [elections.p24]: 'https://volby.transparency.sk/prezident2024/',
     donateUrl: 'https://transparency.sk/volby',
 };
