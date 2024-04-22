@@ -40,8 +40,8 @@ function Home() {
                                 : 'We launched new subpage dedicated to President elections in 2024.'}
                         </p>
                         <ElectionsCountdown
-                            start="2024-03-23T07:00:00"
-                            end="2024-03-23T22:00:00"
+                            start="2024-04-06T07:00:00"
+                            end="2024-04-06T22:00:00"
                             noHeader
                         />
                         <div className="buttons mt-3">
@@ -95,7 +95,7 @@ function Home() {
                         img={imgP24}
                         link={links[el.p24]}
                         title={t(labels.elections[el.p24])}
-                        date="2024-03-23"
+                        date="2024-04-06"
                     >
                         {se(nl2r(t(labels.elections[el.p24])))}
                     </ElectionsPreview>
