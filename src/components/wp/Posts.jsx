@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
@@ -58,20 +58,6 @@ function Posts({
             })
     );
 
-    const navigate = useNavigate();
-    const getClickHandler = (article) => () => {
-        navigate(routes.article(article.slug), {
-            state: { article },
-        });
-    };
-    const getKeyUpHandler = (article) => (event) => {
-        if (event.keyCode === 13) {
-            navigate(routes.article(article.slug), {
-                state: { article },
-            });
-        }
-    };
-
     const loadPage = (page) => () => {
         setActivePage(page);
         scrollToTop();
@@ -86,19 +72,9 @@ function Posts({
         processArticles(data).forEach((article) => {
             articles.push(
                 template === templates.condensed ? (
-                    <NewsCondensed
-                        key={article.slug}
-                        article={article}
-                        clickHandler={getClickHandler(article)}
-                        keyUpHandler={getKeyUpHandler(article)}
-                    />
+                    <NewsCondensed key={article.slug} article={article} />
                 ) : (
-                    <NewsList
-                        key={article.slug}
-                        article={article}
-                        clickHandler={getClickHandler(article)}
-                        keyUpHandler={getKeyUpHandler(article)}
-                    />
+                    <NewsList key={article.slug} article={article} />
                 )
             );
         });

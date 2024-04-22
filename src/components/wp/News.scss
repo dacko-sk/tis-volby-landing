@@ -7,7 +7,15 @@
   }
 }
 
-.article {
+a.article {
+  &:hover {
+    text-decoration: none;
+  }
+  table,
+  .article-date,
+  .article-excerpt {
+    color: $tis-dark-blue;
+  }
   p:last-child {
     margin-bottom: 0;
   }
