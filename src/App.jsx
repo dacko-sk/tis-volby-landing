@@ -96,8 +96,8 @@ function App() {
                                             }
                                             return (
                                                 <Route
-                                                    key={path + 'index'}
-                                                    index={true}
+                                                    key={`${path}index`}
+                                                    index
                                                     element={<SubPage />}
                                                 />
                                             );

@@ -1,5 +1,4 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-import has from 'has';
 
 const lsKey = 'cookies-config';
 
@@ -15,7 +14,7 @@ const initialState = {
 export const setAnaliticsStorage = (oldVal) => {
     if (!window.location.href.includes('localhost')) {
         const ls = JSON.parse(localStorage.getItem(lsKey));
-        const newVal = ls && has(ls, 'analytics') ? ls.analytics : false;
+        const newVal = ls?.analytics ?? false;
         if (oldVal !== newVal) {
             window.gtag('consent', 'update', {
                 analytics_storage: newVal ? 'granted' : 'denied',

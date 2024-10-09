@@ -114,7 +114,7 @@ export const GovDataProvider = function ({ children }) {
     const csvLoadingError = (error) => {
         setGovData({
             ...govData,
-            error: error,
+            error,
         });
     };
 

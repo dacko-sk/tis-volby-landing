@@ -15,7 +15,7 @@ function HeroNumber({
     title,
 }) {
     return (
-        <div className={className + ' text-center'}>
+        <div className={`${className} text-center`}>
             {title && <h2>{title}</h2>}
             <div className="hero-number">
                 {Number.isNaN(Number(number)) ? number : currencyFormat(number)}

@@ -68,7 +68,7 @@ function Donor() {
                             </tr>
                             <tr>
                                 <th>{t(labels.donor.parties)}</th>
-                                <td>
+                                <td aria-label={t(labels.donor.parties)}>
                                     <DonorParties
                                         className="justify-content-end"
                                         parties={donorData.parties}

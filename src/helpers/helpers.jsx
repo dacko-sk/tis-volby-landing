@@ -144,7 +144,8 @@ export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
                     </span>
                 </span>
             );
-        } else if (Array.isArray(textOrReact)) {
+        }
+        if (Array.isArray(textOrReact)) {
             return textOrReact.map((item, index) =>
                 secondarySentenceEnding(
                     item,
@@ -152,7 +153,8 @@ export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
                     index === textOrReact.length - 1
                 )
             );
-        } else if (
+        }
+        if (
             typeof textOrReact === 'object' &&
             (textOrReact.props.children ?? false)
         ) {
@@ -169,7 +171,7 @@ export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
     return textOrReact;
 };
 
-export const sortNumbers = (asc) => (a, b) => asc ?? true ? a - b : b - a;
+export const sortNumbers = (asc) => (a, b) => (asc ?? true ? a - b : b - a);
 
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];

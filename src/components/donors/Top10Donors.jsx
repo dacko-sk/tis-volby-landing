@@ -42,7 +42,7 @@ function Top10Donors({ disclaimer, file, title }) {
                             </td>
                             <td>{donorData.location}</td>
                             <td>{currencyFormat(donorData.amount)}</td>
-                            <td>
+                            <td aria-label={t(labels.donor.parties)}>
                                 <DonorParties parties={donorData.parties} />
                             </td>
                             <td>
