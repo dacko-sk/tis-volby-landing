@@ -61,7 +61,7 @@ export const processElectionPeriod = (csv) => {
                 case csvKeys.SUBSIDY_VOTES:
                 case csvKeys.SUBSIDY_OPERATION:
                 case csvKeys.SUBSIDY_MANDATE:
-                    currentDataSet = row[0];
+                    [currentDataSet] = row;
                     currentYears = row.filter(
                         (element, index) => index > 0 && element !== null
                     );
@@ -78,18 +78,34 @@ export const processElectionPeriod = (csv) => {
                         if (partyName) {
                             const party = {};
                             if (currentDataSet === csvKeys.COALITIONS) {
-                                const members = [];
-                                const percentages = [];
-                                row.splice(1).forEach((column, index) => {
-                                    if (index % 2 === 0) {
-                                        percentages.push(Number(column));
-                                    } else {
-                                        members.push(partyAlias(column));
-                                    }
-                                });
-                                members.forEach((member, index) => {
-                                    party[member] = percentages[index];
-                                });
+                                // first column is coalition name, loop through the rest
+                                row.splice(1)
+                                    .reduce((acc, item, index) => {
+                                        // split remaining columns by 4 items chunks
+                                        const chunkIndex = Math.floor(
+                                            index / 4
+                                        );
+                                        if (!acc[chunkIndex]) {
+                                            acc[chunkIndex] = [];
+                                        }
+                                        acc[chunkIndex].push(item);
+                                        return acc;
+                                    }, [])
+                                    .forEach((chunk) => {
+                                        // first chunk item is member name
+                                        party[partyAlias(chunk[0])] = {
+                                            // remaining 3 items are percentages for each subsidy type
+                                            [csvKeys.SUBSIDY_VOTES]: Number(
+                                                chunk[1]
+                                            ),
+                                            [csvKeys.SUBSIDY_OPERATION]: Number(
+                                                chunk[2]
+                                            ),
+                                            [csvKeys.SUBSIDY_MANDATE]: Number(
+                                                chunk[3]
+                                            ),
+                                        };
+                                    });
                             } else {
                                 currentYears.forEach((year, index) => {
                                     party[year] = Number(row[index + 1]) || 0;
@@ -184,13 +200,15 @@ export const GovDataProvider = function ({ children }) {
                             Object.entries(ep[csvKeys.COALITIONS]).some(
                                 ([coalition, members]) =>
                                     Object.entries(members).some(
-                                        ([member, share]) => {
+                                        ([member, percentages]) => {
                                             if (
                                                 member === party &&
-                                                !Number.isNaN(share)
+                                                !Number.isNaN(
+                                                    percentages[st] ?? NaN
+                                                )
                                             ) {
                                                 parties = [ep[st][coalition]];
-                                                multiplier = share;
+                                                multiplier = percentages[st];
                                                 return true;
                                             }
                                             return false;
@@ -245,14 +263,16 @@ export const GovDataProvider = function ({ children }) {
                                 // check if all members have known shares
                                 const canBeDecomposed = !Object.values(
                                     coalitionMembers
-                                ).some((share) => Number.isNaN(share));
+                                ).some((percentages) =>
+                                    Number.isNaN(percentages[st] ?? NaN)
+                                );
                                 if (canBeDecomposed) {
                                     membersShares =
                                         Object.entries(coalitionMembers);
                                 }
                             }
                         }
-                        membersShares.forEach(([memberName, share]) => {
+                        membersShares.forEach(([memberName, percentages]) => {
                             if (!(parties[memberName] ?? false)) {
                                 parties[memberName] = {};
                             }
@@ -266,7 +286,9 @@ export const GovDataProvider = function ({ children }) {
                                 parties[memberName][stage][st][year] =
                                     (parties[memberName][stage][st][year] ??
                                         0) +
-                                    (share ? share * subsidy : subsidy);
+                                    (percentages
+                                        ? (percentages[st] ?? 1) * subsidy
+                                        : subsidy);
                             });
                         });
                     });
