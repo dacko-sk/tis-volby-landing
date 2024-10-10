@@ -16,6 +16,13 @@ import {
 import { partyAlias, partyAliases } from './parties';
 import { routes, rwq, segments, separators } from './routes';
 
+export const apiEndpoints = {
+    donations: 'https://volby.transparency.sk/api/donors/donations_noflags.php',
+    donors: 'https://volby.transparency.sk/api/donors/donors_noflags.php',
+    file: 'https://volby.transparency.sk/api/donors/donors_json.php',
+    parties:
+        'https://volby.transparency.sk/api/donors/donors_json.php?f=all_parties_noflags',
+};
 export const apiParams = [
     'o', // offset (page number - 1)
     'b', // block size
@@ -53,7 +60,7 @@ export const entityIcon = (i) => t(labels.donations.entityIcons)[i] ?? '';
 
 export const amountSettings = {
     min: 0,
-    max: 1500000,
+    max: 2000000,
     step: 100,
 };
 
@@ -132,13 +139,13 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                 </div>
             );
         case dc.flag:
-            if (sourceColumns[10]) {
+            if (sourceColumns[11]) {
                 return (
                     <div className="text-center">
                         <OverlayTrigger
                             overlay={
                                 <Tooltip id={generateRandomString()}>
-                                    {flagLabel(Number(sourceColumns[10]))}
+                                    {flagLabel(Number(sourceColumns[11]))}
                                 </Tooltip>
                             }
                             placement="right"
@@ -148,7 +155,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                             <Badge
                                 bg="white"
                                 pill
-                                className={`flag-${sourceColumns[10]} border fs-6`}
+                                className={`flag-${sourceColumns[11]} border fs-6`}
                             >
                                 🏴
                             </Badge>
@@ -158,7 +165,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
             }
             return null;
         case dc.notes:
-            return sourceColumns[14];
+            return sourceColumns[10];
         default:
             return null;
     }

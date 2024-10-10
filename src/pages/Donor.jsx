@@ -11,6 +11,7 @@ import { labels, t } from '../helpers/dictionary';
 import {
     DonorFlags,
     DonorParties,
+    apiEndpoints,
     columnLabel,
     entityLabel,
     hiddenDonorColumns,
@@ -28,9 +29,9 @@ function Donor() {
     const navigate = useNavigate();
 
     const aq = useQuery([`donor_${id}`], () =>
-        fetch(
-            `https://volby.transparency.sk/api/donors/donors.php?i=${id}`
-        ).then((response) => response.json())
+        fetch(`${apiEndpoints.donors}?i=${id}`).then((response) =>
+            response.json()
+        )
     );
 
     useEffect(() => {

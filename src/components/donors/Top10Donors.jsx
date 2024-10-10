@@ -4,7 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import { donationsColumns as dc } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
-import { DonorParties, columnLabel, typeLabel } from '../../helpers/dontaions';
+import {
+    DonorParties,
+    apiEndpoints,
+    columnLabel,
+    typeLabel,
+} from '../../helpers/dontaions';
 import { currencyFormat } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
@@ -12,9 +17,9 @@ import Loading from '../general/Loading';
 
 function Top10Donors({ disclaimer, file, title }) {
     const { isLoading, error, data } = useQuery([`donors_${file}`], () =>
-        fetch(
-            `https://volby.transparency.sk/api/donors/donors_json.php?f=${file}`
-        ).then((response) => response.json())
+        fetch(`${apiEndpoints.file}?f=${file}`).then((response) =>
+            response.json()
+        )
     );
 
     let content;

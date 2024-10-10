@@ -57,10 +57,7 @@ function DonationsTable({
     });
 
     const rows = [];
-    if (
-        (donationsQuery.data.rows ?? false) &&
-        Array.isArray(donationsQuery.data.rows)
-    ) {
+    if (Array.isArray(donationsQuery.data.rows ?? null)) {
         donationsQuery.data.rows.forEach((row, ri) => {
             const cols = enabledColumns.map((key) => {
                 const content = getDonationsColumn(row, key);

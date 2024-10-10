@@ -1,5 +1,6 @@
 const parties = [
     ['ALIANCIA', 'Spolupatričnosť'],
+    ['DEMOKRATI'],
     ['DOBRÁ VOĽBA', 'DOBRA VOLBA', 'Dobrá voľba'],
     ['HLAS'],
     ['ĽS-HZDS', 'LS-HZDS', 'LS - HZDS', 'HZDS'],
@@ -25,7 +26,7 @@ const parties = [
     ['SMER', 'SMER - SD'],
     ['SMK', 'SMK - MKP'],
     ['SNS'],
-    ['SPOLU', 'Demokrati'],
+    ['SPOLU'],
     ['TEAM BRATISLAVA'],
     ['TEAM KRAJ NITRA'],
     ['ZA ĽUDÍ', 'ZA LUDI', 'Za ľudí'],

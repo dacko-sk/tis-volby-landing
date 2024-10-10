@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../../helpers/dictionary';
-import { buildApiQuery } from '../../helpers/dontaions';
+import { apiEndpoints, buildApiQuery } from '../../helpers/dontaions';
 
 import DonorCard from './DonorCard';
 import Loading from '../general/Loading';
@@ -14,9 +14,9 @@ function QuickResults({ query }) {
     const aq = useQuery(
         [`donor_search_${queryParams}`],
         () =>
-            fetch(
-                `https://volby.transparency.sk/api/donors/donors.php?${queryParams}`
-            ).then((response) => response.json()),
+            fetch(`${apiEndpoints.donors}?${queryParams}`).then((response) =>
+                response.json()
+            ),
         {
             // run only if query is not empty
             enabled: !!query,

@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../../helpers/dictionary';
 import {
+    apiEndpoints,
     buildApiQuery,
     defaultBlocksize,
     optionalColumns,
@@ -46,9 +47,9 @@ function SearchResults({
     const queryParams = buildApiQuery({ ...options, b: blocksize });
 
     const dq = useQuery([`donations_${queryParams}`], () =>
-        fetch(
-            `https://volby.transparency.sk/api/donors/donations.php?${queryParams}`
-        ).then((response) => response.json())
+        fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
+            response.json()
+        )
     );
 
     const tableSize = 12 - (openFilters ? 3 : 0) - (openSettings ? 2 : 0);

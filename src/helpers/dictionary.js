@@ -68,8 +68,8 @@ export const labels = {
         },
         credits: ['Úvery a pôžičky', 'Credits & loans'],
         disclaimer: [
-            'Zdroj: Výročné správy politických strán 2002 - 2022',
-            'Source: Annual reports of political parties 2002 - 2022',
+            'Zdroj: Výročné správy politických strán 2002 - 2023',
+            'Source: Annual reports of political parties 2002 - 2023',
         ],
         donorInfo: ['Údaje o darcovi', 'Donor details'],
         dac: ['Dary, úvery a pôžičky', 'Donations, credits & loans'],
@@ -149,28 +149,28 @@ export const labels = {
             rows: ['Počet riadkov', 'Number of rows'],
         },
         top10donors: [
-            'Top 10 individuálnych darcov politických strán (2002 - 2022)',
-            'Top 10 individual political party donors (2002 - 2022)',
+            'Top 10 individuálnych darcov politických strán (2002 - 2023)',
+            'Top 10 individual political party donors (2002 - 2023)',
         ],
         top10individual: [
-            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2022)',
-            'Top 10 individual political party donors & creditors (2002 - 2022)',
+            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2023)',
+            'Top 10 individual political party donors & creditors (2002 - 2023)',
         ],
         topParties: [
             'Rebríček politických strán podľa výšky neštátnych príjmov',
             'Political parties ranking by non-government incomes',
         ],
         topPartiesDisclaimer: [
-            'Súčet príspevkov od individuálnych darcov v rokoch 2002 - 2022.',
-            'Sum of donations from individual donors in the years 2002 - 2022.',
+            'Súčet príspevkov od individuálnych darcov v rokoch 2002 - 2023.',
+            'Sum of donations from individual donors in the years 2002 - 2023.',
         ],
         totalDisclaimer: [
-            'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2022.',
-            'Sum of donations from individual donors to all political parties in the years 2002 - 2022.',
+            'Súčet príspevkov od individuálnych darcov všetkých strán v rokoch 2002 - 2023.',
+            'Sum of donations from individual donors to all political parties in the years 2002 - 2023.',
         ],
         totalDisclaimerParty: [
-            'Súčet príspevkov od individuálnych darcov strany v rokoch 2002 - 2022.',
-            'Sum of donations from individual donors of political party in the years 2002 - 2022.',
+            'Súčet príspevkov od individuálnych darcov strany v rokoch 2002 - 2023.',
+            'Sum of donations from individual donors of political party in the years 2002 - 2023.',
         ],
         types: [
             [
@@ -221,8 +221,8 @@ export const labels = {
             'Amount of unique donors & creditors',
         ],
         uniqueDonorsDisclaimer: [
-            'Unikátni individuálni darcovia a veriteľia všetkých strán v rokoch 2002 - 2022.',
-            'Unique individual donors & creditors of political parties in the years 2002 - 2022.',
+            'Unikátni individuálni darcovia a veriteľia všetkých strán v rokoch 2002 - 2023.',
+            'Unique individual donors & creditors of political parties in the years 2002 - 2023.',
         ],
     },
     donor: {

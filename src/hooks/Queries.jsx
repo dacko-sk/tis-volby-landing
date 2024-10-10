@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { apiEndpoints } from '../helpers/dontaions';
 import { partyAlias } from '../helpers/parties';
 
 export const pdKeys = {
@@ -12,9 +13,7 @@ export const usePartiesDonationsData = () =>
     useQuery({
         queryKey: ['all_parties_totals'],
         queryFn: () =>
-            fetch(
-                'https://volby.transparency.sk/api/donors/donors_json.php?f=all_parties'
-            ).then((response) => response.json()),
+            fetch(apiEndpoints.parties).then((response) => response.json()),
         refetchOnMount: false,
         select: (data) => {
             const parties = {};

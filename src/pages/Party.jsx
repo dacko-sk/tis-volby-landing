@@ -3,7 +3,7 @@ import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../helpers/dictionary';
-import { buildApiQuery } from '../helpers/dontaions';
+import { apiEndpoints, buildApiQuery } from '../helpers/dontaions';
 import { routes, segments, separators } from '../helpers/routes';
 
 import useGovData from '../hooks/GovData';
@@ -22,9 +22,9 @@ function Party() {
     };
     const queryParams = buildApiQuery(options);
     const { data: dqData } = useQuery([`donations_party_${partyName}`], () =>
-        fetch(
-            `https://volby.transparency.sk/api/donors/donations.php?${queryParams}`
-        ).then((response) => response.json())
+        fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
+            response.json()
+        )
     );
     const donationsSum = dqData?.sum ?? 0;
     const { paid, est } = getAggTotals(null, null, partyName);
