@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
+import { isMobile } from './browser';
 import { donationsColumns as dc } from './constants';
 import { labels, t } from './dictionary';
 import {
@@ -44,7 +45,7 @@ export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
 export const hiddenPartyColumns = [dc.party];
 export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
 export const blocksizes = [10, 25, 50, 100];
-export const defaultBlocksize = blocksizes[2];
+export const defaultBlocksize = blocksizes[isMobile ? 0 : 2];
 export const defaultSort = `${separators.numbers}date`;
 
 export const columnLabel = (key) =>

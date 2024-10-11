@@ -169,8 +169,8 @@ export const GovDataProvider = function ({ children }) {
                     csvLoadingError(error || 'Failed to load all files');
                 }
             })
-            .catch((error) => {
-                csvLoadingError(error);
+            .catch((e) => {
+                csvLoadingError(e);
             });
     };
 
@@ -303,9 +303,9 @@ export const GovDataProvider = function ({ children }) {
         Object.entries(getPartiesYears(period, type)).forEach(
             ([partyName, stages]) => {
                 parties[partyName] = {};
-                Object.entries(stages).forEach(([stage, subsidyTypes]) => {
+                Object.entries(stages).forEach(([stage, partySubsidyTypes]) => {
                     parties[partyName][stage] = {};
-                    Object.entries(subsidyTypes).forEach(([st, years]) => {
+                    Object.entries(partySubsidyTypes).forEach(([st, years]) => {
                         parties[partyName][stage][st] = sumOfValues(years);
                     });
                 });

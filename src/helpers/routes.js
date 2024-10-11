@@ -1,7 +1,5 @@
 import siteConfig from '../../package.json';
 
-import { isMobile } from './browser';
-
 export const separators = {
     array: '|',
     parts: '_',
@@ -112,14 +110,8 @@ export const buildUrlQuery = (options) => {
 };
 
 export const queries = {
-    donations: (query) => {
-        if (!query && query !== false && isMobile) {
-            query = `b${separators.value}10`;
-        }
-        return query
-            ? separators.url + (query === true ? ':query' : query)
-            : '';
-    },
+    donations: (query) =>
+        query ? separators.url + (query === true ? ':query' : query) : '',
 };
 
 export const routes = {
