@@ -62,8 +62,8 @@ function SearchResults({
         setOpenSettings(!openSettings);
     };
 
-    const updateRouteQuery = (queryOptions, navigateOptions) =>
-        navigate(rwq.donations(route, queryOptions), navigateOptions);
+    const updateRouteQuery = (newQueryOptions, navigateOptions) =>
+        navigate(rwq.donations(route, newQueryOptions), navigateOptions);
 
     const pageClickCallback = (i, totalPages) => () => {
         // copy all options except offset
