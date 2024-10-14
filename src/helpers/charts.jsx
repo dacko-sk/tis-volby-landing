@@ -3,7 +3,7 @@ import { Sector } from 'recharts';
 
 import { isMobile } from './browser';
 import { labels, t } from './dictionary';
-import { shortenValue } from './helpers';
+import { isNumeric, shortenValue } from './helpers';
 import { routes, separators } from './routes';
 
 const tooltipSeparator = ' : ';
@@ -119,11 +119,13 @@ export const BarsTooltip = (bars, showSum, valueFormatter) =>
                         {tooltipNameFormat(t(dataPoint.name))}
                     </p>
                     <ul className="recharts-tooltip-item-list">
-                        {bars.map((bar) => {
-                            if (
-                                !Number.isNaN(dataPoint[bar.key] ?? NaN) &&
-                                dataPoint[bar.key] > 0
-                            ) {
+                        {bars
+                            .filter(
+                                (bar) =>
+                                    isNumeric(dataPoint[bar.key] ?? NaN) &&
+                                    dataPoint[bar.key] > 0
+                            )
+                            .map((bar) => {
                                 sum += dataPoint[bar.key];
                                 return (
                                     <li
@@ -142,8 +144,7 @@ export const BarsTooltip = (bars, showSum, valueFormatter) =>
                                         </span>
                                     </li>
                                 );
-                            }
-                        })}
+                            })}
                         {showSum && bars.length > 1 && (
                             <li
                                 key="sum"

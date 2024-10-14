@@ -1,5 +1,10 @@
 import { getCurrentLocale } from './routes';
 
+export const isNumeric = (value) => !Number.isNaN(Number(value));
+
+export const fixNumber = (value) =>
+    Number(value.replace(',', '.').replace(' ', ''));
+
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat(getCurrentLocale(), options).format(value);
 
@@ -120,12 +125,15 @@ export const decodeHTMLEntities = (rawStr) =>
  */
 export const nl2r = (text) =>
     typeof text === 'string' && text.includes('\n')
-        ? text.split('\n').map((fragment, index) => (
-              <span key={`${index}${fragment}`}>
-                  {index > 0 && <br />}
-                  {fragment}
-              </span>
-          ))
+        ? text.split('\n').map((fragment, index) => {
+              const k = index + fragment;
+              return (
+                  <span key={k}>
+                      {index > 0 && <br />}
+                      {fragment}
+                  </span>
+              );
+          })
         : text;
 
 /**
@@ -133,14 +141,14 @@ export const nl2r = (text) =>
  */
 export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
     if (isLast ?? true) {
-        wordsAmount = wordsAmount || 1;
+        const wa = wordsAmount || 1;
         if (typeof textOrReact === 'string') {
             const words = textOrReact.split(' ');
             return (
                 <span key={textOrReact}>
-                    {`${words.slice(0, words.length - wordsAmount).join(' ')} `}
+                    {`${words.slice(0, words.length - wa).join(' ')} `}
                     <span className="text-secondary">
-                        {words.slice(-wordsAmount).join(' ')}
+                        {words.slice(-wa).join(' ')}
                     </span>
                 </span>
             );
@@ -149,7 +157,7 @@ export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
             return textOrReact.map((item, index) =>
                 secondarySentenceEnding(
                     item,
-                    wordsAmount,
+                    wa,
                     index === textOrReact.length - 1
                 )
             );
@@ -162,7 +170,7 @@ export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
             return children.map((child, index) =>
                 secondarySentenceEnding(
                     child,
-                    wordsAmount,
+                    wa,
                     index === children.length - 1
                 )
             );

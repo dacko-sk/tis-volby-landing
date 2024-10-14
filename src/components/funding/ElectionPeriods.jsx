@@ -41,7 +41,7 @@ function ElectionPeriods({ party }) {
         return <Loading error={govData.error} />;
     }
 
-    const accordions = getElectionPeriods().map((ep) => {
+    const accordions = getElectionPeriods().flatMap((ep) => {
         const period = ep[csvKeys.ELECTION_PERIOD];
         const fromTo = getElectionPeriodYears(period);
         const { paid, est } = getAggTotals(period, null, party);
@@ -123,7 +123,7 @@ function ElectionPeriods({ party }) {
                 );
             }
 
-            return (
+            return [
                 <Accordion.Item key={period} eventKey={period}>
                     <Accordion.Header>
                         {t(labels.government.electionPeriod, [
@@ -132,9 +132,11 @@ function ElectionPeriods({ party }) {
                         ])}
                     </Accordion.Header>
                     <Accordion.Body>{epContent}</Accordion.Body>
-                </Accordion.Item>
-            );
+                </Accordion.Item>,
+            ];
         }
+
+        return [];
     });
 
     const onSelect = (activeKeys) => {

@@ -7,9 +7,10 @@ function Title({
     uppercase = false,
 }) {
     let primaryLength = 0;
+    let content = children;
     if (typeof children === 'string') {
         primaryLength += children.length;
-        children = nl2r(children);
+        content = nl2r(children);
     } else if (typeof children === 'object') {
         Object.keys(children).forEach((key) => {
             if (typeof children[key] === 'string') {
@@ -24,7 +25,7 @@ function Title({
             }mb-4`}
         >
             <h1 className={uppercase ? 'text-uppercase' : ''}>
-                {secondaryWords ? se(children, secondaryWords) : children}
+                {secondaryWords ? se(content, secondaryWords) : content}
                 {!!secondary && (
                     <span className="text-secondary"> {secondary}</span>
                 )}
