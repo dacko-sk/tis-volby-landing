@@ -4,7 +4,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { elections as el, links } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import {
     getCurrentLanguage,
@@ -13,6 +12,7 @@ import {
     routes,
 } from '../../helpers/routes';
 
+import SiteSelector from './SiteSelector';
 import DonateButton from '../general/DonateButton';
 // import SearchField from '../general/SearchField';
 
@@ -32,9 +32,7 @@ function Header() {
                         variant="pills"
                         className="me-auto"
                     >
-                        <Nav.Link as={NavLink} to={routes.home()}>
-                            {t(labels.home.navTitle)}
-                        </Nav.Link>
+                        <SiteSelector />
                         <Nav.Link as={NavLink} to={routes.funding()}>
                             {t(labels.funding.navTitle)}
                         </Nav.Link>
@@ -44,16 +42,6 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.news()}>
                             {t(labels.news.navTitle)}
                         </Nav.Link>
-                        <NavDropdown
-                            title={t(labels.elections.title)}
-                            id="elections-menu"
-                        >
-                            {Object.keys(el).map((e) => (
-                                <NavDropdown.Item key={e} href={links[e]}>
-                                    {t(labels.elections[e])}
-                                </NavDropdown.Item>
-                            ))}
-                        </NavDropdown>
                     </Nav>
                     <Nav variant="pills" className="me-2">
                         <NavDropdown

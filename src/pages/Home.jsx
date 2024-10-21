@@ -1,5 +1,3 @@
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -7,12 +5,10 @@ import { setTitle } from '../helpers/browser';
 import { elections as el, links } from '../helpers/constants';
 import { labels, t } from '../helpers/dictionary';
 import { nl2r, secondarySentenceEnding as se } from '../helpers/helpers';
-import { getCurrentLanguage, languages } from '../helpers/routes';
 import { newsCategories } from '../helpers/wp';
 
 import QuickSearch from '../components/donors/QuickSearch';
 import Top10Donors from '../components/donors/Top10Donors';
-import ElectionsCountdown from '../components/elections/ElectionsCountdown';
 import ElectionsPreview from '../components/elections/ElectionsPreview';
 import PartiesFundingChart from '../components/funding/PartiesFundingChart';
 import Title from '../components/structure/Title';
@@ -29,47 +25,6 @@ function Home() {
             <Title secondaryWords={2} uppercase>
                 {t(labels.home.pageTitle)}
             </Title>
-
-            <Alert variant="primary">
-                <Row className="text-center">
-                    <Col lg={6}>
-                        <h2>{t(labels.elections[el.p24])}</h2>
-                        <p>
-                            {getCurrentLanguage() === languages.sk
-                                ? 'Spustili sme novú podstránku venovanú Prezidentským voľbám 2024.'
-                                : 'We launched new subpage dedicated to President elections in 2024.'}
-                        </p>
-                        <ElectionsCountdown
-                            start="2024-04-06T07:00:00"
-                            end="2024-04-06T22:00:00"
-                            noHeader
-                        />
-                        <div className="buttons mt-3">
-                            <Button href={links[el.p24]} variant="secondary">
-                                {t(labels.elections[el.p24])}
-                            </Button>
-                        </div>
-                    </Col>
-                    <Col className="mt-4 mt-lg-0" lg={6}>
-                        <h2>{t(labels.elections[el.e24])}</h2>
-                        <p>
-                            {getCurrentLanguage() === languages.sk
-                                ? 'Spustili sme novú podstránku venovanú Európskym voľbám 2024.'
-                                : 'We launched new subpage dedicated to European elections in 2024.'}
-                        </p>
-                        <ElectionsCountdown
-                            start="2024-06-08T07:00:00"
-                            end="2024-06-08T22:00:00"
-                            noHeader
-                        />
-                        <div className="buttons mt-3">
-                            <Button href={links[el.e24]} variant="secondary">
-                                {t(labels.elections[el.e24])}
-                            </Button>
-                        </div>
-                    </Col>
-                </Row>
-            </Alert>
 
             <QuickSearch />
 

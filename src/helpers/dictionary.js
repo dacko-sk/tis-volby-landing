@@ -404,7 +404,7 @@ export const labels = {
         yearsTitle: ['Príspevky po rokoch', 'Subsidies by years'],
     },
     home: {
-        navTitle: ['Úvod', 'Home'],
+        navTitle: ['Titulná stránka', 'Landing page'],
         pageTitle: [
             'Monitoring volebných\nkampaní a financovania strán',
             'Monitoring of elections campaigns and political parties funding',
@@ -438,6 +438,7 @@ export const labels = {
     },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
     readMore: ['Čítať ďalej…', 'Read more…'],
+    root: ['Titulná stránka', 'Landing page'],
     tis: [
         'Transparency International Slovensko',
         'Transparency International Slovakia',
