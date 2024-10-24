@@ -1,15 +1,18 @@
 import Pagination from 'react-bootstrap/Pagination';
+import PageItem, { Ellipsis } from 'react-bootstrap/PageItem';
+import { Link } from 'react-router-dom';
 
 import './PaginationWithGaps.scss';
 
 function PaginationWithGaps({
     activePage = 1,
     className = 'justify-content-center',
-    pageClickCallback,
+    pageRouteCallback,
     totalPages,
     useOffset = false,
 }) {
     const items = [];
+    let lastPageNum = 1;
     for (let pageNum = 1; pageNum <= totalPages; pageNum += 1) {
         if (
             totalPages <= 10 ||
@@ -17,36 +20,33 @@ function PaginationWithGaps({
             pageNum >= totalPages - 1 ||
             (pageNum >= activePage - 1 && pageNum <= activePage + 1)
         ) {
-            if (
-                totalPages > 10 &&
-                pageNum === totalPages - 1 &&
-                activePage <= totalPages - 4
-            ) {
+            // if there is a gap, fill it with ellipsis in the half of the range
+            if (pageNum - lastPageNum > 1) {
+                const half =
+                    lastPageNum + Math.round((pageNum - lastPageNum) / 2);
                 items.push(
-                    <li className="pagination-gap" key="gap-before">
-                        …
-                    </li>
+                    <Ellipsis
+                        as={Link}
+                        key={half}
+                        to={pageRouteCallback(useOffset ? half - 1 : half)}
+                        state={{ totalPages }}
+                    />
                 );
             }
 
-            const index = useOffset ? pageNum - 1 : pageNum;
             items.push(
-                <Pagination.Item
+                <PageItem
+                    as={Link}
                     active={pageNum === activePage}
                     key={pageNum}
-                    onClick={pageClickCallback(index, totalPages)}
+                    to={pageRouteCallback(useOffset ? pageNum - 1 : pageNum)}
+                    state={{ totalPages }}
                 >
                     {pageNum}
-                </Pagination.Item>
+                </PageItem>
             );
 
-            if (totalPages > 10 && pageNum === 2 && activePage >= 5) {
-                items.push(
-                    <li className="pagination-gap" key="gap-after">
-                        …
-                    </li>
-                );
-            }
+            lastPageNum = pageNum;
         }
     }
     if (items.length > 1) {

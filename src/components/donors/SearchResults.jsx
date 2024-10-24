@@ -54,6 +54,12 @@ function SearchResults({
 
     const tableSize = 12 - (openFilters ? 3 : 0) - (openSettings ? 2 : 0);
 
+    // prevent pagination from disappearing before the new query is loaded - use the previous total amount sent via router state property
+    let totalPages = location.state?.totalPages ?? 0;
+    if (dq.data?.total ?? false) {
+        totalPages = Math.ceil(dq.data.total / blocksize);
+    }
+
     const toggleFilter = () => {
         setOpenFilters(!openFilters);
     };
@@ -65,21 +71,14 @@ function SearchResults({
     const updateRouteQuery = (newQueryOptions, navigateOptions) =>
         navigate(rwq.donations(route, newQueryOptions), navigateOptions);
 
-    const pageClickCallback = (i, totalPages) => () => {
+    const getPageRoute = (i) => {
         // copy all options except offset
         const { o, ...linkOpt } = options;
         if (i > 0) {
             linkOpt.o = i;
         }
-        updateRouteQuery(linkOpt, {
-            state: { totalPages },
-        });
+        return rwq.donations(route, linkOpt);
     };
-
-    let numOfPages = location.state?.totalPages ?? 0;
-    if (dq.data?.total ?? false) {
-        numOfPages = Math.ceil(dq.data.total / blocksize);
-    }
 
     return (
         <div id="donations" className="mt-4">
@@ -129,8 +128,8 @@ function SearchResults({
                         <PaginationWithGaps
                             className="justify-content-center mt-4"
                             activePage={offset + 1}
-                            totalPages={numOfPages}
-                            pageClickCallback={pageClickCallback}
+                            totalPages={totalPages}
+                            pageRouteCallback={getPageRoute}
                             useOffset
                         />
                     </div>
