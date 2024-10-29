@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
@@ -32,7 +32,9 @@ function Posts({
     template = templates.list,
 }) {
     const [totalPages, setTotalPages] = useState(0);
-    const [activePage, setActivePage] = useState(1);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const activePage = location.state?.page ?? 1;
     const blocksize = limit || 10;
     const catParam = categories.length
         ? `&categories=${categories.join()}`
@@ -59,7 +61,8 @@ function Posts({
     );
 
     const loadPage = (page) => () => {
-        setActivePage(page);
+        // navigate to the same page, just pass the current page via state object to preserve history
+        navigate(location.pathname, { state: { page } });
         scrollToTop();
     };
 
@@ -124,11 +127,6 @@ function Posts({
             );
         }
     }
-
-    // reset active page to 1 if search query changes
-    useEffect(() => {
-        setActivePage(1);
-    }, [search]);
 
     return (
         <div>
