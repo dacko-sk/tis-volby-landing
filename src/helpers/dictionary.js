@@ -71,6 +71,10 @@ export const labels = {
             'Zdroj: Výročné správy politických strán 2002 - 2023',
             'Source: Annual reports of political parties 2002 - 2023',
         ],
+        disclaimerNoCredits: [
+            'Zdroj: Výročné správy politických strán 2002 - 2023, neobsahuje úvery a pôžičky',
+            'Source: Annual reports of political parties 2002 - 2023, excludes credits & loans',
+        ],
         donorInfo: ['Údaje o darcovi', 'Donor details'],
         dac: ['Dary, úvery a pôžičky', 'Donations, credits & loans'],
         donations: ['Dary', 'Donations'],
@@ -149,12 +153,12 @@ export const labels = {
             rows: ['Počet riadkov', 'Number of rows'],
         },
         top10donors: [
-            'Top 10 individuálnych darcov politických strán (2002 - 2023)',
-            'Top 10 individual political party donors (2002 - 2023)',
+            'Top 10 darcov (iba dary a členské)',
+            'Top 10 donors (donations & membership contributions only)',
         ],
-        top10individual: [
-            'Top 10 individuálnych veriteľov a darcov politických strán (2002 - 2023)',
-            'Top 10 individual political party donors & creditors (2002 - 2023)',
+        top10sponsors: [
+            'Top 10 sponzorov (vrátane pôžičiek)',
+            'Top 10 sponsors (includes loans)',
         ],
         topParties: [
             'Rebríček politických strán podľa výšky neštátnych príjmov',
@@ -404,7 +408,7 @@ export const labels = {
         yearsTitle: ['Príspevky po rokoch', 'Subsidies by years'],
     },
     home: {
-        navTitle: ['Titulná stránka', 'Landing page'],
+        navTitle: ['Monitoring volieb', 'Elections Monitoring'],
         pageTitle: [
             'Monitoring volebných\nkampaní a financovania strán',
             'Monitoring of elections campaigns and political parties funding',
@@ -438,11 +442,7 @@ export const labels = {
     },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
     readMore: ['Čítať ďalej…', 'Read more…'],
-    root: ['Titulná stránka', 'Landing page'],
-    tis: [
-        'Transparency International Slovensko',
-        'Transparency International Slovakia',
-    ],
+    root: ['Monitoring volieb', 'Elections Monitoring'],
     search: {
         label: ['Vyhľadávanie', 'Search'],
         results: [
@@ -451,8 +451,23 @@ export const labels = {
         ],
     },
     showMore: ['Zobraziť viac', 'Show more'],
+    sites: {
+        root: ['Financovanie\npolitiky', 'Political\nfinance'],
+        european: ['Európske\nvoľby', 'European\nelections'],
+        national: ['Parlamentné\nvoľby', 'Parliament\nelections'],
+        president: ['Prezidentské\nvoľby', 'President\nelections'],
+        regional: ['Samosprávne\nvoľby', 'Municipal\nelections'],
+    },
+    sitesTitle: [
+        'Ktorú oblasť politiky chcete preskúmať?',
+        'Which political topic are you interested in?',
+    ],
     sponsors: ['Donori projektu', 'Project donors'],
     supportTis: ['Podporte Transparency', 'Support Transparency'],
+    tis: [
+        'Transparency International Slovensko',
+        'Transparency International Slovakia',
+    ],
     usefulInfo: ['Užitočné informácie', 'Useful information'],
     webDev: ['Webové riešenie', 'Web development'],
 };
