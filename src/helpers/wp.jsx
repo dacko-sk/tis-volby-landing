@@ -6,6 +6,8 @@ export const categories = {
     news22: 858,
     news23: 877,
     newsGlobal: 875,
+    bannerNews: 960,
+    bannerNewsEn: 961,
 };
 
 export const newsCategories = [
@@ -66,12 +68,12 @@ const parserOptions = {
                 return <></>;
             }
             if (attribs) {
-                if (attribs.rel && attribs.rel.startsWith('lightbox')) {
+                if (attribs.rel?.startsWith('lightbox')) {
                     // remove lightbox links
                     // will recursively run parser on children
                     return domToReact(children, parserOptions);
                 }
-                if (attribs.href.startsWith('http://')) {
+                if (attribs.href?.startsWith('http://')) {
                     const props = {
                         ...attributesToProps(attribs),
                         // force http links to https
