@@ -5,12 +5,11 @@ import { categories, processArticles } from '../../helpers/wp';
 import BannerItem from './templates/BannerItem';
 import { getCurrentLanguage, languages } from '../../helpers/routes';
 
-const bannerCat =
-    getCurrentLanguage() === languages.sk
-        ? categories.bannerNews
-        : categories.bannerNewsEn;
-
 function BannerNews() {
+    const bannerCat =
+        getCurrentLanguage() === languages.sk
+            ? categories.bannerNews
+            : categories.bannerNewsEn;
     const { isLoading, error, data } = useQuery(
         [`banner_news_${bannerCat}`],
         () =>
