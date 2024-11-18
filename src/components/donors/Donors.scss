@@ -1,19 +1,11 @@
 @use 'sass:map';
 @import './../../scss/variables';
 
-.donor-search {
-  background-color: $tis-dark-blue;
-  h2 {
-    color: $tis-light-blue;
-  }
-  .btn {
-    --bs-btn-hover-border-color: white;
-  }
-}
-
 .donor-card {
   $dc-h-gap: 1.5rem;
-  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition:
+    background-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
   & + & {
     border-top: 1px solid var(--bs-border-color);
   }

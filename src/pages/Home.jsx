@@ -5,6 +5,7 @@ import { newsCategories } from '../helpers/wp';
 import QuickSearch from '../components/donors/QuickSearch';
 import Top10Donors from '../components/donors/Top10Donors';
 import PartiesFundingChart from '../components/funding/PartiesFundingChart';
+import SiteNavigator from '../components/structure/SiteNavigator';
 import Title from '../components/structure/Title';
 import BannerNews from '../components/wp/BannerNews';
 import Posts, { templates } from '../components/wp/Posts';
@@ -18,7 +19,10 @@ function Home() {
                 {t(labels.home.pageTitle)}
             </Title>
 
-            <QuickSearch />
+            <div id="search-container">
+                <SiteNavigator />
+                <QuickSearch />
+            </div>
 
             <BannerNews />
 

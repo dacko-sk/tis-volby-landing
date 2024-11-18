@@ -35,7 +35,7 @@ function QuickSearch() {
     };
 
     return (
-        <div className="donor-search my-4 p-5">
+        <div id="quick-search" className="mt-4">
             <h2 className="mb-3">{t(labels.donations.search.title)}</h2>
             <Form className="" onSubmit={handleFormSumbit}>
                 <InputGroup>
