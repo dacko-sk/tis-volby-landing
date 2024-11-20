@@ -1,47 +1,38 @@
 const parties = [
-    ['ALIANCIA', 'Spolupatričnosť'],
+    ['ALIANCIA', 'SPOLUPATRIČNOSŤ', 'SZÖVETSÉG - ALIANCIA'],
     ['DEMOKRATI'],
-    ['DOBRÁ VOĽBA', 'DOBRA VOLBA', 'Dobrá voľba'],
+    ['DOBRÁ VOĽBA', 'DOBRA VOLBA'],
     ['HLAS'],
     ['ĽS-HZDS', 'LS-HZDS', 'LS - HZDS', 'HZDS'],
     ['KDH'],
-    ['KÚ', 'Kresťanská Únia'],
+    ['KÚ', 'KRESŤANSKÁ ÚNIA'],
     ['KSS'],
     [
         'ĽSNS',
         'LSNS',
-        'Kotlebovci - ĽS Naše Slovensko',
-        'Kotleba - ĽS Naše Slovensko',
+        'KOTLEBOVCI - ĽS NAŠE SLOVENSKO',
+        'KOTLEBA - ĽS NAŠE SLOVENSKO',
     ],
     ['MKO'],
-    ['MOST-HÍD', 'MOST HID', 'MOST - HID', 'Most - Híd'],
-    ['SLOVENSKO (OĽANO)', 'OĽANO', 'OĽaNO - NOVA', 'OĽaNO'],
+    ['MOST-HÍD', 'MOST HID', 'MOST - HID', 'MOST - HÍD'],
+    ['SLOVENSKO (OĽANO)', 'OĽANO', 'OĽANO - NOVA'],
     ['PS'],
-    ['PS a SPOLU', 'Koalícia Progresívne Slovensko a SPOLU'],
+    ['PS A SPOLU', 'KOALÍCIA PROGRESÍVNE SLOVENSKO A SPOLU'],
     ['REPUBLIKA'],
-    ['SAS', 'SaS'],
+    ['SAS'],
     ['SDKÚ', 'SDKU', 'SDKÚ-DS', 'SDKU-DS', 'SDKÚ - DS', 'SDKU - DS'],
-    ['SIEŤ', 'Sieť', '#SIEŤ'],
-    ['SME RODINA', 'SME RODINA - Boris Kollár'],
+    ['SIEŤ', '#SIEŤ'],
+    ['SME RODINA', 'SME RODINA - BORIS KOLLÁR'],
     ['SMER', 'SMER - SD'],
     ['SMK', 'SMK - MKP'],
     ['SNS'],
     ['SPOLU'],
     ['TEAM BRATISLAVA'],
     ['TEAM KRAJ NITRA'],
-    ['ZA ĽUDÍ', 'ZA LUDI', 'Za ľudí'],
+    ['ZA ĽUDÍ', 'ZA LUDI'],
 ];
 
-export const partyAliases = (party) => {
-    let aliases;
-    parties.some((pa) => {
-        if (pa.includes(party)) {
-            aliases = pa;
-            return true;
-        }
-        return false;
-    });
-    return aliases ?? [party];
-};
+export const partyAliases = (party) =>
+    parties.find((pa) => pa.includes(party.toUpperCase())) ?? [party];
 
 export const partyAlias = (party) => (party ? partyAliases(party)[0] : '');
