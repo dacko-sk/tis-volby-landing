@@ -14,9 +14,12 @@ import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
 function AccountOverview({ accName, elType, elYear }) {
-    const defaultOptions = { i: accName, t: elType, y: elYear };
     const queryParams = buildApiQuery(apiParams, {
-        ...defaultOptions,
+        // route fixed params
+        i: accName,
+        t: elType,
+        y: elYear,
+        // add default blocksize to use the same query params as data table on account detail page
         b: defaultBlocksize,
     });
     const tq = useQuery([`transactions_${queryParams}`], () =>

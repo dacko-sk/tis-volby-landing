@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
+import { languages } from './helpers/languages';
 import {
     homepage,
     languageRoot,
-    languages,
     queries,
     routes,
     segments,

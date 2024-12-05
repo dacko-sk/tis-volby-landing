@@ -14,6 +14,7 @@ import {
     columnContent,
     columnLabel,
 } from '../../helpers/dontaions';
+import { partyAliases } from '../../helpers/parties';
 import {
     buildApiQuery,
     parseQueryOptions,
@@ -34,8 +35,8 @@ import '../datatables/Tables.scss';
 function DonationsSearch({
     hiddenColumns = [],
     parties = allDonationsParties(),
-    queryOptions = {},
     route = routes.donations(),
+    routeOptions = {},
 }) {
     const [openFilters, setOpenFilters] = useState(window.screen.width > 991);
     const [openSettings, setOpenSettings] = useState(false);
@@ -44,7 +45,7 @@ function DonationsSearch({
     const navigate = useNavigate();
 
     const options = {
-        ...queryOptions,
+        ...routeOptions,
         ...parseQueryOptions(allowedParams),
     };
     const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
@@ -55,7 +56,15 @@ function DonationsSearch({
                   .split(separators.numbers)
                   .map((item) => optionalColumns[Number(item)])
             : [];
-    const queryParams = buildApiQuery(apiParams, { ...options, b: blocksize });
+    const queryParams = buildApiQuery(apiParams, {
+        ...options,
+        // always add blocksize to api request
+        b: blocksize,
+        // if party name option is provided, replace it with all party aliases
+        ...(options.p ?? false
+            ? { p: partyAliases(options.p).join(separators.array) }
+            : {}),
+    });
 
     const dq = useQuery([`donations_${queryParams}`], () =>
         fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>

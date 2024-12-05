@@ -15,8 +15,9 @@ function PartyDonations() {
     return (
         <DonationsSearch
             hiddenColumns={hiddenPartyColumns}
-            queryOptions={{ p: partyName }}
+            parties={[]}
             route={routes.party(partyName, segments.DONATIONS)}
+            routeOptions={{ p: partyName }}
         />
     );
 }

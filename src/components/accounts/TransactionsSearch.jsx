@@ -35,8 +35,8 @@ import '../datatables/Tables.scss';
 function TransactionsSearch({
     hiddenColumns = hiddenColumnsDefault,
     parties = allDonationsParties(),
-    queryOptions = {},
     route = routes.accounts(),
+    routeOptions = {},
 }) {
     const [openFilters, setOpenFilters] = useState(window.screen.width > 991);
     const [openSettings, setOpenSettings] = useState(false);
@@ -45,7 +45,7 @@ function TransactionsSearch({
     const navigate = useNavigate();
 
     const options = {
-        ...queryOptions,
+        ...routeOptions,
         ...parseQueryOptions(allowedParams),
     };
     const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
@@ -56,7 +56,11 @@ function TransactionsSearch({
                   .split(separators.numbers)
                   .map((item) => optionalColumns[Number(item)])
             : [];
-    const queryParams = buildApiQuery(apiParams, { ...options, b: blocksize });
+    const queryParams = buildApiQuery(apiParams, {
+        ...options,
+        // always add blocksize to api request
+        b: blocksize,
+    });
 
     const tq = useQuery([`transactions_${queryParams}`], () =>
         fetch(`${apiEndpoints.transactions}?${queryParams}`).then((response) =>

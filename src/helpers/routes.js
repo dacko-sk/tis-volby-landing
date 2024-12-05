@@ -1,8 +1,11 @@
 import { useParams } from 'react-router-dom';
 
-import { partyAliases } from './parties';
+import { sortAlphabetically } from './helpers';
+import { getCurrentLanguage, languages } from './languages';
 
 import siteConfig from '../../package.json';
+
+export const homepage = siteConfig.homepage ?? '/';
 
 export const separators = {
     array: ';',
@@ -13,18 +16,6 @@ export const separators = {
     url: '/',
     value: '~',
 };
-
-export const languages = {
-    sk: 'sk',
-    en: 'en',
-};
-
-export const locales = {
-    [languages.sk]: 'sk-SK',
-    [languages.en]: 'en-US',
-};
-
-export const defaultLanguage = Object.values(languages)[0];
 
 export const segments = {
     ACCOUNT: 'ACCOUNT',
@@ -62,18 +53,6 @@ export const localSegments = {
         [segments.SEARCH]: 'search',
     },
 };
-
-export const homepage = siteConfig.homepage ?? '/';
-
-export const getCurrentLanguage = () =>
-    document.location.pathname.substring(
-        homepage.length,
-        homepage.length + 2
-    ) === languages.en
-        ? languages.en
-        : languages.sk;
-
-export const getCurrentLocale = () => locales[getCurrentLanguage()];
 
 export const languageRoot = (language) =>
     homepage +
@@ -203,17 +182,10 @@ export const parseQueryOptions = (allowedParams) => {
 };
 
 export const buildApiQuery = (apiParams, options) => {
-    const filters = [];
-    Object.entries(options).forEach(([param, value]) => {
-        if (apiParams.includes(param)) {
-            filters.push(
-                `${param}=${
-                    param === 'p'
-                        ? partyAliases(value).join(separators.array)
-                        : value
-                }`
-            );
-        }
-    });
-    return filters.join('&');
+    return Object.entries(options)
+        .flatMap(([param, value]) =>
+            apiParams.includes(param) ? [`${param}=${value}`] : []
+        )
+        .sort(sortAlphabetically())
+        .join('&');
 };

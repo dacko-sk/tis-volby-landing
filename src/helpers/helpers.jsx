@@ -1,4 +1,4 @@
-import { getCurrentLocale } from './routes';
+import { getCurrentLocale } from './languages';
 
 export const isNumeric = (value) => !Number.isNaN(Number(value));
 

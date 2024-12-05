@@ -106,8 +106,8 @@ function Donor() {
             <DonationsSearch
                 hiddenColumns={hiddenDonorColumns}
                 parties={Object.keys(aq.data?.rows[0].parties ?? {})}
-                queryOptions={{ i: id }}
                 route={routes.donor(id)}
+                routeOptions={{ i: id }}
             />
         </section>
     );

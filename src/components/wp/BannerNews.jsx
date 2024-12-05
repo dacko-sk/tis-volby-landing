@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { categories, processArticles } from '../../helpers/wp';
 
 import BannerItem from './templates/BannerItem';
-import { getCurrentLanguage, languages } from '../../helpers/routes';
+import { getCurrentLanguage, languages } from '../../helpers/languages';
 
 function BannerNews() {
     const bannerCat =

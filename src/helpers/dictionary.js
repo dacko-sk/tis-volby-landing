@@ -3,7 +3,7 @@ import {
     elections as el,
     transactionsColumns as tc,
 } from './constants';
-import { getCurrentLanguage, languages } from './routes';
+import { getCurrentLanguage, languages } from './languages';
 
 import { csvKeys as gst } from '../hooks/GovData';
 

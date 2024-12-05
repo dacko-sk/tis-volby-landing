@@ -1,6 +1,6 @@
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
-import { getCurrentLanguage, languages } from '../helpers/routes';
+import { getCurrentLanguage, languages } from '../helpers/languages';
 
 import DonationsSearch from '../components/donors/DonationsSearch';
 import ReadMore from '../components/general/ReadMore';

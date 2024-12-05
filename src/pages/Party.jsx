@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../helpers/dictionary';
 import { apiEndpoints, apiParams } from '../helpers/dontaions';
+import { partyAliases } from '../helpers/parties';
 import { buildApiQuery, routes, segments, separators } from '../helpers/routes';
 
 import useGovData from '../hooks/GovData';
@@ -17,10 +18,9 @@ function Party() {
     const partyName = (params.slug ?? '').replaceAll(separators.space, ' ');
     const coalition = isCoalition(partyName);
 
-    const options = {
-        p: partyName,
-    };
-    const queryParams = buildApiQuery(apiParams, options);
+    const queryParams = buildApiQuery(apiParams, {
+        p: partyAliases(partyName).join(separators.array),
+    });
     const { data: dqData } = useQuery([`donations_party_${partyName}`], () =>
         fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
             response.json()

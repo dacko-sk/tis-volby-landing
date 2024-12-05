@@ -47,8 +47,8 @@ function Account() {
 
             <TransactionsSearch
                 hiddenColumns={hiddenColumnsParty}
-                queryOptions={{ i: accName, t: elType, y: elYear }}
                 route={routes.account(params.slug ?? '')}
+                routeOptions={{ i: accName, t: elType, y: elYear }}
             />
         </section>
     );

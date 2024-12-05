@@ -5,12 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { labels, t } from '../../helpers/dictionary';
-import {
-    getCurrentLanguage,
-    languages,
-    localizePath,
-    routes,
-} from '../../helpers/routes';
+import { getCurrentLanguage, languages } from '../../helpers/languages';
+import { localizePath, routes } from '../../helpers/routes';
 
 import SiteSelector from './SiteSelector';
 import DonateButton from '../general/DonateButton';
