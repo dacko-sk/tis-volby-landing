@@ -3,28 +3,40 @@ import Button from 'react-bootstrap/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { labels, t } from '../../helpers/dictionary';
+import { transactionsColumns as tc } from '../../helpers/constants';
 import {
     apiEndpoints,
-    buildApiQuery,
-    defaultBlocksize,
+    apiParams,
+    allowedParams,
+    columnAlign,
+    columnContent,
+    columnLabel,
+    hiddenColumnsDefault,
     optionalColumns,
+} from '../../helpers/accounts';
+import { labels, t } from '../../helpers/dictionary';
+import {
+    buildApiQuery,
     parseQueryOptions,
-} from '../../helpers/dontaions';
-import { routes, rwq, separators } from '../../helpers/routes';
+    routes,
+    rwq,
+    separators,
+} from '../../helpers/routes';
 
 import { allDonationsParties } from '../../hooks/Queries';
 
+import TransactionsFilters from './TransactionsFilters';
+import DataTable from '../datatables/DataTable';
+import TableSettings, { defaultBlocksize } from '../datatables/TableSettings';
 import PaginationWithGaps from '../general/PaginationWithGaps';
-import DonationsTable from './DonationsTable';
-import Filters from './Filters';
-import Settings from './Settings';
 
-function SearchResults({
-    hiddenColumns = [],
+import '../datatables/Tables.scss';
+
+function TransactionsSearch({
+    hiddenColumns = hiddenColumnsDefault,
     parties = allDonationsParties(),
     queryOptions = {},
-    route = routes.donations(),
+    route = routes.accounts(),
 }) {
     const [openFilters, setOpenFilters] = useState(window.screen.width > 991);
     const [openSettings, setOpenSettings] = useState(false);
@@ -34,7 +46,7 @@ function SearchResults({
 
     const options = {
         ...queryOptions,
-        ...parseQueryOptions(),
+        ...parseQueryOptions(allowedParams),
     };
     const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
     const offset = options.o ?? false ? Number(options.o) : 0;
@@ -44,10 +56,10 @@ function SearchResults({
                   .split(separators.numbers)
                   .map((item) => optionalColumns[Number(item)])
             : [];
-    const queryParams = buildApiQuery({ ...options, b: blocksize });
+    const queryParams = buildApiQuery(apiParams, { ...options, b: blocksize });
 
-    const dq = useQuery([`donations_${queryParams}`], () =>
-        fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
+    const tq = useQuery([`transactions_${queryParams}`], () =>
+        fetch(`${apiEndpoints.transactions}?${queryParams}`).then((response) =>
             response.json()
         )
     );
@@ -56,8 +68,8 @@ function SearchResults({
 
     // prevent pagination from disappearing before the new query is loaded - use the previous total amount sent via router state property
     let totalPages = location.state?.totalPages ?? 0;
-    if (dq.data?.total ?? false) {
-        totalPages = Math.ceil(dq.data.total / blocksize);
+    if (tq.data?.total ?? false) {
+        totalPages = Math.ceil(tq.data.total / blocksize);
     }
 
     const toggleFilter = () => {
@@ -69,7 +81,7 @@ function SearchResults({
     };
 
     const updateRouteQuery = (newQueryOptions, navigateOptions) =>
-        navigate(rwq.donations(route, newQueryOptions), navigateOptions);
+        navigate(rwq.searchAndFilter(route, newQueryOptions), navigateOptions);
 
     const getPageRoute = (i) => {
         // copy all options except offset
@@ -77,7 +89,7 @@ function SearchResults({
         if (i > 0) {
             linkOpt.o = i;
         }
-        return rwq.donations(route, linkOpt);
+        return rwq.searchAndFilter(route, linkOpt);
     };
 
     return (
@@ -101,7 +113,7 @@ function SearchResults({
                 <aside
                     className={`col-12 ${openFilters ? 'col-lg-3' : 'd-none'}`}
                 >
-                    <Filters
+                    <TransactionsFilters
                         hiddenColumns={hiddenColumns}
                         parties={parties}
                         updateRouteQuery={updateRouteQuery}
@@ -112,17 +124,26 @@ function SearchResults({
                         openSettings ? 'col-lg-2 order-lg-last' : 'd-none'
                     }`}
                 >
-                    <Settings
+                    <TableSettings
+                        allowedParams={allowedParams}
+                        columnLabel={columnLabel}
                         hiddenColumns={hiddenColumns}
+                        optionalColumns={optionalColumns}
                         updateRouteQuery={updateRouteQuery}
                     />
                 </aside>
                 <div className={`col-12 col-lg-${tableSize}`}>
                     <div id="donations-results">
-                        <DonationsTable
-                            donationsQuery={dq}
+                        <DataTable
+                            allowedParams={allowedParams}
+                            columnAlign={columnAlign}
+                            columnContent={columnContent}
+                            columnLabel={columnLabel}
+                            columns={tc}
+                            dataQuery={tq}
                             route={route}
                             hiddenColumns={hiddenColumns}
+                            optionalColumns={optionalColumns}
                             visibleColumns={visibleColumns}
                         />
                         <PaginationWithGaps
@@ -139,4 +160,4 @@ function SearchResults({
     );
 }
 
-export default SearchResults;
+export default TransactionsSearch;

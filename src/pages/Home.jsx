@@ -29,15 +29,15 @@ function Home() {
             <PartiesFundingChart limit={10} />
 
             <Top10Donors
-                // https://volby.transparency.sk/api/donors/donors_noflags.php?c=0&b=10
-                file="top10individual_noflags"
+                // https://volby.transparency.sk/api/donors/donors.php?c=0&b=10
+                file="top10individual"
                 title={labels.donations.top10sponsors}
                 disclaimer={labels.donations.disclaimer}
             />
 
             <Top10Donors
-                // https://volby.transparency.sk/api/donors/donors_noflags.php?c=0&b=10&t=1-2-3-4
-                file="top10donors_noflags"
+                // https://volby.transparency.sk/api/donors/donors.php?c=0&b=10&t=1-2-3-4
+                file="top10donors"
                 title={labels.donations.top10donors}
                 disclaimer={labels.donations.disclaimerNoCredits}
             />

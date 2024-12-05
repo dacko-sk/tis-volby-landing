@@ -5,14 +5,14 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { donationsColumns as dc } from '../../helpers/constants';
-import { labels, t } from '../../helpers/dictionary';
 import {
+    allowedParams,
     amountSettings,
     columnLabel,
-    entityIcon,
-    parseQueryOptions,
-} from '../../helpers/dontaions';
+    electionsYears,
+} from '../../helpers/accounts';
+import { icons, transactionsColumns as tc } from '../../helpers/constants';
+import { labels, t as translate } from '../../helpers/dictionary';
 import {
     currencyFormat,
     datePickerFormat,
@@ -20,35 +20,26 @@ import {
     sortAlphabetically,
     sortNumbers,
 } from '../../helpers/helpers';
-import { partyAlias } from '../../helpers/parties';
-import { separators } from '../../helpers/routes';
+import { parseQueryOptions, separators } from '../../helpers/routes';
 
-import './Donors.scss';
-
-function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
-    const options = parseQueryOptions();
+function TransactionsFilters({ hiddenColumns = [], updateRouteQuery }) {
+    const options = parseQueryOptions(allowedParams);
 
     const [query, setQuery] = useState(options.q ?? '');
 
-    const entity = (options.c ?? '') !== '' ? Number(options.c) : '';
-    let types =
-        options.t ?? false
-            ? options.t.split(separators.numbers).map((item) => Number(item))
-            : [];
-    let flags =
-        options.f ?? false
-            ? options.f.split(separators.numbers).map((item) => Number(item))
-            : [];
-    const party = options.p ?? '';
-
+    let types = options.t?.split(separators.array) ?? [];
+    let years =
+        options.y?.split(separators.numbers).map((item) => Number(item)) ?? [];
+    const direction = (options.w ?? '') !== '' ? Number(options.w) : '';
     const [amount, setAmount] = useState(
-        options.a ?? false
-            ? options.a.split(separators.numbers).map((item) => Number(item))
-            : [amountSettings.min, amountSettings.max]
+        options.a?.split(separators.numbers).map((item) => Number(item)) ?? [
+            amountSettings.min,
+            amountSettings.max,
+        ]
     );
     const timestamp = options.d
-        ? options.d.split(separators.numbers).map((item) => Number(item))
-        : [0, 0];
+        ?.split(separators.numbers)
+        .map((item) => Number(item)) ?? [0, 0];
 
     const formSubmit = (e) => {
         // prevent form submit action, all paremeters are set via URL
@@ -69,57 +60,70 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
         debounceSearch(e.target.value);
     };
 
-    const updateEntity = (e) => {
-        // copy all options except c & o
-        const { c, o, ...linkOpt } = options;
-        if (e.target.value !== '') {
-            linkOpt.c = Number(e.target.value);
-        }
-        updateRouteQuery(linkOpt);
-    };
-
     const updateTypes = (e) => {
         // copy all options except t & o
         const { t, o, ...linkOpt } = options;
-        const id = Number(e.target.value);
         if (e.target.checked) {
-            types.push(id);
-            types.sort(sortNumbers(true));
+            types.push(e.target.value);
+            types.sort(sortAlphabetically());
         } else {
-            types = types.filter((item) => item !== id);
+            types = types.filter((item) => item !== e.target.value);
         }
         if (types.length) {
-            linkOpt.t = types.join(separators.numbers);
+            linkOpt.t = types.join(separators.array);
         }
         updateRouteQuery(linkOpt);
     };
 
-    const updateFlags = (e) => {
-        // copy all options except f & o
-        const { f, o, ...linkOpt } = options;
+    const updateYears = (e) => {
+        // copy all options except y & o
+        const { y, o, ...linkOpt } = options;
         const id = Number(e.target.value);
         if (e.target.checked) {
-            flags.push(id);
-            flags.sort(sortNumbers(true));
+            years.push(id);
+            years.sort(sortNumbers(true));
         } else {
-            flags = flags.filter((item) => item !== id);
+            years = years.filter((item) => item !== id);
         }
-        if (flags.length) {
-            linkOpt.f = flags.join(separators.numbers);
+        if (years.length) {
+            linkOpt.y = years.join(separators.numbers);
+        }
+        updateRouteQuery(linkOpt);
+    };
+
+    const updateDirection = (e) => {
+        // copy all options except w & o
+        const { w, o, ...linkOpt } = options;
+        const id = Number(e.target.value);
+        if (e.target.checked) {
+            if (direction !== Number(!id)) {
+                linkOpt.w = id;
+            }
+        } else if (direction === '') {
+            linkOpt.w = Number(!id);
         }
         updateRouteQuery(linkOpt);
     };
 
     const debounceArrNumParam = useDebouncedCallback((value, param) => {
-        // copy all options except f & o
+        // copy all options except o
         const { o, ...linkOpt } = options;
-        linkOpt[param] = value.join(separators.numbers);
+        if (Array.isArray(value)) {
+            linkOpt[param] = value.join(separators.numbers);
+        } else if (linkOpt[param] ?? false) {
+            delete linkOpt[param];
+        }
         updateRouteQuery(linkOpt);
     }, 500);
 
     const updateAmount = (minmax) => {
         setAmount(minmax);
-        debounceArrNumParam(minmax, 'a');
+        debounceArrNumParam(
+            minmax[0] === amountSettings.min && minmax[1] === amountSettings.max
+                ? null
+                : minmax,
+            'a'
+        );
     };
 
     const updateAmountMin = (e) => {
@@ -170,15 +174,6 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
         updateDate([min, max]);
     };
 
-    const updateParty = (e) => {
-        // copy all options except p & o
-        const { p, o, ...linkOpt } = options;
-        if (e.target.value !== '') {
-            linkOpt.p = e.target.value;
-        }
-        updateRouteQuery(linkOpt);
-    };
-
     return (
         <Form
             id="donations-filters"
@@ -187,20 +182,20 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
         >
             <Form.Group>
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {t(labels.donations.filters.search)}
+                    {translate(labels.donations.filters.search)}
                 </h6>
                 <InputGroup>
                     <Form.Label
-                        htmlFor="donations-search"
+                        htmlFor="transactions-search"
                         className="visually-hidden"
                     >
-                        {t(labels.search.label)}
+                        {translate(labels.search.label)}
                     </Form.Label>
                     <Form.Control
-                        placeholder={t(labels.search.label)}
-                        aria-label={t(labels.search.label)}
+                        placeholder={translate(labels.search.label)}
+                        aria-label={translate(labels.search.label)}
                         aria-describedby="search-icon"
-                        id="donations-search"
+                        id="transactions-search"
                         onChange={updateQuery}
                         value={query}
                     />
@@ -208,33 +203,49 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
                 </InputGroup>
             </Form.Group>
 
-            {!hiddenColumns.includes(dc.entity) && (
+            {!hiddenColumns.includes(tc.type) && (
                 <Form.Group className="mt-3">
                     <h6 className="fw-bold text-primary text-uppercase">
-                        {columnLabel(dc.entity)}
+                        {columnLabel(tc.type)}
                     </h6>
-                    <Form.Check
-                        key=""
-                        inline
-                        label={t(labels.all)}
-                        id="entity-all"
-                        name="entity"
-                        type="radio"
-                        value=""
-                        checked={entity === ''}
-                        onChange={updateEntity}
-                    />
-                    {t(labels.donations.entities).map((label, index) => (
+                    {Object.entries(labels.elections.types).map(
+                        ([elType, typeLabels]) => (
+                            <Form.Check
+                                key={elType}
+                                label={
+                                    <span className="el-icon">
+                                        <img src={icons.elections[elType]} />
+                                        <span>{translate(typeLabels)}</span>
+                                    </span>
+                                }
+                                id={`et-${elType}`}
+                                name="type"
+                                type="checkbox"
+                                value={elType}
+                                checked={types.includes(elType)}
+                                onChange={updateTypes}
+                            />
+                        )
+                    )}
+                </Form.Group>
+            )}
+
+            {!hiddenColumns.includes(tc.type) && (
+                <Form.Group className="mt-3">
+                    <h6 className="fw-bold text-primary text-uppercase">
+                        {columnLabel(tc.year)}
+                    </h6>
+                    {electionsYears.map((elYear) => (
                         <Form.Check
-                            key={label}
+                            key={elYear}
                             inline
-                            label={`${entityIcon(index)} ${label}`}
-                            id={`entity-${label}`}
-                            name="entity"
-                            type="radio"
-                            value={index}
-                            checked={entity === index}
-                            onChange={updateEntity}
+                            label={elYear}
+                            id={`ey-${elYear}`}
+                            name="year"
+                            type="checkbox"
+                            value={elYear}
+                            checked={years.includes(elYear)}
+                            onChange={updateYears}
                         />
                     ))}
                 </Form.Group>
@@ -242,68 +253,37 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabel(dc.type)}
+                    {translate(labels.accounts.paymentType)}
                 </h6>
-                {t(labels.donations.types).map((label, index) => {
-                    if (!label) {
-                        return null;
-                    }
-                    return (
-                        <Form.Check
-                            key={label}
-                            inline
-                            label={label}
-                            id={`type-${index}`}
-                            name="type"
-                            type="checkbox"
-                            value={index}
-                            checked={types.includes(index)}
-                            onChange={updateTypes}
-                        />
-                    );
-                })}
+                {translate(labels.accounts.paymentTypes).map((label, index) => (
+                    <Form.Check
+                        key={label}
+                        inline
+                        label={
+                            <>
+                                <span className={`payment-${index}`}>
+                                    {icons.payments[index]}
+                                </span>
+                                {label}
+                            </>
+                        }
+                        id={`payment-${index}`}
+                        name="payment"
+                        type="checkbox"
+                        value={index}
+                        checked={direction !== Number(!index)}
+                        onChange={updateDirection}
+                    />
+                ))}
             </Form.Group>
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabel(dc.flag)}
-                </h6>
-                {t(labels.donations.flags).map((label, index) => {
-                    if (!index) {
-                        return null;
-                    }
-                    return (
-                        <Form.Check
-                            key={label}
-                            inline
-                            label={
-                                <>
-                                    <span
-                                        className={`flag-${index} badge rounded-pill border bg-light bg-opacity-25`}
-                                    >
-                                        🏴
-                                    </span>
-                                    {` ${label}`}
-                                </>
-                            }
-                            id={`flag-${index}`}
-                            name="flag"
-                            type="checkbox"
-                            value={index}
-                            checked={flags.includes(index)}
-                            onChange={updateFlags}
-                        />
-                    );
-                })}
-            </Form.Group>
-
-            <Form.Group className="mt-3">
-                <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabel(dc.amount)}
+                    {columnLabel(tc.amount)}
                 </h6>
                 <div className="d-flex">
                     <Form.Label htmlFor="amount-min">
-                        {t(labels.donations.filters.from)}
+                        {translate(labels.donations.filters.from)}
                     </Form.Label>
                     <span className="ms-auto">{currencyFormat(amount[0])}</span>
                 </div>
@@ -317,7 +297,7 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
                 />
                 <div className="d-flex">
                     <Form.Label htmlFor="amount-max">
-                        {t(labels.donations.filters.to)}
+                        {translate(labels.donations.filters.to)}
                     </Form.Label>
                     <span className="ms-auto">{currencyFormat(amount[1])}</span>
                 </div>
@@ -333,12 +313,12 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
 
             <Form.Group className="mt-3">
                 <h6 className="fw-bold text-primary text-uppercase">
-                    {columnLabel(dc.date)}
+                    {columnLabel(tc.date)}
                 </h6>
                 <Row className="align-items-center">
                     <Col xs={2}>
                         <Form.Label htmlFor="date-min" className="my-0">
-                            {t(labels.donations.filters.from)}
+                            {translate(labels.donations.filters.from)}
                         </Form.Label>
                     </Col>
                     <Col xs={10}>
@@ -353,7 +333,7 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
                 <Row className="align-items-center mt-2">
                     <Col xs={2}>
                         <Form.Label htmlFor="date-max" className="my-0">
-                            {t(labels.donations.filters.to)}
+                            {translate(labels.donations.filters.to)}
                         </Form.Label>
                     </Col>
                     <Col xs={10}>
@@ -366,29 +346,8 @@ function Filters({ hiddenColumns = [], parties = [], updateRouteQuery }) {
                     </Col>
                 </Row>
             </Form.Group>
-
-            {!hiddenColumns.includes(dc.party) && parties.length > 1 && (
-                <Form.Group className="mt-3">
-                    <h6 className="fw-bold text-primary text-uppercase">
-                        {columnLabel(dc.party)}
-                    </h6>
-                    <Form.Select size="sm" onChange={updateParty} value={party}>
-                        <option key="" value="">
-                            {t(labels.all)}
-                        </option>
-                        {parties.sort(sortAlphabetically()).map((party) => {
-                            const partyName = partyAlias(party);
-                            return (
-                                <option key={partyName} value={partyName}>
-                                    {partyName}
-                                </option>
-                            );
-                        })}
-                    </Form.Select>
-                </Form.Group>
-            )}
         </Form>
     );
 }
 
-export default Filters;
+export default TransactionsFilters;

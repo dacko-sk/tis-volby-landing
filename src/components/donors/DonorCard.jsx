@@ -5,8 +5,6 @@ import { DonorFlags, DonorParties, entityIcon } from '../../helpers/dontaions';
 import { currencyFormat } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
-import './Donors.scss';
-
 function DonorCard({ donorData }) {
     const icon = donorData.name ? (
         <span className="me-2">{entityIcon(Number(donorData.company))}</span>

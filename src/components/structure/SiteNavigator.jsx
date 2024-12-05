@@ -3,15 +3,9 @@ import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Row from 'react-bootstrap/Row';
 
-import { elections as el, links } from '../../helpers/constants';
+import { elections as el, icons, links } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { nl2r } from '../../helpers/helpers';
-
-import iconL from '../../../public/img/icons/96money.png';
-import iconE from '../../../public/img/icons/96eu.png';
-import iconN from '../../../public/img/icons/96national.png';
-import iconP from '../../../public/img/icons/96president.png';
-import iconR from '../../../public/img/icons/96regional.png';
 
 function IconContent({ icon, label }) {
     return (
@@ -29,14 +23,25 @@ function SiteNavigator({ site }) {
             <Row>
                 <Col xs={6} sm={4} lg>
                     <a href="/" className="sn-icon">
-                        <IconContent icon={iconL} label={labels.sites.root} />
+                        <IconContent
+                            icon={icons.elections.f}
+                            label={labels.sites.root}
+                        />
                     </a>
                 </Col>
                 {[
-                    [el.s22, iconR, labels.sites.regional],
-                    [[el.n23, el.n20], iconN, labels.sites.national],
-                    [[el.p24, el.p19], iconP, labels.sites.president],
-                    [el.e24, iconE, labels.sites.european],
+                    [el.s22, icons.elections.r, labels.sites.regional],
+                    [
+                        [el.n23, el.n20],
+                        icons.elections.n,
+                        labels.sites.national,
+                    ],
+                    [
+                        [el.p24, el.p19],
+                        icons.elections.p,
+                        labels.sites.president,
+                    ],
+                    [el.e24, icons.elections.e, labels.sites.european],
                 ].map(([key, icon, label]) => {
                     const isDropdown = Array.isArray(key);
                     return (

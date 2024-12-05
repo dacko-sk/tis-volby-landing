@@ -1,20 +1,24 @@
 import Form from 'react-bootstrap/Form';
 
+import { isMobile } from '../../helpers/browser';
 import { labels, t } from '../../helpers/dictionary';
-import {
-    blocksizes,
-    columnLabel,
-    defaultBlocksize,
-    optionalColumns,
-    parseQueryOptions,
-} from '../../helpers/dontaions';
 import { sortNumbers } from '../../helpers/helpers';
-import { separators } from '../../helpers/routes';
+import { parseQueryOptions, separators } from '../../helpers/routes';
 
-import './Donors.scss';
+export const blocksizes = [10, 25, 50, 100];
+export const defaultBlocksize = blocksizes[isMobile ? 0 : 2];
+export const settingsParams = [
+    'v', // visible optional columns
+];
 
-function Settings({ hiddenColumns = [], updateRouteQuery }) {
-    const options = parseQueryOptions();
+function TableSettings({
+    allowedParams,
+    columnLabel,
+    hiddenColumns = [],
+    optionalColumns,
+    updateRouteQuery,
+}) {
+    const options = parseQueryOptions(allowedParams);
 
     const blocksize = options.b ?? false ? Number(options.b) : defaultBlocksize;
     let visibleColumns =
@@ -90,4 +94,4 @@ function Settings({ hiddenColumns = [], updateRouteQuery }) {
     );
 }
 
-export default Settings;
+export default TableSettings;

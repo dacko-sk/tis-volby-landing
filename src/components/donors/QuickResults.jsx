@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../../helpers/dictionary';
-import { apiEndpoints, buildApiQuery } from '../../helpers/dontaions';
+import { apiEndpoints, apiParams } from '../../helpers/dontaions';
+import { buildApiQuery } from '../../helpers/routes';
 
 import DonorCard from './DonorCard';
 import Loading from '../general/Loading';
@@ -10,7 +11,7 @@ import AlertWithIcon from '../general/AlertWithIcon';
 const maxResults = 5;
 
 function QuickResults({ query }) {
-    const queryParams = buildApiQuery({ b: maxResults, q: query });
+    const queryParams = buildApiQuery(apiParams, { b: maxResults, q: query });
     const aq = useQuery(
         [`donor_search_${queryParams}`],
         () =>

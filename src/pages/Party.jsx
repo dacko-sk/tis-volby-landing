@@ -3,8 +3,8 @@ import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../helpers/dictionary';
-import { apiEndpoints, buildApiQuery } from '../helpers/dontaions';
-import { routes, segments, separators } from '../helpers/routes';
+import { apiEndpoints, apiParams } from '../helpers/dontaions';
+import { buildApiQuery, routes, segments, separators } from '../helpers/routes';
 
 import useGovData from '../hooks/GovData';
 
@@ -20,7 +20,7 @@ function Party() {
     const options = {
         p: partyName,
     };
-    const queryParams = buildApiQuery(options);
+    const queryParams = buildApiQuery(apiParams, options);
     const { data: dqData } = useQuery([`donations_party_${partyName}`], () =>
         fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
             response.json()

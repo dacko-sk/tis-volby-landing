@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -6,23 +6,24 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import { isMobile } from './browser';
-import { donationsColumns as dc } from './constants';
+import { donationsColumns as dc, icons } from './constants';
 import { labels, t } from './dictionary';
 import {
     currencyFormat,
     dateNumericFormat,
     generateRandomString,
 } from './helpers';
-import { partyAlias, partyAliases } from './parties';
-import { routes, rwq, segments, separators } from './routes';
+import { partyAlias } from './parties';
+import { routes, segments, separators } from './routes';
+
+import { settingsParams } from '../components/datatables/TableSettings';
 
 export const apiEndpoints = {
-    donations: 'https://volby.transparency.sk/api/donors/donations_noflags.php',
-    donors: 'https://volby.transparency.sk/api/donors/donors_noflags.php',
+    donations: 'https://volby.transparency.sk/api/donors/donations.php',
+    donors: 'https://volby.transparency.sk/api/donors/donors.php',
     file: 'https://volby.transparency.sk/api/donors/donors_json.php',
     parties:
-        'https://volby.transparency.sk/api/donors/donors_json.php?f=all_parties_noflags',
+        'https://volby.transparency.sk/api/donors/donors_json.php?f=all_parties',
 };
 export const apiParams = [
     'o', // offset (page number - 1)
@@ -37,27 +38,19 @@ export const apiParams = [
     'q', // search query
     's', // sort
 ];
-export const settingsParams = [
-    'v', // visible optional columns
-];
+export const allowedParams = [...apiParams, ...settingsParams];
 
 export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
 export const hiddenPartyColumns = [dc.party];
 export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
-export const blocksizes = [10, 25, 50, 100];
-export const defaultBlocksize = blocksizes[isMobile ? 0 : 2];
 export const defaultSort = `${separators.numbers}date`;
 
-export const columnLabel = (key) =>
-    Object.keys(labels.donations.columns).includes(key)
-        ? t(labels.donations.columns[key])
-        : '';
 export const typeLabel = (i, plural) =>
     t(plural ? labels.donations.typesPlural : labels.donations.types)[i] ?? '';
 export const flagLabel = (i) => t(labels.donations.flags)[i] ?? '';
 export const flagAggLabel = (i) => t(labels.donations.flagsAggregated)[i] ?? '';
 export const entityLabel = (i) => t(labels.donations.entities)[i] ?? '';
-export const entityIcon = (i) => t(labels.donations.entityIcons)[i] ?? '';
+export const entityIcon = (i) => icons.entities[i] ?? '';
 
 export const amountSettings = {
     min: 0,
@@ -71,7 +64,24 @@ export const isCompany = (sourceColumns) => {
     );
 };
 
-export const getDonationsColumn = (sourceColumns, targetColumn) => {
+export const columnAlign = (key) => {
+    switch (key) {
+        case dc.amount:
+        case dc.date:
+            return 'text-end';
+        case dc.entity:
+        case dc.flag:
+        case dc.source:
+            return 'text-center';
+        default:
+            return '';
+    }
+};
+export const columnLabel = (key) =>
+    Object.keys(labels.donations.columns).includes(key)
+        ? t(labels.donations.columns[key])
+        : '';
+export const columnContent = (sourceColumns, targetColumn) => {
     const company = isCompany(sourceColumns);
     const name = sourceColumns[company ? 4 : 2].trim();
     switch (targetColumn) {
@@ -101,7 +111,7 @@ export const getDonationsColumn = (sourceColumns, targetColumn) => {
                         className="text-center fs-5"
                         aria-label={entityLabel(Number(company))}
                     >
-                        {entityIcon(Number(company))}
+                        {icons.entities[Number(company)]}
                     </div>
                 </OverlayTrigger>
             ) : (
@@ -177,37 +187,6 @@ export const getSortedDonorParties = (parties) =>
     Object.entries(parties)
         .sort((a, b) => b[1] - a[1])
         .map(([party]) => party);
-
-export const parseQueryOptions = () => {
-    const params = useParams();
-    const options = {};
-    if ((params.query ?? false) && params.query.length) {
-        const allowed = [...apiParams, ...settingsParams];
-        params.query.split(separators.parts).forEach((pair) => {
-            const [filter, value] = pair.split(separators.value);
-            if (allowed.includes(filter)) {
-                options[filter] = value;
-            }
-        });
-    }
-    return options;
-};
-
-export const buildApiQuery = (options) => {
-    const filters = [];
-    Object.entries(options).forEach(([param, value]) => {
-        if (apiParams.includes(param)) {
-            filters.push(
-                `${param}=${
-                    param === 'p'
-                        ? partyAliases(value).join(separators.array)
-                        : value
-                }`
-            );
-        }
-    });
-    return filters.join('&');
-};
 
 export function FlagBadge({ compact = false, flag }) {
     const i = Number(flag);
@@ -291,37 +270,5 @@ export function DonorParties({
                 );
             })}
         </Stack>
-    );
-}
-
-export function SortLink({ column, children, route = routes.donations() }) {
-    const options = parseQueryOptions();
-
-    // copy all options except s & o
-    const { s, o, ...linkOpt } = options;
-    let currentClass = 'text-decoration-none';
-    let targetSort;
-    switch (options.s ?? defaultSort) {
-        // current column is sorted ascending, target is descending
-        case column:
-            currentClass += ' s-a';
-            targetSort = separators.numbers + column;
-            break;
-        // current column is sorted descending, target is no sort
-        case separators.numbers + column:
-            currentClass += ' s-d';
-            targetSort = separators.numbers;
-            break;
-        // other unsorted columns, target is ascending
-        default:
-            targetSort = column;
-    }
-    if (targetSort !== defaultSort) {
-        linkOpt.s = targetSort;
-    }
-    return (
-        <Link className={currentClass} to={rwq.donations(route, linkOpt)}>
-            {children}
-        </Link>
     );
 }

@@ -1,4 +1,3 @@
-@use 'sass:map';
 @import './../../scss/variables';
 
 .donor-card {
@@ -40,5 +39,44 @@
   }
   &.flag-3 {
     --bs-border-color: #{$tis-light-blue};
+  }
+}
+
+.el-icon {
+  position: relative;
+  img {
+    height: 24px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    label & {
+      height: 20px;
+    }
+  }
+  span {
+    margin-left: 36px;
+    label & {
+      margin-left: 30px;
+    }
+  }
+}
+
+[class^='payment'] {
+  display: inline-block;
+  // border: 1px solid white;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: $fw-bold;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  margin-right: 6px;
+  &[class$='-0'] {
+    background-color: $tis-score-green;
+  }
+  &[class$='-1'] {
+    background-color: $tis-score-red;
   }
 }

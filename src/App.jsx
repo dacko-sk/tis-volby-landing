@@ -13,6 +13,7 @@ import {
 import ContextProviders from './ContextProviders';
 import Layout from './Layout';
 
+import Account from './pages/Account';
 import Accounts from './pages/Accounts';
 import Article from './pages/Article';
 import Donations from './pages/Donations';
@@ -44,17 +45,28 @@ function App() {
                                 [routes.donations(lang), Donations],
                                 [
                                     routes.donations(lang) +
-                                        queries.donations(true),
+                                        queries.searchAndFilter(true),
                                     Donations,
                                 ],
                                 [routes.donor(true, lang), Donor],
                                 [
                                     routes.donor(true, lang) +
-                                        queries.donations(true),
+                                        queries.searchAndFilter(true),
                                     Donor,
                                 ],
                                 [routes.government(lang), Government],
                                 [routes.accounts(lang), Accounts],
+                                [
+                                    routes.accounts(lang) +
+                                        queries.searchAndFilter(true),
+                                    Accounts,
+                                ],
+                                [routes.account(true, lang), Account],
+                                [
+                                    routes.account(true, lang) +
+                                        queries.searchAndFilter(true),
+                                    Account,
+                                ],
                                 [routes.parties(lang), Parties],
                                 [
                                     routes.party(true, '', lang),
@@ -65,7 +77,7 @@ function App() {
                                         [
                                             segments.DONATIONS,
                                             PartyDonations,
-                                            queries.donations(true),
+                                            queries.searchAndFilter(true),
                                         ],
                                         [segments.GOVERNMENT, PartyGovernment],
                                     ],

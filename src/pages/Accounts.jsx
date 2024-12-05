@@ -1,6 +1,7 @@
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 
+import TransactionsSearch from '../components/accounts/TransactionsSearch';
 import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
 
@@ -13,7 +14,7 @@ function Accounts() {
 
             <FundingNav />
 
-            <div id="accounts">accounts</div>
+            <TransactionsSearch />
         </section>
     );
 }

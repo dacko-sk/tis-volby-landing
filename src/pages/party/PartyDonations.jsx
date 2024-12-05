@@ -5,7 +5,7 @@ import { labels, t } from '../../helpers/dictionary';
 import { hiddenPartyColumns } from '../../helpers/dontaions';
 import { routes, segments } from '../../helpers/routes';
 
-import SearchResults from '../../components/donors/SearchResults';
+import DonationsSearch from '../../components/donors/DonationsSearch';
 
 function PartyDonations() {
     const partyName = useOutletContext();
@@ -13,7 +13,7 @@ function PartyDonations() {
     setTitle(`${partyName} : ${t(labels.donations.navTitle)}`);
 
     return (
-        <SearchResults
+        <DonationsSearch
             hiddenColumns={hiddenPartyColumns}
             queryOptions={{ p: partyName }}
             route={routes.party(partyName, segments.DONATIONS)}

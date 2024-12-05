@@ -10,7 +10,7 @@ import { routes, rwq } from '../../helpers/routes';
 
 import QuickResults from './QuickResults';
 
-import './Donors.scss';
+import '../datatables/Tables.scss';
 
 function QuickSearch() {
     const navigate = useNavigate();
@@ -18,7 +18,10 @@ function QuickSearch() {
     const [apiQuery, setApiQuery] = useState(null);
 
     const q = encodeURIComponent(inputVal);
-    const searchLink = rwq.donations(routes.donations(), inputVal ? { q } : {});
+    const searchLink = rwq.searchAndFilter(
+        routes.donations(),
+        inputVal ? { q } : {}
+    );
 
     const debounceSearch = useDebouncedCallback((value) => {
         setApiQuery(value);

@@ -1,15 +1,49 @@
-import { donationsColumns as dc, elections as el } from './constants';
+import {
+    donationsColumns as dc,
+    elections as el,
+    transactionsColumns as tc,
+} from './constants';
 import { getCurrentLanguage, languages } from './routes';
 
 import { csvKeys as gst } from '../hooks/GovData';
 
 export const labels = {
     accounts: {
+        back: ['Späť na všetky účty', 'Return to all accounts'],
+        columns: {
+            [tc.ta]: ['Transparentný účet', 'Transparent Account'],
+            [tc.type]: ['Voľby', 'Elections'],
+            [tc.year]: ['Volebný rok', 'Elections year'],
+            [tc.accountName]: ['Názov účtu', 'Account Name'],
+            [tc.date]: ['Dátum', 'Date'],
+            [tc.amount]: ['Suma', 'Amount'],
+            [tc.message]: ['Informácia o platbe', 'Message'],
+            [tc.txType]: ['Druh platby', 'Transaction Type'],
+            [tc.ks]: ['KS', 'Constant Symbol'],
+            [tc.vs]: ['VS', 'VS'],
+            [tc.ss]: ['ŠS', 'SS'],
+            [tc.note]: ['Poznámka', 'Note'],
+        },
+        info: ['Detail účtu', 'Account details'],
         navTitle: ['Transparentné účty', 'Transparent accounts'],
         navTitleShort: ['Účty', 'Accounts'],
+        noTransactions: [
+            'Zvoleným filtrom nevyhovujú žiadne platby.',
+            'There are no payments matching the selected filters.',
+        ],
         pageTitle: [
             'Archív\ntransparentných účtov',
             'Transparentaccounts archive',
+        ],
+        paymentType: ['Typ obratu', 'Payment type'],
+        paymentTypes: [
+            ['Príjmy', 'Výdavky'],
+            ['Incoming', 'Outgoing'],
+        ],
+        transactionsAmount: ['Počet platieb', 'Payments amount'],
+        totalSpendingDisclaimer: [
+            'Súčet všetkých výdavkov na transparentnom účte vedenom pre dané voľby',
+            'Sum of all outgoing payments on the transparent account for the elections',
         ],
     },
     all: ['Zobraziť všetko', 'Show all'],
@@ -82,7 +116,6 @@ export const labels = {
             ['Fyzická osoba', 'Firma'],
             ['Person', 'Company'],
         ],
-        entityIcons: [['👨‍💼', '🏢']],
         filters: {
             button: ['Filtre', 'Filters'],
             from: ['Od', 'From'],
@@ -253,6 +286,12 @@ export const labels = {
             'Time to elections end',
         ],
         title: ['Voľby', 'Elections'],
+        types: {
+            e: ['Európske voľby', 'European elections'],
+            n: ['Parlamentné voľby', 'Parliamentary elections'],
+            p: ['Prezidentské voľby', 'President elections'],
+            r: ['Samosprávne voľby', 'Municipal elections'],
+        },
     },
     errors: {
         loading: [

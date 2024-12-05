@@ -2,7 +2,7 @@ import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 import { getCurrentLanguage, languages } from '../helpers/routes';
 
-import SearchResults from '../components/donors/SearchResults';
+import DonationsSearch from '../components/donors/DonationsSearch';
 import ReadMore from '../components/general/ReadMore';
 import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
@@ -117,7 +117,7 @@ function Donations() {
                 {introText[getCurrentLanguage()]}
             </ReadMore>
 
-            <SearchResults />
+            <DonationsSearch />
         </section>
     );
 }

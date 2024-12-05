@@ -19,9 +19,9 @@ import {
 import { currencyFormat } from '../helpers/helpers';
 import { routes } from '../helpers/routes';
 
+import DonationsSearch from '../components/donors/DonationsSearch';
 import Title from '../components/structure/Title';
 import Loading from '../components/general/Loading';
-import SearchResults from '../components/donors/SearchResults';
 
 function Donor() {
     const params = useParams();
@@ -103,7 +103,7 @@ function Donor() {
             </Title>
             {content}
             <h2 className="my-4">{t(labels.donations.allDonations)}</h2>
-            <SearchResults
+            <DonationsSearch
                 hiddenColumns={hiddenDonorColumns}
                 parties={Object.keys(aq.data?.rows[0].parties ?? {})}
                 queryOptions={{ i: id }}

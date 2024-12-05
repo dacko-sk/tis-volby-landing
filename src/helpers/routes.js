@@ -1,7 +1,11 @@
+import { useParams } from 'react-router-dom';
+
+import { partyAliases } from './parties';
+
 import siteConfig from '../../package.json';
 
 export const separators = {
-    array: '|',
+    array: ';',
     parts: '_',
     newline: '\n',
     numbers: '-',
@@ -23,6 +27,7 @@ export const locales = {
 export const defaultLanguage = Object.values(languages)[0];
 
 export const segments = {
+    ACCOUNT: 'ACCOUNT',
     ACCOUNTS: 'ACCOUNTS',
     DONOR: 'DONOR',
     DONATIONS: 'DONATIONS',
@@ -35,6 +40,7 @@ export const segments = {
 
 export const localSegments = {
     [languages.sk]: {
+        [segments.ACCOUNT]: 'ucet',
         [segments.ACCOUNTS]: 'ucty',
         [segments.DONOR]: 'donor',
         [segments.DONATIONS]: 'donori',
@@ -45,6 +51,7 @@ export const localSegments = {
         [segments.SEARCH]: 'vyhladavanie',
     },
     [languages.en]: {
+        [segments.ACCOUNT]: 'account',
         [segments.ACCOUNTS]: 'accounts',
         [segments.DONOR]: 'donor',
         [segments.DONATIONS]: 'donations',
@@ -110,11 +117,20 @@ export const buildUrlQuery = (options) => {
 };
 
 export const queries = {
-    donations: (query) =>
+    searchAndFilter: (query) =>
         query ? separators.url + (query === true ? ':query' : query) : '',
 };
 
 export const routes = {
+    account: (slug, lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.ACCOUNT, lang) +
+        separators.url +
+        (slug === true
+            ? ':slug'
+            : encodeURIComponent(slug.replaceAll(' ', separators.space))),
     accounts: (lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +
@@ -168,6 +184,36 @@ export const routes = {
 };
 
 export const rwq = {
-    donations: (route, queryOptions) =>
-        route + queries.donations(buildUrlQuery(queryOptions)),
+    searchAndFilter: (route, queryOptions) =>
+        route + queries.searchAndFilter(buildUrlQuery(queryOptions)),
+};
+
+export const parseQueryOptions = (allowedParams) => {
+    const params = useParams();
+    const options = {};
+    if ((params.query ?? false) && params.query.length) {
+        params.query.split(separators.parts).forEach((pair) => {
+            const [filter, value] = pair.split(separators.value);
+            if (allowedParams.includes(filter)) {
+                options[filter] = value;
+            }
+        });
+    }
+    return options;
+};
+
+export const buildApiQuery = (apiParams, options) => {
+    const filters = [];
+    Object.entries(options).forEach(([param, value]) => {
+        if (apiParams.includes(param)) {
+            filters.push(
+                `${param}=${
+                    param === 'p'
+                        ? partyAliases(value).join(separators.array)
+                        : value
+                }`
+            );
+        }
+    });
+    return filters.join('&');
 };
