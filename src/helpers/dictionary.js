@@ -339,6 +339,10 @@ export const labels = {
         ],
         sourcesTitle: ['Zdroje financovania', 'Funding sources'],
     },
+    genders: {
+        M: ['Muž', 'Male'],
+        F: ['Žena', 'Female'],
+    },
     government: {
         [gst.SUBSIDY_MANDATE]: {
             short: ['Mandát', 'Mandate'],

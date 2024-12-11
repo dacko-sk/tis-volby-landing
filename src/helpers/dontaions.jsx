@@ -42,7 +42,14 @@ export const allowedParams = [...apiParams, ...settingsParams];
 
 export const hiddenDonorColumns = [dc.entity, dc.name, dc.address];
 export const hiddenPartyColumns = [dc.party];
-export const optionalColumns = [dc.address, dc.subtype, dc.source, dc.notes];
+export const optionalColumns = [
+    dc.address,
+    dc.subtype,
+    dc.source,
+    dc.notes,
+    dc.gender,
+    dc.region,
+];
 export const defaultSort = `${separators.numbers}date`;
 
 export const typeLabel = (i, plural) =>
@@ -51,6 +58,8 @@ export const flagLabel = (i) => t(labels.donations.flags)[i] ?? '';
 export const flagAggLabel = (i) => t(labels.donations.flagsAggregated)[i] ?? '';
 export const entityLabel = (i) => t(labels.donations.entities)[i] ?? '';
 export const entityIcon = (i) => icons.entities[i] ?? '';
+export const genderLabel = (i) => t(labels.genders[i] ?? '');
+export const regionLabel = (i) => t(labels.regions[i] ?? '');
 
 export const amountSettings = {
     min: 0,
@@ -178,6 +187,10 @@ export const columnContent = (sourceColumns, targetColumn) => {
             return null;
         case dc.notes:
             return sourceColumns[10];
+        case dc.gender:
+            return genderLabel(sourceColumns[11]);
+        case dc.region:
+            return regionLabel(sourceColumns[12]);
         default:
             return null;
     }
