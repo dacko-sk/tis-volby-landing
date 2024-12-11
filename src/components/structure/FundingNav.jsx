@@ -27,14 +27,14 @@ function FundingNav() {
                         {t(labels.government.navTitle)}
                     </span>
                 </Nav.Link>
-                <Nav.Link as={NavLink} to={routes.accounts()}>
+                {/* <Nav.Link as={NavLink} to={routes.accounts()}>
                     <span className="d-md-none">
                         {t(labels.accounts.navTitleShort)}
                     </span>
                     <span className="d-none d-md-inline">
                         {t(labels.accounts.navTitle)}
                     </span>
-                </Nav.Link>
+                </Nav.Link> */}
             </Nav>
         </div>
     );

@@ -84,6 +84,7 @@ export const columnLabel = (key) =>
 export const columnContent = (sourceColumns, targetColumn) => {
     const company = isCompany(sourceColumns);
     const name = sourceColumns[company ? 4 : 2].trim();
+    const flag = sourceColumns[sourceColumns.length - 1]; // last column is flag (currently #13)
     switch (targetColumn) {
         case dc.party:
             return partyAlias(sourceColumns[0]);
@@ -150,13 +151,13 @@ export const columnContent = (sourceColumns, targetColumn) => {
                 </div>
             );
         case dc.flag:
-            if (sourceColumns[11]) {
+            if (flag) {
                 return (
                     <div className="text-center">
                         <OverlayTrigger
                             overlay={
                                 <Tooltip id={generateRandomString()}>
-                                    {flagLabel(Number(sourceColumns[11]))}
+                                    {flagLabel(Number(flag))}
                                 </Tooltip>
                             }
                             placement="right"
@@ -166,7 +167,7 @@ export const columnContent = (sourceColumns, targetColumn) => {
                             <Badge
                                 bg="white"
                                 pill
-                                className={`flag-${sourceColumns[11]} border fs-6`}
+                                className={`flag-${flag} border fs-6`}
                             >
                                 🏴
                             </Badge>

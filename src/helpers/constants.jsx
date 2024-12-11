@@ -32,8 +32,10 @@ export const donationsColumns = {
     subtype: 'subtype',
     amount: 'amount',
     source: 'source',
-    flag: 'flag',
     notes: 'notes',
+    gender: 'gender',
+    region: 'region',
+    flag: 'flag',
 };
 
 export const transactionsColumns = {

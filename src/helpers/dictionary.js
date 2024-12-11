@@ -97,8 +97,10 @@ export const labels = {
             [dc.subtype]: ['Typ plnenia', 'Type of fulfillment'],
             [dc.amount]: ['Výška príspevku', 'Amount'],
             [dc.source]: ['Zdroj', 'Source'],
-            [dc.flag]: ['Mimoriadny príznak', 'Risk indicator'],
             [dc.notes]: ['Poznámka', 'Note'],
+            [dc.gender]: ['Pohlavie', 'Gender'],
+            [dc.region]: ['Kraj', 'Region'],
+            [dc.flag]: ['Mimoriadny príznak', 'Risk indicator'],
         },
         credits: ['Úvery a pôžičky', 'Credits & loans'],
         disclaimer: [
@@ -481,6 +483,16 @@ export const labels = {
     },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
     readMore: ['Čítať ďalej…', 'Read more…'],
+    regions: {
+        BA: ['Brativlavský', 'Bratislava'],
+        BB: ['Banskobystrický', 'Banská Bystrica'],
+        KE: ['Košický', 'Košice'],
+        NR: ['Nitriansky', 'Nitra'],
+        PO: ['Prešovský', 'Prešov'],
+        TN: ['Trenčiansky', 'Trenčín'],
+        TT: ['Trnavský', 'Trnava'],
+        ZA: ['Žilinský', 'Žilina'],
+    },
     root: ['Monitoring volieb', 'Elections Monitoring'],
     search: {
         label: ['Vyhľadávanie', 'Search'],
