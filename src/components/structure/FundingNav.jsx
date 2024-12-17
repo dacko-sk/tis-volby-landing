@@ -35,6 +35,9 @@ function FundingNav() {
                         {t(labels.accounts.navTitle)}
                     </span>
                 </Nav.Link> */}
+                <Nav.Link as={NavLink} to={routes.charts()}>
+                    {t(labels.charts.navTitle)}
+                </Nav.Link>
             </Nav>
         </div>
     );

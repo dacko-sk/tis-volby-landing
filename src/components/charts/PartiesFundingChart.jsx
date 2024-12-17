@@ -9,10 +9,10 @@ import { routes } from '../../helpers/routes';
 import useGovData from '../../hooks/GovData';
 import { pdKeys, usePartiesDonationsData } from '../../hooks/Queries';
 
-import TisBarChart, { columnVariants } from '../charts/TisBarChart';
+import TisBarChart, { columnVariants } from './TisBarChart';
 import Loading from '../general/Loading';
 
-function PartiesFundingChart({ limit }) {
+function PartiesFundingChart({ className, limit, title }) {
     const { data, isLoading, error } = usePartiesDonationsData();
     const { getPartiesTotals, getExtremes } = useGovData();
 
@@ -51,7 +51,7 @@ function PartiesFundingChart({ limit }) {
     return totals.length ? (
         <>
             <TisBarChart
-                className="mt-4"
+                className={className}
                 bars={columnVariants.funding}
                 currency
                 data={limit ? totals.slice(0, limit) : totals}
@@ -60,10 +60,7 @@ function PartiesFundingChart({ limit }) {
                     labels.funding.partiesTotalDisclaimer,
                     Object.values(getExtremes())
                 )}
-                title={t(
-                    labels.funding[`partiesTotal${!limit ? 'All' : ''}`],
-                    limit ? [limit] : []
-                )}
+                title={title}
                 vertical
             />
             {limit && (

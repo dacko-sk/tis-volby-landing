@@ -16,6 +16,7 @@ import Layout from './Layout';
 import Account from './pages/Account';
 import Accounts from './pages/Accounts';
 import Article from './pages/Article';
+import Charts from './pages/Charts';
 import Donations from './pages/Donations';
 import Donor from './pages/Donor';
 import Funding from './pages/Funding';
@@ -55,6 +56,7 @@ function App() {
                                     Donor,
                                 ],
                                 [routes.government(lang), Government],
+                                [routes.charts(lang), Charts],
                                 [routes.accounts(lang), Accounts],
                                 [
                                     routes.accounts(lang) +

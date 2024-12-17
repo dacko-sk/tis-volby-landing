@@ -49,8 +49,35 @@ export const labels = {
     all: ['Zobraziť všetko', 'Show all'],
     charts: {
         amount: ['Suma', 'Amount'],
+        demographyTitle: [
+            'Demografické rozloženie darcov',
+            'Demographics structure of donors',
+        ],
+        gendersTitle: [
+            'Výška darov podľa pohlavia',
+            'Donations amount by gender',
+        ],
+        gendersUniqueTitle: [
+            'Počet darcov podľa pohlavia',
+            'Donors amount by gender',
+        ],
         incoming: ['Príjmy', 'Incomes'],
+        navTitle: ['Grafy', 'Charts'],
+        pageTitle: ['Štatistiky\na grafy', 'Stats\n& Charts'],
         outgoing: ['Výdavky', 'Expenses'],
+        regionsDisclaimer: [
+            'Súčet príspevkov od individuálnych darcov v kraji rokoch 2002 - 2023.',
+            'Sum of donations from individual donors in the region in years 2002 - 2023.',
+        ],
+        regionsTitle: [
+            'Výška darov podľa krajov',
+            'Sum of donations in each region',
+        ],
+        regionsUniqueTitle: [
+            'Unikátni darcovia v krajoch',
+            'Unique donors in each region',
+        ],
+        showMore: ['Ďalšie grafy a štatistiky', 'More charts & statistics'],
         sum: ['Spolu', 'Total'],
     },
     contact: ['Kontakt', 'Contact'],
@@ -92,7 +119,7 @@ export const labels = {
             [dc.date]: ['Dátum', 'Date'],
             [dc.entity]: ['Typ darcu', 'Donor type'],
             [dc.name]: ['Meno / Názov firmy', 'Person / Company name'],
-            [dc.address]: ['Adresa', 'Address'],
+            [dc.address]: ['Miesto pobytu', 'Address'],
             [dc.type]: ['Typ príjmu', 'Income type'],
             [dc.subtype]: ['Typ plnenia', 'Type of fulfillment'],
             [dc.amount]: ['Výška príspevku', 'Amount'],
@@ -339,9 +366,13 @@ export const labels = {
         ],
         sourcesTitle: ['Zdroje financovania', 'Funding sources'],
     },
-    genders: {
+    gender: {
         M: ['Muž', 'Male'],
         F: ['Žena', 'Female'],
+    },
+    genders: {
+        M: ['Muži', 'Male'],
+        F: ['Ženy', 'Female'],
     },
     government: {
         [gst.SUBSIDY_MANDATE]: {

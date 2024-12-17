@@ -4,7 +4,7 @@ import { newsCategories } from '../helpers/wp';
 
 import QuickSearch from '../components/donors/QuickSearch';
 import Top10Donors from '../components/donors/Top10Donors';
-import PartiesFundingChart from '../components/funding/PartiesFundingChart';
+import PartiesFundingChart from '../components/charts/PartiesFundingChart';
 import SiteNavigator from '../components/structure/SiteNavigator';
 import Title from '../components/structure/Title';
 import BannerNews from '../components/wp/BannerNews';
@@ -26,7 +26,11 @@ function Home() {
 
             <BannerNews />
 
-            <PartiesFundingChart limit={10} />
+            <PartiesFundingChart
+                className="mt-4"
+                limit={10}
+                title={t(labels.funding.partiesTotal, [10])}
+            />
 
             <Top10Donors
                 // https://volby.transparency.sk/api/donors/donors.php?c=0&b=10

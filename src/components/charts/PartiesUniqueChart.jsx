@@ -4,10 +4,10 @@ import { sortByNumericProp } from '../../helpers/helpers';
 
 import { pdKeys, usePartiesDonationsData } from '../../hooks/Queries';
 
-import TisBarChart, { columnVariants } from '../charts/TisBarChart';
+import TisBarChart, { columnVariants } from './TisBarChart';
 import Loading from '../general/Loading';
 
-function UniqueDonorsChart() {
+function PartiesUniqueChart() {
     const { data, isLoading, error } = usePartiesDonationsData();
 
     if (isLoading || error) {
@@ -25,15 +25,13 @@ function UniqueDonorsChart() {
 
     return (
         <TisBarChart
-            className="mt-4"
             bars={columnVariants.uniqueDonors}
             data={totals}
             lastUpdate={false}
             subtitle={t(labels.donations.uniqueDonorsDisclaimer)}
-            title={t(labels.donations.uniqueDonors)}
             vertical
         />
     );
 }
 
-export default UniqueDonorsChart;
+export default PartiesUniqueChart;

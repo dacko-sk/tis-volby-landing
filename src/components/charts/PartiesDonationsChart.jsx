@@ -4,7 +4,7 @@ import { sortByNumericProp } from '../../helpers/helpers';
 
 import { pdKeys, usePartiesDonationsData } from '../../hooks/Queries';
 
-import TisBarChart, { columnVariants } from '../charts/TisBarChart';
+import TisBarChart, { columnVariants } from './TisBarChart';
 import Loading from '../general/Loading';
 
 function PartiesDonationsChart() {
@@ -27,13 +27,11 @@ function PartiesDonationsChart() {
 
     return (
         <TisBarChart
-            className="mt-4"
             bars={columnVariants.donations}
             currency
             data={totals}
             lastUpdate={false}
             subtitle={t(labels.donations.topPartiesDisclaimer)}
-            title={t(labels.donations.topParties)}
             vertical
         />
     );

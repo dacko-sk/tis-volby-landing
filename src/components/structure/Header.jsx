@@ -29,9 +29,45 @@ function Header() {
                         className="me-auto"
                     >
                         <SiteSelector />
-                        <Nav.Link as={NavLink} to={routes.funding()}>
-                            {t(labels.funding.navTitle)}
-                        </Nav.Link>
+                        <NavDropdown
+                            title={t(labels.funding.navTitle)}
+                            className={
+                                document.location.pathname.startsWith(
+                                    routes.funding()
+                                )
+                                    ? 'show'
+                                    : ''
+                            }
+                        >
+                            <NavDropdown.Item
+                                as={NavLink}
+                                to={routes.funding()}
+                                end
+                            >
+                                {t(labels.funding.overview)}
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                                as={NavLink}
+                                to={routes.donations()}
+                            >
+                                {t(labels.donations.navTitle)}
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                                as={NavLink}
+                                to={routes.government()}
+                            >
+                                {t(labels.government.navTitle)}
+                            </NavDropdown.Item>
+                            {/* <NavDropdown.Item
+                                as={NavLink}
+                                to={routes.accounts()}
+                            >
+                                {t(labels.accounts.navTitle)}
+                            </NavDropdown.Item> */}
+                            <NavDropdown.Item as={NavLink} to={routes.charts()}>
+                                {t(labels.charts.pageTitle)}
+                            </NavDropdown.Item>
+                        </NavDropdown>
                         <Nav.Link as={NavLink} to={routes.parties()}>
                             {t(labels.parties.navTitle)}
                         </Nav.Link>

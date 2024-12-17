@@ -30,3 +30,12 @@ export const allDonationsParties = () => {
     const { data, isLoading, error } = usePartiesDonationsData();
     return isLoading || error ? [] : Object.keys(data);
 };
+
+export const useDonationsStatsData = () =>
+    useQuery({
+        queryKey: ['stats'],
+        queryFn: () =>
+            fetch(apiEndpoints.stats).then((response) => response.json()),
+        refetchOnMount: false,
+        select: (data) => data.stats ?? {},
+    });

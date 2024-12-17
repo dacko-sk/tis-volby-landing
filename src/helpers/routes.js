@@ -20,6 +20,7 @@ export const separators = {
 export const segments = {
     ACCOUNT: 'ACCOUNT',
     ACCOUNTS: 'ACCOUNTS',
+    CHARTS: 'CHARTS',
     DONOR: 'DONOR',
     DONATIONS: 'DONATIONS',
     FUNDING: 'FUNDING',
@@ -33,6 +34,7 @@ export const localSegments = {
     [languages.sk]: {
         [segments.ACCOUNT]: 'ucet',
         [segments.ACCOUNTS]: 'ucty',
+        [segments.CHARTS]: 'grafy',
         [segments.DONOR]: 'donor',
         [segments.DONATIONS]: 'donori',
         [segments.FUNDING]: 'financovanie',
@@ -44,6 +46,7 @@ export const localSegments = {
     [languages.en]: {
         [segments.ACCOUNT]: 'account',
         [segments.ACCOUNTS]: 'accounts',
+        [segments.CHARTS]: 'charts',
         [segments.DONOR]: 'donor',
         [segments.DONATIONS]: 'donations',
         [segments.FUNDING]: 'funding',
@@ -122,6 +125,11 @@ export const routes = {
               separators.url +
               (slug === true ? ':slug' : slug)
             : ''),
+    charts: (lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.CHARTS, lang),
     donor: (id, lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +

@@ -24,6 +24,7 @@ export const apiEndpoints = {
     file: 'https://volby.transparency.sk/api/donors/donors_json.php',
     parties:
         'https://volby.transparency.sk/api/donors/donors_json.php?f=all_parties',
+    stats: 'https://volby.transparency.sk/api/donors/donors_json.php?f=stats',
 };
 export const apiParams = [
     'o', // offset (page number - 1)
@@ -58,7 +59,7 @@ export const flagLabel = (i) => t(labels.donations.flags)[i] ?? '';
 export const flagAggLabel = (i) => t(labels.donations.flagsAggregated)[i] ?? '';
 export const entityLabel = (i) => t(labels.donations.entities)[i] ?? '';
 export const entityIcon = (i) => icons.entities[i] ?? '';
-export const genderLabel = (i) => t(labels.genders[i] ?? '');
+export const genderLabel = (i) => t(labels.gender[i] ?? '');
 export const regionLabel = (i) => t(labels.regions[i] ?? '');
 
 export const amountSettings = {

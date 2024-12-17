@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Row from 'react-bootstrap/Row';
@@ -6,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import { elections as el, icons, links } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { nl2r } from '../../helpers/helpers';
+import { routes } from '../../helpers/routes';
 
 function IconContent({ icon, label }) {
     return (
@@ -22,12 +24,12 @@ function SiteNavigator({ site }) {
             <h2 className="text-white mb-3">{t(labels.sitesTitle)}</h2>
             <Row>
                 <Col xs={6} sm={4} lg>
-                    <a href="/" className="sn-icon">
+                    <Link to={routes.funding()} className="sn-icon">
                         <IconContent
                             icon={icons.elections.f}
                             label={labels.sites.root}
                         />
-                    </a>
+                    </Link>
                 </Col>
                 {[
                     [el.s22, icons.elections.r, labels.sites.regional],
