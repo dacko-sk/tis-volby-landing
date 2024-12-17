@@ -180,14 +180,14 @@ export const labels = {
             ],
         ],
         learnMore: ['Zistiť viac o darcoch', 'Find out more about donors'],
-        navTitle: ['Databáza donorov', 'Donors database'],
+        navTitle: ['Knižnica darcov', 'Donors database'],
         navTitleShort: ['Donori', 'Donors'],
         noData: [
             'Pre túto stranu sme doposiaľ nespracovali dáta o darcoch z výročných správ.',
             `Donors data haven't been analysed for this party yet.`,
         ],
         pageTitle: [
-            'Vyhľadávanie\nv databáze donorov',
+            'Vyhľadávanie\nv knižnici darcov',
             'Search\nin donors database',
         ],
         search: {
@@ -205,7 +205,7 @@ export const labels = {
                 'Enter donor or party name…',
             ],
             title: [
-                'Vyhľadávanie v databáze donorov',
+                'Vyhľadávanie v knižnici darcov',
                 'Search in donors database',
             ],
         },
@@ -504,7 +504,7 @@ export const labels = {
     },
     parties: {
         allDisclaimer: [
-            'Abecedný zoznam strán a koalícií, pre ktoré sú dostupné dáta o financovaní zo štátneho rozpočtu alebo máme spracované dáta o darcoch v databáze donorov.',
+            'Abecedný zoznam strán a koalícií, pre ktoré sú dostupné dáta o financovaní zo štátneho rozpočtu alebo máme spracované dáta o darcoch v knižnici darcov.',
             'Parties & coalitions with available data of government subsidies or with processed donor database. The list is sorted alphabetically.',
         ],
         coalition: ['Koalícia', 'Coalition'],

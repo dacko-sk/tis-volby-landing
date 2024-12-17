@@ -11,7 +11,11 @@ function FundingNav() {
                 <Nav.Link as={NavLink} to={routes.funding()} end>
                     {t(labels.funding.overview)}
                 </Nav.Link>
-                <Nav.Link as={NavLink} to={routes.donations()}>
+                <Nav.Link
+                    as={NavLink}
+                    to={routes.donations()}
+                    className="tab-highlight"
+                >
                     <span className="d-md-none">
                         {t(labels.donations.navTitleShort)}
                     </span>
