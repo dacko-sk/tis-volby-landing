@@ -8,17 +8,28 @@ import { languageRoot, routes } from '../../helpers/routes';
 function SiteSelector({ site }) {
     return (
         <NavDropdown
-            title={t(labels.home.navTitle)}
+            title={
+                <>
+                    <span className="d-none d-lg-inline d-xl-none">
+                        {t(labels.home.navTitleShort)}
+                    </span>
+                    <span className="d-lg-none d-md-inline d-xl-inline">
+                        {t(labels.home.navTitle)}
+                    </span>
+                </>
+            }
             id="elections-menu"
             className={
                 languageRoot() === document.location.pathname ? 'show' : ''
             }
         >
             {site ? (
-                <NavDropdown.Item href="/">{t(labels.root)}</NavDropdown.Item>
+                <NavDropdown.Item href="/">
+                    {t(labels.sites.root)}
+                </NavDropdown.Item>
             ) : (
                 <NavDropdown.Item as={NavLink} to={routes.home()}>
-                    {t(labels.root)}
+                    {t(labels.sites.root)}
                 </NavDropdown.Item>
             )}
             {Object.keys(el).map((e) =>

@@ -7,6 +7,7 @@ import {
     queries,
     routes,
     segments,
+    separators,
     urlSegment,
 } from './helpers/routes';
 
@@ -19,7 +20,7 @@ import Article from './pages/Article';
 import Charts from './pages/Charts';
 import Donations from './pages/Donations';
 import Donor from './pages/Donor';
-import Funding from './pages/Funding';
+// import Funding from './pages/Funding';
 import Government from './pages/Government';
 import Home from './pages/Home';
 import News from './pages/News';
@@ -38,11 +39,10 @@ function App() {
                 <Routes>
                     <Route path={homepage} element={<Layout />}>
                         <Route index element={<Home />} />
-
                         {Object.keys(languages).map((lang) =>
                             [
                                 [routes.home(lang), Home],
-                                [routes.funding(lang), Funding],
+                                // [routes.funding(lang), Funding],
                                 [routes.donations(lang), Donations],
                                 [
                                     routes.donations(lang) +
@@ -119,6 +119,28 @@ function App() {
                                     )}
                                 </Route>
                             ))
+                        )}
+
+                        {/* redirect all funding/something routes to something */}
+                        {Object.keys(languages).map((lang) =>
+                            [routes.charts(lang), routes.government(lang)].map(
+                                (newRoute) => (
+                                    <Route
+                                        key={lang + newRoute}
+                                        path={
+                                            languageRoot(lang) +
+                                            urlSegment(segments.FUNDING, lang) +
+                                            separators.url +
+                                            newRoute.slice(
+                                                languageRoot(lang).length
+                                            )
+                                        }
+                                        element={
+                                            <Navigate replace to={newRoute} />
+                                        }
+                                    />
+                                )
+                            )
                         )}
 
                         {/* fallback */}

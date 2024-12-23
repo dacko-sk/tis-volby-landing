@@ -181,7 +181,7 @@ export const labels = {
         ],
         learnMore: ['Zistiť viac o darcoch', 'Find out more about donors'],
         navTitle: ['Knižnica darcov', 'Donors database'],
-        navTitleShort: ['Donori', 'Donors'],
+        navTitleShort: ['Darcovia', 'Donors'],
         noData: [
             'Pre túto stranu sme doposiaľ nespracovali dáta o darcoch z výročných správ.',
             `Donors data haven't been analysed for this party yet.`,
@@ -197,11 +197,11 @@ export const labels = {
                 'There are no items matching the selected filters.',
             ],
             noDonors: [
-                'Hľadanému výrazu nezodpovedá žiaden donor. Skúste podrobné vyhľadávanie',
+                'Hľadanému výrazu nezodpovedá žiaden darca. Skúste podrobné vyhľadávanie',
                 'No donor found, please try the Advanced search',
             ],
             placeholder: [
-                'Zadajte meno donora alebo názov strany…',
+                'Zadajte meno darcu alebo názov strany…',
                 'Enter donor or party name…',
             ],
             title: [
@@ -297,7 +297,7 @@ export const labels = {
             'Kumulatívne mimoriadne príznaky',
             'Cummulative risk indicators',
         ],
-        pageTitle: ['Donor'],
+        pageTitle: ['Darca', 'Donor'],
         parties: ['Podporené strany', 'Supported parties'],
     },
     download: ['Stiahnuť', 'Download'],
@@ -338,7 +338,7 @@ export const labels = {
             'Zistiť viac o financovaní',
             'Find out more about subsidies',
         ],
-        navTitle: ['Financovanie', 'Funding'],
+        navTitle: ['Ďalšie témy', 'More topics'],
         overview: ['Prehľad', 'Overview'],
         pageTitle: [
             'Financovanie\npolitických strán',
@@ -484,7 +484,8 @@ export const labels = {
         yearsTitle: ['Príspevky po rokoch', 'Subsidies by years'],
     },
     home: {
-        navTitle: ['Monitoring volieb', 'Elections Monitoring'],
+        navTitle: ['Financovanie politiky', 'Political finance'],
+        navTitleShort: ['Financovanie', 'Financing'],
         pageTitle: [
             'Monitoring volebných\nkampaní a financovania strán',
             'Monitoring of elections campaigns and political parties funding',
@@ -512,7 +513,7 @@ export const labels = {
             'Zloženie koalície v %i. volebnom období',
             'Coalition members in election period no. %i',
         ],
-        navTitle: ['Strany', 'Parties'],
+        navTitle: ['Zoznam strán', 'Parties list'],
         pageTitle: ['Strany a koalície', 'Parties & coalitions'],
         party: ['Strana', 'Party'],
     },
@@ -528,7 +529,6 @@ export const labels = {
         TT: ['Trnavský', 'Trnava'],
         ZA: ['Žilinský', 'Žilina'],
     },
-    root: ['Monitoring volieb', 'Elections Monitoring'],
     search: {
         label: ['Vyhľadávanie', 'Search'],
         results: [

@@ -6,8 +6,6 @@ import Row from 'react-bootstrap/Row';
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 
-import Title from '../components/structure/Title';
-import FundingNav from '../components/structure/FundingNav';
 import DonationsGendersChart from '../components/charts/DonationsGendersChart';
 import DonationsGendersUniqueChart from '../components/charts/DonationsGendersUniqeChart';
 import DonationsRegionsChart from '../components/charts/DonationsRegionsChart';
@@ -15,6 +13,8 @@ import DonationsRegionsUniqueChart from '../components/charts/DonationsRegionsUn
 import PartiesFundingChart from '../components/charts/PartiesFundingChart';
 import PartiesDonationsChart from '../components/charts/PartiesDonationsChart';
 import PartiesUniqueChart from '../components/charts/PartiesUniqueChart';
+import FundingSources from '../components/funding/FundingSources';
+import Title from '../components/structure/Title';
 
 const ACC_KEYS = {
     PARTIES: 'p',
@@ -45,9 +45,14 @@ function Charts() {
         <section>
             <Title secondaryWords={1}>{t(labels.charts.pageTitle)}</Title>
 
-            <FundingNav />
+            <FundingSources />
 
-            <Accordion activeKey={open} alwaysOpen onSelect={onSelect}>
+            <Accordion
+                activeKey={open}
+                alwaysOpen
+                onSelect={onSelect}
+                className="mt-4"
+            >
                 <Accordion.Item
                     key={ACC_KEYS.PARTIES}
                     eventKey={ACC_KEYS.PARTIES}

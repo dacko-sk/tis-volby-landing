@@ -4,7 +4,6 @@ import { getCurrentLanguage, languages } from '../helpers/languages';
 
 import DonationsSearch from '../components/donors/DonationsSearch';
 import ReadMore from '../components/general/ReadMore';
-import FundingNav from '../components/structure/FundingNav';
 import Title from '../components/structure/Title';
 
 const introText = {
@@ -110,8 +109,6 @@ function Donations() {
     return (
         <section>
             <Title secondaryWords={1}>{t(labels.donations.pageTitle)}</Title>
-
-            <FundingNav />
 
             <ReadMore id="financovanie-uvod" lines={4}>
                 {introText[getCurrentLanguage()]}

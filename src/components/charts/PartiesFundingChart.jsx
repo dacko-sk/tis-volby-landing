@@ -65,7 +65,7 @@ function PartiesFundingChart({ className, limit, title }) {
             />
             {limit && (
                 <div className="text-center mt-3">
-                    <Button as={Link} to={routes.funding()} variant="secondary">
+                    <Button as={Link} to={routes.charts()} variant="secondary">
                         {t(labels.funding.learnMore)}
                     </Button>
                 </div>

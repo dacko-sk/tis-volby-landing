@@ -73,12 +73,12 @@
 }
 
 .nav-tabs .tab-highlight {
-  @extend #{'.bg-secondary', '.text-white'};
+  @extend .bg-primary-subtle;
   &:hover {
-    @extend #{'.bg-transparent', '.text-secondary'};
+    @extend .bg-transparent;
   }
   &.active {
-    @extend #{'.bg-transparent', '.text-secondary'};
+    @extend .bg-transparent;
   }
 }
 

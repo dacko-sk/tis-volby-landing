@@ -29,11 +29,39 @@ function Header() {
                         className="me-auto"
                     >
                         <SiteSelector />
+                        <Nav.Link as={NavLink} to={routes.donations()}>
+                            <span className="d-none d-lg-inline d-xl-none">
+                                {t(labels.donations.navTitleShort)}
+                            </span>
+                            <span className="d-lg-none d-md-inline d-xl-inline">
+                                {t(labels.donations.navTitle)}
+                            </span>
+                        </Nav.Link>
+                        {/* <Nav.Link as={NavLink} to={routes.government()}>
+                            {t(labels.government.navTitle)}
+                        </Nav.Link> */}
+                        <Nav.Link as={NavLink} to={routes.accounts()}>
+                            <span className="d-none d-lg-inline d-xl-none">
+                                {t(labels.accounts.navTitleShort)}
+                            </span>
+                            <span className="d-lg-none d-md-inline d-xl-inline">
+                                {t(labels.accounts.navTitle)}
+                            </span>
+                        </Nav.Link>
+                        <Nav.Link as={NavLink} to={routes.news()}>
+                            {t(labels.news.navTitle)}
+                        </Nav.Link>
                         <NavDropdown
                             title={t(labels.funding.navTitle)}
                             className={
-                                document.location.pathname.startsWith(
-                                    routes.funding()
+                                [
+                                    routes.parties(),
+                                    // routes.donations(),
+                                    routes.government(),
+                                    // routes.accounts(),
+                                    routes.charts(),
+                                ].some((path) =>
+                                    document.location.pathname.startsWith(path)
                                 )
                                     ? 'show'
                                     : ''
@@ -41,17 +69,16 @@ function Header() {
                         >
                             <NavDropdown.Item
                                 as={NavLink}
-                                to={routes.funding()}
-                                end
+                                to={routes.parties()}
                             >
-                                {t(labels.funding.overview)}
+                                {t(labels.parties.navTitle)}
                             </NavDropdown.Item>
-                            <NavDropdown.Item
+                            {/* <NavDropdown.Item
                                 as={NavLink}
                                 to={routes.donations()}
                             >
                                 {t(labels.donations.navTitle)}
-                            </NavDropdown.Item>
+                            </NavDropdown.Item> */}
                             <NavDropdown.Item
                                 as={NavLink}
                                 to={routes.government()}
@@ -68,12 +95,6 @@ function Header() {
                                 {t(labels.charts.pageTitle)}
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link as={NavLink} to={routes.parties()}>
-                            {t(labels.parties.navTitle)}
-                        </Nav.Link>
-                        <Nav.Link as={NavLink} to={routes.news()}>
-                            {t(labels.news.navTitle)}
-                        </Nav.Link>
                     </Nav>
                     <Nav variant="pills" className="me-2">
                         <NavDropdown

@@ -35,8 +35,8 @@ export const localSegments = {
         [segments.ACCOUNT]: 'ucet',
         [segments.ACCOUNTS]: 'ucty',
         [segments.CHARTS]: 'grafy',
-        [segments.DONOR]: 'donor',
-        [segments.DONATIONS]: 'donori',
+        [segments.DONOR]: 'darca',
+        [segments.DONATIONS]: 'darcovia',
         [segments.FUNDING]: 'financovanie',
         [segments.GOVERNMENT]: 'statne-prispevky',
         [segments.NEWS]: 'aktuality',
@@ -106,7 +106,7 @@ export const queries = {
 export const routes = {
     account: (slug, lang) =>
         languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
+        urlSegment(segments.ACCOUNTS, lang) +
         separators.url +
         urlSegment(segments.ACCOUNT, lang) +
         separators.url +
@@ -114,10 +114,7 @@ export const routes = {
             ? ':slug'
             : encodeURIComponent(slug.replaceAll(' ', separators.space))),
     accounts: (lang) =>
-        languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
-        separators.url +
-        urlSegment(segments.ACCOUNTS, lang),
+        languageRoot(lang) + urlSegment(segments.ACCOUNTS, lang),
     article: (slug, lang) =>
         languageRoot(lang) +
         (slug
@@ -125,31 +122,21 @@ export const routes = {
               separators.url +
               (slug === true ? ':slug' : slug)
             : ''),
-    charts: (lang) =>
-        languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
-        separators.url +
-        urlSegment(segments.CHARTS, lang),
+    charts: (lang) => languageRoot(lang) + urlSegment(segments.CHARTS, lang),
     donor: (id, lang) =>
         languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
+        urlSegment(segments.DONATIONS, lang) +
+        separators.url +
         (id
-            ? separators.url +
-              urlSegment(segments.DONOR, lang) +
+            ? urlSegment(segments.DONOR, lang) +
               separators.url +
               (id === true ? ':id' : encodeURIComponent(id))
             : ''),
     donations: (lang) =>
-        languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
-        separators.url +
-        urlSegment(segments.DONATIONS, lang),
+        languageRoot(lang) + urlSegment(segments.DONATIONS, lang),
     funding: (lang) => languageRoot(lang) + urlSegment(segments.FUNDING, lang),
     government: (lang) =>
-        languageRoot(lang) +
-        urlSegment(segments.FUNDING, lang) +
-        separators.url +
-        urlSegment(segments.GOVERNMENT, lang),
+        languageRoot(lang) + urlSegment(segments.GOVERNMENT, lang),
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
     parties: (lang) => languageRoot(lang) + urlSegment(segments.PARTIES, lang),

@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Row from 'react-bootstrap/Row';
 
+import { focusElement, scrollToElement } from '../../helpers/browser';
 import { elections as el, icons, links } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { nl2r } from '../../helpers/helpers';
-import { routes } from '../../helpers/routes';
 
 function IconContent({ icon, label }) {
     return (
@@ -24,12 +24,18 @@ function SiteNavigator({ site }) {
             <h2 className="text-white mb-3">{t(labels.sitesTitle)}</h2>
             <Row>
                 <Col xs={6} sm={4} lg>
-                    <Link to={routes.funding()} className="sn-icon">
+                    <Button
+                        className="sn-icon"
+                        onClick={() => {
+                            focusElement('quicksearch');
+                            scrollToElement('quick-search');
+                        }}
+                    >
                         <IconContent
                             icon={icons.elections.f}
                             label={labels.sites.root}
                         />
-                    </Link>
+                    </Button>
                 </Col>
                 {[
                     [el.s22, icons.elections.r, labels.sites.regional],
