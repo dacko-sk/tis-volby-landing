@@ -35,8 +35,8 @@ export const localSegments = {
         [segments.ACCOUNT]: 'ucet',
         [segments.ACCOUNTS]: 'ucty',
         [segments.CHARTS]: 'grafy',
-        [segments.DONOR]: 'donor',
-        [segments.DONATIONS]: 'donori',
+        [segments.DONOR]: 'darca',
+        [segments.DONATIONS]: 'darcovia',
         [segments.FUNDING]: 'financovanie',
         [segments.GOVERNMENT]: 'statne-prispevky',
         [segments.NEWS]: 'aktuality',
@@ -133,6 +133,8 @@ export const routes = {
     donor: (id, lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.DONATIONS, lang) +
         (id
             ? separators.url +
               urlSegment(segments.DONOR, lang) +

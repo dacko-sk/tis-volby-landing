@@ -149,7 +149,9 @@ th a {
 
 #search-container {
   @extend #{'.bg-success', '.my-4', '.p-3', '.p-sm-5'};
-  h2 {
+  h2,
+  h3,
+  h4 {
     color: white;
   }
   .btn {

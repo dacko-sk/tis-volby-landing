@@ -19,7 +19,6 @@ import Article from './pages/Article';
 import Charts from './pages/Charts';
 import Donations from './pages/Donations';
 import Donor from './pages/Donor';
-import Funding from './pages/Funding';
 import Government from './pages/Government';
 import Home from './pages/Home';
 import News from './pages/News';
@@ -42,7 +41,6 @@ function App() {
                         {Object.keys(languages).map((lang) =>
                             [
                                 [routes.home(lang), Home],
-                                [routes.funding(lang), Funding],
                                 [routes.donations(lang), Donations],
                                 [
                                     routes.donations(lang) +
@@ -120,6 +118,20 @@ function App() {
                                 </Route>
                             ))
                         )}
+
+                        {/* redirect removed funding page */}
+                        {Object.keys(languages).map((lang) => (
+                            <Route
+                                key={lang}
+                                path={routes.funding(lang)}
+                                element={
+                                    <Navigate
+                                        replace
+                                        to={routes.donations(lang)}
+                                    />
+                                }
+                            />
+                        ))}
 
                         {/* fallback */}
                         <Route

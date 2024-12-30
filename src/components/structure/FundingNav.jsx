@@ -8,14 +8,7 @@ function FundingNav() {
     return (
         <div className="tabs-scrollable mb-4">
             <Nav variant="tabs">
-                <Nav.Link as={NavLink} to={routes.funding()} end>
-                    {t(labels.funding.overview)}
-                </Nav.Link>
-                <Nav.Link
-                    as={NavLink}
-                    to={routes.donations()}
-                    className="tab-highlight"
-                >
+                <Nav.Link as={NavLink} to={routes.donations()}>
                     <span className="d-md-none">
                         {t(labels.donations.navTitleShort)}
                     </span>
@@ -31,16 +24,21 @@ function FundingNav() {
                         {t(labels.government.navTitle)}
                     </span>
                 </Nav.Link>
-                {/* <Nav.Link as={NavLink} to={routes.accounts()}>
+                <Nav.Link as={NavLink} to={routes.accounts()}>
                     <span className="d-md-none">
                         {t(labels.accounts.navTitleShort)}
                     </span>
                     <span className="d-none d-md-inline">
                         {t(labels.accounts.navTitle)}
                     </span>
-                </Nav.Link> */}
+                </Nav.Link>
                 <Nav.Link as={NavLink} to={routes.charts()}>
-                    {t(labels.charts.navTitle)}
+                    <span className="d-md-none">
+                        {t(labels.charts.navTitle)}
+                    </span>
+                    <span className="d-none d-md-inline">
+                        {t(labels.charts.pageTitle)}
+                    </span>
                 </Nav.Link>
             </Nav>
         </div>

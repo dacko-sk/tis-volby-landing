@@ -2,7 +2,7 @@ import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 import { newsCategories } from '../helpers/wp';
 
-import QuickSearch from '../components/donors/QuickSearch';
+import QuickSearch from '../components/datatables/QuickSearch';
 import Top10Donors from '../components/donors/Top10Donors';
 import PartiesFundingChart from '../components/charts/PartiesFundingChart';
 import SiteNavigator from '../components/structure/SiteNavigator';

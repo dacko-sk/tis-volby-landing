@@ -45,6 +45,12 @@ export const labels = {
             'Súčet všetkých výdavkov na transparentnom účte vedenom pre dané voľby',
             'Sum of all outgoing payments on the transparent account for the elections',
         ],
+        search: {
+            advanced: [
+                'Viac výsledkov a podrobné vyhľadávanie platieb',
+                'More results & advanced payments search',
+            ],
+        },
     },
     all: ['Zobraziť všetko', 'Show all'],
     charts: {
@@ -63,7 +69,7 @@ export const labels = {
         ],
         incoming: ['Príjmy', 'Incomes'],
         navTitle: ['Grafy', 'Charts'],
-        pageTitle: ['Štatistiky\na grafy', 'Stats\n& Charts'],
+        pageTitle: ['Grafy\na súhrny', 'Stats\n& Charts'],
         outgoing: ['Výdavky', 'Expenses'],
         regionsDisclaimer: [
             'Súčet príspevkov od individuálnych darcov v kraji rokoch 2002 - 2023.',
@@ -181,7 +187,7 @@ export const labels = {
         ],
         learnMore: ['Zistiť viac o darcoch', 'Find out more about donors'],
         navTitle: ['Knižnica darcov', 'Donors database'],
-        navTitleShort: ['Donori', 'Donors'],
+        navTitleShort: ['Darcovia', 'Donors'],
         noData: [
             'Pre túto stranu sme doposiaľ nespracovali dáta o darcoch z výročných správ.',
             `Donors data haven't been analysed for this party yet.`,
@@ -191,7 +197,10 @@ export const labels = {
             'Search\nin donors database',
         ],
         search: {
-            advanced: ['Podrobné vyhľadávanie', 'Advanced search'],
+            advanced: [
+                'Viac výsledkov a podrobné vyhľadávanie darcov',
+                'More results & advanced donors search',
+            ],
             noDonations: [
                 'Zvoleným filtrom nevyhovujú žiadne príspevky.',
                 'There are no items matching the selected filters.',
@@ -201,12 +210,12 @@ export const labels = {
                 'No donor found, please try the Advanced search',
             ],
             placeholder: [
-                'Zadajte meno donora alebo názov strany…',
-                'Enter donor or party name…',
+                'Zadajte meno donora, názov účtu alebo strany…',
+                'Enter donor, account or party name…',
             ],
             title: [
-                'Vyhľadávanie v knižnici darcov',
-                'Search in donors database',
+                'Vyhľadávanie v knižnici darcov a transparentných účtoch',
+                'Search in donors database & transparent accounts',
             ],
         },
         settings: {
@@ -297,7 +306,7 @@ export const labels = {
             'Kumulatívne mimoriadne príznaky',
             'Cummulative risk indicators',
         ],
-        pageTitle: ['Donor'],
+        pageTitle: ['Darca', 'Donor'],
         parties: ['Podporené strany', 'Supported parties'],
     },
     download: ['Stiahnuť', 'Download'],

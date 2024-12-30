@@ -22,6 +22,7 @@
         content: '•';
         position: absolute;
         transform: translateX(calc($dc-h-gap / 2 - 50%));
+        font-weight: $fw-regular;
       }
       &:last-child:after {
         content: none;

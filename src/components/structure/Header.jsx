@@ -34,6 +34,12 @@ function Header() {
                             className={
                                 document.location.pathname.startsWith(
                                     routes.funding()
+                                ) &&
+                                ![routes.donations(), routes.donor()].some(
+                                    (excl) =>
+                                        document.location.pathname.startsWith(
+                                            excl
+                                        )
                                 )
                                     ? 'show'
                                     : ''
@@ -41,16 +47,14 @@ function Header() {
                         >
                             <NavDropdown.Item
                                 as={NavLink}
-                                to={routes.funding()}
-                                end
-                            >
-                                {t(labels.funding.overview)}
-                            </NavDropdown.Item>
-                            <NavDropdown.Item
-                                as={NavLink}
                                 to={routes.donations()}
                             >
-                                {t(labels.donations.navTitle)}
+                                <span className="d-md-none">
+                                    {t(labels.donations.navTitleShort)}
+                                </span>
+                                <span className="d-none d-md-inline">
+                                    {t(labels.donations.navTitle)}
+                                </span>
                             </NavDropdown.Item>
                             <NavDropdown.Item
                                 as={NavLink}
@@ -58,16 +62,29 @@ function Header() {
                             >
                                 {t(labels.government.navTitle)}
                             </NavDropdown.Item>
-                            {/* <NavDropdown.Item
+                            <NavDropdown.Item
                                 as={NavLink}
                                 to={routes.accounts()}
                             >
-                                {t(labels.accounts.navTitle)}
-                            </NavDropdown.Item> */}
+                                <span className="d-md-none">
+                                    {t(labels.accounts.navTitleShort)}
+                                </span>
+                                <span className="d-none d-md-inline">
+                                    {t(labels.accounts.navTitle)}
+                                </span>
+                            </NavDropdown.Item>
                             <NavDropdown.Item as={NavLink} to={routes.charts()}>
                                 {t(labels.charts.pageTitle)}
                             </NavDropdown.Item>
                         </NavDropdown>
+                        <Nav.Link as={NavLink} to={routes.donations()}>
+                            <span className="d-none d-lg-inline d-xl-none">
+                                {t(labels.donations.navTitleShort)}
+                            </span>
+                            <span className="d-lg-none d-md-inline d-xl-inline">
+                                {t(labels.donations.navTitle)}
+                            </span>
+                        </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.parties()}>
                             {t(labels.parties.navTitle)}
                         </Nav.Link>

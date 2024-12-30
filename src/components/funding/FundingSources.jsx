@@ -1,7 +1,5 @@
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
 
 import { colors, links } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
@@ -115,14 +113,7 @@ function FundingSources({ party }) {
 
     return (
         <Row>
-            <Col xl={6}>
-                {chart}
-                <div className="text-center">
-                    <Button as={Link} to={routes.charts()} variant="secondary">
-                        {t(labels.charts.showMore)}
-                    </Button>
-                </div>
-            </Col>
+            <Col xl={6}>{chart}</Col>
             <Col xl={6} className="mt-4 mt-xl-0">
                 {!coalition && sum[pdKeys.DONATIONS] > 0 && (
                     <HeroNumber

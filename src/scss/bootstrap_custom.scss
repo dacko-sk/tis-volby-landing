@@ -72,16 +72,6 @@
   }
 }
 
-.nav-tabs .tab-highlight {
-  @extend #{'.bg-secondary', '.text-white'};
-  &:hover {
-    @extend #{'.bg-transparent', '.text-secondary'};
-  }
-  &.active {
-    @extend #{'.bg-transparent', '.text-secondary'};
-  }
-}
-
 @media (max-width: map.get($grid-breakpoints, 'lg')) {
   .navbar-nav {
     --bs-nav-link-padding-x: 0.5em;

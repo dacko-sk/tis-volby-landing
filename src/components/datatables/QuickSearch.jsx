@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { labels, t } from '../../helpers/dictionary';
 import { routes, rwq } from '../../helpers/routes';
 
-import QuickResults from './QuickResults';
+import TransactionsQuickResults from '../accounts/TransactionsQuickResults';
+import DonorsQuickResults from '../donors/DonorsQuickResults';
 
-import '../datatables/Tables.scss';
+import './Tables.scss';
 
 function QuickSearch() {
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ function QuickSearch() {
 
     return (
         <div id="quick-search" className="mt-4">
-            <h2 className="mb-3">{t(labels.donations.search.title)}</h2>
+            <h3 className="mb-3">{t(labels.donations.search.title)}</h3>
             <Form className="" onSubmit={handleFormSumbit}>
                 <InputGroup>
                     <Form.Control
@@ -60,16 +60,9 @@ function QuickSearch() {
                     </InputGroup.Text>
                 </InputGroup>
 
-                <QuickResults query={apiQuery} />
+                <DonorsQuickResults q={apiQuery} />
 
-                <Button
-                    as={Link}
-                    to={searchLink}
-                    variant="secondary"
-                    className="mt-4"
-                >
-                    {t(labels.donations.search.advanced)}
-                </Button>
+                <TransactionsQuickResults q={apiQuery} />
             </Form>
         </div>
     );
