@@ -92,8 +92,9 @@ function DonationsSearch({
         navigate(rwq.searchAndFilter(route, newQueryOptions), navigateOptions);
 
     const getPageRoute = (i) => {
-        // copy all options except offset
+        // copy all options except offset and keys from routeOptions
         const { o, ...linkOpt } = options;
+        Object.keys(routeOptions).forEach((key) => delete linkOpt[key]);
         if (i > 0) {
             linkOpt.o = i;
         }

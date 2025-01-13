@@ -24,6 +24,7 @@ import Home from './pages/Home';
 import News from './pages/News';
 import Parties from './pages/Parties';
 import Party from './pages/Party';
+import PartyAccounts from './pages/party/PartyAccounts';
 import PartyDonations from './pages/party/PartyDonations';
 import PartyGovernment from './pages/party/PartyGovernment';
 import PartyOverview from './pages/party/PartyOverview';
@@ -80,6 +81,12 @@ function App() {
                                             queries.searchAndFilter(true),
                                         ],
                                         [segments.GOVERNMENT, PartyGovernment],
+                                        [segments.ACCOUNTS, PartyAccounts],
+                                        [
+                                            segments.ACCOUNTS,
+                                            PartyAccounts,
+                                            queries.searchAndFilter(true),
+                                        ],
                                     ],
                                 ],
                                 [routes.news(lang), News],

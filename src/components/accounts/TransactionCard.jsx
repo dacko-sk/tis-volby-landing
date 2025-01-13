@@ -4,22 +4,19 @@ import Stack from 'react-bootstrap/Stack';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { Link } from 'react-router-dom';
 
-import { getColumnIndex } from '../../helpers/accounts';
+import { detailLink, getColumnIndex } from '../../helpers/accounts';
 import { icons, transactionsColumns as tc } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { currencyFormat, generateRandomString } from '../../helpers/helpers';
-import { routes, rwq, separators } from '../../helpers/routes';
+import { separators } from '../../helpers/routes';
 
-function TransactionCard({ tData, q }) {
+function TransactionCard({ tData }) {
     const ta = tData[getColumnIndex(tc.ta)];
     const type = tData[getColumnIndex(tc.type)];
     const year = tData[getColumnIndex(tc.year)];
     return (
         <Link
-            to={rwq.searchAndFilter(
-                routes.account([ta, type, year].join(separators.value)),
-                { q, s: separators.numbers + tc.amount }
-            )}
+            to={detailLink(tData, { s: separators.numbers + tc.amount })}
             className="donor-card d-block bg-light text-dark text-decoration-none p-3"
         >
             <Stack className="flex-wrap" direction="horizontal">

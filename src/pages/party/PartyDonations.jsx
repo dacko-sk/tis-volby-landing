@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { setTitle } from '../../helpers/browser';
 import { labels, t } from '../../helpers/dictionary';
 import { hiddenPartyColumns } from '../../helpers/dontaions';
+import { partyFullName } from '../../helpers/parties';
 import { routes, segments } from '../../helpers/routes';
 
 import DonationsSearch from '../../components/donors/DonationsSearch';
@@ -10,7 +11,7 @@ import DonationsSearch from '../../components/donors/DonationsSearch';
 function PartyDonations() {
     const partyName = useOutletContext();
 
-    setTitle(`${partyName} : ${t(labels.donations.navTitle)}`);
+    setTitle(`${partyFullName(partyName)} : ${t(labels.donations.navTitle)}`);
 
     return (
         <DonationsSearch

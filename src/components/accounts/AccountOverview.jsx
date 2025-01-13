@@ -3,7 +3,11 @@ import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 import { useQuery } from '@tanstack/react-query';
 
-import { apiEndpoints, apiParams } from '../../helpers/accounts';
+import {
+    apiEndpoints,
+    apiParams,
+    getColumnIndex,
+} from '../../helpers/accounts';
 import { icons, transactionsColumns as tc } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import { currencyFormat } from '../../helpers/helpers';
@@ -13,12 +17,10 @@ import { defaultBlocksize } from '../datatables/TableSettings';
 import HeroNumber from '../general/HeroNumber';
 import Loading from '../general/Loading';
 
-function AccountOverview({ accName, elType, elYear }) {
+function AccountOverview({ accId }) {
     const queryParams = buildApiQuery(apiParams, {
         // route fixed params
-        i: accName,
-        t: elType,
-        y: elYear,
+        i: accId,
         // add default blocksize to use the same query params as data table on account detail page
         b: defaultBlocksize,
     });
@@ -32,6 +34,10 @@ function AccountOverview({ accName, elType, elYear }) {
         return <Loading error={tq.error} />;
     }
 
+    const firstRow = tq.data.rows?.[0] ?? [];
+    const elType = firstRow[getColumnIndex(tc.type)] ?? null;
+    const elYear = firstRow[getColumnIndex(tc.year)] ?? null;
+
     return (
         <Row className="gy-3 gy-lg-0">
             <Col lg={6}>
@@ -40,14 +46,16 @@ function AccountOverview({ accName, elType, elYear }) {
                     <tbody>
                         <tr>
                             <td>{t(labels.accounts.columns[tc.type])}</td>
-                            <td className="text-end">
-                                <span className="el-icon">
-                                    <img src={icons.elections[elType]} />
-                                    <span>
-                                        {`${t(labels.elections.types[elType])} ${elYear}`}
+                            {elType && elYear && (
+                                <td className="text-end">
+                                    <span className="el-icon">
+                                        <img src={icons.elections[elType]} />
+                                        <span>
+                                            {`${t(labels.elections.types[elType])} ${elYear}`}
+                                        </span>
                                     </span>
-                                </span>
-                            </td>
+                                </td>
+                            )}
                         </tr>
                         <tr>
                             <td>{t(labels.charts.incoming)}</td>

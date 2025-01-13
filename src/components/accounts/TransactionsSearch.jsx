@@ -15,6 +15,7 @@ import {
     optionalColumns,
 } from '../../helpers/accounts';
 import { labels, t } from '../../helpers/dictionary';
+import { partiesWithAccounts, partyAccounts } from '../../helpers/parties';
 import {
     buildApiQuery,
     parseQueryOptions,
@@ -22,8 +23,6 @@ import {
     rwq,
     separators,
 } from '../../helpers/routes';
-
-import { allDonationsParties } from '../../hooks/Queries';
 
 import TransactionsFilters from './TransactionsFilters';
 import DataTable from '../datatables/DataTable';
@@ -34,7 +33,7 @@ import '../datatables/Tables.scss';
 
 function TransactionsSearch({
     hiddenColumns = hiddenColumnsDefault,
-    parties = allDonationsParties(),
+    parties = partiesWithAccounts,
     route = routes.accounts(),
     routeOptions = {},
 }) {
@@ -56,14 +55,20 @@ function TransactionsSearch({
                   .split(separators.numbers)
                   .map((item) => optionalColumns[Number(item)])
             : [];
-    const queryParams = buildApiQuery(apiParams, {
+    const queryParams = {
         ...options,
         // always add blocksize to api request
         b: blocksize,
-    });
+    };
+    // if party name option is provided, replace it with all party accounts
+    if (options.p ?? false) {
+        queryParams.i = partyAccounts(options.p);
+        delete queryParams.p;
+    }
+    const apiQuery = buildApiQuery(apiParams, queryParams);
 
-    const tq = useQuery([`transactions_${queryParams}`], () =>
-        fetch(`${apiEndpoints.transactions}?${queryParams}`).then((response) =>
+    const tq = useQuery([`transactions_${apiQuery}`], () =>
+        fetch(`${apiEndpoints.transactions}?${apiQuery}`).then((response) =>
             response.json()
         )
     );
@@ -88,8 +93,9 @@ function TransactionsSearch({
         navigate(rwq.searchAndFilter(route, newQueryOptions), navigateOptions);
 
     const getPageRoute = (i) => {
-        // copy all options except offset
+        // copy all options except offset and keys from routeOptions
         const { o, ...linkOpt } = options;
+        Object.keys(routeOptions).forEach((key) => delete linkOpt[key]);
         if (i > 0) {
             linkOpt.o = i;
         }

@@ -9,12 +9,13 @@ import {
     dateNumericFormat,
     generateRandomString,
 } from './helpers';
-import { routes, separators } from './routes';
+import { findPartyByAccount } from './parties';
+import { routes, rwq, segments, separators } from './routes';
 
 import { settingsParams } from '../components/datatables/TableSettings';
 
 export const apiEndpoints = {
-    transactions: 'https://volby.transparency.sk/api/accounts/search.php',
+    transactions: 'https://volby.transparency.sk/api/accounts/search_ids.php',
 };
 export const apiParams = [
     'o', // offset (page number - 1)
@@ -26,12 +27,14 @@ export const apiParams = [
     'q', // search query
     's', // sort
     't', // type
-    'i', // transparent account
+    'i', // transparent account ID
+    'p', // transparent account name
 ];
 export const allowedParams = [...apiParams, ...settingsParams];
 
-export const hiddenColumnsDefault = [tc.year, tc.currency];
-export const hiddenColumnsParty = [...hiddenColumnsDefault, tc.ta, tc.type];
+export const hiddenColumnsDefault = [tc.id, tc.year, tc.currency];
+export const hiddenColumnsAccount = [...hiddenColumnsDefault, tc.ta, tc.type];
+export const hiddenColumnsParty = [...hiddenColumnsDefault, tc.ta];
 export const optionalColumns = [
     tc.currency,
     tc.txType,
@@ -61,10 +64,25 @@ export const columnAlign = (key) => {
             return '';
     }
 };
+
 export const columnLabel = (key) =>
     Object.keys(labels.accounts.columns).includes(key)
         ? t(labels.accounts.columns[key])
         : '';
+
+export const detailLink = (sourceColumns, routeQuery = {}) => {
+    const [accId] = (sourceColumns[getColumnIndex(tc.id)] ?? '0-').split('-');
+    const party = findPartyByAccount(accId);
+    const route = party
+        ? routes.party(party, segments.ACCOUNTS)
+        : routes.account(
+              [sourceColumns[getColumnIndex(tc.ta)], accId].join(
+                  separators.value
+              )
+          );
+    return rwq.searchAndFilter(route, routeQuery);
+};
+
 export const columnContent = (sourceColumns, targetColumn) => {
     const val = sourceColumns[getColumnIndex(targetColumn)];
     const direction = Number(sourceColumns[getColumnIndex(tc.amount)] <= 0);
@@ -72,15 +90,10 @@ export const columnContent = (sourceColumns, targetColumn) => {
         case tc.ta:
             return (
                 <Link
-                    to={routes.account(
-                        [
-                            val,
-                            sourceColumns[getColumnIndex(tc.type)],
-                            sourceColumns[getColumnIndex(tc.year)],
-                        ].join(separators.value)
-                    )}
+                    to={detailLink(sourceColumns)}
+                    data-id={sourceColumns[getColumnIndex(tc.id)]}
                 >
-                    {val}
+                    {sourceColumns[getColumnIndex(tc.ta)]}
                 </Link>
             );
         case tc.type:

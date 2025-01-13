@@ -97,7 +97,16 @@ export const columnContent = (sourceColumns, targetColumn) => {
     const flag = sourceColumns[sourceColumns.length - 1]; // last column is flag (currently #13)
     switch (targetColumn) {
         case dc.party:
-            return partyAlias(sourceColumns[0]);
+            return (
+                <Link
+                    to={routes.party(
+                        partyAlias(sourceColumns[0]),
+                        segments.DONATIONS
+                    )}
+                >
+                    {partyAlias(sourceColumns[0])}
+                </Link>
+            );
         case dc.date:
             return (
                 <div className="text-end text-nowrap">

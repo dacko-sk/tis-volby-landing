@@ -37,21 +37,21 @@ export const donationsColumns = {
     region: 'region',
     flag: 'flag',
 };
-
 export const transactionsColumns = {
-    ta: 'ta', // 0
-    type: 'type', // 1
-    year: 'year', // 2
-    accountName: 'accountName', // 3
-    date: 'date', // 4
-    amount: 'amount', // 5
-    currency: 'currency', // 6
-    message: 'message', // 7
-    txType: 'txType', // 8
-    ks: 'ks', // 9
-    vs: 'vs', // 10
-    ss: 'ss', // 11
-    note: 'note', // 12
+    id: 'id', // 0
+    ta: 'ta', // 1
+    type: 'type', // 2
+    year: 'year', // 3
+    accountName: 'accountName', // 4
+    date: 'date', // 5
+    amount: 'amount', // 6
+    currency: 'currency', // 7
+    message: 'message', // 8
+    txType: 'txType', // 9
+    ks: 'ks', // 10
+    vs: 'vs', // 11
+    ss: 'ss', // 12
+    note: 'note', // 13
 };
 
 export const elections = {

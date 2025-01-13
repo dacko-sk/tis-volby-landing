@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 
 import { labels, t } from '../../helpers/dictionary';
+import { partyFullName } from '../../helpers/parties';
 import { routes } from '../../helpers/routes';
 
 import useGovData from '../../hooks/GovData';
@@ -29,7 +30,7 @@ function PartiesTiles({ parties, compact = true }) {
                             <div className="type">
                                 {t(coalition ? labels.parties.coalition : '')}
                             </div>
-                            <h3 className="m-0">{partyName}</h3>
+                            <h3 className="m-0">{partyFullName(partyName)}</h3>
                         </Link>
                     </Col>
                 );

@@ -36,7 +36,7 @@ function TransactionsQuickResults({ maxResults = 3, q }) {
             return <Loading className="my-5" error={aq.error} />;
         }
         const cards = (aq.data?.rows ?? []).map((tData) => (
-            <TransactionCard key={generateRandomString()} tData={tData} q={q} />
+            <TransactionCard key={generateRandomString()} tData={tData} />
         ));
         return (
             <>

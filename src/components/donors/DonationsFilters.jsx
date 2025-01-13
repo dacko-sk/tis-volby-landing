@@ -19,7 +19,7 @@ import {
     sortAlphabetically,
     sortNumbers,
 } from '../../helpers/helpers';
-import { partyAlias } from '../../helpers/parties';
+import { partyAlias, partyFullName } from '../../helpers/parties';
 import { parseQueryOptions, separators } from '../../helpers/routes';
 
 function DonationsFilters({
@@ -392,7 +392,7 @@ function DonationsFilters({
                             const partyName = partyAlias(p);
                             return (
                                 <option key={partyName} value={partyName}>
-                                    {partyName}
+                                    {partyFullName(partyName)}
                                 </option>
                             );
                         })}

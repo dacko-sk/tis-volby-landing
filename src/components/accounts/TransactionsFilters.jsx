@@ -20,9 +20,14 @@ import {
     sortAlphabetically,
     sortNumbers,
 } from '../../helpers/helpers';
+import { partyFullName } from '../../helpers/parties';
 import { parseQueryOptions, separators } from '../../helpers/routes';
 
-function TransactionsFilters({ hiddenColumns = [], updateRouteQuery }) {
+function TransactionsFilters({
+    hiddenColumns = [],
+    parties = [],
+    updateRouteQuery,
+}) {
     const options = parseQueryOptions(allowedParams);
 
     const [query, setQuery] = useState(options.q ?? '');
@@ -40,6 +45,7 @@ function TransactionsFilters({ hiddenColumns = [], updateRouteQuery }) {
     const timestamp = options.d
         ?.split(separators.numbers)
         .map((item) => Number(item)) ?? [0, 0];
+    const party = options.p ?? '';
 
     const formSubmit = (e) => {
         // prevent form submit action, all paremeters are set via URL
@@ -172,6 +178,15 @@ function TransactionsFilters({ hiddenColumns = [], updateRouteQuery }) {
             min = Math.min(max, min);
         }
         updateDate([min, max]);
+    };
+
+    const updateParty = (e) => {
+        // copy all options except p & o
+        const { p, o, ...linkOpt } = options;
+        if (e.target.value !== '') {
+            linkOpt.p = e.target.value;
+        }
+        updateRouteQuery(linkOpt);
     };
 
     return (
@@ -346,6 +361,24 @@ function TransactionsFilters({ hiddenColumns = [], updateRouteQuery }) {
                     </Col>
                 </Row>
             </Form.Group>
+
+            {!hiddenColumns.includes(tc.party) && parties.length > 1 && (
+                <Form.Group className="mt-3">
+                    <h6 className="fw-bold text-primary text-uppercase">
+                        {translate(labels.parties.party)}
+                    </h6>
+                    <Form.Select size="sm" onChange={updateParty} value={party}>
+                        <option key="" value="">
+                            {translate(labels.all)}
+                        </option>
+                        {parties.map((partyName) => (
+                            <option key={partyName} value={partyName}>
+                                {partyFullName(partyName)}
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
+            )}
         </Form>
     );
 }
