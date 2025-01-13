@@ -15,7 +15,7 @@ import { routes, rwq, segments, separators } from './routes';
 import { settingsParams } from '../components/datatables/TableSettings';
 
 export const apiEndpoints = {
-    transactions: 'https://volby.transparency.sk/api/accounts/search_ids.php',
+    transactions: 'https://volby.transparency.sk/api/accounts/search.php',
 };
 export const apiParams = [
     'o', // offset (page number - 1)
