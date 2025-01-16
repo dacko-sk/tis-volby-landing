@@ -98,6 +98,7 @@ const parties = {
     'PS A SPOLU': { aliases: ['KOALÍCIA PROGRESÍVNE SLOVENSKO A SPOLU'] },
     'PIRÁTSKA STRANA': {
         accounts: { e24: 2202814976, n23: 2401881936 },
+        aliases: ['PIRÁTSKA STRANA - SLOVENSKO'],
     },
     PRINCÍP: {
         accounts: { n23: 5186956723, r22: 5186956723 },
@@ -168,7 +169,7 @@ const parties = {
         accounts: { e24: 4942326053 },
     },
     SP: {
-        accounts: { e24: 2802819121, r22: 2902302357 },
+        accounts: { e24: 2802819121 },
         aliases: ['SLOVENSKÝ PATRIOT'],
         fullName: ['SLOVENSKÝ PATRIOT'],
     },

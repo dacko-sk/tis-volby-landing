@@ -40,7 +40,7 @@ export const donationsColumns = {
 export const transactionsColumns = {
     id: 'id', // 0
     ta: 'ta', // 1
-    type: 'type', // 2
+    elections: 'elections', // 2
     year: 'year', // 3
     accountName: 'accountName', // 4
     date: 'date', // 5

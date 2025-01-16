@@ -12,7 +12,7 @@ import { separators } from '../../helpers/routes';
 
 function TransactionCard({ tData }) {
     const ta = tData[getColumnIndex(tc.ta)];
-    const type = tData[getColumnIndex(tc.type)];
+    const elType = tData[getColumnIndex(tc.elections)];
     const year = tData[getColumnIndex(tc.year)];
     return (
         <Link
@@ -24,14 +24,14 @@ function TransactionCard({ tData }) {
                     <OverlayTrigger
                         overlay={
                             <Tooltip id={generateRandomString()}>
-                                {t(labels.elections.types[type])}
+                                {t(labels.elections.types[elType])}
                             </Tooltip>
                         }
                         placement="top"
                         delayShow={300}
                         delayHide={150}
                     >
-                        <img src={icons.elections[type]} />
+                        <img src={icons.elections[elType]} />
                     </OverlayTrigger>
                     <span>{year}</span>
                 </div>

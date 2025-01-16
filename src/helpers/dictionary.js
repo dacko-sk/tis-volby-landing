@@ -12,7 +12,7 @@ export const labels = {
         back: ['Späť na všetky účty', 'Return to all accounts'],
         columns: {
             [tc.ta]: ['Transparentný účet', 'Transparent Account'],
-            [tc.type]: ['Voľby', 'Elections'],
+            [tc.elections]: ['Voľby', 'Elections'],
             [tc.year]: ['Volebný rok', 'Elections year'],
             [tc.accountName]: ['Názov účtu', 'Account Name'],
             [tc.date]: ['Dátum', 'Date'],
@@ -528,7 +528,7 @@ export const labels = {
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
     readMore: ['Čítať ďalej…', 'Read more…'],
     regions: {
-        BA: ['Brativlavský', 'Bratislava'],
+        BA: ['Bratislavský', 'Bratislava'],
         BB: ['Banskobystrický', 'Banská Bystrica'],
         KE: ['Košický', 'Košice'],
         NR: ['Nitriansky', 'Nitra'],

@@ -35,7 +35,7 @@ function AccountOverview({ accId }) {
     }
 
     const firstRow = tq.data.rows?.[0] ?? [];
-    const elType = firstRow[getColumnIndex(tc.type)] ?? null;
+    const elType = firstRow[getColumnIndex(tc.elections)] ?? null;
     const elYear = firstRow[getColumnIndex(tc.year)] ?? null;
 
     return (
@@ -45,7 +45,7 @@ function AccountOverview({ accId }) {
                 <Table responsive hover>
                     <tbody>
                         <tr>
-                            <td>{t(labels.accounts.columns[tc.type])}</td>
+                            <td>{t(labels.accounts.columns[tc.elections])}</td>
                             {elType && elYear && (
                                 <td className="text-end">
                                     <span className="el-icon">

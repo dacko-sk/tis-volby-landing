@@ -32,7 +32,7 @@ function TransactionsFilters({
 
     const [query, setQuery] = useState(options.q ?? '');
 
-    let types = options.t?.split(separators.array) ?? [];
+    let elections = options.e?.split(separators.array) ?? [];
     let years =
         options.y?.split(separators.numbers).map((item) => Number(item)) ?? [];
     const direction = (options.w ?? '') !== '' ? Number(options.w) : '';
@@ -66,17 +66,17 @@ function TransactionsFilters({
         debounceSearch(e.target.value);
     };
 
-    const updateTypes = (e) => {
-        // copy all options except t & o
-        const { t, o, ...linkOpt } = options;
-        if (e.target.checked) {
-            types.push(e.target.value);
-            types.sort(sortAlphabetically());
+    const updateElections = (event) => {
+        // copy all options except e & o
+        const { e, o, ...linkOpt } = options;
+        if (event.target.checked) {
+            elections.push(event.target.value);
+            elections.sort(sortAlphabetically());
         } else {
-            types = types.filter((item) => item !== e.target.value);
+            elections = elections.filter((item) => item !== event.target.value);
         }
-        if (types.length) {
-            linkOpt.t = types.join(separators.array);
+        if (elections.length) {
+            linkOpt.e = elections.join(separators.array);
         }
         updateRouteQuery(linkOpt);
     };
@@ -218,10 +218,10 @@ function TransactionsFilters({
                 </InputGroup>
             </Form.Group>
 
-            {!hiddenColumns.includes(tc.type) && (
+            {!hiddenColumns.includes(tc.elections) && (
                 <Form.Group className="mt-3">
                     <h6 className="fw-bold text-primary text-uppercase">
-                        {columnLabel(tc.type)}
+                        {columnLabel(tc.elections)}
                     </h6>
                     {Object.entries(labels.elections.types).map(
                         ([elType, typeLabels]) => (
@@ -234,18 +234,18 @@ function TransactionsFilters({
                                     </span>
                                 }
                                 id={`et-${elType}`}
-                                name="type"
+                                name="elections"
                                 type="checkbox"
                                 value={elType}
-                                checked={types.includes(elType)}
-                                onChange={updateTypes}
+                                checked={elections.includes(elType)}
+                                onChange={updateElections}
                             />
                         )
                     )}
                 </Form.Group>
             )}
 
-            {!hiddenColumns.includes(tc.type) && (
+            {!hiddenColumns.includes(tc.elections) && (
                 <Form.Group className="mt-3">
                     <h6 className="fw-bold text-primary text-uppercase">
                         {columnLabel(tc.year)}

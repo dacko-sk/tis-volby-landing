@@ -26,6 +26,7 @@ export const apiParams = [
     'd', // date (timestamp)
     'q', // search query
     's', // sort
+    'e', // elections
     't', // type
     'i', // transparent account ID
     'p', // transparent account name
@@ -33,7 +34,11 @@ export const apiParams = [
 export const allowedParams = [...apiParams, ...settingsParams];
 
 export const hiddenColumnsDefault = [tc.id, tc.year, tc.currency];
-export const hiddenColumnsAccount = [...hiddenColumnsDefault, tc.ta, tc.type];
+export const hiddenColumnsAccount = [
+    ...hiddenColumnsDefault,
+    tc.ta,
+    tc.elections,
+];
 export const hiddenColumnsParty = [...hiddenColumnsDefault, tc.ta];
 export const optionalColumns = [
     tc.currency,
@@ -96,7 +101,7 @@ export const columnContent = (sourceColumns, targetColumn) => {
                     {sourceColumns[getColumnIndex(tc.ta)]}
                 </Link>
             );
-        case tc.type:
+        case tc.elections:
             return (
                 <div className="el-icon">
                     <OverlayTrigger
