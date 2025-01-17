@@ -131,14 +131,16 @@ export const columnContent = (sourceColumns, targetColumn) => {
                     <OverlayTrigger
                         overlay={
                             <Tooltip id={generateRandomString()}>
-                                {t(labels.accounts.paymentTypes[direction])}
+                                {t(
+                                    labels.accounts.paymentDirections[direction]
+                                )}
                             </Tooltip>
                         }
                         placement="left"
                         delayShow={300}
                         delayHide={150}
                     >
-                        <div className={`payment-${direction}`}>
+                        <div data-direction={direction}>
                             {icons.payments[direction]}
                         </div>
                     </OverlayTrigger>

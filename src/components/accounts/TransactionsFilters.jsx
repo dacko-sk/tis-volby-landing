@@ -35,6 +35,7 @@ function TransactionsFilters({
     let elections = options.e?.split(separators.array) ?? [];
     let years =
         options.y?.split(separators.numbers).map((item) => Number(item)) ?? [];
+    const type = (options.t ?? '') !== '' ? Number(options.t) : '';
     const direction = (options.w ?? '') !== '' ? Number(options.w) : '';
     const [amount, setAmount] = useState(
         options.a?.split(separators.numbers).map((item) => Number(item)) ?? [
@@ -93,6 +94,20 @@ function TransactionsFilters({
         }
         if (years.length) {
             linkOpt.y = years.join(separators.numbers);
+        }
+        updateRouteQuery(linkOpt);
+    };
+
+    const updateType = (e) => {
+        // copy all options except t & o
+        const { t, o, ...linkOpt } = options;
+        const id = Number(e.target.value);
+        if (e.target.checked) {
+            if (type !== Number(!id)) {
+                linkOpt.t = id;
+            }
+        } else if (type === '') {
+            linkOpt.t = Number(!id);
         }
         updateRouteQuery(linkOpt);
     };
@@ -274,22 +289,43 @@ function TransactionsFilters({
                     <Form.Check
                         key={label}
                         inline
-                        label={
-                            <>
-                                <span className={`payment-${index}`}>
-                                    {icons.payments[index]}
-                                </span>
-                                {label}
-                            </>
-                        }
-                        id={`payment-${index}`}
-                        name="payment"
+                        label={label}
+                        id={`payment-type-${index}`}
+                        name="payment-type"
                         type="checkbox"
                         value={index}
-                        checked={direction !== Number(!index)}
-                        onChange={updateDirection}
+                        checked={type !== Number(!index)}
+                        onChange={updateType}
                     />
                 ))}
+            </Form.Group>
+
+            <Form.Group className="mt-3">
+                <h6 className="fw-bold text-primary text-uppercase">
+                    {translate(labels.accounts.paymentDirection)}
+                </h6>
+                {translate(labels.accounts.paymentDirections).map(
+                    (label, index) => (
+                        <Form.Check
+                            key={label}
+                            inline
+                            label={
+                                <>
+                                    <span data-direction={index}>
+                                        {icons.payments[index]}
+                                    </span>
+                                    {label}
+                                </>
+                            }
+                            id={`payment-direction-${index}`}
+                            name="payment-direction"
+                            type="checkbox"
+                            value={index}
+                            checked={direction !== Number(!index)}
+                            onChange={updateDirection}
+                        />
+                    )
+                )}
             </Form.Group>
 
             <Form.Group className="mt-3">

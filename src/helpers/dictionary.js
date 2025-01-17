@@ -35,10 +35,15 @@ export const labels = {
             'Archív\ntransparentných účtov',
             'Transparentaccounts archive',
         ],
-        paymentType: ['Typ obratu', 'Payment type'],
-        paymentTypes: [
+        paymentDirection: ['Typ obratu', 'Payment direction'],
+        paymentDirections: [
             ['Príjmy', 'Výdavky'],
             ['Incoming', 'Outgoing'],
+        ],
+        paymentType: ['Druh platiteľa', 'Payer type'],
+        paymentTypes: [
+            ['Politická strana', 'Iné fyzické a právnické osoby'],
+            ['Political party', 'Other entities'],
         ],
         transactionsAmount: ['Počet platieb', 'Payments amount'],
         totalSpendingDisclaimer: [

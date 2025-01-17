@@ -63,7 +63,7 @@
   }
 }
 
-[class^='payment'] {
+[data-direction] {
   display: inline-block;
   // border: 1px solid white;
   color: white;
@@ -74,10 +74,10 @@
   height: 20px;
   line-height: 20px;
   margin-right: 6px;
-  &[class$='-0'] {
+  &[data-direction='0'] {
     background-color: $tis-score-green;
   }
-  &[class$='-1'] {
+  &[data-direction='1'] {
     background-color: $tis-score-red;
   }
 }
