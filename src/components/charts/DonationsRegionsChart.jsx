@@ -14,12 +14,21 @@ function DonationsRegionsChart() {
     }
 
     const regions = Object.entries(data.regions ?? {})
-        .map(([region, regData]) => ({
-            name: t(labels.regions[region]),
-            [pdKeys.DONATIONS]: regData[pdKeys.DONATIONS],
-            [pdKeys.CREDITS]: regData[pdKeys.CREDITS],
-            total: regData[pdKeys.DONATIONS] + regData[pdKeys.CREDITS],
-        }))
+        .flatMap(([region, regData]) => {
+            const regionLabel = labels.regions[region];
+            return regionLabel
+                ? [
+                      {
+                          name: t(regionLabel),
+                          [pdKeys.DONATIONS]: regData[pdKeys.DONATIONS],
+                          [pdKeys.CREDITS]: regData[pdKeys.CREDITS],
+                          total:
+                              regData[pdKeys.DONATIONS] +
+                              regData[pdKeys.CREDITS],
+                      },
+                  ]
+                : [];
+        })
         .sort(sortByNumericProp('total'));
 
     return (

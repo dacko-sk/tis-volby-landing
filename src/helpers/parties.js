@@ -8,6 +8,7 @@ const parties = {
             'SPOLUPATRIČNOSŤ',
             'SZÖVETSÉG - ALIANCIA',
             'MAĎARSKÁ ALIANCIA',
+            'MKO',
         ],
     },
     APS: {

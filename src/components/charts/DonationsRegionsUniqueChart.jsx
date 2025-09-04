@@ -14,10 +14,17 @@ function DonationsRegionsUniqueChart() {
     }
 
     const regions = Object.entries(data.regions ?? {})
-        .map(([region, regData]) => ({
-            name: t(labels.regions[region]),
-            unique: regData[pdKeys.UNIQUE],
-        }))
+        .flatMap(([region, regData]) => {
+            const regionLabel = labels.regions[region];
+            return regionLabel
+                ? [
+                      {
+                          name: t(regionLabel),
+                          unique: regData[pdKeys.UNIQUE],
+                      },
+                  ]
+                : [];
+        })
         .sort(sortByNumericProp('unique'));
 
     return (
