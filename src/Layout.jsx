@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { scrollToTop } from './helpers/browser';
+import { labels, t } from './helpers/dictionary';
 
 import useGovData from './hooks/GovData';
 
@@ -42,7 +44,15 @@ function Layout() {
             <Header />
 
             <main className="container mb-4">
-                <Outlet />
+                <ErrorBoundary
+                    fallback={
+                        <div className="mt-4">
+                            {t(labels.errors.processing)}
+                        </div>
+                    }
+                >
+                    <Outlet />
+                </ErrorBoundary>
             </main>
 
             <DonateBanner />

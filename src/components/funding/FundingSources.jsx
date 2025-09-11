@@ -121,7 +121,9 @@ function FundingSources({ party }) {
                         button={t(labels.donations.learnMore)}
                         disclaimer={t(
                             labels.donations[
-                                `totalDisclaimer${party ? 'Party' : ''}`
+                                party
+                                    ? 'totalDisclaimerParty'
+                                    : 'totalDisclaimer'
                             ]
                         )}
                         link={
@@ -137,7 +139,7 @@ function FundingSources({ party }) {
                     button={govSum ? t(labels.government.learnMore) : null}
                     disclaimer={t(
                         labels.government[
-                            `totalDisclaimer${party ? 'Party' : ''}`
+                            party ? 'totalDisclaimerParty' : 'totalDisclaimer'
                         ],
                         Object.values(getExtremes())
                     )}
