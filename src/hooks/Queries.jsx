@@ -19,7 +19,14 @@ export const usePartiesDonationsData = () =>
             const parties = {};
             Object.entries(data.parties ?? {}).forEach(
                 ([partyName, partyData]) => {
-                    parties[partyAlias(partyName)] = partyData;
+                    const alias = partyAlias(partyName);
+                    // init object
+                    parties[alias] = parties[alias] ?? {};
+                    // add values
+                    Object.values(pdKeys).forEach((key) => {
+                        parties[alias][key] =
+                            (parties[alias][key] ?? 0) + (partyData[key] ?? 0);
+                    });
                 }
             );
             return parties;
