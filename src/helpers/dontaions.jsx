@@ -165,7 +165,7 @@ export const columnContent = (sourceColumns, targetColumn) => {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        🖹
+                        📄
                     </a>
                 </div>
             );
