@@ -387,10 +387,12 @@ export const labels = {
     gender: {
         M: ['Muž', 'Male'],
         F: ['Žena', 'Female'],
+        firma: ['Firma', 'Company'],
     },
     genders: {
         M: ['Muži', 'Male'],
         F: ['Ženy', 'Female'],
+        firma: ['Firmy', 'Companies'],
     },
     government: {
         [gst.SUBSIDY_MANDATE]: {

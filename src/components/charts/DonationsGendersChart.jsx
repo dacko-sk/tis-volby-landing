@@ -9,6 +9,7 @@ import Loading from '../general/Loading';
 const genderColors = {
     F: [colors.colorOrange, colors.colorOrangeDs],
     M: [colors.colorDarkBlue, colors.colorDarkBlueDs],
+    firma: [colors.colorLightBlue, colors.colorLightBlueDs],
 };
 
 function DonationsGendersChart() {
@@ -20,7 +21,7 @@ function DonationsGendersChart() {
 
     const gendersPie = {
         data: Object.entries(data.genders ?? {}).flatMap(([g, gData]) =>
-            labels.gender[g] ?? false
+            labels.genders[g] ?? false
                 ? [
                       {
                           name: `${t(labels.genders[g])} (${t(labels.donations.donations)})`,

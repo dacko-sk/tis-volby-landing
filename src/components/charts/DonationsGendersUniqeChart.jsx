@@ -9,6 +9,7 @@ import Loading from '../general/Loading';
 const genderColors = {
     F: colors.colorOrange,
     M: colors.colorDarkBlue,
+    firma: colors.colorLightBlue,
 };
 
 function DonationsGendersUniqueChart() {
@@ -20,7 +21,7 @@ function DonationsGendersUniqueChart() {
 
     const gendersPie = {
         data: Object.entries(data.genders ?? {}).flatMap(([g, gData]) =>
-            labels.gender[g] ?? false
+            labels.genders[g] ?? false
                 ? [
                       {
                           name: t(labels.genders[g]),
