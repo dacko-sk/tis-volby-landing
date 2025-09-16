@@ -16,6 +16,7 @@ import PartiesUniqueChart from '../components/charts/PartiesUniqueChart';
 import FundingSources from '../components/funding/FundingSources';
 import Title from '../components/structure/Title';
 import FundingNav from '../components/structure/FundingNav';
+import Top10Donors from '../components/donors/Top10Donors';
 
 const ACC_KEYS = {
     PARTIES: 'p',
@@ -24,6 +25,7 @@ const ACC_KEYS = {
     REGIONS: 'r',
     REGIONS_UNUQUE: 'ru',
     DEMOGRAPHY: 'd',
+    COMPANIES: 'c',
 };
 
 function Charts() {
@@ -143,6 +145,25 @@ function Charts() {
                                     <DonationsGendersUniqueChart />
                                 </Col>
                             </Row>
+                        )}
+                    </Accordion.Body>
+                </Accordion.Item>
+
+                <Accordion.Item
+                    key={ACC_KEYS.COMPANIES}
+                    eventKey={ACC_KEYS.COMPANIES}
+                >
+                    <Accordion.Header>
+                        {t(labels.charts.companiesTitle)}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                        {loaded.includes(ACC_KEYS.COMPANIES) && (
+                            <Top10Donors
+                                // https://volby.transparency.sk/api/donors/donors.php?c=1&b=10&f=0
+                                file="top10companies"
+                                title={labels.charts.companies}
+                                disclaimer={labels.charts.companiesDisclaimer}
+                            />
                         )}
                     </Accordion.Body>
                 </Accordion.Item>

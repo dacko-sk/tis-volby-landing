@@ -15,13 +15,14 @@ import { routes } from '../../helpers/routes';
 
 import Loading from '../general/Loading';
 
-function Top10Donors({ disclaimer, file, title }) {
+function Top10Donors({ className, disclaimer, file, title }) {
     const { isLoading, error, data } = useQuery([`donors_${file}`], () =>
         fetch(`${apiEndpoints.file}?f=${file}`).then((response) =>
             response.json()
         )
     );
 
+    const companies = file === 'top10companies';
     let content;
     if (isLoading || error) {
         content = <Loading error={error} />;
@@ -30,8 +31,16 @@ function Top10Donors({ disclaimer, file, title }) {
             <Table responsive bordered hover striped>
                 <thead>
                     <tr className="align-middle">
-                        <th>{t(labels.donor.pageTitle)}</th>
-                        <th>{columnLabel(dc.address)}</th>
+                        <th>
+                            {companies
+                                ? t(labels.donations.columns.companyName)
+                                : t(labels.donor.pageTitle)}
+                        </th>
+                        <th>
+                            {companies
+                                ? t(labels.donations.columns.companyLocation)
+                                : columnLabel(dc.address)}
+                        </th>
                         <th>{t(labels.donor.amount)}</th>
                         <th>{t(labels.donor.parties)}</th>
                         <th>{columnLabel(dc.type)}</th>
@@ -65,8 +74,8 @@ function Top10Donors({ disclaimer, file, title }) {
     }
 
     return (
-        <div>
-            <h2 className="my-4">{t(title)}</h2>
+        <div className={className}>
+            <h2 className="mb-4">{t(title)}</h2>
             {content}
             <em className="disclaimer">{t(disclaimer)}</em>
         </div>

@@ -40,6 +40,7 @@ function Home() {
             />
 
             <Top10Donors
+                className="mt-4"
                 // https://volby.transparency.sk/api/donors/donors.php?c=0&b=10
                 file="top10individual"
                 title={labels.donations.top10sponsors}
@@ -47,6 +48,7 @@ function Home() {
             />
 
             <Top10Donors
+                className="mt-4"
                 // https://volby.transparency.sk/api/donors/donors.php?c=0&b=10&t=1-2-3-4
                 file="top10donors"
                 title={labels.donations.top10donors}

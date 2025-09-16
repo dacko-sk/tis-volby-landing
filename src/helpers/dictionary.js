@@ -60,6 +60,15 @@ export const labels = {
     all: ['Zobraziť všetko', 'Show all'],
     charts: {
         amount: ['Suma', 'Amount'],
+        companies: ['Top 10 firiem', 'Top 10 companies'],
+        companiesTitle: [
+            'Rebríček firiem podľa výšky darov a pôžičiek',
+            'Companies ranking by donations and loans amount',
+        ],
+        companiesDisclaimer: [
+            'Súčet príspevkov od firiem v rokoch 2002 - 2024. Rebríček neobsahuje bankové úvery.',
+            'Sum of donations from companies in the years 2002 - 2024. Ranking excludes bank credits.',
+        ],
         demographyTitle: [
             'Demografické rozloženie darcov',
             'Demographics structure of donors',
@@ -139,6 +148,8 @@ export const labels = {
             [dc.gender]: ['Pohlavie', 'Gender'],
             [dc.region]: ['Kraj', 'Region'],
             [dc.flag]: ['Mimoriadny príznak', 'Risk indicator'],
+            companyLocation: ['Sídlo', 'Location'],
+            companyName: ['Obchodné meno', 'Business name'],
         },
         credits: ['Úvery a pôžičky', 'Credits & loans'],
         disclaimer: [
