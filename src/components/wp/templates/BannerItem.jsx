@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import { parseWpHtml } from '../../../helpers/wp';
 
 import Media from '../Media';
+import ReadMore from '../../general/ReadMore';
 
 function BannerItem({ article }) {
     return (
@@ -25,7 +26,9 @@ function BannerItem({ article }) {
                 <Col>
                     <div className="article-body">
                         <h2 className="mb-3">{article.title.rendered}</h2>
-                        {parseWpHtml(article.content.rendered)}
+                        <ReadMore lines={4} id={article.slug}>
+                            {parseWpHtml(article.content.rendered)}
+                        </ReadMore>
                     </div>
                 </Col>
             </Row>

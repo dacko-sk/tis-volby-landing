@@ -7,6 +7,10 @@ import './ReadMore.scss';
 function ReadMore({ children, id = 'readmore', lines = 2 }) {
     const [open, setOpen] = useState(false);
 
+    if (open) {
+        return children;
+    }
+
     const clickToggle = (e) => {
         e.preventDefault();
         setOpen(!open);
@@ -19,10 +23,10 @@ function ReadMore({ children, id = 'readmore', lines = 2 }) {
     };
 
     return (
-        <div className={`readmore${open ? '' : ' closed'}`}>
+        <div className="readmore closed">
             <div
                 id={id}
-                style={open ? {} : { maxHeight: `${lines * 1.5}em` }}
+                style={{ maxHeight: `${lines * 1.5}em` }}
                 onClick={clickToggle}
                 onKeyUp={keyUpToggle}
                 role="button"
@@ -30,15 +34,13 @@ function ReadMore({ children, id = 'readmore', lines = 2 }) {
             >
                 {children}
             </div>
-            {!open && (
-                <a
-                    href={`#${id}`}
-                    className="d-block text-center"
-                    onClick={clickToggle}
-                >
-                    {t(labels.readMore)}
-                </a>
-            )}
+            <a
+                href={`#${id}`}
+                className="d-block text-center"
+                onClick={clickToggle}
+            >
+                {t(labels.readMore)}
+            </a>
         </div>
     );
 }

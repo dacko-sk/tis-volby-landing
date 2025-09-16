@@ -1,3 +1,5 @@
+@import './../../scss/variables';
+
 .readmore {
   & > div {
     transition: max-height 0.5s ease-in-out;
@@ -20,6 +22,13 @@
         rgba(255, 255, 255, 1) 100%
       );
       pointer-events: none;
+      .alert-primary & {
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0) 0%,
+          var(--bs-primary-bg-subtle) 100%
+        );
+      }
     }
   }
 }

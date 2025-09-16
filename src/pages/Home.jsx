@@ -26,6 +26,13 @@ function Home() {
 
             <BannerNews />
 
+            <h2 className="mt-4 text-center">{t(labels.news.latest)}</h2>
+            <Posts
+                categories={newsCategories}
+                limit={2}
+                template={templates.condensed}
+            />
+
             <PartiesFundingChart
                 className="mt-4"
                 limit={10}
@@ -44,13 +51,6 @@ function Home() {
                 file="top10donors"
                 title={labels.donations.top10donors}
                 disclaimer={labels.donations.disclaimerNoCredits}
-            />
-
-            <h2 className="mt-4 text-center">{t(labels.news.latest)}</h2>
-            <Posts
-                categories={newsCategories}
-                limit={2}
-                template={templates.condensed}
             />
         </section>
     );
