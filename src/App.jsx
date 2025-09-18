@@ -28,6 +28,7 @@ import Party from './pages/Party';
 import PartyAccounts from './pages/party/PartyAccounts';
 import PartyDonations from './pages/party/PartyDonations';
 import PartyGovernment from './pages/party/PartyGovernment';
+import PartyNews from './pages/party/PartyNews';
 import PartyOverview from './pages/party/PartyOverview';
 
 import './scss/volby-landing.scss';
@@ -89,6 +90,7 @@ function App() {
                                             PartyAccounts,
                                             queries.searchAndFilter(true),
                                         ],
+                                        [segments.NEWS, PartyNews],
                                     ],
                                 ],
                                 [routes.news(lang), News],

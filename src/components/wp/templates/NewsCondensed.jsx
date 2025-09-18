@@ -7,6 +7,7 @@ import { routes } from '../../../helpers/routes';
 import { parseWpHtml } from '../../../helpers/wp';
 
 import Media from '../Media';
+import PartyTags from '../PartyTags';
 
 function NewsCondensed({ article }) {
     return (
@@ -37,6 +38,10 @@ function NewsCondensed({ article }) {
                         <div className="article-date my-2">
                             {dateTimeFormat(article.date)}
                         </div>
+                        <PartyTags
+                            className="article-tags my-2"
+                            tags={article.tags}
+                        />
                         <div className="article-excerpt">
                             {parseWpHtml(article.excerpt.rendered)}
                         </div>

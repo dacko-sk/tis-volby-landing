@@ -4,7 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import { labels, t } from '../helpers/dictionary';
 import { apiEndpoints, apiParams } from '../helpers/dontaions';
-import { hasAccounts, partyAliases, partyFullName } from '../helpers/parties';
+import {
+    hasAccounts,
+    partyAliases,
+    partyFullName,
+    partyWpTag,
+} from '../helpers/parties';
 import { buildApiQuery, routes, segments, separators } from '../helpers/routes';
 
 import useGovData from '../hooks/GovData';
@@ -63,6 +68,14 @@ function Party() {
                             to={routes.party(partyName, segments.ACCOUNTS)}
                         >
                             {t(labels.accounts.navTitle)}
+                        </Nav.Link>
+                    )}
+                    {partyWpTag(partyName) && (
+                        <Nav.Link
+                            as={NavLink}
+                            to={routes.party(partyName, segments.NEWS)}
+                        >
+                            {t(labels.news.navTitle)}
                         </Nav.Link>
                     )}
                 </Nav>

@@ -10,6 +10,7 @@ const parties = {
             'MAĎARSKÁ ALIANCIA',
             'MKO',
         ],
+        wp: 899,
     },
     APS: {
         accounts: { e24: 2602594351, n23: 2602594351 },
@@ -19,6 +20,7 @@ const parties = {
     DEMOKRATI: {
         accounts: { e24: 2946166297, n23: 5200777415 },
         fullName: 'DEMOKRATI',
+        wp: 900,
     },
     'DOBRÁ VOĽBA': {
         accounts: { n20: '2020-dv', r22: 5193555063 },
@@ -31,6 +33,7 @@ const parties = {
     HLAS: {
         accounts: { e24: 5213487943, n23: 5201155706, r22: 5192332474 },
         fullName: 'HLAS',
+        wp: 901,
     },
     KARMA: {
         accounts: { n23: '1db9f729c5' },
@@ -43,15 +46,18 @@ const parties = {
             r22: 5191733399,
         },
         fullName: 'KRESŤANSKO DEMOKRATICKÉ HNUTIE',
+        wp: 902,
     },
     KÚ: {
         accounts: { e24: 5213785166, n23: 5204564329 },
         aliases: ['KRESŤANSKÁ ÚNIA'],
         fullName: 'KRESŤANSKÁ ÚNIA',
+        wp: 919,
     },
     KSS: {
         accounts: { e24: 5214083457, n23: 5173959220, r22: 5193974137 },
         fullName: 'KOMUNISTICKÁ STRANA SLOVENSKA',
+        wp: 903,
     },
     'ĽS-HZDS': { aliases: ['LS-HZDS', 'LS - HZDS', 'HZDS'] },
     ĽSNS: {
@@ -66,6 +72,7 @@ const parties = {
             'KOTLEBOVCI - ĽS NAŠE SLOVENSKO',
             'KOTLEBA - ĽS NAŠE SLOVENSKO',
         ],
+        wp: 904,
     },
     MF: {
         accounts: { n23: '5917b3b1b7' },
@@ -81,6 +88,7 @@ const parties = {
     },
     MYSLOVENSKO: {
         accounts: { e24: 5214774274, n23: 5204179906 },
+        wp: 920,
     },
     NK: {
         accounts: { r22: 5190807640 },
@@ -95,17 +103,20 @@ const parties = {
             r22: 5192786986,
         },
         fullName: 'PROGRESÍVNE SLOVENSKO',
+        wp: 906,
     },
     'PS A SPOLU': { aliases: ['KOALÍCIA PROGRESÍVNE SLOVENSKO A SPOLU'] },
     'PIRÁTSKA STRANA': {
         accounts: { e24: 2202814976, n23: 2401881936 },
         aliases: ['PIRÁTSKA STRANA - SLOVENSKO'],
+        wp: 914,
     },
     PRINCÍP: {
         accounts: { n23: 5186956723, r22: 5186956723 },
     },
     REPUBLIKA: {
         accounts: { e24: 4917050358, n23: 4786046155, r22: 4570401656 },
+        wp: 907,
     },
     SAS: {
         accounts: {
@@ -115,10 +126,12 @@ const parties = {
             r22: 5178313461,
         },
         aliases: ['SLOBODA A SOLIDARITA'],
+        wp: 908,
     },
     SDKÚ: {
         accounts: { n23: 2943155496 },
         aliases: ['SDKU', 'SDKÚ-DS', 'SDKU-DS', 'SDKÚ - DS', 'SDKU - DS'],
+        wp: 927,
     },
     SHO: {
         accounts: { n23: 2502606052 },
@@ -135,6 +148,7 @@ const parties = {
         },
         aliases: ['OĽANO', 'OĽANO - NOVA'],
         fullName: 'SLOVENSKO (OĽANO)',
+        wp: 905,
     },
     'SME RODINA': {
         accounts: { n20: '2020-sr', n23: 5200310540, r22: 5189770449 },
@@ -148,14 +162,17 @@ const parties = {
             r22: 5191226290,
         },
         aliases: ['SMER - SD'],
+        wp: 910,
     },
     SMK: { aliases: ['SMK - MKP'] },
     SNS: {
         accounts: { e24: 5212432254, n20: '2020-sns', n23: 5201011948 },
+        wp: 911,
     },
     SOCIALISTI: {
         accounts: { e24: 2949169530, r22: 5194064389 },
         aliases: ['SOCIALISTI.SK'],
+        wp: 956,
     },
     SOM: {
         accounts: { r22: 5195176737 },
@@ -165,14 +182,17 @@ const parties = {
         accounts: { e24: 5215267565, n23: 5203740781 },
         aliases: ['SPOLOČNE OBČANIA SLOVENSKA'],
         fullName: 'SPOLOČNE OBČANIA SLOVENSKA',
+        wp: 916,
     },
     SOSK: {
         accounts: { e24: 4942326053 },
+        wp: 954,
     },
     SP: {
         accounts: { e24: 2802819121 },
         aliases: ['SLOVENSKÝ PATRIOT'],
         fullName: ['SLOVENSKÝ PATRIOT'],
+        wp: 953,
     },
     SPOLU: {
         accounts: { n20: '2020-spolu', r22: 5188974466 },
@@ -182,6 +202,7 @@ const parties = {
     },
     SRDCE: {
         accounts: { e24: 5213928091, n23: 5204184430 },
+        wp: 922,
     },
     'TEAM BRATISLAVA': { accounts: { r22: 5191923301 } },
     'TEAM KRAJ NITRA': { accounts: { r22: 5194268541 } },
@@ -196,6 +217,7 @@ const parties = {
     VOLT: {
         accounts: { e24: 2947168454 },
         aliases: ['VOLT SLOVENSKO'],
+        wp: 955,
     },
     'ZA ĽUDÍ': {
         accounts: { n20: '2020-zl', n23: 2945150584, r22: 5190694287 },
@@ -205,6 +227,7 @@ const parties = {
         accounts: { e24: 5214182586 },
         aliases: ['ZDRAVÝ ROZUM'],
         fullName: 'ZDRAVÝ ROZUM',
+        wp: 958,
     },
 };
 
@@ -242,3 +265,11 @@ export const partyAccounts = (party) =>
 export const hasAccounts = (party) => !!parties[partyAlias(party)]?.accounts;
 
 export const partiesWithAccounts = Object.keys(parties).filter(hasAccounts);
+
+export const wpTagsMap = Object.fromEntries(
+    Object.entries(parties)
+        .filter(([, value]) => value.wp)
+        .map(([key, value]) => [value.wp, key])
+);
+
+export const partyWpTag = (party) => parties[partyAlias(party)]?.wp ?? null;

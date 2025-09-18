@@ -29,6 +29,7 @@ function Posts({
     noResults,
     search = '',
     showMore = null,
+    tags = [],
     template = templates.list,
 }) {
     const [totalPages, setTotalPages] = useState(0);
@@ -42,12 +43,15 @@ function Posts({
     const catExParam = categoriesExclude.length
         ? `&categories_exclude=${categoriesExclude.join()}`
         : '';
+    const tagParam = tags.length ? `&tags=${tags.join()}&tax_relation=AND` : '';
     const searchParam = search ? `&search=${search}` : '';
     const { isLoading, error, data } = useQuery(
-        [`all_posts_${catParam}_${search}_${blocksize}_${activePage}`],
+        [
+            `all_posts_${catParam}_${tagParam}_${search}_${blocksize}_${activePage}`,
+        ],
         () =>
             fetch(
-                `https://cms.transparency.sk/wp-json/wp/v2/posts?per_page=${blocksize}&page=${activePage}${catParam}${catExParam}${searchParam}`
+                `https://cms.transparency.sk/wp-json/wp/v2/posts?per_page=${blocksize}&page=${activePage}${catParam}${catExParam}${tagParam}${searchParam}`
             ).then((response) => {
                 if (response.headers) {
                     const wptp = Number(

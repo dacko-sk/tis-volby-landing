@@ -138,12 +138,34 @@ a.article {
   }
 }
 
+.emoji-icon:before {
+  display: inline-block;
+  font-style: normal;
+  margin-right: 0.25em;
+  text-decoration: none;
+}
+
 .article-date {
+  @extend .emoji-icon;
   font-style: italic;
   &:before {
     content: '📅';
-    font-style: normal;
-    margin-right: 0.25em;
+  }
+}
+
+.article-tags {
+  @extend .emoji-icon;
+  font-style: italic;
+  &:before {
+    content: '🔖';
+  }
+  .tag {
+    & + .tag:before {
+      content: '·';
+      color: $font-color;
+      display: inline-block; // disable hover underline effect from parent link
+      margin: 0 0.5em;
+    }
   }
 }
 
