@@ -147,6 +147,11 @@ export const routes = {
         separators.url +
         urlSegment(segments.DONATIONS, lang),
     funding: (lang) => languageRoot(lang) + urlSegment(segments.FUNDING, lang),
+    fundingNews: (lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.NEWS, lang),
     government: (lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +

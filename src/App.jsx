@@ -13,12 +13,13 @@ import {
 import ContextProviders from './ContextProviders';
 import Layout from './Layout';
 
-import Account from './pages/Account';
-import Accounts from './pages/Accounts';
+import Account from './pages/funding/Account';
+import Accounts from './pages/funding/Accounts';
 import Article from './pages/Article';
-import Charts from './pages/Charts';
-import Donations from './pages/Donations';
-import Donor from './pages/Donor';
+import Charts from './pages/funding/Charts';
+import Donations from './pages/funding/Donations';
+import Donor from './pages/funding/Donor';
+import FundingNews from './pages/funding/FundingNews';
 import Government from './pages/Government';
 import Home from './pages/Home';
 import News from './pages/News';
@@ -56,6 +57,7 @@ function App() {
                                 ],
                                 [routes.government(lang), Government],
                                 [routes.charts(lang), Charts],
+                                [routes.fundingNews(lang), FundingNews],
                                 [routes.accounts(lang), Accounts],
                                 [
                                     routes.accounts(lang) +

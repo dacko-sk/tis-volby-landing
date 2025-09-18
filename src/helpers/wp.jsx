@@ -5,14 +5,20 @@ import { decodeHTMLEntities } from './helpers';
 export const categories = {
     news22: 858,
     news23: 877,
-    newsGlobal: 875,
+    news24e: 947,
+    news24p: 933,
+    funding: 963,
     bannerNews: 960,
     bannerNewsEn: 961,
+    newsGlobal: 875,
 };
 
 export const newsCategories = [
     categories.news22,
     categories.news23,
+    categories.news24e,
+    categories.news24p,
+    categories.funding,
     categories.newsGlobal,
 ];
 

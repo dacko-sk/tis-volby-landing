@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { hiddenColumnsAccount } from '../helpers/accounts';
-import { setTitle } from '../helpers/browser';
-import { transactionsColumns as tc } from '../helpers/constants';
-import { labels, t } from '../helpers/dictionary';
-import { routes, separators } from '../helpers/routes';
+import { hiddenColumnsAccount } from '../../helpers/accounts';
+import { setTitle } from '../../helpers/browser';
+import { transactionsColumns as tc } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
+import { routes, separators } from '../../helpers/routes';
 
-import TransactionsSearch from '../components/accounts/TransactionsSearch';
-import Title from '../components/structure/Title';
-import AccountOverview from '../components/accounts/AccountOverview';
+import TransactionsSearch from '../../components/accounts/TransactionsSearch';
+import Title from '../../components/structure/Title';
+import AccountOverview from '../../components/accounts/AccountOverview';
 
 function Account() {
     const params = useParams();

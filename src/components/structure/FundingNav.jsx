@@ -40,6 +40,9 @@ function FundingNav() {
                         {t(labels.charts.pageTitle)}
                     </span>
                 </Nav.Link>
+                <Nav.Link as={NavLink} to={routes.fundingNews()}>
+                    {t(labels.news.navTitle)}
+                </Nav.Link>
             </Nav>
         </div>
     );

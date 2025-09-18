@@ -76,6 +76,12 @@ function Header() {
                             <NavDropdown.Item as={NavLink} to={routes.charts()}>
                                 {t(labels.charts.pageTitle)}
                             </NavDropdown.Item>
+                            <NavDropdown.Item
+                                as={NavLink}
+                                to={routes.fundingNews()}
+                            >
+                                {t(labels.news.fundingTitle)}
+                            </NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link as={NavLink} to={routes.donations()}>
                             <span className="d-none d-lg-inline d-xl-none">

@@ -3,20 +3,20 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { setTitle } from '../helpers/browser';
-import { labels, t } from '../helpers/dictionary';
+import { setTitle } from '../../helpers/browser';
+import { labels, t } from '../../helpers/dictionary';
 
-import DonationsGendersChart from '../components/charts/DonationsGendersChart';
-import DonationsGendersUniqueChart from '../components/charts/DonationsGendersUniqeChart';
-import DonationsRegionsChart from '../components/charts/DonationsRegionsChart';
-import DonationsRegionsUniqueChart from '../components/charts/DonationsRegionsUniqueChart';
-import PartiesFundingChart from '../components/charts/PartiesFundingChart';
-import PartiesDonationsChart from '../components/charts/PartiesDonationsChart';
-import PartiesUniqueChart from '../components/charts/PartiesUniqueChart';
-import FundingSources from '../components/funding/FundingSources';
-import Title from '../components/structure/Title';
-import FundingNav from '../components/structure/FundingNav';
-import Top10Donors from '../components/donors/Top10Donors';
+import DonationsGendersChart from '../../components/charts/DonationsGendersChart';
+import DonationsGendersUniqueChart from '../../components/charts/DonationsGendersUniqeChart';
+import DonationsRegionsChart from '../../components/charts/DonationsRegionsChart';
+import DonationsRegionsUniqueChart from '../../components/charts/DonationsRegionsUniqueChart';
+import PartiesFundingChart from '../../components/charts/PartiesFundingChart';
+import PartiesDonationsChart from '../../components/charts/PartiesDonationsChart';
+import PartiesUniqueChart from '../../components/charts/PartiesUniqueChart';
+import FundingSources from '../../components/funding/FundingSources';
+import Title from '../../components/structure/Title';
+import FundingNav from '../../components/structure/FundingNav';
+import Top10Donors from '../../components/donors/Top10Donors';
 
 const ACC_KEYS = {
     PARTIES: 'p',

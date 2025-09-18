@@ -524,6 +524,7 @@ export const labels = {
     learnMore: ['Zistiť viac', 'Learn more'],
     lastUpdate: ['Naposledy aktualizované', 'Last updated on'],
     news: {
+        fundingTitle: ['Novinky vo financovaní', 'Funding News'],
         latest: ['Najnovšie aktuality', 'Latest News (Slovak only)'],
         navTitle: ['Aktuality', 'News'],
         noData: ['Neboli nájdené žiadne články.', 'No articles found.'],

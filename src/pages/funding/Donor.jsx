@@ -5,9 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
-import { setTitle } from '../helpers/browser';
-import { donationsColumns as dc } from '../helpers/constants';
-import { labels, t } from '../helpers/dictionary';
+import { setTitle } from '../../helpers/browser';
+import { donationsColumns as dc } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
 import {
     DonorFlags,
     DonorParties,
@@ -15,13 +15,13 @@ import {
     columnLabel,
     entityLabel,
     hiddenDonorColumns,
-} from '../helpers/dontaions';
-import { currencyFormat } from '../helpers/helpers';
-import { routes } from '../helpers/routes';
+} from '../../helpers/dontaions';
+import { currencyFormat } from '../../helpers/helpers';
+import { routes } from '../../helpers/routes';
 
-import DonationsSearch from '../components/donors/DonationsSearch';
-import Title from '../components/structure/Title';
-import Loading from '../components/general/Loading';
+import DonationsSearch from '../../components/donors/DonationsSearch';
+import Title from '../../components/structure/Title';
+import Loading from '../../components/general/Loading';
 
 function Donor() {
     const params = useParams();
