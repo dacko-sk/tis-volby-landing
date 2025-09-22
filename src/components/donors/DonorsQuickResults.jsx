@@ -34,7 +34,7 @@ function DonorsQuickResults({ maxResults = 3, q }) {
         ));
         return (
             <>
-                <h4 className="my-3">{t(labels.donations.navTitleShort)}</h4>
+                <h4 className="my-4">{t(labels.donations.navTitleShort)}</h4>
                 {cards.length ? (
                     cards
                 ) : (

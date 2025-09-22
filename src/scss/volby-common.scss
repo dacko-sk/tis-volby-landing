@@ -151,11 +151,19 @@ th a {
   @extend #{'.bg-success', '.my-4', '.p-3', '.p-sm-5'};
   h2,
   h3,
-  h4 {
+  h4,
+  .article-date,
+  .article-excerpt {
     color: white;
   }
   .btn {
     --bs-btn-hover-border-color: white;
+  }
+  .hover-bg {
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
   }
 }
 

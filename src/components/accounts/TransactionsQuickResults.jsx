@@ -40,7 +40,7 @@ function TransactionsQuickResults({ maxResults = 3, q }) {
         ));
         return (
             <>
-                <h4 className="my-3">{t(labels.accounts.navTitle)}</h4>
+                <h4 className="my-4">{t(labels.accounts.navTitle)}</h4>
                 {cards.length ? (
                     cards
                 ) : (

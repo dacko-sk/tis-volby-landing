@@ -230,8 +230,8 @@ export const labels = {
                 'Enter donor, account or party name…',
             ],
             title: [
-                'Vyhľadávanie v knižnici darcov a transparentných účtoch',
-                'Search in donors database & transparent accounts',
+                'Vyhľadávanie v knižnici darcov, transparentných účtoch a kampaniach',
+                'Search in donors database, transparent accounts & campaigns',
             ],
         },
         settings: {
@@ -563,6 +563,7 @@ export const labels = {
     root: ['Monitoring volieb', 'Elections Monitoring'],
     search: {
         label: ['Vyhľadávanie', 'Search'],
+        others: ['Kampane a ostatné sekcie', 'Campaigns & other sections'],
         results: [
             'Výsledky vyhľadávania výrazu',
             'Search results for the query',

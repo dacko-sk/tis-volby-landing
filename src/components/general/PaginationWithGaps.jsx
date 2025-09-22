@@ -2,12 +2,15 @@ import Pagination from 'react-bootstrap/Pagination';
 import PageItem, { Ellipsis } from 'react-bootstrap/PageItem';
 import { Link } from 'react-router-dom';
 
+import { scrollToTop } from '../../helpers/browser';
+
 import './PaginationWithGaps.scss';
 
 function PaginationWithGaps({
     activePage = 1,
     className = 'justify-content-center',
     pageRouteCallback,
+    scrollTop,
     totalPages,
     useOffset = false,
 }) {
@@ -24,23 +27,26 @@ function PaginationWithGaps({
             if (pageNum - lastPageNum > 1) {
                 const half =
                     lastPageNum + Math.round((pageNum - lastPageNum) / 2);
+                const route = pageRouteCallback(useOffset ? half - 1 : half);
+                const state = { ...(route.state ?? {}), totalPages };
                 items.push(
-                    <Ellipsis
-                        as={Link}
-                        key={half}
-                        to={pageRouteCallback(useOffset ? half - 1 : half)}
-                        state={{ totalPages }}
-                    />
+                    <Ellipsis as={Link} key={half} to={route} state={state} />
                 );
             }
 
+            const route = pageRouteCallback(useOffset ? pageNum - 1 : pageNum);
+            const state = {
+                ...(route.state ?? {}),
+                totalPages,
+            };
             items.push(
                 <PageItem
                     as={Link}
                     active={pageNum === activePage}
                     key={pageNum}
-                    to={pageRouteCallback(useOffset ? pageNum - 1 : pageNum)}
-                    state={{ totalPages }}
+                    to={route}
+                    state={state}
+                    onClick={scrollTop ? scrollToTop : null}
                 >
                     {pageNum}
                 </PageItem>

@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Button from 'react-bootstrap/Button';
-import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 
-import { scrollToTop } from '../../helpers/browser';
 import { labels, t } from '../../helpers/dictionary';
 import { routes } from '../../helpers/routes';
 import { processArticles } from '../../helpers/wp';
@@ -14,6 +12,7 @@ import NewsCondensed from './templates/NewsCondensed';
 import NewsList from './templates/NewsList';
 import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
+import PaginationWithGaps from '../general/PaginationWithGaps';
 
 import './News.scss';
 
@@ -29,12 +28,12 @@ function Posts({
     noResults,
     search = '',
     showMore = null,
+    showMoreRoute = null,
     tags = [],
     template = templates.list,
 }) {
     const [totalPages, setTotalPages] = useState(0);
     const location = useLocation();
-    const navigate = useNavigate();
     const activePage = location.state?.page ?? 1;
     const blocksize = limit || 10;
     const catParam = categories.length
@@ -64,27 +63,18 @@ function Posts({
             })
     );
 
-    const loadPage = (page) => () => {
-        // navigate to the same page, just pass the current page via state object to preserve history
-        navigate(location.pathname, { state: { page } });
-        scrollToTop();
-    };
-
-    const articles = [];
     let content = null;
 
     if (isLoading || error) {
         content = <Loading error={error} />;
     } else {
-        processArticles(data).forEach((article) => {
-            articles.push(
-                template === templates.condensed ? (
-                    <NewsCondensed key={article.slug} article={article} />
-                ) : (
-                    <NewsList key={article.slug} article={article} />
-                )
-            );
-        });
+        const articles = processArticles(data).map((article) =>
+            template === templates.condensed ? (
+                <NewsCondensed key={article.slug} article={article} />
+            ) : (
+                <NewsList key={article.slug} article={article} />
+            )
+        );
 
         content = articles.length ? (
             <Row
@@ -102,34 +92,32 @@ function Posts({
     }
 
     let nav = null;
-    if (showMore || limit) {
+    if (showMore || showMoreRoute || limit) {
         nav = (
             <div className="buttons mt-3 text-center">
-                <Button as={Link} to={routes.news()} variant="secondary">
+                <Button
+                    as={Link}
+                    to={showMoreRoute ?? routes.news()}
+                    variant="secondary"
+                >
                     {showMore || t(labels.showMore)}
                 </Button>
             </div>
         );
-    } else {
-        const items = [];
-        for (let i = 1; i <= totalPages; i += 1) {
-            items.push(
-                <Pagination.Item
-                    key={i}
-                    active={i === activePage}
-                    onClick={loadPage(i)}
-                >
-                    {i}
-                </Pagination.Item>
-            );
-        }
-        if (items.length > 1) {
-            nav = (
-                <Pagination className="justify-content-center mt-4">
-                    {items}
-                </Pagination>
-            );
-        }
+    } else if (totalPages > 1) {
+        nav = (
+            <PaginationWithGaps
+                className="justify-content-center mt-4"
+                activePage={activePage}
+                pageRouteCallback={(page) => ({
+                    pathname: location.pathname,
+                    // navigate to the same page, just pass the current page via state object to preserve history
+                    state: { page },
+                })}
+                totalPages={totalPages}
+                scrollTop
+            />
+        );
     }
 
     return (
