@@ -159,7 +159,7 @@ function Charts() {
                     <Accordion.Body>
                         {loaded.includes(ACC_KEYS.COMPANIES) && (
                             <Top10Donors
-                                // https://volby.transparency.sk/api/donors/donors.php?c=1&b=10&f=0
+                                // https://volby.transparency.sk/api/donors/donors.php?c=1&b=10&f=2
                                 file="top10companies"
                                 title={labels.charts.companies}
                                 disclaimer={labels.charts.companiesDisclaimer}
