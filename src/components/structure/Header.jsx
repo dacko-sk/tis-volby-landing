@@ -10,7 +10,7 @@ import { localizePath, routes } from '../../helpers/routes';
 
 import SiteSelector from './SiteSelector';
 import DonateButton from '../general/DonateButton';
-// import SearchField from '../general/SearchField';
+import SearchField from '../general/SearchField';
 
 import logo from '../../../public/img/tis-logo-blue.png';
 
@@ -98,6 +98,7 @@ function Header() {
                             {t(labels.news.navTitle)}
                         </Nav.Link>
                     </Nav>
+                    <SearchField />
                     <Nav variant="pills" className="me-2">
                         <NavDropdown
                             title={getCurrentLanguage()}
@@ -116,7 +117,6 @@ function Header() {
                             ))}
                         </NavDropdown>
                     </Nav>
-                    {/* <SearchField /> */}
                     <DonateButton xl />
                 </Navbar.Collapse>
             </Container>
