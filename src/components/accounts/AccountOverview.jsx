@@ -24,11 +24,13 @@ function AccountOverview({ accId }) {
         // add default blocksize to use the same query params as data table on account detail page
         b: defaultBlocksize,
     });
-    const tq = useQuery([`transactions_${queryParams}`], () =>
-        fetch(`${apiEndpoints.transactions}?${queryParams}`).then((response) =>
-            response.json()
-        )
-    );
+    const tq = useQuery({
+        queryKey: [`transactions_${queryParams}`],
+        queryFn: () =>
+            fetch(`${apiEndpoints.transactions}?${queryParams}`).then(
+                (response) => response.json()
+            ),
+    });
 
     if (tq.isLoading || tq.error) {
         return <Loading error={tq.error} />;

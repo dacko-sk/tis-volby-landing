@@ -67,11 +67,13 @@ function TransactionsSearch({
     }
     const apiQuery = buildApiQuery(apiParams, queryParams);
 
-    const tq = useQuery([`transactions_${apiQuery}`], () =>
-        fetch(`${apiEndpoints.transactions}?${apiQuery}`).then((response) =>
-            response.json()
-        )
-    );
+    const tq = useQuery({
+        queryKey: [`transactions_${apiQuery}`],
+        queryFn: () =>
+            fetch(`${apiEndpoints.transactions}?${apiQuery}`).then((response) =>
+                response.json()
+            ),
+    });
 
     const tableSize = 12 - (openFilters ? 3 : 0) - (openSettings ? 2 : 0);
 

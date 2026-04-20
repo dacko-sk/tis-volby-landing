@@ -28,11 +28,13 @@ function Donor() {
     const id = params.id ?? null;
     const navigate = useNavigate();
 
-    const aq = useQuery([`donor_${id}`], () =>
-        fetch(`${apiEndpoints.donors}?i=${id}`).then((response) =>
-            response.json()
-        )
-    );
+    const aq = useQuery({
+        queryKey: [`donor_${id}`],
+        queryFn: () =>
+            fetch(`${apiEndpoints.donors}?i=${id}`).then((response) =>
+                response.json()
+            ),
+    });
 
     useEffect(() => {
         if (!aq.isLoading && !aq.error && aq.data && !(aq.data.rows ?? false)) {

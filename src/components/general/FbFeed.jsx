@@ -13,7 +13,7 @@ const FbFeed = memo(({ appId, name, url }) => {
     useEffect(() => {
         const script = document.createElement('script');
 
-        script.src = `https://connect.facebook.net/sk_SK/sdk.js#xfbml=1&version=v14.0&appId=${appId}&autoLogAppEvents=1`;
+        script.src = `https://connect.facebook.net/sk_SK/sdk.js#xfbml=1&version=v25.0&appId=${appId}&autoLogAppEvents=1`;
         script.id = 'fbscript';
         script.async = true;
         script.defer = true;
@@ -36,12 +36,13 @@ const FbFeed = memo(({ appId, name, url }) => {
             <div
                 className="fb-page"
                 data-href={url}
-                data-tabs="timeline"
+                // data-tabs="timeline"
+                data-show-posts="true"
                 data-width=""
-                data-height="400"
-                data-small-header="true"
+                data-height="500"
+                // data-small-header="true"
                 data-adapt-container-width="true"
-                data-hide-cover="false"
+                data-hide-cover="true"
                 data-show-facepile="true"
             >
                 <blockquote cite={url} className="fb-xfbml-parse-ignore">

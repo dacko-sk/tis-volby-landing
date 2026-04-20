@@ -18,17 +18,17 @@ function TransactionsQuickResults({ maxResults = 3, q }) {
         q,
         s: separators.numbers + tc.amount,
     });
-    const aq = useQuery(
-        [`transactions_${queryParams}`],
-        () =>
+    const aq = useQuery({
+        queryKey: [`transactions_${queryParams}`],
+        queryFn: () =>
             fetch(`${apiEndpoints.transactions}?${queryParams}`).then(
                 (response) => response.json()
             ),
-        {
+        queryOptions: {
             // run only if q is not empty
             enabled: !!q,
-        }
-    );
+        },
+    });
 
     if (q) {
         // isInitialLoading flag will be true if query is enabled, there are no data yet (isLoading) and isFetching

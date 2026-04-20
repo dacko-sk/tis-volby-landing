@@ -26,11 +26,13 @@ function Party() {
     const queryParams = buildApiQuery(apiParams, {
         p: partyAliases(partyName).join(separators.array),
     });
-    const { data: dqData } = useQuery([`donations_party_${partyName}`], () =>
-        fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
-            response.json()
-        )
-    );
+    const { data: dqData } = useQuery({
+        queryKey: [`donations_party_${partyName}`],
+        queryFn: () =>
+            fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
+                response.json()
+            ),
+    });
     const donationsSum = dqData?.sum ?? 0;
     const { paid, est } = getAggTotals(null, null, partyName);
 

@@ -66,11 +66,13 @@ function DonationsSearch({
             : {}),
     });
 
-    const dq = useQuery([`donations_${queryParams}`], () =>
-        fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
-            response.json()
-        )
-    );
+    const dq = useQuery({
+        queryKey: [`donations_${queryParams}`],
+        queryFn: () =>
+            fetch(`${apiEndpoints.donations}?${queryParams}`).then((response) =>
+                response.json()
+            ),
+    });
 
     const tableSize = 12 - (openFilters ? 3 : 0) - (openSettings ? 2 : 0);
 

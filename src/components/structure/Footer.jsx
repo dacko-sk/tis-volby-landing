@@ -175,7 +175,7 @@ function Footer() {
                         </Col>
                         <Col md={12} lg={4}>
                             <FbFeed
-                                appId="210544879524339"
+                                appId="3539612796251349"
                                 name="Transparency International Slovensko"
                                 url="https://www.facebook.com/transparencysk"
                             />

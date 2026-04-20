@@ -44,11 +44,11 @@ function Posts({
         : '';
     const tagParam = tags.length ? `&tags=${tags.join()}&tax_relation=AND` : '';
     const searchParam = search ? `&search=${search}` : '';
-    const { isLoading, error, data } = useQuery(
-        [
+    const { isLoading, error, data } = useQuery({
+        queryKey: [
             `all_posts_${catParam}_${tagParam}_${search}_${blocksize}_${activePage}`,
         ],
-        () =>
+        queryFn: () =>
             fetch(
                 `https://cms.transparency.sk/wp-json/wp/v2/posts?per_page=${blocksize}&page=${activePage}${catParam}${catExParam}${tagParam}${searchParam}`
             ).then((response) => {
@@ -60,8 +60,8 @@ function Posts({
                 }
                 // must return promise
                 return response.json();
-            })
-    );
+            }),
+    });
 
     let content = null;
 

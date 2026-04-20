@@ -22,17 +22,17 @@ function Article() {
             : {};
 
     // load article data from API (if needed)
-    const { isLoading, error, data } = useQuery(
-        [`article_${slug}`],
-        () =>
+    const { isLoading, error, data } = useQuery({
+        queryKey: [`article_${slug}`],
+        queryFn: () =>
             fetch(
                 `https://cms.transparency.sk/wp-json/wp/v2/posts?slug=${slug}`
             ).then((response) => response.json()),
-        {
+        queryOptions: {
             // run only if article data were not delivered via location.state
             enabled: !(article.title ?? false),
-        }
-    );
+        },
+    });
 
     if (!isLoading && !error && data && data.length) {
         // article successfully loaded from API - show it!

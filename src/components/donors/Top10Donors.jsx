@@ -16,11 +16,13 @@ import { routes } from '../../helpers/routes';
 import Loading from '../general/Loading';
 
 function Top10Donors({ className, disclaimer, file, title }) {
-    const { isLoading, error, data } = useQuery([`donors_${file}`], () =>
-        fetch(`${apiEndpoints.file}?f=${file}`).then((response) =>
-            response.json()
-        )
-    );
+    const { isLoading, error, data } = useQuery({
+        queryKey: [`donors_${file}`],
+        queryFn: () =>
+            fetch(`${apiEndpoints.file}?f=${file}`).then((response) =>
+                response.json()
+            ),
+    });
 
     const companies = file === 'top10companies';
     let content;

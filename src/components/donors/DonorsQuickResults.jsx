@@ -12,17 +12,17 @@ import Loading from '../general/Loading';
 
 function DonorsQuickResults({ maxResults = 3, q }) {
     const queryParams = buildApiQuery(apiParams, { b: maxResults, q });
-    const aq = useQuery(
-        [`donor_search_${queryParams}`],
-        () =>
+    const aq = useQuery({
+        queryKey: [`donor_search_${queryParams}`],
+        queryFn: () =>
             fetch(`${apiEndpoints.donors}?${queryParams}`).then((response) =>
                 response.json()
             ),
-        {
+        queryOptions: {
             // run only if q is not empty
             enabled: !!q,
-        }
-    );
+        },
+    });
 
     if (q) {
         // isInitialLoading flag will be true if query is enabled, there are no data yet (isLoading) and isFetching

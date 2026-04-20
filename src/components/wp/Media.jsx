@@ -5,16 +5,16 @@ import Loading from '../general/Loading';
 import fallbackImg from '../../../public/img/news.png';
 
 function Media({ alt, id, fallback }) {
-    const { isLoading, error, data } = useQuery(
-        [`media_${id}`],
-        () =>
+    const { isLoading, error, data } = useQuery({
+        queryKey: [`media_${id}`],
+        queryFn: () =>
             fetch(`https://cms.transparency.sk/wp-json/wp/v2/media/${id}`).then(
                 (response) => response.json()
             ),
-        {
+        queryOptions: {
             enabled: id > 0,
-        }
-    );
+        },
+    });
 
     if ((id > 0 && isLoading) || error) {
         return <Loading small error={error} />;
