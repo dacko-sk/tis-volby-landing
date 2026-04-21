@@ -4,18 +4,18 @@
   "homepage": "/",
   "dependencies": {
     "@tanstack/react-query": "^5.99.2",
-    "bootstrap": "^5.3.3",
-    "html-react-parser": "^3.0.8",
+    "bootstrap": "^5.3.8",
+    "html-react-parser": "^6.0.1",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.2",
-    "react-countdown": "^2.3.5",
+    "react-bootstrap": "^2.10.10",
+    "react-countdown": "^2.3.6",
     "react-dom": "^18.2.0",
-    "react-error-boundary": "^6.0.0",
+    "react-error-boundary": "^6.1.1",
     "react-papaparse": "^4.4.0",
     "react-router-dom": "^6.7.0",
-    "react-social-icons": "^6.12.0",
-    "recharts": "^2.9.3",
-    "use-debounce": "^9.0.3"
+    "react-social-icons": "^6.25.0",
+    "recharts": "^3.8.1",
+    "use-debounce": "^10.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",

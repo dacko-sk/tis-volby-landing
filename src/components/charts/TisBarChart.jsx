@@ -4,8 +4,8 @@ import {
     Bar,
     BarChart,
     CartesianGrid,
-    Cell,
     Legend,
+    Rectangle,
     ReferenceLine,
     ResponsiveContainer,
     Tooltip,
@@ -163,14 +163,16 @@ function TisBarChart({
             label={bar.label ?? null}
             stackId={bar.stackId ?? null}
         >
-            {parsedData.map((dataObj) => (
-                <Cell
-                    key={`cell-${dataObj[bar.key]}`}
-                    fill={dataObj.color ?? bar.color}
-                >
-                    {bar.labelList ?? null}
-                </Cell>
-            ))}
+            {parsedData
+                .filter((dataObj) => dataObj[bar.key])
+                .map((dataObj) => (
+                    <Rectangle
+                        key={`cell-${dataObj[bar.key]}`}
+                        fill={dataObj.color ?? bar.color}
+                    >
+                        {bar.labelList ?? null}
+                    </Rectangle>
+                ))}
         </Bar>
     ));
 

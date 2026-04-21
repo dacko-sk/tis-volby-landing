@@ -1,20 +1,14 @@
 import { useState } from 'react';
-import {
-    ResponsiveContainer,
-    Cell,
-    Legend,
-    Pie,
-    PieChart,
-    Tooltip,
-} from 'recharts';
+import { ResponsiveContainer, Legend, Pie, PieChart, Tooltip } from 'recharts';
 
 import { isMobile } from '../../helpers/browser';
 import {
     preparePctData,
-    ActiveShape,
     PieLabel,
+    PieSector,
     PieTooltip,
-    InactiveShape,
+    PieLabelLine,
+    PieLegendContent,
 } from '../../helpers/charts';
 import {
     currencyFormat,
@@ -94,8 +88,11 @@ function TisPieChart({
                         <PieChart>
                             <Pie
                                 activeIndex={activeSegment}
-                                activeShape={ActiveShape}
-                                inactiveShape={InactiveShape}
+                                className={
+                                    activeSegment !== null
+                                        ? 'has-active-sector'
+                                        : ''
+                                }
                                 data={data}
                                 dataKey={pie.dataKey}
                                 nameKey={pie.nameKey}
@@ -106,23 +103,21 @@ function TisPieChart({
                                 paddingAngle={1}
                                 fill={pie.color}
                                 label={label}
+                                labelLine={PieLabelLine}
                                 animationDuration={750}
                                 onClick={pieClick}
                                 onMouseOver={pieOver}
                                 onMouseOut={pieOut}
-                            >
-                                {data.map((dataObj) => (
-                                    <Cell
-                                        key={`cell-${dataObj[pie.nameKey]}`}
-                                        fill={dataObj.color ?? null}
-                                    />
-                                ))}
-                            </Pie>
+                                shape={PieSector}
+                            />
                             {hasInner && (
                                 <Pie
                                     activeIndex={activeSegment}
-                                    activeShape={ActiveShape}
-                                    inactiveShape={InactiveShape}
+                                    className={
+                                        activeSegment !== null
+                                            ? 'has-active-sector'
+                                            : ''
+                                    }
                                     data={data}
                                     dataKey={pie.innerKey}
                                     nameKey={pie.nameKey}
@@ -137,26 +132,14 @@ function TisPieChart({
                                     onClick={pieClick}
                                     onMouseOver={pieOver}
                                     onMouseOut={pieOut}
-                                >
-                                    {data.map((dataObj) => (
-                                        <Cell
-                                            key={`cell-${dataObj[pie.nameKey]}`}
-                                            fill={dataObj.color ?? null}
-                                        />
-                                    ))}
-                                </Pie>
+                                    shape={PieSector}
+                                />
                             )}
                             <Legend
                                 layout={isMobile ? 'horizontal' : 'vertical'}
                                 align={isMobile ? 'center' : 'right'}
                                 verticalAlign={isMobile ? 'bottom' : 'middle'}
-                                payload={data.map((dataObj) => {
-                                    return {
-                                        value: dataObj[pie.nameKey] ?? '',
-                                        type: 'rect',
-                                        color: dataObj.color ?? null,
-                                    };
-                                })}
+                                content={PieLegendContent}
                             />
                             <Tooltip content={tooltip} />
                         </PieChart>

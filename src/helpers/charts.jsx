@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Sector } from 'recharts';
+import { Curve, DefaultLegendContent, Sector } from 'recharts';
 
 import { isMobile } from './browser';
 import { labels, t } from './dictionary';
@@ -79,34 +79,6 @@ export const prepareAvgDeltaPctData = (data, keys) => {
     });
     return pctData;
 };
-
-export const PieLabel = (showName, formatPercent, formatter) =>
-    function ({ cx, cy, fill, midAngle, outerRadius, name, percent, value }) {
-        const RADIAN = Math.PI / 180;
-
-        const radius = outerRadius + 25;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-        let label;
-        if (showName) {
-            label = name;
-        } else {
-            label = formatter(formatPercent ? percent : value);
-        }
-
-        return (
-            <text
-                x={x}
-                y={y}
-                fill={fill}
-                textAnchor={x > cx ? 'start' : 'end'}
-                dominantBaseline="central"
-            >
-                {label}
-            </text>
-        );
-    };
 
 export const BarsTooltip = (bars, showSum, valueFormatter) =>
     function ({ active, payload }) {
@@ -202,51 +174,64 @@ export const PieTooltip = (dataKeys, dataLabels, formatter) =>
         return null;
     };
 
-export function ActiveShape({
-    cx,
-    cy,
-    innerRadius,
-    outerRadius,
-    startAngle,
-    endAngle,
-    fill,
-}) {
+export const PieLabel = (showName, formatPercent, formatter) =>
+    function (props) {
+        const { color, cx, cy, midAngle, outerRadius, name, percent, value } =
+            props;
+        const RADIAN = Math.PI / 180;
+
+        const radius = outerRadius + 25;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+        let label;
+        if (showName) {
+            label = name;
+        } else {
+            label = formatter(formatPercent ? percent : value);
+        }
+
+        return (
+            <text
+                x={x}
+                y={y}
+                fill={color}
+                textAnchor={x > cx ? 'start' : 'end'}
+                dominantBaseline="central"
+            >
+                {label}
+            </text>
+        );
+    };
+
+export function PieLabelLine(props) {
+    const { color } = props;
+    return <Curve {...props} stroke={color} />;
+}
+
+export function PieSector(props) {
+    const { color, innerRadius, isActive, outerRadius } = props;
     return (
-        <g>
-            <Sector
-                cx={cx}
-                cy={cy}
-                innerRadius={Math.round(innerRadius * 0.95)}
-                outerRadius={Math.round(outerRadius * 1.05)}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                fill={fill}
-            />
-        </g>
+        <Sector
+            {...props}
+            className={isActive ? '' : 'sector-inactive'}
+            fill={color}
+            innerRadius={
+                isActive ? Math.round(innerRadius * 0.95) : innerRadius
+            }
+            outerRadius={
+                isActive ? Math.round(outerRadius * 1.05) : outerRadius
+            }
+        />
     );
 }
 
-export function InactiveShape({
-    cx,
-    cy,
-    innerRadius,
-    outerRadius,
-    startAngle,
-    endAngle,
-    fill,
-}) {
-    return (
-        <g>
-            <Sector
-                className="pie-inactive"
-                cx={cx}
-                cy={cy}
-                innerRadius={innerRadius}
-                outerRadius={outerRadius}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                fill={fill}
-            />
-        </g>
-    );
+export function PieLegendContent(props) {
+    const { payload } = props;
+    // copy color from payload to legend payload
+    const newPayload = payload.map((entry) => ({
+        ...entry,
+        color: entry.payload?.color ?? entry.color,
+    }));
+    return <DefaultLegendContent {...props} payload={newPayload} />;
 }

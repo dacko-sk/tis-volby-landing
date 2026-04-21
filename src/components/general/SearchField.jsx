@@ -28,7 +28,7 @@ function SearchField() {
                     onClick={focusMainSearch}
                     onFocus={focusMainSearch}
                     role="button"
-                    value=""
+                    // value=""
                 />
                 <InputGroup.Text
                     id="search-icon"
