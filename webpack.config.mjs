@@ -89,7 +89,20 @@ export default (env, argv) => {
                         // Translates CSS into CommonJS
                         'css-loader',
                         // Compiles Sass to CSS
-                        'sass-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sassOptions: {
+                                    // TODO: remove this once bootstrap can handle this :)
+                                    silenceDeprecations: [
+                                        'color-functions',
+                                        'global-builtin',
+                                        'if-function',
+                                        'import',
+                                    ],
+                                },
+                            },
+                        },
                     ],
                 },
                 {
