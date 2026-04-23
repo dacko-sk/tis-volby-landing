@@ -1,12 +1,18 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
-const { homepage } = require('./package.json');
-const appManifest = require('./public/manifest.json');
+import pkg from './package.json' with { type: 'json' };
+import appManifest from './public/manifest.json' with { type: 'json' };
 
-module.exports = (env, argv) => {
+const { homepage } = pkg;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default (env, argv) => {
     const isEnvProduction = argv.mode === 'production';
     const rootPath = homepage && isEnvProduction ? homepage : '/';
 
