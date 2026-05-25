@@ -1,6 +1,7 @@
 import Nav from 'react-bootstrap/Nav';
 import { NavLink } from 'react-router-dom';
 
+import { useDemoMode } from '../../helpers/demoMode';
 import { labels, t } from '../../helpers/dictionary';
 import { routes } from '../../helpers/routes';
 
@@ -32,6 +33,11 @@ function FundingNav() {
                         {t(labels.accounts.navTitle)}
                     </span>
                 </Nav.Link>
+                {useDemoMode() && (
+                    <Nav.Link as={NavLink} to={routes.assetDeclarations()}>
+                        {t(labels.assetDeclarations.navTitle)}
+                    </Nav.Link>
+                )}
                 <Nav.Link as={NavLink} to={routes.charts()}>
                     <span className="d-md-none">
                         {t(labels.charts.navTitle)}

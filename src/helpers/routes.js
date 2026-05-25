@@ -20,12 +20,14 @@ export const separators = {
 export const segments = {
     ACCOUNT: 'ACCOUNT',
     ACCOUNTS: 'ACCOUNTS',
+    ASSET_DECLARATIONS: 'ASSET_DECLARATIONS',
     CHARTS: 'CHARTS',
     DONOR: 'DONOR',
     DONATIONS: 'DONATIONS',
     FUNDING: 'FUNDING',
     GOVERNMENT: 'GOVERNMENT',
     NEWS: 'NEWS',
+    OFFICIAL: 'OFFICIAL',
     PARTIES: 'PARTIES',
     SEARCH: 'SEARCH',
 };
@@ -34,24 +36,28 @@ export const localSegments = {
     [languages.sk]: {
         [segments.ACCOUNT]: 'ucet',
         [segments.ACCOUNTS]: 'ucty',
+        [segments.ASSET_DECLARATIONS]: 'majetkove-priznania',
         [segments.CHARTS]: 'grafy',
         [segments.DONOR]: 'darca',
         [segments.DONATIONS]: 'darcovia',
         [segments.FUNDING]: 'financovanie',
         [segments.GOVERNMENT]: 'statne-prispevky',
         [segments.NEWS]: 'aktuality',
+        [segments.OFFICIAL]: 'funkcionar',
         [segments.PARTIES]: 'strany',
         [segments.SEARCH]: 'vyhladavanie',
     },
     [languages.en]: {
         [segments.ACCOUNT]: 'account',
         [segments.ACCOUNTS]: 'accounts',
+        [segments.ASSET_DECLARATIONS]: 'asset-declarations',
         [segments.CHARTS]: 'charts',
         [segments.DONOR]: 'donor',
         [segments.DONATIONS]: 'donations',
         [segments.FUNDING]: 'funding',
         [segments.GOVERNMENT]: 'government',
         [segments.NEWS]: 'news',
+        [segments.OFFICIAL]: 'official',
         [segments.PARTIES]: 'parties',
         [segments.SEARCH]: 'search',
     },
@@ -118,6 +124,22 @@ export const routes = {
         urlSegment(segments.FUNDING, lang) +
         separators.url +
         urlSegment(segments.ACCOUNTS, lang),
+    assetDeclarations: (lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.ASSET_DECLARATIONS, lang),
+    assetDeclaration: (slug, lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.ASSET_DECLARATIONS, lang) +
+        separators.url +
+        urlSegment(segments.OFFICIAL, lang) +
+        separators.url +
+        (slug === true
+            ? ':slug'
+            : encodeURIComponent(slug.replaceAll(' ', separators.space))),
     article: (slug, lang) =>
         languageRoot(lang) +
         (slug

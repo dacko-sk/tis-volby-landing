@@ -20,6 +20,8 @@ import Charts from './pages/funding/Charts';
 import Donations from './pages/funding/Donations';
 import Donor from './pages/funding/Donor';
 import FundingNews from './pages/funding/FundingNews';
+import AssetDeclarations from './pages/funding/AssetDeclarations';
+import AssetDeclaration from './pages/funding/AssetDeclaration';
 import Government from './pages/Government';
 import Home from './pages/Home';
 import News from './pages/News';
@@ -59,6 +61,14 @@ function App() {
                                 [routes.government(lang), Government],
                                 [routes.charts(lang), Charts],
                                 [routes.fundingNews(lang), FundingNews],
+                                [
+                                    routes.assetDeclarations(lang),
+                                    AssetDeclarations,
+                                ],
+                                [
+                                    routes.assetDeclaration(true, lang),
+                                    AssetDeclaration,
+                                ],
                                 [routes.accounts(lang), Accounts],
                                 [
                                     routes.accounts(lang) +
