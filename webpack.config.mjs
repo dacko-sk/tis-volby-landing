@@ -5,6 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
+import Dotenv from 'dotenv-webpack';
 import pkg from './package.json' with { type: 'json' };
 import appManifest from './public/manifest.json' with { type: 'json' };
 
@@ -15,7 +16,6 @@ const __dirname = dirname(__filename);
 export default (env, argv) => {
     const isEnvProduction = argv.mode === 'production';
     const rootPath = homepage && isEnvProduction ? homepage : '/';
-
     const plugins = [
         new HtmlWebpackPlugin({
             template: 'public/index.html',
@@ -47,6 +47,29 @@ export default (env, argv) => {
             },
         }),
     ];
+    // Load env vars with prefix DHC_ (base file)
+    plugins.push(
+        new Dotenv({
+            path: `.env.${argv.mode}`,
+            allowlist: [/^DHC_/],
+        })
+    );
+    // Apply .env.local overrides if present (git‑ignored, not committed)
+    plugins.push(
+        new Dotenv({
+            path: `.env.local`,
+            allowlist: [/^DHC_/],
+            ignoreStub: true, // do not generate empty vars when file missing
+        })
+    );
+    // Apply .env.{mode}.local overrides (e.g. .env.development.local)
+    plugins.push(
+        new Dotenv({
+            path: `.env.${argv.mode}.local`,
+            allowlist: [/^DHC_/],
+            ignoreStub: true,
+        })
+    );
     if (isEnvProduction) {
         plugins.push(
             new MiniCssExtractPlugin({

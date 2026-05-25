@@ -45,6 +45,7 @@ export default [
             globals: {
                 ...globals.serviceworker,
                 ...globals.browser,
+                process: 'readonly',
             },
             ecmaVersion: 'latest',
             sourceType: 'module',
