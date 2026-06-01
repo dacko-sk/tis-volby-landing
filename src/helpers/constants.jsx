@@ -54,6 +54,12 @@ export const transactionsColumns = {
     note: 'note', // 13
 };
 
+export const assetDeclarationsColumns = {
+    name: 'name',
+    function: 'function',
+    years: 'years',
+};
+
 export const elections = {
     e24: 'e24',
     p24: 'p24',

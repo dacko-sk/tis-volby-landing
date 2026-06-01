@@ -1,4 +1,5 @@
 import {
+    assetDeclarationsColumns as ac,
     donationsColumns as dc,
     elections as el,
     transactionsColumns as tc,
@@ -59,16 +60,77 @@ export const labels = {
     },
     all: ['Zobraziť všetko', 'Show all'],
     assetDeclarations: {
+        assets: ['Majetky', 'Assets'],
         back: ['Späť na majetkové priznania', 'Return to asset declarations'],
+        dataDictionaryDisclaimer: [
+            'Viac informácií o dátach a metodike nájdete na stránke ',
+            'For more information about data and methodology, please visit our ',
+        ],
+        dataDictionary: [
+            'Dátový slovník a metadáta',
+            'Data dictionary and metadata',
+        ],
+        dataDictionaryLabels: {
+            primary: ['Základný prehľad', 'Primary Overview'],
+            dataset: ['Dátový súbor:', 'Dataset:'],
+            source: ['Zdroj:', 'Source:'],
+            sourceUrl: ['Odkaz na zdroj:', 'Source URL:'],
+            desc: ['Popis:', 'Description:'],
+            legis: ['Súvisiaca legislatíva:', 'Related legislation:'],
+            period: ['Pokryté obdobie:', 'Period covered:'],
+            geo: ['Geografický rozsah:', 'Geographical scope:'],
+            notes: ['Poznámky/Obmedzenia:', 'Notes/Limitations:'],
+            links: ['Odkazy:', 'Links:'],
+            rawBtn: [
+                'Stiahnuť surové dáta (JSON)',
+                'Download Raw JSON Dataset',
+            ],
+            metaBtn: ['Stiahnuť metadáta (JSON)', 'Download Metadata JSON'],
+            secTable: ['Premenné', 'Variables'],
+            vName: ['Názov premennej', 'Variable Name'],
+            vType: ['Dátový typ', 'Data Type'],
+            vDesc: ['Popis premennej', 'Variable Description'],
+            vNotes: ['Poznámky/Obmedzenia', 'Notes/Limitations'],
+            vSource: ['Zdroj', 'Source'],
+            rfTitle: ['Indikátory rizika (Red flags)', 'Red flag Indicators'],
+            rfName: ['Riziko (Krátky názov)', 'Red Flag (Short name)'],
+            descText: [
+                'Tento dátový slovník slúži na zabezpečenie transparentnosti, porovnateľnosti a prístupnosti datasetu majetkových priznaní pre novinárov, výskumníkov a občanov.',
+                'This data dictionary is provided to make the Asset Declarations dataset transparent, comparable, and user-friendly for journalists, researchers, and citizens.',
+            ],
+            sourceLink: ['Pôvodný zdroj dát NRSR', 'Original NRSR Data Source'],
+        },
+        columns: {
+            [ac.name]: ['Meno', 'Name'],
+            [ac.function]: ['Funkcie', 'Functions'],
+            [ac.years]: ['Roky priznaní', 'Declaration years'],
+        },
+        declarationsByYear: ['Priznania podľa rokov', 'Declarations by year'],
         navTitle: ['Majetkové priznania', 'Asset declarations'],
         pageTitle: ['Majetkové priznania', 'Asset Declarations'],
-        subtitle: ['Prehľad majetkových priznaní verejných funkcionárov', 'Overview of public officials\' asset declarations'],
-        searchPlaceholder: ['Vyhľadajte funkcionára podľa mena...', 'Search official by name...'],
+        subtitle: [
+            'Prehľad majetkových priznaní verejných funkcionárov',
+            "Overview of public officials' asset declarations",
+        ],
+        searchPlaceholder: ['Meno, funkcia…', 'Name, function…'],
         declarationsCount: ['%i priznaní', '%i declarations'],
-        noData: ['Neboli nájdené žiadne majetkové priznania.', 'No asset declarations found.'],
-        noOfficialFound: ['Hľadanému výrazu nezodpovedá žiaden funkcionár.', 'No public official found matching the search query.'],
-        yearsDisclaimer: ['Prehľad vývoja deklarovaných príjmov funkcionára (v EUR)', 'Development of official\'s declared incomes (in EUR)'],
-        
+        noData: [
+            'Neboli nájdené žiadne majetkové priznania.',
+            'No asset declarations found.',
+        ],
+        noOfficialFound: [
+            'Hľadanému výrazu nezodpovedá žiaden funkcionár.',
+            'No public official found matching the search query.',
+        ],
+        yearsDisclaimer: [
+            'Prehľad vývoja deklarovaných príjmov funkcionára (v EUR)',
+            "Development of official's declared incomes (in EUR)",
+        ],
+        filters: {
+            search: ['Vyhľadávanie', 'Search'],
+            years: ['Roky', 'Years'],
+        },
+
         public_function: ['Verejná funkcia', 'Public function'],
         employee: ['Zamestnanie', 'Employment'],
         business: ['Podnikanie', 'Business'],
@@ -80,16 +142,28 @@ export const labels = {
         use_real_estates: ['Užívanie nehnuteľnosti', 'Use of real estate'],
         use_movable: ['Užívanie hnuteľnosti', 'Use of movable property'],
         donations: ['Prijaté dary', 'Donations received'],
-        
-        income_function: ['Príjem z výkonu verejnej funkcie', 'Income from public office'],
+
+        income_function: [
+            'Príjem z výkonu verejnej funkcie',
+            'Income from public office',
+        ],
         income_other: ['Iné príjmy', 'Other income'],
         income_total: ['Príjmy spolu', 'Total income'],
-        
+
         reported_on_start: ['Oznámenie podané', 'Declaration type'],
-        reported_on_start_true: ['k dňu ujatia sa výkonu verejnej funkcie', 'as of taking office'],
-        reported_on_start_false: ['za predchádzajúci kalendárny rok', 'for the previous calendar year'],
-        
-        function_condition: ['Splnenie podmienok (čl. 4 ods. 1 a 2)', 'Compliance with conditions'],
+        reported_on_start_true: [
+            'k dňu ujatia sa výkonu verejnej funkcie',
+            'as of taking office',
+        ],
+        reported_on_start_false: [
+            'za predchádzajúci kalendárny rok',
+            'for the previous calendar year',
+        ],
+
+        function_condition: [
+            'Splnenie podmienok (čl. 4 ods. 1 a 2)',
+            'Compliance with conditions',
+        ],
         function_condition_true: ['Áno', 'Yes'],
         function_condition_false: ['Nie', 'No'],
     },

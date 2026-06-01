@@ -18,6 +18,7 @@ function DataTable({
     hiddenColumns = [],
     optionalColumns,
     visibleColumns = [],
+    noDataMessage,
 }) {
     if (dataQuery.isLoading || dataQuery.error) {
         return <Loading error={dataQuery.error} />;
@@ -70,7 +71,7 @@ function DataTable({
         </Table>
     ) : (
         <AlertWithIcon variant="danger">
-            {t(labels.accounts.noTransactions)}
+            {noDataMessage || t(labels.accounts.noTransactions)}
         </AlertWithIcon>
     );
 }

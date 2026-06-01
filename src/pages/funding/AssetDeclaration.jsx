@@ -14,6 +14,7 @@ import { labels, t } from '../../helpers/dictionary';
 import { currencyFormat, nl2r } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 import { colors } from '../../helpers/constants';
+import { endpoints } from '../../helpers/assetDeclarations';
 
 import FundingNav from '../../components/structure/FundingNav';
 import Title from '../../components/structure/Title';
@@ -28,9 +29,7 @@ function AssetDeclaration() {
     const { isLoading, error, data } = useQuery({
         queryKey: [`asset_declaration_${slug}`],
         queryFn: () =>
-            fetch(
-                `${process.env.DHC_TYPO3_API_DOMAIN}/elections/asset-declarations/official/${slug}`
-            ).then((response) => response.json()),
+            fetch(endpoints.official(slug)).then((response) => response.json()),
         queryOptions: {
             enabled: !!slug,
         },
@@ -84,13 +83,11 @@ function AssetDeclaration() {
             key: 'income_function',
             name: labels.assetDeclarations.income_function,
             color: colors.colorDarkBlue,
-            stackId: 'incomes',
         },
         {
             key: 'income_other',
             name: labels.assetDeclarations.income_other,
             color: colors.colorLightBlue,
-            stackId: 'incomes',
         },
     ];
 
@@ -98,6 +95,7 @@ function AssetDeclaration() {
         <section className="asset-declaration-detail">
             <Title secondary={name}>
                 {t(labels.assetDeclarations.pageTitle)}
+                <br />
             </Title>
 
             <FundingNav />
@@ -106,7 +104,7 @@ function AssetDeclaration() {
                 <Button
                     as={Link}
                     to={routes.assetDeclarations()}
-                    variant="outline-dark"
+                    variant="outline-primary"
                     className="py-2"
                 >
                     &larr; {t(labels.assetDeclarations.back)}
@@ -137,7 +135,7 @@ function AssetDeclaration() {
             <Row>
                 <Col lg={12}>
                     <h3 className="mb-4 text-center fw-bold">
-                        {t(labels.usefulInfo)}
+                        {t(labels.assetDeclarations.declarationsByYear)}
                     </h3>
                     <Tabs
                         defaultActiveKey={latestYear}
@@ -176,7 +174,7 @@ function AssetDeclaration() {
                                         {/* Row 1: Basic Info Cards */}
                                         <Col md={6}>
                                             <Card className="h-100 shadow-sm border-0">
-                                                <Card.Header className="bg-dark text-white fw-bold py-3">
+                                                <Card.Header className="bg-primary text-white fw-bold py-3">
                                                     ℹ️ {t(labels.usefulInfo)}
                                                 </Card.Header>
                                                 <Table
@@ -263,12 +261,8 @@ function AssetDeclaration() {
                                         <Col md={6}>
                                             <Card className="h-100 shadow-sm border-0">
                                                 <Card.Header className="bg-primary text-white fw-bold py-3">
-                                                    💰 {t(labels.charts.amount)}{' '}
-                                                    &{' '}
-                                                    {t(
-                                                        labels.assetDeclarations
-                                                            .function_condition
-                                                    )}
+                                                    💰{' '}
+                                                    {t(labels.charts.incoming)}
                                                 </Card.Header>
                                                 <Table
                                                     responsive
@@ -360,8 +354,12 @@ function AssetDeclaration() {
                                         {/* Row 3: Asset Details Card (full-width) */}
                                         <Col xs={12}>
                                             <Card className="shadow-sm border-0">
-                                                <Card.Header className="bg-dark text-white fw-bold py-3">
-                                                    🏠 {t(labels.parties.party)}
+                                                <Card.Header className="bg-primary text-white fw-bold py-3">
+                                                    🏠{' '}
+                                                    {t(
+                                                        labels.assetDeclarations
+                                                            .assets
+                                                    )}
                                                 </Card.Header>
                                                 <Table
                                                     responsive

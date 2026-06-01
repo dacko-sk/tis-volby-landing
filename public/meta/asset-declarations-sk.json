@@ -1,0 +1,145 @@
+{
+  "dataset": "Majetkové priznania",
+  "source": "Národná rada Slovenskej republiky (NRSR)",
+  "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=oznamenia_funkcionarov",
+  "description": "Informácie o majetkových priznaniach verejných funkcionárov na Slovensku, vrátane ich príjmov, nehnuteľností, hnuteľného majetku a majetkových práv.",
+  "related_legislation": "Ústavný zákon č. 357/2004 Z. z. o ochrane verejného záujmu pri výkone funkcií verejných funkcionárov",
+  "period_covered": "Ročne, rôzne roky",
+  "geographical_scope": "Národný",
+  "notes_limitations": "Dáta sú deklarované samotnými verejnými funkcionármi. Môžu sa vyskytovať rozdiely v pravopise a formátovaní.",
+  "variables": [
+    {
+      "name": "official_id",
+      "data_type": "Text",
+      "description": "Unikátny identifikátor funkcionára",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "nrsr_name",
+      "data_type": "Text",
+      "description": "Meno podľa záznamov NRSR",
+      "notes_limitations": "Formát: Priezvisko, Meno",
+      "source": "NRSR"
+    },
+    {
+      "name": "name",
+      "data_type": "Text",
+      "description": "Celé meno funkcionára, vrátane titulov",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations",
+      "data_type": "Pole (Array)",
+      "description": "Zoznam všetkých podaných majetkových priznaní (oznámení)",
+      "notes_limitations": "Obsahuje jedno alebo viacero priznaní",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.declaration_id",
+      "data_type": "Číslo",
+      "description": "ID oznámenia",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.year",
+      "data_type": "Číslo",
+      "description": "oznámenie za rok",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.report_date",
+      "data_type": "Dátum",
+      "description": "oznámenie bolo podané",
+      "notes_limitations": "Formát YYYY-MM-DD. Môže byť null v prípade, že reported_on_start je true.",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.reported_on_start",
+      "data_type": "Boolean",
+      "description": "Indikuje, či bolo oznámenie podané pri nástupe do funkcie",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.public_function",
+      "data_type": "Text",
+      "description": "vykonávaná verejná funkcia",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.income_function",
+      "data_type": "Číslo",
+      "description": "príjmy za rok: z výkonu verejnej funkcie (v EUR)",
+      "notes_limitations": "Suma pre priznania za rok 2008 a staršie, pôvodne uvedená v slovenských korunách (SKK), bola prepočítaná na eurá (EUR) fixným konverzným kurzom 1 EUR = 30,1260 SKK a zaokrúhlená na dve desatinné miesta (eurocenty).",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.income_other",
+      "data_type": "Číslo",
+      "description": "príjmy za rok: iné (v EUR)",
+      "notes_limitations": "Suma pre priznania za rok 2008 a staršie, pôvodne uvedená v slovenských korunách (SKK), bola prepočítaná na eurá (EUR) fixným konverzným kurzom 1 EUR = 30,1260 SKK a zaokrúhlená na dve desatinné miesta (eurocenty).",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.function_condition",
+      "data_type": "Boolean",
+      "description": "spĺňam podmienky nezlučiteľnosti výkonu funkcie verejného funkcionára s výkonom iných funkcií, zamestnaní alebo činností podľa čl. 5 ods. 1 a 2 ú. z. č. 357/2004 Z. z.",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.employee",
+      "data_type": "Text",
+      "description": "vykonávam nasledovné zamestnanie v pracovnom pomere alebo obdobnom pracovnom vzťahu alebo štátnozamestnaneckom vzťahu (čl. 7 ods. 1 písm. b) ú. z. č. 357/2004 Z. z.)",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.business",
+      "data_type": "Text",
+      "description": "vykonávam nasledovnú podnikateľskú činnosť (čl. 5 ods. 2 až 5 a čl. 7 ods. 1 písm. b) ú. z. č. 357/2004 Z. z.)",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.other_functions",
+      "data_type": "Text",
+      "description": "počas výkonu verejnej funkcie mám tieto funkcie (čl. 5 ods. 4 a čl. 7 ods. 1 písm. c) ú. z. č. 357/2004 Z. z.)",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.real_estates",
+      "data_type": "Text",
+      "description": "vlastníctvo nehnuteľnej veci",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.movable",
+      "data_type": "Text",
+      "description": "vlastníctvo hnuteľnej veci",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.property_rights",
+      "data_type": "Text",
+      "description": "vlastníctvo majetkového práva alebo inej majetkovej hodnoty",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.credits",
+      "data_type": "Text",
+      "description": "existencia záväzku",
+      "notes_limitations": "Môže obsahovať viacero záznamov oddelených novým riadkom",
+      "source": "NRSR"
+    }
+  ]
+}

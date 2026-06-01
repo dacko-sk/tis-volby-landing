@@ -21,6 +21,7 @@ import Donations from './pages/funding/Donations';
 import Donor from './pages/funding/Donor';
 import FundingNews from './pages/funding/FundingNews';
 import AssetDeclarations from './pages/funding/AssetDeclarations';
+import AssetDeclarationsDataDictionary from './pages/funding/AssetDeclarationsDataDictionary';
 import AssetDeclaration from './pages/funding/AssetDeclaration';
 import Government from './pages/Government';
 import Home from './pages/Home';
@@ -64,6 +65,15 @@ function App() {
                                 [
                                     routes.assetDeclarations(lang),
                                     AssetDeclarations,
+                                ],
+                                [
+                                    routes.assetDeclarations(lang) +
+                                        queries.searchAndFilter(true),
+                                    AssetDeclarations,
+                                ],
+                                [
+                                    routes.assetDeclarationsDataDictionary(lang),
+                                    AssetDeclarationsDataDictionary,
                                 ],
                                 [
                                     routes.assetDeclaration(true, lang),

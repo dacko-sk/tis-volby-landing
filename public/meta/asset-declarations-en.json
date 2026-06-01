@@ -1,0 +1,145 @@
+{
+  "dataset": "Asset Declarations",
+  "source": "National Council of the Slovak Republic (NRSR)",
+  "source_url": "https://www.nrsr.sk/web/Default.aspx?sid=oznamenia_funkcionarov",
+  "description": "Information on the asset declarations of public officials in Slovakia, including their income, real estate, movable assets, and property rights.",
+  "related_legislation": "Constitutional Law No. 357/2004 Coll. on the Protection of Public Interest in the Performance of Functions of Public Officials",
+  "period_covered": "Annually, various years",
+  "geographical_scope": "National",
+  "notes_limitations": "Self-reported data by public officials. Some variations in spelling or formatting might exist.",
+  "variables": [
+    {
+      "name": "official_id",
+      "data_type": "Text",
+      "description": "Unique identifier for the official",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "nrsr_name",
+      "data_type": "Text",
+      "description": "Name as registered in the parliament records",
+      "notes_limitations": "Format: Surname, First name",
+      "source": "NRSR"
+    },
+    {
+      "name": "name",
+      "data_type": "Text",
+      "description": "Full name of the official",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations",
+      "data_type": "Array",
+      "description": "List of all declarations submitted by the official",
+      "notes_limitations": "Contains one or more declaration objects",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.declaration_id",
+      "data_type": "Numeric",
+      "description": "Unique identifier for the specific declaration",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.year",
+      "data_type": "Numeric",
+      "description": "The year the declaration covers",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.report_date",
+      "data_type": "Date",
+      "description": "Date the declaration was reported",
+      "notes_limitations": "YYYY-MM-DD format. Can be null if reported_on_start is true.",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.reported_on_start",
+      "data_type": "Boolean",
+      "description": "Indicates if the declaration was submitted upon taking office",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.public_function",
+      "data_type": "Text",
+      "description": "The public function(s) held by the official",
+      "notes_limitations": "May contain multiple records separated by newline",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.income_function",
+      "data_type": "Numeric",
+      "description": "Income derived from the public function in EUR",
+      "notes_limitations": "Amounts for declarations from 2008 and earlier, originally reported in Slovak crowns (SKK), were converted to euros (EUR) using the fixed official conversion rate of 1 EUR = 30.1260 SKK and rounded to two decimal places (eurocents).",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.income_other",
+      "data_type": "Numeric",
+      "description": "Other income derived from outside the public function in EUR",
+      "notes_limitations": "Amounts for declarations from 2008 and earlier, originally reported in Slovak crowns (SKK), were converted to euros (EUR) using the fixed official conversion rate of 1 EUR = 30.1260 SKK and rounded to two decimal places (eurocents).",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.function_condition",
+      "data_type": "Boolean",
+      "description": "Whether the official meets the legal conditions to perform their function",
+      "notes_limitations": "",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.employee",
+      "data_type": "Text",
+      "description": "Details about any other employment the official holds",
+      "notes_limitations": "May contain multiple records separated by a newline",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.business",
+      "data_type": "Text",
+      "description": "Details of any business activities or enterprise ownership",
+      "notes_limitations": "May contain multiple records separated by a newline",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.other_functions",
+      "data_type": "Text",
+      "description": "Other functions held in state bodies, territorial self-government bodies, or legal entities",
+      "notes_limitations": "May contain multiple records separated by a newline",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.real_estates",
+      "data_type": "Text",
+      "description": "List of real estate properties owned, including location and ownership share",
+      "notes_limitations": "May contain multiple records separated by a newline",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.movable",
+      "data_type": "Text",
+      "description": "List of movable assets owned, including vehicles and valuables",
+      "notes_limitations": "May contain multiple records separated by a newline",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.property_rights",
+      "data_type": "Text",
+      "description": "List of property rights and other asset values (e.g., shares, securities)",
+      "notes_limitations": "May contain multiple records separated by a newline",
+      "source": "NRSR"
+    },
+    {
+      "name": "declarations.credits",
+      "data_type": "Text",
+      "description": "List of financial liabilities, credits, and loans",
+      "notes_limitations": "May contain multiple records separated by a newline",
+      "source": "NRSR"
+    }
+  ]
+}

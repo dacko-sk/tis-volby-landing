@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Button from 'react-bootstrap/Button';
 
+import { endpoints } from '../../helpers/assetDeclarations';
 import { labels, t } from '../../helpers/dictionary';
 import { routes } from '../../helpers/routes';
 import { contains } from '../../helpers/helpers';
@@ -16,10 +17,7 @@ function AssetDeclarationsQuickResults({ maxResults = 3, q }) {
         : ['asset_declarations'];
     const { isLoading, error, data } = useQuery({
         queryKey,
-        queryFn: () =>
-            fetch(
-                `${process.env.DHC_TYPO3_API_DOMAIN}/elections/asset-declarations/`
-            ).then((res) => res.json()),
+        queryFn: () => fetch(endpoints.search).then((res) => res.json()),
         enabled: true,
     });
 
@@ -31,7 +29,7 @@ function AssetDeclarationsQuickResults({ maxResults = 3, q }) {
         return <Loading className="my-5" error={error} />;
     }
 
-    const officials = data ?? [];
+    const officials = data?.officials ?? [];
     const filtered = officials
         .filter((o) => contains(o.name, q))
         .slice(0, maxResults);

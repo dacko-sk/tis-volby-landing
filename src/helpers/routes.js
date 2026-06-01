@@ -21,6 +21,7 @@ export const segments = {
     ACCOUNT: 'ACCOUNT',
     ACCOUNTS: 'ACCOUNTS',
     ASSET_DECLARATIONS: 'ASSET_DECLARATIONS',
+    DATA_DICTIONARY: 'DATA_DICTIONARY',
     CHARTS: 'CHARTS',
     DONOR: 'DONOR',
     DONATIONS: 'DONATIONS',
@@ -37,6 +38,7 @@ export const localSegments = {
         [segments.ACCOUNT]: 'ucet',
         [segments.ACCOUNTS]: 'ucty',
         [segments.ASSET_DECLARATIONS]: 'majetkove-priznania',
+        [segments.DATA_DICTIONARY]: 'datovy-slovnik',
         [segments.CHARTS]: 'grafy',
         [segments.DONOR]: 'darca',
         [segments.DONATIONS]: 'darcovia',
@@ -51,6 +53,7 @@ export const localSegments = {
         [segments.ACCOUNT]: 'account',
         [segments.ACCOUNTS]: 'accounts',
         [segments.ASSET_DECLARATIONS]: 'asset-declarations',
+        [segments.DATA_DICTIONARY]: 'data-dictionary',
         [segments.CHARTS]: 'charts',
         [segments.DONOR]: 'donor',
         [segments.DONATIONS]: 'donations',
@@ -129,6 +132,13 @@ export const routes = {
         urlSegment(segments.FUNDING, lang) +
         separators.url +
         urlSegment(segments.ASSET_DECLARATIONS, lang),
+    assetDeclarationsDataDictionary: (lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.FUNDING, lang) +
+        separators.url +
+        urlSegment(segments.ASSET_DECLARATIONS, lang) +
+        separators.url +
+        urlSegment(segments.DATA_DICTIONARY, lang),
     assetDeclaration: (slug, lang) =>
         languageRoot(lang) +
         urlSegment(segments.FUNDING, lang) +
