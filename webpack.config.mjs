@@ -6,9 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
 import Dotenv from 'dotenv-webpack';
-import pkg from './package.json' with { type: 'json' };
 import appManifest from './public/manifest.json' with { type: 'json' };
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -163,7 +161,7 @@ export default (env, argv) => {
         },
         output: {
             clean: true,
-            path: path.join(__dirname, 'build'),
+            path: path.join(__dirname, '/build'),
             pathinfo: !isEnvProduction,
             publicPath: rootPath,
             filename: isEnvProduction
