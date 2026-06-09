@@ -1,0 +1,8 @@
+index,account_name,date,amount,currency,message,tx_type,vs,ss
+0,,2024-04-30,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+1,,2024-04-30,-6.0,EUR,Poplatok za vedenie účtu,Poplatok,,
+2,,2024-03-31,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+3,,2024-03-31,-6.0,EUR,Poplatok za vedenie účtu,Poplatok,,
+4,,2024-02-29,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+5,,2024-02-29,-0.62,EUR,Poplatok za vedenie účtu,Poplatok,,
+6,NÁHLIK MILAN,2024-02-29,70.0,EUR,F001290220241768156,Bezhotovostný vklad,,

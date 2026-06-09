@@ -127,6 +127,7 @@ function TisPieChart({
                                     outerRadius="45%"
                                     paddingAngle={1}
                                     fill={pie.color}
+                                    legendType="none"
                                     label={false}
                                     animationDuration={750}
                                     onClick={pieClick}

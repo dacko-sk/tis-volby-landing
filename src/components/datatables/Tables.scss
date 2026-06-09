@@ -1,4 +1,5 @@
 @import './../../scss/variables';
+@import '~bootstrap/scss/mixins/breakpoints';
 
 .donor-card {
   $dc-h-gap: 1.5rem;
@@ -79,5 +80,11 @@
   }
   &[data-direction='1'] {
     background-color: $tis-score-red;
+  }
+}
+
+.col-name-nowrap {
+  @include media-breakpoint-up(lg) {
+    white-space: nowrap;
   }
 }

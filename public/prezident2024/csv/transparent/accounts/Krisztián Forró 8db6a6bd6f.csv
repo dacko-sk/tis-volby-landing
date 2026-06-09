@@ -1,0 +1,373 @@
+index,date,amount,currency,account_name,message,vs
+0,2024-04-30,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.04.2024 do 30.04.2024, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 15 x debet - elektronicky: 0,00",
+1,2024-04-30,-3,EUR,,"Poplatok platobné karty, Miesto: VISA CLASSIC DEB. CL Suma: 3 EUR 29.04.2024","VS: 495000120
+ŠS: 1138357340
+KS: 6898"
+2,2024-04-16,-1440,EUR,"H and K Plus, s.r.o. ICO: 51471965","Odoslaná platba elektronicky, Reklamne a propagacne sluzby",VS: 20240047
+3,2024-04-15,-33,EUR,Obec Marcelova,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 1732024
+4,2024-04-15,-495,EUR,Mestske kulturne stredisko Benedeka Csaplara,"Odoslaná platba elektronicky, Prenajom NP-divadelna sala,zasadacia miestnost,satna",VS: 240020
+5,2024-04-11,-30,EUR,Obec Andovce,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 20244
+6,2024-04-11,-30,EUR,Obec Obid,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 122024
+7,2024-04-08,-28,EUR,Obec Kalonda,"Odoslaná platba elektronicky, Hlasenie v obecnom rozhlase",VS: 2024000003
+8,2024-04-08,-9.8,EUR,Obec Besa,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 232024
+9,2024-04-08,-30,EUR,Obec Buc,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 0282024
+10,2024-04-04,-468,EUR,Kolozsi Peter - KOLOREK,"Odoslaná platba elektronicky, Plosny inzerat v KN Gratise c. 05/24",VS: 2024057
+11,2024-04-04,-6,EUR,Obec Ziharec,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 1314400023
+12,2024-04-04,-31,EUR,Mesto Kolarovo,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 1318400016
+13,2024-04-03,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 01.04.2024","VS: 497000093
+ŠS: 1138357340
+KS: 6898"
+14,2024-04-03,-171.46,EUR,,"Transakcia platobnou kartou, Suma: 171,46 EUR 01.04.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000093
+ŠS: 1138357340
+KS: 0608"
+15,2024-04-02,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 29.03.2024","VS: 497000090
+ŠS: 1138357340
+KS: 6898"
+16,2024-04-02,-3.22,EUR,,"Transakcia platobnou kartou, Suma: 3,22 EUR 29.03.2024 Miesto: FACEBK U4K3U242L2 fb.me/ads","VS: 405000090
+ŠS: 1138357340
+KS: 0608"
+17,2024-04-02,-60,EUR,Obec Iza,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 1315400022
+18,2024-04-02,-15,EUR,Obec Muzla,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 20247
+19,2024-04-02,-55,EUR,Obec Mytne Ludany,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 20241
+20,2024-04-02,-20,EUR,Obec Gbelce,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 1911400031
+21,2024-03-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.03.2024 do 31.03.2024, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 8 x prijaté platby: 0,00, 24 x debet - elektronicky: 0,00",
+22,2024-03-28,-3,EUR,,"Poplatok platobné karty, Miesto: VISA CLASSIC DEB. CL Suma: 3 EUR 27.03.2024","VS: 495000087
+ŠS: 1138357340
+KS: 6898"
+23,2024-03-26,-30,EUR,Obec Streda nad Bodrogom,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 072024
+24,2024-03-26,-30,EUR,Mesto Kralovsky Chlmec,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 9117400015
+25,2024-03-26,-10,EUR,Obec Mostova,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 2024000009
+26,2024-03-25,-50,EUR,Obec Calovec,"Odoslaná platba elektronicky, Rozhlasovy poplatok","VS: 2024000042
+KS: 0308"
+27,2024-03-25,-120,EUR,Ing. Alzbeta Fotiova,"Odoslaná platba elektronicky, Sluzby suvisiace s produkcio filmov,videozaznamov a zvukovych nahravok",VS: 004
+28,2024-03-25,-36,EUR,Obec Klizska Nema,"Odoslaná platba elektronicky, Miestny rozhlas",VS: 12024
+29,2024-03-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+30,2024-03-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+31,2024-03-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+32,2024-03-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+33,2024-03-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+34,2024-03-22,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 20.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+35,2024-03-22,-1048.21,EUR,,"Transakcia platobnou kartou, Suma: 1048,21 EUR 20.03.2024 Miesto: FACEBK *DRBUJ242L2 fb.me/ads","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+36,2024-03-22,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 20.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+37,2024-03-22,-1005.78,EUR,,"Transakcia platobnou kartou, Suma: 1005,78 EUR 20.03.2024 Miesto: FACEBK *Y28G72GZK2 fb.me/ads","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+38,2024-03-22,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 20.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+39,2024-03-22,-24,EUR,Obec Kralov Brod,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 2024000017
+40,2024-03-22,-42,EUR,Obec Jesenske,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 000324
+41,2024-03-22,-22,EUR,Mesto Zeliezovce,"Odoslaná platba elektronicky, Hlasenie v miestnom rozhlase",VS: 5013400058
+42,2024-03-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+43,2024-03-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 19.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+44,2024-03-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 19.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+45,2024-03-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 19.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+46,2024-03-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 19.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+47,2024-03-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 19.03.2024","VS: 497000081
+ŠS: 1138357340
+KS: 6898"
+48,2024-03-21,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 20.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+49,2024-03-21,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 19.03.2024 Miesto: FACEBK 5FJJG2UZK2 fb.me/ads","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+50,2024-03-21,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 19.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+51,2024-03-21,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 19.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+52,2024-03-21,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 19.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+53,2024-03-21,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 19.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000081
+ŠS: 1138357340
+KS: 0608"
+54,2024-03-20,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 18.03.2024 Miesto: FACEBK KV62D282L2 fb.me/ads","VS: 405000079
+ŠS: 1138357340
+KS: 0608"
+55,2024-03-20,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 18.03.2024","VS: 497000079
+ŠS: 1138357340
+KS: 6898"
+56,2024-03-19,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 17.03.2024","VS: 497000079
+ŠS: 1138357340
+KS: 6898"
+57,2024-03-19,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 17.03.2024 Miesto: FACEBK DE9XVZPZK2 fb.me/ads","VS: 405000079
+ŠS: 1138357340
+KS: 0608"
+58,2024-03-19,-10500,EUR,Ing.Szilard Nemeth - REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Volebne noviny A4 - Volby prezidenta SR 2024",VS: 2024101
+59,2024-03-19,-200,EUR,Reformovana krestanska cirkev na SK - Cirkevny zbor Rimavska Sobota,"Odoslaná platba elektronicky, Prenajom saly dna 7.3.2024 - Volby prezidenta SR 2024","VS: 202403045
+KS: 0308"
+60,2024-03-19,15000,EUR,Krisztian Forro,"Prijatá platba, vklad na kampan",
+61,2024-03-18,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 17.03.2024 Miesto: FACEBK B246E2UZK2 fb.me/ads","VS: 405000077
+ŠS: 1138357340
+KS: 0608"
+62,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 17.03.2024","VS: 497000077
+ŠS: 1138357340
+KS: 6898"
+63,2024-03-18,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 16.03.2024 Miesto: FACEBK T7F4UZPZK2 fb.me/ads","VS: 405000076
+ŠS: 1138357340
+KS: 0608"
+64,2024-03-18,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 15.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000076
+ŠS: 1138357340
+KS: 0608"
+65,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 16.03.2024","VS: 497000076
+ŠS: 1138357340
+KS: 6898"
+66,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 15.03.2024","VS: 497000076
+ŠS: 1138357340
+KS: 6898"
+67,2024-03-18,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 15.03.2024 Miesto: FACEBK 7Y4RS3LZK2 fb.me/ads","VS: 405000075
+ŠS: 1138357340
+KS: 0608"
+68,2024-03-18,-350,EUR,,"Transakcia platobnou kartou, Suma: 350 EUR 14.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000075
+ŠS: 1138357340
+KS: 0608"
+69,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 15.03.2024","VS: 497000075
+ŠS: 1138357340
+KS: 6898"
+70,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 14.03.2024","VS: 497000075
+ŠS: 1138357340
+KS: 6898"
+71,2024-03-18,-110,EUR,Mestske kulturne stredisko Moldava nad Bodvou,"Odoslaná platba elektronicky, Prenajom priestorov MsKS dna 22.2.2024 - Volby prezidenta SR 2024","VS: 20005
+KS: 0308"
+72,2024-03-18,-250,EUR,Gabriel Fekete-Fekete L.Y.U.K,"Odoslaná platba elektronicky, Prenajom miestnosti pocas kampane - Volby prezidenta SR 2024","VS: 202407
+KS: 0308"
+73,2024-03-18,-50,EUR,Guta TV s.r.o.,"Odoslaná platba elektronicky, Zverejnenie politickej inzercie - Volby prezidenta SR 2024","VS: 224019
+KS: 0308"
+74,2024-03-15,-200,EUR,,"Transakcia platobnou kartou, Suma: 200 EUR 13.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000074
+ŠS: 1138357340
+KS: 0608"
+75,2024-03-15,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 13.03.2024 Miesto: FACEBK 6TSDRZPZK2 fb.me/ads","VS: 405000074
+ŠS: 1138357340
+KS: 0608"
+76,2024-03-15,-10,EUR,,"Transakcia platobnou kartou, Suma: 10 EUR 13.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000074
+ŠS: 1138357340
+KS: 0608"
+77,2024-03-15,-50,EUR,,"Transakcia platobnou kartou, Suma: 50 EUR 13.03.2024 Miesto: GOOGLE *ADS7607927121 G.CO/HELPPAY#","VS: 405000074
+ŠS: 1138357340
+KS: 0608"
+78,2024-03-15,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 13.03.2024","VS: 497000074
+ŠS: 1138357340
+KS: 6898"
+79,2024-03-15,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 13.03.2024","VS: 497000074
+ŠS: 1138357340
+KS: 6898"
+80,2024-03-15,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 13.03.2024","VS: 497000074
+ŠS: 1138357340
+KS: 6898"
+81,2024-03-15,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 13.03.2024","VS: 497000074
+ŠS: 1138357340
+KS: 6898"
+82,2024-03-15,10,EUR,Attila Karaffa,"Prijatá platba, Attila Karaffa",
+83,2024-03-15,500,EUR,Zoltan Cziprusz,"Prijatá platba, Cziprusz Zoltan",
+84,2024-03-14,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 12.03.2024","VS: 497000073
+ŠS: 1138357340
+KS: 6898"
+85,2024-03-14,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 12.03.2024 Miesto: FACEBK JPZ3RZB2L2 fb.me/ads","VS: 405000073
+ŠS: 1138357340
+KS: 0608"
+86,2024-03-14,-2268,EUR,"DUEL-PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzercii v Uj Szo dna 20.3.2024, vo Vasarnap dna 19.3.2024 - volby do EP 2024",VS: 7012400146
+87,2024-03-14,-2880,EUR,"VALEUR, s.r.o.","Odoslaná platba elektronicky, Vyroba letakov A4 - volby do EP 2024",VS: 1802024
+88,2024-03-14,-180,EUR,Mesto Sahy,"Odoslaná platba elektronicky, Hlasenie v mestskom rozhlase-politicka reklama - volby do EP 2024",VS: 1412400003
+89,2024-03-14,-240,EUR,Ladislav Kopasz - LELESPRESS,"Odoslaná platba elektronicky, Uverejnenie farebnej reklamy v Regio 1/2024 - volby do EP 2024",VS: 24014
+90,2024-03-14,-72,EUR,HODUS KOMUNAL s.r.o.,"Odoslaná platba elektronicky, Inzerat v casopise Hodos a mi falunk - volby do EP 2024",VS: 240100050
+91,2024-03-14,-300,EUR,Mesto Kralovsky Chlmec,"Odoslaná platba elektronicky, Najomne za uzivanie NP v MsKs dna 10.3.2024 - volby do EP 2024",VS: 9118400014
+92,2024-03-14,-5000,EUR,Monika Csikmakova - GHYMES,"Odoslaná platba elektronicky, Organizovanie slavnostneho galavecera dna 20.3.2024 - volby do EP 2024",VS: 22024
+93,2024-03-14,6000,EUR,Krisztian Forro,"Prijatá platba, vklad na transparentny ucet",
+94,2024-03-14,20000,EUR,POSA LUDOVIT,"Prijatá platba, ",KS: 0308
+95,2024-03-13,-960,EUR,,"Transakcia platobnou kartou, Suma: 960 EUR 11.03.2024 Miesto: FACEBK WDXWQ2YZK2 fb.me/ads","VS: 405000072
+ŠS: 1138357340
+KS: 0608"
+96,2024-03-13,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 11.03.2024","VS: 497000072
+ŠS: 1138357340
+KS: 6898"
+97,2024-03-12,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 10.03.2024","VS: 497000071
+ŠS: 1138357340
+KS: 6898"
+98,2024-03-12,-864,EUR,,"Transakcia platobnou kartou, Suma: 864 EUR 10.03.2024 Miesto: FACEBK 7Y7X3282L2 fb.me/ads","VS: 405000071
+ŠS: 1138357340
+KS: 0608"
+99,2024-03-12,10,EUR,Kassova Ingrid,"Prijatá platba, kassova ingrid",
+100,2024-03-11,-576,EUR,,"Transakcia platobnou kartou, Suma: 576 EUR 08.03.2024 Miesto: FACEBK P4MTA2CZK2 fb.me/ads","VS: 405000069
+ŠS: 1138357340
+KS: 0608"
+101,2024-03-11,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 08.03.2024","VS: 497000069
+ŠS: 1138357340
+KS: 6898"
+102,2024-03-05,-12014.63,EUR,"Red Post, s.r.o.","Odoslaná platba elektronicky, Distribucia letakov - volby Prezidenta SR 2024",VS: 2024004
+103,2024-03-04,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 29.02.2024","VS: 497000061
+ŠS: 1138357340
+KS: 6898"
+104,2024-03-04,-333.56,EUR,,"Transakcia platobnou kartou, Suma: 333,56 EUR 29.02.2024 Miesto: FACEBK CG6N93LZK2 fb.me/ads","VS: 405000061
+ŠS: 1138357340
+KS: 0608"
+105,2024-03-04,-540,EUR,Ing.Szilard Nemeth REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Reklamne predmety - volby Prezidenta SR 2024",VS: 2024077
+106,2024-03-04,-432,EUR,"DIZART, s.r.o.","Odoslaná platba elektronicky, Vytahova reklama na 1 mesiac - volby Prezidenta SR 2024",VS: 2024036
+107,2024-03-04,3600,EUR,LIVIA KOLEKOVA,"Prijatá platba, Kolek Janos",
+108,2024-03-01,1000,EUR,Jan Kolek,"Prijatá platba, ",
+109,2024-02-29,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.02.2024 do 29.02.2024, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 4 x prijaté platby: 0,00, 7 x debet - elektronicky: 0,00",
+110,2024-02-29,-3,EUR,,"Poplatok platobné karty, Miesto: VISA CLASSIC DEB. CL Suma: 3 EUR 28.02.2024","VS: 495000059
+ŠS: 1138357340
+KS: 6898"
+111,2024-02-28,-384,EUR,,"Transakcia platobnou kartou, Suma: 384 EUR 26.02.2024 Miesto: FACEBK G5VHQZ32L2 fb.me/ads","VS: 405000058
+ŠS: 1138357340
+KS: 0608"
+112,2024-02-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.02.2024","VS: 497000058
+ŠS: 1138357340
+KS: 6898"
+113,2024-02-27,4800,EUR,Jozef Kovacs,"Prijatá platba, JOZEF KOVACS PODPORA KAMPANE",VS: 26022024
+114,2024-02-26,-2000,EUR,Zdruzenie za spolocne ciele - Szovetseg a kozos celokert,"Odoslaná platba elektronicky, Naklady medialnej kampane - volby Prezidenta SR 2024",VS: 022024
+115,2024-02-26,4500,EUR,Forrova Katarina,"Prijatá platba, Forrova Katarina",
+116,2024-02-26,100,EUR,Laszlo Biro,"Prijatá platba, Biro Laszlo - tamogatas",
+117,2024-02-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 21.02.2024","VS: 497000053
+ŠS: 1138357340
+KS: 6898"
+118,2024-02-22,-252,EUR,,"Transakcia platobnou kartou, Suma: 252 EUR 21.02.2024 Miesto: FACEBK GR3PZZXZK2 fb.me/ads","VS: 405000053
+ŠS: 1138357340
+KS: 0608"
+119,2024-02-21,100,EUR,Istvan Gal,"Prijatá platba, Forro Kr",
+120,2024-02-19,-19200,EUR,"H and K Plus s.r.o., ICO: 51471965","Odoslaná platba elektronicky, Prenajom a tlac billboardov na marec 2024 - volby prezidenta SR 2024",VS: 30240002
+121,2024-02-16,-168,EUR,,"Transakcia platobnou kartou, Suma: 168 EUR 14.02.2024 Miesto: FACEBK 34UBAZ32L2 fb.me/ads","VS: 405000046
+ŠS: 1138357340
+KS: 0608"
+122,2024-02-16,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 14.02.2024","VS: 497000046
+ŠS: 1138357340
+KS: 6898"
+123,2024-02-14,-210,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Potlac a vymena roll up platna - kampan Prezidentske volby 2024",VS: 202400018
+124,2024-02-12,-108,EUR,,"Transakcia platobnou kartou, Suma: 108 EUR 09.02.2024 Miesto: FACEBK G56YYY72L2 fb.me/ads","VS: 405000041
+ŠS: 1138357340
+KS: 0608"
+125,2024-02-12,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 09.02.2024","VS: 497000041
+ŠS: 1138357340
+KS: 6898"
+126,2024-02-12,-780,EUR,VALEUR. s.r.o.,"Odoslaná platba elektronicky, Vyroba letakov A4 - kampan Prezidentske volby 2024",VS: 902024
+127,2024-02-08,-72,EUR,,"Transakcia platobnou kartou, Suma: 72 EUR 07.02.2024 Miesto: FACEBK QEDM6ZBZK2 fb.me/ads","VS: 405000039
+ŠS: 1138357340
+KS: 0608"
+128,2024-02-08,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 07.02.2024","VS: 497000039
+ŠS: 1138357340
+KS: 6898"
+129,2024-02-08,-432,EUR,"DIZART, s.r.o.","Odoslaná platba elektronicky, Vytahova reklama na 1 mesiac - Prezidentske volby SR 2024",VS: 2024022
+130,2024-02-07,-48,EUR,,"Transakcia platobnou kartou, Suma: 48 EUR 05.02.2024 Miesto: FACEBK Q7B6E2LZK2 fb.me/ads","VS: 405000037
+ŠS: 1138357340
+KS: 0608"
+131,2024-02-07,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 05.02.2024","VS: 497000037
+ŠS: 1138357340
+KS: 6898"
+132,2024-02-05,-39.6,EUR,,"Transakcia platobnou kartou, Suma: 39,6 EUR 03.02.2024 Miesto: FACEBK UETRTYTZK2 fb.me/ads","VS: 405000034
+ŠS: 1138357340
+KS: 0608"
+133,2024-02-05,-32.4,EUR,,"Transakcia platobnou kartou, Suma: 32,4 EUR 02.02.2024 Miesto: FACEBK FBQ6CZXZK2 fb.me/ads","VS: 405000034
+ŠS: 1138357340
+KS: 0608"
+134,2024-02-05,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 03.02.2024","VS: 497000034
+ŠS: 1138357340
+KS: 6898"
+135,2024-02-05,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 02.02.2024","VS: 497000034
+ŠS: 1138357340
+KS: 6898"
+136,2024-02-05,-26.4,EUR,,"Transakcia platobnou kartou, Suma: 26,4 EUR 01.02.2024 Miesto: FACEBK YJRX8YPZK2 fb.me/ads","VS: 405000033
+ŠS: 1138357340
+KS: 0608"
+137,2024-02-05,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 01.02.2024","VS: 497000033
+ŠS: 1138357340
+KS: 6898"
+138,2024-02-05,-1260,EUR,MultiMedia s.r.o.,"Odoslaná platba elektronicky, Polep auta, vyroba reklamneho predmetu-Prezidentske volby SR 2024",VS: 240200017
+139,2024-02-05,-2598,EUR,Ing. Szilard Nemeth-REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Vyroba reklamnych predmetov - Prezidentske volby SR 2024",VS: 2024043
+140,2024-02-02,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 01.02.2024","VS: 497000032
+ŠS: 1138357340
+KS: 6898"
+141,2024-02-02,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 31.01.2024","VS: 497000032
+ŠS: 1138357340
+KS: 6898"
+142,2024-02-02,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 31.01.2024","VS: 497000032
+ŠS: 1138357340
+KS: 6898"
+143,2024-02-02,-21.6,EUR,,"Transakcia platobnou kartou, Suma: 21,6 EUR 01.02.2024 Miesto: FACEBK W4X68YPZK2 fb.me/ads","VS: 405000032
+ŠS: 1138357340
+KS: 0608"
+144,2024-02-02,-14.4,EUR,,"Transakcia platobnou kartou, Suma: 14,4 EUR 31.01.2024 Miesto: FACEBK JUSC7YPZK2 fb.me/ads","VS: 405000032
+ŠS: 1138357340
+KS: 0608"
+145,2024-02-02,-18,EUR,,"Transakcia platobnou kartou, Suma: 18 EUR 31.01.2024 Miesto: FACEBK 9DB2XYBZK2 fb.me/ads","VS: 405000032
+ŠS: 1138357340
+KS: 0608"
+146,2024-02-01,-12,EUR,,"Transakcia platobnou kartou, Suma: 12 EUR 30.01.2024 Miesto: FACEBK BNYZQY32L2 fb.me/ads","VS: 405000031
+ŠS: 1138357340
+KS: 0608"
+147,2024-02-01,-10.8,EUR,,"Transakcia platobnou kartou, Suma: 10,8 EUR 30.01.2024 Miesto: FACEBK M99Q6YPZK2 fb.me/ads","VS: 405000031
+ŠS: 1138357340
+KS: 0608"
+148,2024-02-01,-10.8,EUR,,"Transakcia platobnou kartou, Suma: 10,8 EUR 30.01.2024 Miesto: FACEBK 354HVYBZK2 fb.me/ads","VS: 405000031
+ŠS: 1138357340
+KS: 0608"
+149,2024-02-01,-10.8,EUR,,"Transakcia platobnou kartou, Suma: 10,8 EUR 30.01.2024 Miesto: FACEBK HSV472LZK2 fb.me/ads","VS: 405000031
+ŠS: 1138357340
+KS: 0608"
+150,2024-02-01,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.01.2024","VS: 497000031
+ŠS: 1138357340
+KS: 6898"
+151,2024-02-01,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.01.2024","VS: 497000031
+ŠS: 1138357340
+KS: 6898"
+152,2024-02-01,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.01.2024","VS: 497000031
+ŠS: 1138357340
+KS: 6898"
+153,2024-02-01,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.01.2024","VS: 497000031
+ŠS: 1138357340
+KS: 6898"
+154,2024-01-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.01.2024 do 31.01.2024, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 2 x prijaté platby: 0,00, 3 x debet - elektronicky: 0,00",
+155,2024-01-31,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 29.01.2024","VS: 497000030
+ŠS: 1138357340
+KS: 6898"
+156,2024-01-31,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 29.01.2024","VS: 497000030
+ŠS: 1138357340
+KS: 6898"
+157,2024-01-31,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 29.01.2024","VS: 497000030
+ŠS: 1138357340
+KS: 6898"
+158,2024-01-31,-10.8,EUR,,"Transakcia platobnou kartou, Suma: 10,8 EUR 29.01.2024 Miesto: FACEBK 384S5YPZK2 fb.me/ads","VS: 405000030
+ŠS: 1138357340
+KS: 0608"
+159,2024-01-31,-10.8,EUR,,"Transakcia platobnou kartou, Suma: 10,8 EUR 29.01.2024 Miesto: FACEBK NLU28ZXZK2 fb.me/ads","VS: 405000030
+ŠS: 1138357340
+KS: 0608"
+160,2024-01-31,-10.8,EUR,,"Transakcia platobnou kartou, Suma: 10,8 EUR 29.01.2024 Miesto: FACEBK 3EMKNYTZK2 fb.me/ads","VS: 405000030
+ŠS: 1138357340
+KS: 0608"
+161,2024-01-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA CLASSIC DEB. CL Suma: 3 EUR 30.01.2024","VS: 495000030
+ŠS: 1138357340
+KS: 6898"
+162,2024-01-29,-2845,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Vyroba bannerov - Prezidentske volby 2024",VS: 202400012
+163,2024-01-24,-10848,EUR,H and K Plus s.r.o. ICO:51471965,"Odoslaná platba elektronicky, Prenajom a tlac billboardov na 2/2024 - Prezidentske volby 2024",VS: 30240001
+164,2024-01-23,-3237.6,EUR,Kobalt s.r.o.,"Odoslaná platba elektronicky, Prenajom auta pocas kampane Prezidenske volby 2024",VS: 20240008
+165,2024-01-22,25000,EUR,Krisztian Forro,"Prijatá platba, vklad",
+166,2024-01-19,25000,EUR,Krisztian Forro,"Prijatá platba, vklad",

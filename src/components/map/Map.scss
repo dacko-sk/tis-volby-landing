@@ -1,0 +1,29 @@
+@import './../../scss/variables';
+
+#map {
+  & > div {
+    height: 100%;
+  }
+
+  .leaflet-container {
+    font-family: $font-family, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+
+  .leaflet-tooltip {
+    // background-color: rgb(255 255 255 / 15%);
+    // background-color: transparent;
+    background-color: $tis-light-blue;
+    // border: none;
+    box-shadow: 0 0px 8px 2px rgb(0 0 0 / 40%);
+    // box-shadow: 0 0px 8px 2px rgb(255 255 255 / 50%);
+    color: #fff;
+    font-size: 0.9rem;
+    // font-weight: $fw-bold;
+    line-height: 1.1rem;
+    padding: 0.1em 0.35em;
+    text-align: center;
+    &.hovered {
+      background-color: $tis-orange;
+    }
+  }
+}

@@ -9,6 +9,7 @@ import './PaginationWithGaps.scss';
 function PaginationWithGaps({
     activePage = 1,
     className = 'justify-content-center',
+    pageClickCallback,
     pageRouteCallback,
     scrollTop,
     totalPages,
@@ -27,30 +28,51 @@ function PaginationWithGaps({
             if (pageNum - lastPageNum > 1) {
                 const half =
                     lastPageNum + Math.round((pageNum - lastPageNum) / 2);
-                const route = pageRouteCallback(useOffset ? half - 1 : half);
-                const state = { ...(route.state ?? {}), totalPages };
-                items.push(
-                    <Ellipsis as={Link} key={half} to={route} state={state} />
-                );
+                if (pageRouteCallback) {
+                    const route = pageRouteCallback(useOffset ? half - 1 : half);
+                    const state = { ...(route.state ?? {}), totalPages };
+                    items.push(
+                        <Ellipsis as={Link} key={half} to={route} state={state} />
+                    );
+                } else if (pageClickCallback) {
+                    items.push(
+                        <Ellipsis
+                            key={half}
+                            onClick={pageClickCallback(useOffset ? half - 1 : half)}
+                        />
+                    );
+                }
             }
 
-            const route = pageRouteCallback(useOffset ? pageNum - 1 : pageNum);
-            const state = {
-                ...(route.state ?? {}),
-                totalPages,
-            };
-            items.push(
-                <PageItem
-                    as={Link}
-                    active={pageNum === activePage}
-                    key={pageNum}
-                    to={route}
-                    state={state}
-                    onClick={scrollTop ? scrollToTop : null}
-                >
-                    {pageNum}
-                </PageItem>
-            );
+            if (pageRouteCallback) {
+                const route = pageRouteCallback(useOffset ? pageNum - 1 : pageNum);
+                const state = {
+                    ...(route.state ?? {}),
+                    totalPages,
+                };
+                items.push(
+                    <PageItem
+                        as={Link}
+                        active={pageNum === activePage}
+                        key={pageNum}
+                        to={route}
+                        state={state}
+                        onClick={scrollTop ? scrollToTop : null}
+                    >
+                        {pageNum}
+                    </PageItem>
+                );
+            } else if (pageClickCallback) {
+                items.push(
+                    <PageItem
+                        active={pageNum === activePage}
+                        key={pageNum}
+                        onClick={pageClickCallback(useOffset ? pageNum - 1 : pageNum)}
+                    >
+                        {pageNum}
+                    </PageItem>
+                );
+            }
 
             lastPageNum = pageNum;
         }

@@ -1,0 +1,55 @@
+index,date,amount,currency,account_name,message,vs
+0,2024-05-02,-7,EUR,Avizo - Upomienka,"Poplatok, ",
+1,2024-04-30,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.04.2024 do 30.04.2024, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00",
+2,2024-04-30,-3,EUR,,"Poplatok platobné karty, Miesto: VISA CLASSIC DEB. CL Suma: 3 EUR 29.04.2024","VS: 495000120
+ŠS: 1138119419
+KS: 6898"
+3,2024-04-07,-3,EUR,Avizo - Vyzva,"Poplatok, ",
+4,2024-03-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.03.2024 do 31.03.2024, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 4 x prijaté platby: 0,00, 1 x debet - elektronicky: 0,00",
+5,2024-03-28,-3,EUR,,"Poplatok platobné karty, Miesto: VISA CLASSIC DEB. CL Suma: 3 EUR 27.03.2024","VS: 495000087
+ŠS: 1138119419
+KS: 6898"
+6,2024-03-20,-75,EUR,,"Transakcia platobnou kartou, Suma: 75 EUR 18.03.2024 Miesto: POSTA SENKVICE SENKVICE","VS: 405000079
+ŠS: 1138119419
+KS: 0608"
+7,2024-03-20,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 18.03.2024","VS: 497000079
+ŠS: 1138119419
+KS: 6898"
+8,2024-03-19,-40,EUR,,"Odoslaná platba elektronicky, od Patrika za Kosice dik",
+9,2024-03-18,-1.5,EUR,,"Transakcia platobnou kartou, Suma: 1,5 EUR 16.03.2024 Miesto: PARKOVANIE V MESTE KOSICE KOSICE","VS: 405000077
+ŠS: 1138119419
+KS: 0608"
+10,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 16.03.2024","VS: 497000077
+ŠS: 1138119419
+KS: 6898"
+11,2024-03-18,-177.2,EUR,,"Transakcia platobnou kartou, Suma: 177,2 EUR 15.03.2024 Miesto: Poetika Presov","VS: 405000076
+ŠS: 1138119419
+KS: 0608"
+12,2024-03-18,-126.5,EUR,,"Transakcia platobnou kartou, Suma: 126,5 EUR 15.03.2024 Miesto: Poetika Presov","VS: 405000076
+ŠS: 1138119419
+KS: 0608"
+13,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 15.03.2024","VS: 497000076
+ŠS: 1138119419
+KS: 6898"
+14,2024-03-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 15.03.2024","VS: 497000076
+ŠS: 1138119419
+KS: 6898"
+15,2024-03-15,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 14.03.2024","VS: 497000075
+ŠS: 1138119419
+KS: 6898"
+16,2024-03-15,-150,EUR,,"Výber hotovosti kartou, Suma: 150 EUR 14.03.2024 Miesto: CSOB Dunajska Streda Dunajska Stre","VS: 401000075
+ŠS: 1138119419
+KS: 0608"
+17,2024-03-15,150,EUR,Patrik Dubovsky PhD.,"Prijatá platba, ",
+18,2024-03-12,100,EUR,"Holik Peter, Ing.","Prijatá platba, ",
+19,2024-03-06,43,EUR,Patrik Dubovsky PhD.,"Prijatá platba, ",
+20,2024-03-06,100,EUR,Ing. Lubomira Kakalikova PhD.,"Prijatá platba, Patrik dobre si sa rozhodol. Luba Kakalikova s rodinou","VS: 2024
+ŠS: 23
+KS: 3"
+21,2024-02-29,-3,EUR,,"Poplatok platobné karty, Miesto: VISA CLASSIC DEB. CL Suma: 3 EUR 28.02.2024","VS: 495000059
+ŠS: 1138119419
+KS: 6898"
+22,2024-02-26,10,EUR,GUNCAGA JAN,"Prijatá platba, prispevok na kampan",
+23,2024-02-20,50,EUR,LALIK JURAJ,"Prijatá platba, prispevok PV 2024",
+24,2024-02-19,100,EUR,Jozef Hegedus,"Prijatá platba, ",
+25,2024-02-05,30,EUR,KAMIL KOVER,"Prijatá platba, KAMIL KOVER PRISPEVOK NA VOLEBNU KAMPAN",VS: 0000195222

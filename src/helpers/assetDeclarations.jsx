@@ -27,6 +27,8 @@ export const defaultSort = `name`;
 
 export const columnAlign = (key) => {
     switch (key) {
+        case ac.name:
+            return 'col-name-nowrap';
         default:
             return '';
     }
@@ -42,7 +44,7 @@ export const columnContent = (official, targetColumn) => {
         case ac.name:
             return (
                 <Link to={routes.assetDeclaration(official.official_id)}>
-                    {official.name || official.nrsr_name}
+                    {official.nrsr_name || official.name}
                 </Link>
             );
         case ac.function: {
@@ -64,7 +66,10 @@ export const columnContent = (official, targetColumn) => {
                                 uniqueFunctionsMap.set(lowerFn, fn);
                             } else {
                                 const countUpper = (str) =>
-                                    str.split('').filter((c) => c !== c.toLowerCase()).length;
+                                    str
+                                        .split('')
+                                        .filter((c) => c !== c.toLowerCase())
+                                        .length;
                                 if (countUpper(fn) > countUpper(existing)) {
                                     uniqueFunctionsMap.set(lowerFn, fn);
                                 }

@@ -4,6 +4,7 @@ import {
     Bar,
     BarChart,
     CartesianGrid,
+    Cell,
     Legend,
     Rectangle,
     ReferenceLine,
@@ -15,6 +16,7 @@ import {
 
 import {
     BarsTooltip,
+    chartKeys,
     horizontalYaxisWidth,
     prepareAvgDeltaPctData,
     shortChartNames,
@@ -96,6 +98,39 @@ export const columnVariants = {
             color: colors.colorOrange,
         },
     ],
+    donors: [
+        {
+            key: chartKeys.UNIQUE,
+            name: labels.donations.uniqueDonors,
+            color: colors.colorDarkBlue,
+        },
+    ],
+    adsSpending: [
+        {
+            key: 'total_spend',
+            name: 'Výdavky na FB reklamu',
+            color: colors.colorOrange,
+        },
+    ],
+    adsAmount: [
+        {
+            key: 'total_ad_count',
+            name: 'Všetky sponzorované príspevky',
+            color: colors.colorDarkBlue,
+        },
+        {
+            key: 'total_ads_tagged',
+            name: 'Označená politická reklama',
+            color: colors.colorLightBlue,
+            stackId: 'total',
+        },
+        {
+            key: 'total_ads_missing_attribution',
+            name: 'Nesprávne označená politická reklama',
+            color: colors.colorOrange,
+            stackId: 'total',
+        },
+    ],
 };
 
 export const subsidyBars = (stacked, reversed, data) => {
@@ -147,6 +182,7 @@ function TisBarChart({
 }) {
     if (!data || !Array.isArray(data) || !data.length) {
         return null;
+        console.log('TisBarChart rendering:', title || subtitle, bars, data);
     }
 
     const dataKeys = bars.map((bar) => bar.key);
@@ -163,16 +199,10 @@ function TisBarChart({
             label={bar.label ?? null}
             stackId={bar.stackId ?? null}
         >
-            {parsedData
-                .filter((dataObj) => dataObj[bar.key])
-                .map((dataObj) => (
-                    <Rectangle
-                        key={`cell-${dataObj[bar.key]}`}
-                        fill={dataObj.color ?? bar.color}
-                    >
-                        {bar.labelList ?? null}
-                    </Rectangle>
-                ))}
+            {parsedData.map((dataObj, index) => (
+                <Cell key={`cell-${index}`} fill={dataObj.color ?? bar.color} />
+            ))}
+            {bar.labelList ?? null}
         </Bar>
     ));
 
@@ -259,6 +289,7 @@ function TisBarChart({
                             ) : (
                                 <XAxis
                                     dataKey="name"
+                                    interval={0}
                                     height={15 + labelLines * 15}
                                     minTickGap={-10}
                                     tickFormatter={shortChartNames}
@@ -275,6 +306,7 @@ function TisBarChart({
                             {vertical ? (
                                 <YAxis
                                     dataKey="name"
+                                    interval={0}
                                     minTickGap={-15}
                                     tick={
                                         labelLines > 1 ? (
@@ -298,7 +330,7 @@ function TisBarChart({
                                 />
                             )}
                             <Tooltip content={tooltipContent} />
-                            <Legend />
+                            <Legend itemSorter={null} />
                             {refLine}
                             {barElements}
                         </BarChart>

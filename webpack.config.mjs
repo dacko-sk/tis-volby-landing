@@ -50,8 +50,16 @@ export default (env, argv) => {
     // Load env vars with prefix DHC_ (base file)
     plugins.push(
         new Dotenv({
+            path: `.env`,
+            allowlist: [/^DHC_/],
+        })
+    );
+    // Apply stage overrides if present
+    plugins.push(
+        new Dotenv({
             path: `.env.${argv.mode}`,
             allowlist: [/^DHC_/],
+            ignoreStub: true, // do not generate empty vars when file missing
         })
     );
     // Apply .env.local overrides if present (git‑ignored, not committed)
@@ -147,6 +155,10 @@ export default (env, argv) => {
                     test: /\.csv$/i,
                     type: 'asset/resource',
                 },
+                {
+                    test: /\.geojson$/i,
+                    type: 'json',
+                },
             ],
         },
         output: {
@@ -165,6 +177,18 @@ export default (env, argv) => {
         plugins,
         resolve: {
             extensions: ['.js', '.jsx'],
+            alias: {
+                react: path.resolve(__dirname, 'node_modules/react'),
+                'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+                'react-router': path.resolve(
+                    __dirname,
+                    'node_modules/react-router'
+                ),
+                'react-router-dom': path.resolve(
+                    __dirname,
+                    'node_modules/react-router-dom'
+                ),
+            },
         },
     };
 };

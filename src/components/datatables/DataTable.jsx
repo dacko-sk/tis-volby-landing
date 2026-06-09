@@ -51,7 +51,8 @@ function DataTable({
         ? dataQuery.data.rows.map((row, ri) => {
               const cols = enabledColumns.map((key) => {
                   const content = columnContent(row, key);
-                  return <td key={key}>{content}</td>;
+                  const align = columnAlign(key);
+                  return <td key={key} className={align}>{content}</td>;
               });
               const k = `r${ri}`;
               return (

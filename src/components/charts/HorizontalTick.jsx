@@ -14,7 +14,7 @@ function HorizontalTick({ x, y, payload }) {
             fontSize={tickFontSize}
         >
             <tspan x={x} dy="0.71em" className="name">
-                {tickLabel(payload.value)}
+                {tickLabel(payload.value, x)}
             </tspan>
         </text>
     );

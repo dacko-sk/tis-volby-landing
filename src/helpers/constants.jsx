@@ -4,6 +4,8 @@ import iconN from '../../public/img/icons/96national.png';
 import iconP from '../../public/img/icons/96president.png';
 import iconR from '../../public/img/icons/96regional.png';
 
+import { getActiveSubsite } from './languages';
+
 export const colorLightBlue = '#2bace2';
 export const colorLightBlueDs = '#b9c6cc';
 export const colorDarkBlue = '#1b335f';
@@ -11,6 +13,7 @@ export const colorDarkBlueDs = '#79869d';
 export const colorOrange = '#f06c50';
 export const colorOrangeDs = '#a9a4a4';
 export const colorGrey = '#e9f2f9';
+export const colorDarkGrey = '#808080';
 
 export const colors = {
     colorLightBlue,
@@ -20,6 +23,7 @@ export const colors = {
     colorDarkBlueDs,
     colorOrangeDs,
     colorGrey,
+    colorDarkGrey,
 };
 
 export const donationsColumns = {
@@ -37,6 +41,7 @@ export const donationsColumns = {
     region: 'region',
     flag: 'flag',
 };
+
 export const transactionsColumns = {
     id: 'id', // 0
     ta: 'ta', // 1
@@ -61,6 +66,7 @@ export const assetDeclarationsColumns = {
 };
 
 export const elections = {
+    s26: 's26',
     e24: 'e24',
     p24: 'p24',
     n23: 'n23',
@@ -98,5 +104,50 @@ export const links = {
     [elections.n23]: '/parlament2023/',
     [elections.e24]: '/euro2024/',
     [elections.p24]: '/prezident2024/',
+    [elections.s26]: '/samosprava2026/',
     donateUrl: 'https://transparency.sk/volby',
 };
+
+export const dates = {
+    get electionsStart() {
+        const subsite = getActiveSubsite();
+        if (subsite === 'samosprava2026') return '2026-10-24T07:00:00';
+        if (subsite === 'euro2024') return '2024-06-08T07:00:00';
+        if (subsite === 'prezident2024') return '2024-03-23T07:00:00';
+        if (subsite === 'samosprava2022') return '2022-10-29T07:00:00';
+        return '2024-03-23T07:00:00';
+    },
+    get electionsEnd() {
+        const subsite = getActiveSubsite();
+        if (subsite === 'samosprava2026') return '2026-10-24T20:00:00';
+        if (subsite === 'euro2024') return '2024-06-08T22:00:00';
+        if (subsite === 'prezident2024') return '2024-04-06T22:00:00';
+        if (subsite === 'samosprava2022') return '2022-10-29T20:00:00';
+        return '2024-04-06T22:00:00';
+    },
+    get monitoringEnd() {
+        const subsite = getActiveSubsite();
+        if (subsite === 'euro2024') return '2024-07-25T07:00:00';
+        if (subsite === 'prezident2024') return '2024-07-25T07:00:00';
+        return undefined;
+    },
+};
+
+export const campaignMetadata = {
+    type: 'type',
+    municipality: 'municipality',
+    support: 'support',
+    fb: 'fb',
+    web: 'web',
+    date: 'date',
+    score: 'score',
+};
+
+export const transparencyClasses = {
+    good: 'good',
+    average: 'average',
+    bad: 'bad',
+    unknown: 'unknown',
+};
+
+export { parties } from './parties';

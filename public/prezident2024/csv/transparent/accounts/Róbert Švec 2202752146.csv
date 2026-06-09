@@ -1,0 +1,93 @@
+index,date,amount,tx_type,account_name,message,ks,vs,ss,note
+0,2024-03-21,-45.01,Transakcia kartou,,"Nákup: SLOVNAFT-SK10105, Bratislava, SK, dne 20.3.2024, částka  45.01 EUR",,0354,,"Nákup: SLOVNAFT-SK10105, Bratislava, SK, dne 20.3.2024, částka  45.01 EUR"
+1,2024-03-21,-60.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 20.3.2024, částka  60.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 20.3.2024, částka  60.00 EUR"
+2,2024-03-20,-121.99,Bezhotovostná platba,,GARMOND Nitra - tlac letakov,,240112,,GARMOND Nitra - tlac letakov
+3,2024-03-20,130.0,Platba prevodom v rámci banky,"Ing. Ščurka, Jaroslav","Ing,Jaroslav Scurka, MSc., Poprad,Chalupkova 15 - Dar",,,,"Ing,Jaroslav Scurka, MSc., Poprad,Chalupkova 15 - Dar"
+4,2024-03-20,-0.01,Bezhotovostná platba,,Peter Samuel - vratenie platby,,,,Peter Samuel – vratenie platby
+5,2024-03-20,-0.01,Bezhotovostná platba,,Peter Samuel - vratenie platby,,,,Peter Samuel – vratenie platby
+6,2024-03-20,-0.01,Bezhotovostná platba,,Peter Samuel - vratenie platby,,,,Peter Samuel – vratenie platby
+7,2024-03-20,-0.01,Bezhotovostná platba,,Peter Samuel - vratenie platby,,,,Peter Samuel – vratenie platby
+8,2024-03-20,24.0,Bezhotovostný príjem,JUSKO JOZEF,"Ing. Jozef Jusko, Clementisova 12, Kosice, DAR",,,,JUSKO JOZEF
+9,2024-03-19,-90.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,STEFANIKOVA TR. 3, NITRA, SK, dne 18.3.2024, částka  90.00 EUR",,0354,,"Výběr z bankomatu: NITRA,STEFANIKOVA TR. 3, NITRA, SK, dne 18.3.2024, částka  90.00 EUR"
+10,2024-03-18,-34.91,Transakcia kartou,,"Nákup: SLOVNAFT-SK11417, Povazska Byst, SK, dne 17.3.2024, částka  34.91 EUR",,0354,,"Nákup: SLOVNAFT-SK11417, Povazska Byst, SK, dne 17.3.2024, částka  34.91 EUR"
+11,2024-03-17,20.0,Platba prevodom v rámci banky,"Szénasiová, Alžbeta","Alzbeta Szenasiova, Levice 93401, Polna 4,Dar",,,,"Alzbeta Szenasiova, Levice 93401, Polna 4,Dar"
+12,2024-03-16,-50.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 15.3.2024, částka  50.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 15.3.2024, částka  50.00 EUR"
+13,2024-03-15,-90.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 14.3.2024, částka  90.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 14.3.2024, částka  90.00 EUR"
+14,2024-03-15,24.0,Bezhotovostný príjem,Miroslav Pozník,"/DO2024-03-14/SPMiroslav Pozník ,Rozkvet 2064/139 ,01701 Považská Bystrica ,dar",,,,Miroslav Pozník
+15,2024-03-14,25.0,Bezhotovostný príjem,Michal Kozák,"/DO2024-03-13/SPMichal Kozak, Jaltská 17, Košice ,Dar",,,,Michal Kozák
+16,2024-03-14,30.0,Bezhotovostný príjem,Richard Székely,"/DO2024-03-13/SPSzékely Alexander, olivová 2, Košice, DAR",,,,Richard Székely
+17,2024-03-13,48.0,Bezhotovostný príjem,Oliver Soóš,"/DO2024-03-12/SPOliver Soóš, Chotčanská 34/115 - dar",,,,Oliver Soóš
+18,2024-03-12,30.0,Bezhotovostný príjem,Bronislava Minjariko,"/DO2024-03-11/SPBronislava Minjariková, Pribišova 2, 841 05 Bratis lava, dar",,,,Bronislava Minjariko
+19,2024-03-12,30.0,Bezhotovostný príjem,Milan Minjarik,"/DO2024-03-11/SPMilan Minjarik, Rovníková 14, 821 02 Bratislava, d ar",,,,Milan Minjarik
+20,2024-03-11,25.0,Bezhotovostný príjem,Pavol Skýpala,"/DO2024-03-10/SPPavol Skýpala, Fučíkova 636/11, 98701, Poltár, DAR",,,,Pavol Skýpala
+21,2024-03-11,30.0,Bezhotovostný príjem,DANIELA FRATRICOVA,"/DO2024-03-11/SPDANIELA FRATRICOVA, HURBANOVA 1A, LEOPOLDOV, DAR",,,,DANIELA FRATRICOVA
+22,2024-03-11,50.0,Bezhotovostný príjem,Marek Čižmár,"/DO2024-03-11/SPMarek Čižmár, Tureň, Dar",,,,Marek Čižmár
+23,2024-03-10,-26.91,Transakcia kartou,,"Nákup: OMV 2324, Zelenec p TT, SK, dne 9.3.2024, částka  26.91 EUR",,0354,,"Nákup: OMV 2324, Zelenec p TT, SK, dne 9.3.2024, částka  26.91 EUR"
+24,2024-03-08,-30.04,Transakcia kartou,,"Nákup: SLOVNAFT-SK10105, Bratislava, SK, dne 7.3.2024, částka  30.04 EUR",,0354,,"Nákup: SLOVNAFT-SK10105, Bratislava, SK, dne 7.3.2024, částka  30.04 EUR"
+25,2024-03-05,-270.0,Transakcia kartou,,"Výběr z bankomatu: NITRA, STEFANIKOVA TR. 7, NITRA, SK, dne 4.3.2024, částka  270.00 EUR",,0354,,"Výběr z bankomatu: NITRA, STEFANIKOVA TR. 7, NITRA, SK, dne 4.3.2024, částka  270.00 EUR"
+26,2024-03-05,-190.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 4.3.2024, částka  190.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 4.3.2024, částka  190.00 EUR"
+27,2024-03-01,48.0,Platba prevodom v rámci banky,"Sukup, Luboš","Lubos Sukup Srobarova 6 Skalica, dar",,,,"Lubos Sukup Srobarova 6 Skalica, dar"
+28,2024-03-01,-80.0,Platba prevodom v rámci banky,,ROPA s.r.o. Led obrazovka Stanicnenamestie Kosice,0308,20240012,,ROPA s.r.o. Led obrazovka Stanicne namestie Kosice
+29,2024-03-01,500.0,Bezhotovostný príjem,Marian Bednár,"/DO2024-03-01/SPMarian Bednár, Kmeťová 46,Nové Zámky-DKR",0558,550308,,Marian Bednár
+30,2024-02-29,-200.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 28.2.2024, částka  200.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 28.2.2024, částka  200.00 EUR"
+31,2024-02-27,-29.76,Transakcia kartou,,"Nákup: SLOVNAFT-SK10144, Bratislava, SK, dne 26.2.2024, částka  29.76 EUR",,0354,,"Nákup: SLOVNAFT-SK10144, Bratislava, SK, dne 26.2.2024, částka  29.76 EUR"
+32,2024-02-26,24.0,Bezhotovostný príjem,Tibor Šovčík,"/DO2024-02-23/SP Tibor Sovcik, Komenskeho 348/12 Nedozery- Brezany 972 12 DAR",0968,,,Tibor Šovčík
+33,2024-02-24,-190.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 23.2.2024, částka  190.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 23.2.2024, částka  190.00 EUR"
+34,2024-02-23,10.0,Bezhotovostný príjem,Bronislava Minjariko,"/DO2024-02-22/SPBronislava Minjariková, Pribišova 2, 841 05 Bratis lava, dar",,,,Bronislava Minjariko
+35,2024-02-23,10.0,Bezhotovostný príjem,Milan Minjarik,"/DO2024-02-22/SPMilan Minjarik, Rovníková 14, 821 02 Bratislava, d ar",,,,Milan Minjarik
+36,2024-02-23,200.0,Bezhotovostný príjem,Michal Kovalcik,/DO2024-02-22/SPMichal Kovalcik Slovenska Ves 387 Dar,,,,Michal Kovalcik
+37,2024-02-22,-24.82,Transakcia kartou,,"Nákup: SLOVNAFT-SK20908, Nove Zamky, SK, dne 21.2.2024, částka  24.82 EUR",,0354,,"Nákup: SLOVNAFT-SK20908, Nove Zamky, SK, dne 21.2.2024, částka  24.82 EUR"
+38,2024-02-20,10.0,Bezhotovostný príjem,Miroslav Šnirc,"/DO2024-02-19/SP Miroslav Snirc CIGEL 48. 97101 Prievidza ,dar.",,,,Miroslav Šnirc
+39,2024-02-20,100.0,Bezhotovostný príjem,Richard Székely,"/DO2024-02-19/SPSzékely Alexander, olivová 2, Košice, DAR",,,,Richard Székely
+40,2024-02-20,30.0,Bezhotovostný príjem,Peter Ovčiarik,"/DO2024-02-19/SP Peter Ovciarik, Juzna trieda 23, 04001 Kosice - dar",,,,Peter Ovčiarik
+41,2024-02-19,25.0,Bezhotovostný príjem,Pavol Skýpala,"/DO2024-02-18/SPPavol Skýpala, Fučíkova 636/11, 98701, Poltár, DAR",,,,Pavol Skýpala
+42,2024-02-14,-80.0,Platba prevodom v rámci banky,,"ROPA s.r.o., Led obrazovka stanicne namestie Kosice",0308,20240005,,"ROPA s.r.o., Led obrazovka stanicne namestie Kosice"
+43,2024-02-12,-14.52,Transakcia kartou,,"Nákup: SPP CNG s.r.o., Banska Bystri, SK, dne 11.2.2024, částka  14.52 EUR",,0354,,"Nákup: SPP CNG s.r.o., Banska Bystri, SK, dne 11.2.2024, částka  14.52 EUR"
+44,2024-02-12,50.0,Platba prevodom v rámci banky,"Szénasiová, Alžbeta","Alžbeta Szénásiová, Poľná 4, Levice,Dar",,,,"Alžbeta Szénásiová, Poľná 4, Levice,Dar"
+45,2024-02-12,10.0,Bezhotovostný príjem,STANCO PETER,"/DO2024-02-09/SPPeter Stanco Rakova 415 ,dar",,,,STANCO PETER
+46,2024-02-12,80.0,Platba prevodom v rámci banky,"Szénasiová, Alžbeta","Alzbeta Szenasiova, Polna 4,Levice,Dar",,,,"Alzbeta Szenasiova, Polna 4,Levice,Dar"
+47,2024-02-12,20.0,Platba prevodom v rámci banky,"Szénasiová, Alžbeta","Alzbeta Szenasiova, Polna 4, Levice,Dar",,,,"Alzbeta Szenasiova, Polna 4, Levice,Dar"
+48,2024-02-10,-30.01,Transakcia kartou,,"Nákup: OMV 2305, Bratislava, SK, dne 9.2.2024, částka  30.01 EUR",,0354,,"Nákup: OMV 2305, Bratislava, SK, dne 9.2.2024, částka  30.01 EUR"
+49,2024-02-10,-100.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 9.2.2024, částka  100.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 9.2.2024, částka  100.00 EUR"
+50,2024-02-10,-10.0,Transakcia kartou,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 9.2.2024, částka  10.00 EUR",,0354,,"Výběr z bankomatu: NITRA,FRANA MOJTU 8, NITRA, SK, dne 9.2.2024, částka  10.00 EUR"
+51,2024-02-06,0.01,Bezhotovostný príjem,PETER SAMUEL,/DO2024-02-05/SPZ COHO ZIJE VOCCA SVEC ? NA TO NECH VAM ODPOVIE VY TUPE OVCE....,,,,PETER SAMUEL
+52,2024-02-06,0.01,Bezhotovostný príjem,PETER SAMUEL,/DO2024-02-05/SPUZ SI DOKANDIDOVAL TY NACEK...,,,,PETER SAMUEL
+53,2024-02-06,0.01,Bezhotovostný príjem,PETER SAMUEL,"/DO2024-02-05/SPSKODA ZE NEKANDIDUJES TY NACISTA, ZASA SI MOHOL BYT POSLEDNY...AKO VO VSETKYCH VOLBACH KDE SI BOL....",,,,PETER SAMUEL
+54,2024-02-06,0.01,Bezhotovostný príjem,PETER SAMUEL,/DO2024-02-05/SPKATKA BOKOVA NA HRAD ----,,,,PETER SAMUEL
+55,2024-02-05,15.0,Bezhotovostný príjem,IGOR PANAK,"/DO2024-02-05/SPIGOR PANAK, KALINCIAKOVA 1759/27, SENEC 903 01 - DAR",,,0005022024,IGOR PANAK
+56,2024-02-05,25.0,Bezhotovostný príjem,Samuel Ľudovít Škvar,"/DO2024-02-04/SPSamuel Ľudovít Škvarka,dar na kandidátku",,,,Samuel Ľudovít Škvar
+57,2024-02-05,10.0,Bezhotovostný príjem,ELENA VLCKOVA,"/DO2024-02-02/SPElena Vlckova Senica Tovarenska 535, DAR",,,,ELENA VLCKOVA
+58,2024-02-02,-560.0,Výber v hotovosti,,,0558,,,úhrada nákladov na volebnú kampaň
+59,2024-02-01,-108.0,Bezhotovostná platba,,"GRYF MEDIA, s.r.o., prenajom reklam
+nej plochy GA001, februar 2024 + tl
+ac plagatov",0308,2300793,,"GRYF MEDIA, s.r.o., prenajom reklamnej plochy GA001, februar 2024 + tlac plagatov"
+60,2024-02-01,500.0,Bezhotovostný príjem,Marian Bednár,/DO2024-01-31/SPdar,0558,550308,,Marian Bednár
+61,2024-01-31,-30.01,Transakcia kartou,,"Nákup: OMV 2305, Bratislava, SK, dne 30.1.2024, částka  30.01 EUR",,0354,,"Nákup: OMV 2305, Bratislava, SK, dne 30.1.2024, částka  30.01 EUR"
+62,2024-01-30,-40.05,Transakcia kartou,,"Nákup: OMV 2314, Nitra, SK, dne 29.1.2024, částka  40.05 EUR",,0354,,"Nákup: OMV 2314, Nitra, SK, dne 29.1.2024, částka  40.05 EUR"
+63,2024-01-30,-390.0,Výber v hotovosti,,,0558,,,úhrada nákladov na volebnú kampaň
+64,2024-01-30,500.0,Bezhotovostný príjem,"Straňák Peter, MUDr.","/DO2024-01-29/SPPeter Stranak, Slnecna 166, Namestovo - Dar",0558,2024002,,"Straňák Peter, MUDr."
+65,2024-01-30,25.0,Bezhotovostný príjem,Pavol Skýpala,"/DO2024-01-29/SPPavol Skýpala, Fučíkova 636/11, 98701, Poltár, DAR",,,,Pavol Skýpala
+66,2024-01-29,10.0,Bezhotovostný príjem,Juraj Tököly,"/DO2024-01-26/SP Juraj Tokoly, Risnovce 557, dar",,,,Juraj Tököly
+67,2024-01-29,30.0,Bezhotovostný príjem,Jozef Capak,"/DO2024-01-26/SPJozef Capak, Puchov, dar",,,,Jozef Capak
+68,2024-01-29,10.0,Platba prevodom v rámci banky,"Szénasiová, Alžbeta","Alzbeta Szenasiova, Levice 93401, Polna 4,Dar",,,,"Alzbeta Szenasiova, Levice 93401, Polna 4,Dar"
+69,2024-01-26,30.0,Bezhotovostný príjem,Bronislava Minjariko,"/DO2024-01-25/SPBronislava Minjariková, Pribišova 2, 841 05 Bratis lava, dar",,,,Bronislava Minjariko
+70,2024-01-24,-460.0,Výber v hotovosti,,,0558,,,uhrada nákladov na volebnu kampan
+71,2024-01-24,30.0,Bezhotovostný príjem,Miroslav Pozník,"/DO2024-01-23/SPMiroslav Pozník ,Rozkvet 2064/139 ,01701 ,Považská Bystrica , dar",,,,Miroslav Pozník
+72,2024-01-23,100.0,Bezhotovostný príjem,Richard Šimčák,/DO2024-01-22/SPRichard Šimčák. Železiarenská 52 Košice Šaca 04015 . Dar.,,,,Richard Šimčák
+73,2024-01-23,48.0,Bezhotovostný príjem,TOMAS HABANIK,"Tomas Habanik, Dubovecka 45, Tr. Tepla, dar",,,,TOMAS HABANIK
+74,2024-01-22,24.0,Bezhotovostný príjem,Mária Štybrichová,"/DO2024-01-22/SP Maria Stybrichova, Krcava, dar",,,,Mária Štybrichová
+75,2024-01-22,30.0,Bezhotovostný príjem,Milan Minjarik,"/DO2024-01-19/SPMilan Minjarik, Rovníková 14, 821 02 Bratislava, d ar",,,,Milan Minjarik
+76,2024-01-18,50.0,Bezhotovostný príjem,Marek Lesík,/DO2024-01-18/SP Marek Lesik Culenova 5 Bratislava 811 09 DAR,,,,Marek Lesík
+77,2024-01-17,24.0,Bezhotovostný príjem,DUSAN FRATRIC,"/DO2024-01-16/SPDUSAN FRATRIC, POD ZECAKOM 47, BRATISLAVA, DAR",,,,DUSAN FRATRIC
+78,2024-01-15,-800.0,Výber v hotovosti,,,0558,,,úhrada nákladov na volebnú kampaň
+79,2024-01-15,25.0,Bezhotovostný príjem,Michal Kozák,"/DO2024-01-12/SPMichal Kozak, Jaltská 17, Košice, DAR",,,,Michal Kozák
+80,2024-01-15,1000.0,Bezhotovostný príjem,"Straňák Peter, MUDr.","/DO2024-01-12/SPPeter Stranak, Slnecna 166/24, Namestovo - Dar",0558,2024001,,"Straňák Peter, MUDr."
+81,2024-01-11,5.0,Platba prevodom v rámci banky,"Hrobárik, Martin",Martin Hrobarik Kolarovice 734 dar,,,,Martin Hrobarik Kolarovice 734 dar
+82,2024-01-10,20.0,Bezhotovostný príjem,Ivana Horváthová,"/DO2024-01-09/SP Ivana Horvathova, Dolna 54/31, Kremnica, dar",,,,Ivana Horváthová
+83,2024-01-09,10.0,Bezhotovostný príjem,"Maras Ladislav, JUDr",/DO2024-01-08/SPMaras Ladislav Presov Dar,0558,321963,,"Maras Ladislav, JUDr"
+84,2024-01-09,24.0,Bezhotovostný príjem,MATUSIK VLADIMIR,/DO2024-01-08/SPVladimir Matusik Upohlav 552 01801 Udica dar,,,,MATUSIK VLADIMIR
+85,2024-01-08,-340.0,Výber v hotovosti,,,0558,,,úhrada nákladov na volebnú kampaň
+86,2024-01-08,200.0,Bezhotovostný príjem,KOVALCIK MICHAL,/DO2024-01-07/SPMichal Kovalcik Slovenska Ves 387 Dar,,,,KOVALCIK MICHAL
+87,2024-01-08,100.0,Bezhotovostný príjem,Richard Székely,"/DO2024-01-05/SPAlexander Székely, Košice olivová 2 04001. DAR",,,,Richard Székely
+88,2024-01-08,20.0,Bezhotovostný príjem,Marián Chudý,/DO2024-01-06/SPMarian Chudy Emila Skákalu 1761/10Leopoldov 92041 DAR,,,,Marián Chudý
+89,2024-01-05,50.0,Bezhotovostný príjem,Pavol Skýpala,"/DO2024-01-04/SPPavol Skýpala, Fučíkova 636/11, 98701, Poltár, DAR",,,,Pavol Skýpala

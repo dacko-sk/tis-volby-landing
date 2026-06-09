@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
 import { newsCategories } from '../helpers/wp';
@@ -12,6 +15,18 @@ import Posts, { templates } from '../components/wp/Posts';
 
 function Home() {
     setTitle(t(labels.home.pageTitle));
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!sessionStorage.getItem('redirectedTo2026')) {
+            sessionStorage.setItem('redirectedTo2026', 'true');
+            // Redirect if we are still within the 2026 election period (e.g. before Nov 1, 2026)
+            if (new Date() < new Date('2026-11-01T00:00:00')) {
+                navigate('/samosprava2026', { replace: true });
+            }
+        }
+    }, [navigate]);
 
     return (
         <section>

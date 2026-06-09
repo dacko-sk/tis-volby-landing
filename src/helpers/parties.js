@@ -1,7 +1,7 @@
 import { isNumeric } from './helpers';
 import { separators } from './routes';
 
-const parties = {
+export const parties = {
     ALIANCIA: {
         accounts: { e24: 'aefea5d295', n23: 'aae53e5f23', r22: 5193282528 },
         aliases: [
@@ -37,6 +37,7 @@ const parties = {
     },
     KARMA: {
         accounts: { n23: '1db9f729c5' },
+        wp: 918,
     },
     KDH: {
         accounts: {
@@ -56,11 +57,13 @@ const parties = {
     },
     KSS: {
         accounts: { e24: 5214083457, n23: 5173959220, r22: 5193974137 },
+        aliases: ['KOMUNISTICKÁ STRANA SLOVENSKA'],
         fullName: 'KOMUNISTICKÁ STRANA SLOVENSKA',
         wp: 903,
     },
     'ĽS-HZDS': { aliases: ['LS-HZDS', 'LS - HZDS', 'HZDS'] },
     ĽSNS: {
+        fullName: 'Kotlebovci - Ľudová strana Naše Slovensko',
         accounts: {
             e24: 5213275473,
             n20: '2020-lsns',
@@ -77,6 +80,7 @@ const parties = {
     MF: {
         accounts: { n23: '5917b3b1b7' },
         fullName: 'MAĎARSKÉ FÓRUM',
+        wp: 912,
     },
     'MOST-HÍD': {
         accounts: { n20: '2020-mh', n23: '504c1be5d6' },
@@ -85,6 +89,11 @@ const parties = {
     MKO: {},
     MKS: {
         accounts: { n20: '2020-mks' },
+    },
+    MM: {
+        aliases: ['MODRI, MOST-HID'],
+        fullName: 'MODRÍ, MOST-HÍD',
+        wp: 917,
     },
     MYSLOVENSKO: {
         accounts: { e24: 5214774274, n23: 5204179906 },
@@ -106,13 +115,14 @@ const parties = {
         wp: 906,
     },
     'PS A SPOLU': { aliases: ['KOALÍCIA PROGRESÍVNE SLOVENSKO A SPOLU'] },
-    'PIRÁTSKA STRANA': {
+    SPS: {
         accounts: { e24: 2202814976, n23: 2401881936 },
-        aliases: ['PIRÁTSKA STRANA - SLOVENSKO'],
+        aliases: ['PIRÁTSKA STRANA - SLOVENSKO', 'PIRÁTSKA STRANA'],
         wp: 914,
     },
     PRINCÍP: {
         accounts: { n23: 5186956723, r22: 5186956723 },
+        wp: 924,
     },
     REPUBLIKA: {
         accounts: { e24: 4917050358, n23: 4786046155, r22: 4570401656 },
@@ -137,6 +147,7 @@ const parties = {
         accounts: { n23: 2502606052 },
         aliases: ['SLOVENSKÉ HNUTIE OBRODY'],
         fullName: 'SLOVENSKÉ HNUTIE OBRODY',
+        wp: 921,
     },
     SIEŤ: { aliases: ['#SIEŤ'] },
     SLOVENSKO: {
@@ -153,6 +164,7 @@ const parties = {
     'SME RODINA': {
         accounts: { n20: '2020-sr', n23: 5200310540, r22: 5189770449 },
         aliases: ['SME RODINA - BORIS KOLLÁR'],
+        wp: 909,
     },
     SMER: {
         accounts: {
@@ -199,6 +211,7 @@ const parties = {
     },
     SPRAVODLIVOSŤ: {
         accounts: { n23: 2945151763 },
+        wp: 915,
     },
     SRDCE: {
         accounts: { e24: 5213928091, n23: 5204184430 },
@@ -213,6 +226,7 @@ const parties = {
         accounts: { n23: 5204130889 },
         aliases: ['VLASTENECKÝ BLOK'],
         fullName: 'VLASTENECKÝ BLOK',
+        wp: 923,
     },
     VOLT: {
         accounts: { e24: 2947168454 },
@@ -222,6 +236,7 @@ const parties = {
     'ZA ĽUDÍ': {
         accounts: { n20: '2020-zl', n23: 2945150584, r22: 5190694287 },
         aliases: ['ZA LUDI'],
+        wp: 913,
     },
     ZR: {
         accounts: { e24: 5214182586 },
@@ -273,3 +288,72 @@ export const wpTagsMap = Object.fromEntries(
 );
 
 export const partyWpTag = (party) => parties[partyAlias(party)]?.wp ?? null;
+
+import { csvConfig } from '../hooks/AdsData';
+
+const partiesImages = require.context(
+    '../../public/img/parties',
+    false,
+    /\.(jpg|png)$/
+);
+const partiesSvgs = require.context(
+    '!@svgr/webpack!../../public/img/parties',
+    false,
+    /\.(svg)$/
+);
+
+export const partyImage = (name) => {
+    const searchName = name.toLowerCase();
+    const file = partiesImages
+        .keys()
+        .find(
+            (key) =>
+                !!['jpg', 'png'].find((ext) => key.toLowerCase().endsWith(`/${searchName}.${ext}`))
+        );
+    if (file) {
+        return (
+            <img src={partiesImages(file)} alt={name} className="party-logo" />
+        );
+    }
+    return null;
+};
+
+export const partySvg = (name) => {
+    const searchName = name.toLowerCase();
+    const svg = partiesSvgs.keys().find((key) => key.toLowerCase().endsWith(`/${searchName}.svg`));
+    if (svg) {
+        const PartySvg = partiesSvgs(svg).default;
+        return <PartySvg className="party-logo" />;
+    }
+    return null;
+};
+
+export const partyData = (name, accountData, adsData) => {
+    const alias = partyAlias(name);
+    const data = {
+        name,
+        alias,
+        image:
+            partySvg(alias) ??
+            partyImage(alias) ??
+            partySvg(name) ??
+            partyImage(name),
+        account: accountData,
+        ...(adsData ?? {}),
+    };
+    if (!data[csvConfig.ACCOUNTS.columns.FULL_NAME]) {
+        data[csvConfig.ACCOUNTS.columns.FULL_NAME] = partyFullName(alias) || name;
+    }
+    data.hasAccount = accountData !== false;
+    data.hasMeta = adsData && !!data[csvConfig.ACCOUNTS.columns.FB].length;
+    data.hasGoogle =
+        adsData && !!data[csvConfig.ACCOUNTS.columns.GOOGLE].length;
+    data.hasWp = adsData && !!data[csvConfig.ACCOUNTS.columns.WP];
+    data.hasCL = adsData && !!data[csvConfig.ACCOUNTS.columns.CL];
+    data.hasAssets = adsData && !!data[csvConfig.ACCOUNTS.columns.ASSETS];
+    data.hasReport =
+        adsData && !!data[csvConfig.ACCOUNTS.columns.REPORTS].length;
+    data.isValid = data.hasAccount || adsData !== false;
+
+    return data;
+};

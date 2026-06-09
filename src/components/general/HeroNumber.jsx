@@ -1,13 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
-import { currencyFormat } from '../../helpers/helpers';
+import { currencyFormat, numFormat } from '../../helpers/helpers';
 
 import LastUpdateTag from './LastUpdateTag';
 
 function HeroNumber({
     className,
     button,
+    currency = true,
     disclaimer,
     lastUpdate,
     link,
@@ -18,7 +19,7 @@ function HeroNumber({
         <div className={`${className} text-center`}>
             {title && <h2>{title}</h2>}
             <div className="hero-number">
-                {Number.isNaN(Number(number)) ? number : currencyFormat(number)}
+                {Number.isNaN(Number(number)) ? number : (currency ? currencyFormat(number) : numFormat(number))}
                 {lastUpdate ? (
                     <LastUpdateTag timestamp={lastUpdate}>
                         {disclaimer}

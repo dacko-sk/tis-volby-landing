@@ -288,6 +288,11 @@ th a {
   }
 }
 
+.unfade-image {
+  opacity: 1;
+  filter: saturate(100%);
+}
+
 .hover-bg {
   cursor: pointer;
   display: block;
@@ -310,6 +315,29 @@ th a {
   h3 {
     color: $tis-orange;
   }
+}
+
+.tis-icon-link {
+  @extend #{'.d-flex', '.justify-content-between'};
+  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+  padding: calc(0.5 * var(--bs-gutter-x));
+  &:hover,
+  &:focus {
+    background-color: $tis-grey;
+  }
+  [class^='col-'] > & {
+    @extend .h-100;
+  }
+
+  .download-icon {
+    width: 1.5em;
+  }
+}
+
+.inline-icon {
+  display: inline-block;
+  height: 1em;
+  vertical-align: text-bottom;
 }
 
 .bg-banner {

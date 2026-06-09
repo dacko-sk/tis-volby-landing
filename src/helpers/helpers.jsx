@@ -1,9 +1,18 @@
+import { setTitle as setBrowserTitle } from './browser';
+import { chartKeys } from './charts';
 import { getCurrentLocale } from './languages';
 
 export const isNumeric = (value) => !Number.isNaN(Number(value));
 
-export const fixNumber = (value) =>
-    Number(value.replace(',', '.').replace(' ', ''));
+export const fixNumber = (value) => {
+    if (typeof value === 'number') {
+        return value;
+    }
+    if (typeof value === 'string') {
+        return Number(value.replace(',', '.').replace(/\s/g, ''));
+    }
+    return Number(value) || 0;
+};
 
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat(getCurrentLocale(), options).format(value);
@@ -47,10 +56,23 @@ export const wholeCurrencyFormat = (value) =>
         notation: 'compact',
     });
 
-export const slovakDateFormat = (timestamp, options) =>
-    new Intl.DateTimeFormat(getCurrentLocale(), options).format(
-        new Date(typeof timestamp === 'number' ? 1000 * timestamp : timestamp)
+export const slovakDateFormat = (timestamp, options) => {
+    if (
+        timestamp === undefined ||
+        timestamp === null ||
+        timestamp === '' ||
+        timestamp === 0
+    ) {
+        return '';
+    }
+    const date = new Date(
+        typeof timestamp === 'number' ? 1000 * timestamp : timestamp
     );
+    if (isNaN(date.getTime())) {
+        return '';
+    }
+    return new Intl.DateTimeFormat(getCurrentLocale(), options).format(date);
+};
 
 export const dateTimeFormat = (timestamp) =>
     slovakDateFormat(timestamp, {
@@ -109,8 +131,11 @@ export const shortenValue = (value, length, removals) => {
 export const shortenUrl = (value) =>
     shortenValue(value, 32, ['https://', 'www.']);
 
-export const fixUrl = (url) =>
-    url.startsWith('http') ? url : `https://${url}`;
+export const fixUrl = (url) => {
+    if (Array.isArray(url)) return fixUrl(url[0]);
+    if (typeof url !== 'string') return '';
+    return url.startsWith('http') ? url : `https://${url}`;
+};
 
 export const decodeHTMLEntities = (rawStr) =>
     rawStr
@@ -179,13 +204,13 @@ export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
     return textOrReact;
 };
 
-export const sortNumbers = (asc) => (a, b) => (asc ?? true ? a - b : b - a);
+export const sortNumbers = (asc) => (a, b) => ((asc ?? true) ? a - b : b - a);
 
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];
 
 export const sortAlphabetically = (asc) => (a, b) =>
-    asc ?? true ? a.localeCompare(b) : b.localeCompare(a);
+    (asc ?? true) ? a.localeCompare(b) : b.localeCompare(a);
 
 export const sumOfValues = (obj) =>
     Object.values(obj).reduce((sum, val) => sum + val, 0);
@@ -213,3 +238,88 @@ export const swapName = (name) => {
 
 export const generateRandomString = (length) =>
     [...Array(length ?? 6)].map(() => Math.random().toString(36)[2]).join('');
+
+export const setTitle = setBrowserTitle;
+
+export const regions = {
+    BB: 'Banskobystrický kraj',
+    BA: 'Bratislavský kraj',
+    KE: 'Košický kraj',
+    NR: 'Nitriansky kraj',
+    PO: 'Prešovský kraj',
+    TN: 'Trenčiansky kraj',
+    TT: 'Trnavský kraj',
+    ZA: 'Žilinský kraj',
+};
+
+const replacements = {
+    ...regions,
+    'Banskobystrický samosprávny kraj': 'BBSK',
+    'Bratislavský samosprávny kraj': 'BSK',
+    'Košický samosprávny kraj': 'KSK',
+    'Nitriansky samosprávny kraj': 'NSK',
+    'Prešovský samosprávny kraj': 'PSK',
+    'Trenčiansky samosprávny kraj': 'TSK',
+    'Trnavský samosprávny kraj': 'TTSK',
+    'Žilinský samosprávny kraj': 'ŽSK',
+    Banskobystrický: 'Banskobystrický samosprávny kraj',
+    Bratislavský: 'Bratislavský samosprávny kraj',
+    Košický: 'Košický samosprávny kraj',
+    Nitriansky: 'Nitriansky samosprávny kraj',
+    Prešovský: 'Prešovský samosprávny kraj',
+    Trenčiansky: 'Trenčiansky samosprávny kraj',
+    Trnavský: 'Trnavský samosprávny kraj',
+    Žilinský: 'Žilinský samosprávny kraj',
+};
+
+export const substitute = (value) => replacements[value] ?? value;
+
+const cities = {
+    BB: 'Banská Bystrica',
+    BA: 'Bratislava',
+    KE: 'Košice',
+    NR: 'Nitra',
+    PO: 'Prešov',
+    TN: 'Trenčín',
+    TT: 'Trnava',
+    ZA: 'Žilina',
+    'Banskobystrický samosprávny kraj': 'Banská Bystrica',
+    'Bratislavský samosprávny kraj': 'Bratislava',
+    'Košický samosprávny kraj': 'Košice',
+    'Nitriansky samosprávny kraj': 'Nitra',
+    'Prešovský samosprávny kraj': 'Prešov',
+    'Trenčiansky samosprávny kraj': 'Trenčín',
+    'Trnavský samosprávny kraj': 'Trnava',
+    'Žilinský samosprávny kraj': 'Žilina',
+};
+
+export const regionalCity = (value) => cities[value] ?? value;
+
+export const sortBySpending = sortByNumericProp(chartKeys.OUTGOING, false);
+
+export const sortByDonors = sortByNumericProp(chartKeys.UNIQUE, false);
+
+export const getTimestampFromIsoDate = (string) => {
+    const t = new Date(string).getTime();
+    return Number.isNaN(t) ? 0 : t / 1000;
+};
+
+export const sortByTextProp = (prop) => (a, b) =>
+    a[prop].localeCompare(b[prop]);
+
+export const sortByName = sortByTextProp('name');
+
+export const getLastWord = (inputString) => {
+    if (!inputString.trim()) {
+        return '';
+    }
+
+    const words = inputString.split(' ');
+    return words[words.length - 1];
+};
+
+export const sortBySurname = (a, b) =>
+    getLastWord(a).localeCompare(getLastWord(b));
+
+export const badgePctFormat = (value) =>
+    Number(value) > -1 ? pctFormat(value) : 'N/A';

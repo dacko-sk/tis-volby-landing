@@ -19,6 +19,8 @@ function IconContent({ icon, label }) {
 }
 
 function SiteNavigator({ site }) {
+    const isInternal = (key) => key !== el.p19 && key !== el.n20;
+
     return (
         <div id="site-navigator">
             <h2 className="text-white mb-3">{t(labels.sitesTitle)}</h2>
@@ -48,7 +50,11 @@ function SiteNavigator({ site }) {
                     </Dropdown>
                 </Col>
                 {[
-                    [el.s22, icons.elections.r, labels.sites.regional],
+                    [
+                        [el.s26, el.s22],
+                        icons.elections.r,
+                        labels.sites.regional,
+                    ],
                     [
                         [el.n23, el.n20],
                         icons.elections.n,
@@ -79,17 +85,26 @@ function SiteNavigator({ site }) {
                                         />
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        {key.map((di) => (
-                                            <Dropdown.Item
-                                                key={di}
-                                                href={links[di]}
-                                                active={site === di}
-                                            >
-                                                {t(labels.elections[di])}
-                                            </Dropdown.Item>
-                                        ))}
+                                        {key.map((di) => {
+                                            const asProps = isInternal(di)
+                                                ? { as: Link, to: links[di] }
+                                                : { href: links[di] };
+                                            return (
+                                                <Dropdown.Item
+                                                    key={di}
+                                                    active={site === di}
+                                                    {...asProps}
+                                                >
+                                                    {t(labels.elections[di])}
+                                                </Dropdown.Item>
+                                            );
+                                        })}
                                     </Dropdown.Menu>
                                 </Dropdown>
+                            ) : isInternal(key) ? (
+                                <Link to={links[key]} className="sn-icon">
+                                    <IconContent icon={icon} label={label} />
+                                </Link>
                             ) : (
                                 <a href={links[key]} className="sn-icon">
                                     <IconContent icon={icon} label={label} />

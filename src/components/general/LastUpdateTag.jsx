@@ -2,6 +2,10 @@ import { labels, t } from '../../helpers/dictionary';
 import { dateTimeFormat } from '../../helpers/helpers';
 
 function LastUpdateTag({ children, timestamp }) {
+    const formattedDate = dateTimeFormat(timestamp);
+    if (!formattedDate) {
+        return null;
+    }
     return (
         <em className="disclaimer">
             {children && (
@@ -10,7 +14,7 @@ function LastUpdateTag({ children, timestamp }) {
                     <br />
                 </>
             )}
-            {t(labels.lastUpdate)} {dateTimeFormat(timestamp)}.
+            {t(labels.lastUpdate)} {formattedDate}.
         </em>
     );
 }

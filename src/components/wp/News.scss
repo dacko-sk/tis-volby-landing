@@ -21,7 +21,8 @@
       margin: 0;
       overflow: hidden;
     }
-    img {
+    img,
+    svg {
       max-height: 100%;
       max-width: 100%;
     }
@@ -36,6 +37,10 @@ a.article {
     &:focus {
       figure {
         border-style: solid;
+      }
+      img,
+      svg {
+        filter: saturate(100%);
       }
     }
     & > .row > .col-lg-3 {
@@ -73,6 +78,14 @@ a.article {
       border-color: $tis-score-unknown;
       border-style: dotted;
       border-width: 2px;
+    }
+    img,
+    svg {
+      filter: saturate(25%);
+    }
+    .cover {
+      bottom: 2px;
+      padding: 0 2px;
     }
     &.score-good {
       .thumb:after {
@@ -131,7 +144,8 @@ a.article {
         line-height: 2.15rem;
         transform: translate(50%, -50%) rotate(45deg) translate(0, 150%);
       }
-      img {
+      img,
+      svg {
         filter: saturate(25%);
       }
     }
@@ -202,7 +216,8 @@ ul.blocks-gallery-grid {
         width: 100%;
         height: 100%;
       }
-      img {
+      img,
+      svg {
         position: relative;
         top: 50%;
         transform: translateY(-50%);
@@ -223,6 +238,20 @@ ul.blocks-gallery-grid {
   .analysis-preview th {
     width: 33%;
   }
+  .articles.featured a.article .thumb:after {
+    font-size: 2em;
+    line-height: 2.65rem;
+  }
+  .analysis-preview .cover {
+    font-size: 1.25em;
+    padding: 0.4em 1em;
+    .articles.featured & {
+      font-size: 1.5em;
+    }
+    .articles.list & {
+      font-size: 1.1em;
+    }
+  }
 }
 
 @media (min-width: map.get($grid-breakpoints, 'xl')) {
@@ -230,6 +259,10 @@ ul.blocks-gallery-grid {
     & > .col-md {
       width: 20%;
     }
+  }
+  .articles.featured a.article .thumb:after {
+    font-size: 2.5em;
+    line-height: 3.15rem;
   }
 }
 
@@ -241,7 +274,8 @@ ul.blocks-gallery-grid {
       figure {
         position: relative;
       }
-      img {
+      img,
+      svg {
         max-height: 250px;
         position: relative;
         top: 0;
@@ -251,5 +285,34 @@ ul.blocks-gallery-grid {
   }
   .analysis-preview th {
     width: 25%;
+  }
+  .articles.featured a.article .thumb:after {
+    font-size: 3em;
+    line-height: 3.65rem;
+  }
+  .analysis-preview .cover {
+    font-size: 1.5em;
+    .articles.featured & {
+      font-size: 2em;
+    }
+  }
+}
+
+$fade: 0.3;
+.cover {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  span {
+    background-color: fade-out(black, $fade);
+    border-radius: 0;
+    display: inline-block;
+    line-height: 1.5em;
+    padding: 0.35em;
+    width: 100%;
+    white-space: normal;
+    &.info {
+      background-color: fade-out($tis-score-unknown, $fade);
+    }
   }
 }

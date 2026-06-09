@@ -3,20 +3,115 @@ import { Curve, DefaultLegendContent, Sector } from 'recharts';
 
 import { isMobile } from './browser';
 import { labels, t } from './dictionary';
+import { colors } from './constants';
 import { isNumeric, shortenValue } from './helpers';
 import { routes, separators } from './routes';
+
+import { municipalTypes, tempExtraAccountKeys } from '../hooks/AccountsData';
 
 const tooltipSeparator = ' : ';
 
 export const horizontalYaxisWidth = 80;
 export const verticalYaxisWidth = isMobile ? 120 : 180;
 
-export const tooltipNameFormat = (value) => {
-    const parts = value.split(separators.newline);
-    return <strong>{parts.length ? parts[0] : value}</strong>;
+export const chartKeys = {
+    AMOUNT: 'a',
+    CAMPAIGN: 'c',
+    GOOGLE: 'g',
+    INCOMING: 'i',
+    META: 'm',
+    PRECAMPAIGN: 'p',
+    OUTGOING: 'o',
+    TOTAL: 't',
+    UNIQUE: 'u',
 };
 
-export const tickLabel = (value) => {
+export const columnVariants = {
+    inOut: [
+        {
+            key: chartKeys.OUTGOING,
+            name: labels.charts.outgoing,
+            color: colors.colorOrange,
+        },
+        {
+            key: chartKeys.INCOMING,
+            name: labels.charts.incoming,
+            color: colors.colorDarkBlue,
+        },
+    ],
+    inOutStacked: [
+        {
+            key: chartKeys.OUTGOING,
+            name: labels.charts.outgoing,
+            color: colors.colorOrange,
+            stackId: 'finance',
+        },
+        {
+            key: chartKeys.INCOMING,
+            name: labels.charts.incoming,
+            color: colors.colorDarkBlue,
+            stackId: 'finance',
+        },
+    ],
+    finalReport: [
+        {
+            key: chartKeys.PRECAMPAIGN,
+            name: labels.charts.precampaign,
+            color: colors.colorDarkBlue,
+            stackId: 'FR',
+        },
+        {
+            key: chartKeys.CAMPAIGN,
+            name: labels.charts.campaign,
+            color: colors.colorOrange,
+            stackId: 'FR',
+        },
+    ],
+    spending: [
+        {
+            key: chartKeys.OUTGOING,
+            name: labels.charts.outgoing,
+            color: colors.colorLightBlue,
+        },
+    ],
+    amount: [
+        {
+            key: chartKeys.AMOUNT,
+            name: labels.ads.amount.title,
+            color: colors.colorOrange,
+        },
+    ],
+    donors: [
+        {
+            key: chartKeys.UNIQUE,
+            name: labels.charts.uniqeDonors,
+            color: colors.colorDarkBlue,
+        },
+    ],
+    online: [
+        {
+            key: chartKeys.META,
+            name: 'Meta',
+            color: colors.colorDarkBlue,
+            stackId: 'online',
+        },
+        {
+            key: chartKeys.GOOGLE,
+            name: 'Google',
+            color: colors.colorOrange,
+            stackId: 'online',
+        },
+    ],
+};
+
+export const tooltipNameFormat = (value) => {
+    const parts = value.split(separators.newline);
+    const nameStr = parts.length ? parts[0] : value;
+    const cleanName = nameStr.split(separators.parts)[0];
+    return <strong>{cleanName}</strong>;
+};
+
+export const tickLabel = (value, x) => {
     const args = value.split(separators.newline);
     // if tick label consist of name + \n + route name - create link to that route
     if (args.length > 1) {
@@ -24,6 +119,65 @@ export const tickLabel = (value) => {
         const route = args.splice(1, 1)[0];
         if (typeof routes[route] === 'function') {
             return <Link to={routes[route](...args)}>{args[0]}</Link>;
+        } else if (route.includes(separators.parts)) {
+            const nameParts = args[0].split(separators.parts);
+            const name = nameParts.length > 1 ? nameParts[0] : args[0];
+            const isElected = nameParts.length > 1;
+            const parts = route.split(separators.parts);
+            let town = parts.length > 1 ? parts[1] : route;
+            const multiTown = town.split(' a ');
+            let subTown = null;
+            if (multiTown.length > 1) {
+                [town, subTown] = multiTown;
+            }
+            const region = parts.length > 1 ? parts[0] : null;
+            const dy = '1.2em';
+
+            const nameLink = (
+                <Link to={routes.candidateMunicipal(name, town)}>{name}</Link>
+            );
+            const numLines = 1 + 1 + (args.length > 1 && args[1] ? 1 : 0);
+            const firstDy = `${-((numLines - 1) * 1.2) / 2}em`;
+
+            const firstLine = isElected ? (
+                <tspan dy={firstDy} fill={colors.colorLightBlue}>
+                    {nameLink}
+                </tspan>
+            ) : (
+                <tspan dy={firstDy}>{nameLink}</tspan>
+            );
+
+            return (
+                <>
+                    {firstLine}
+                    {town === '…' ? (
+                        <tspan x={x} dy={dy} fontWeight="normal">
+                            {town}
+                        </tspan>
+                    ) : subTown ? (
+                        <tspan x={x} dy={dy} fontWeight="normal">
+                            <Link to={routes.municipality(town, region)}>
+                                {town}
+                            </Link>
+                            {' a '}
+                            <Link to={routes.municipality(subTown, region)}>
+                                {subTown}
+                            </Link>
+                        </tspan>
+                    ) : (
+                        <tspan x={x} dy={dy} fontWeight="normal">
+                            <Link to={routes.municipality(town, region)}>
+                                {town}
+                            </Link>
+                        </tspan>
+                    )}
+                    {args.length > 1 && args[1] && (
+                        <tspan x={x} dy={dy} fontWeight="normal">
+                            {args[1]}
+                        </tspan>
+                    )}
+                </>
+            );
         }
     }
     return value;
@@ -31,6 +185,13 @@ export const tickLabel = (value) => {
 
 export const partyChartLabel = (party, segment) =>
     [party, 'party', ...(segment ? [segment] : [])].join(separators.newline);
+
+export const getPartyChartLabel = partyChartLabel;
+
+export const candidateChartLabel = (candidate, segment) =>
+    [candidate, 'candidate', ...(segment ? [segment] : [])].join(
+        separators.newline
+    );
 
 export const shortChartNames = (name) => shortenValue(name, isMobile ? 30 : 60);
 
@@ -205,15 +366,16 @@ export const PieLabel = (showName, formatPercent, formatter) =>
     };
 
 export function PieLabelLine(props) {
-    const { color } = props;
-    return <Curve {...props} stroke={color} />;
+    const { color, key, ...rest } = props;
+    return <Curve key={key} {...rest} stroke={color} />;
 }
 
 export function PieSector(props) {
-    const { color, innerRadius, isActive, outerRadius } = props;
+    const { color, innerRadius, isActive, outerRadius, key, ...rest } = props;
     return (
         <Sector
-            {...props}
+            key={key}
+            {...rest}
             className={isActive ? '' : 'sector-inactive'}
             fill={color}
             innerRadius={
@@ -235,3 +397,28 @@ export function PieLegendContent(props) {
     }));
     return <DefaultLegendContent {...props} payload={newPayload} />;
 }
+
+export const getMunicipalityTickText = (row, showType) => {
+    const n =
+        row[tempExtraAccountKeys.name] +
+        (row.isElected ? `${separators.parts}*` : '');
+    const type =
+        showType === true
+            ? separators.newline +
+              t(
+                  labels.elections.municipalTypes[
+                      row.isRegional
+                          ? municipalTypes.regional
+                          : municipalTypes.local
+                  ]
+              )
+            : '';
+    return (
+        n +
+        separators.newline +
+        row[tempExtraAccountKeys.region] +
+        separators.parts +
+        row.municipalityShortName +
+        type
+    );
+};
