@@ -30,7 +30,7 @@ function Map() {
             >
                 <TileLayer
                     attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-                    url="https://api.mapbox.com/styles/v1/{id}/tiles/256/{z}/{x}/{y}?access_token=REDACTED"
+                    url={`https://api.mapbox.com/styles/v1/{id}/tiles/256/{z}/{x}/{y}?access_token=${process.env.DHC_MAPBOX_TOKEN}`}
                     id="dacko/ckkwz2cuz020917oddvwqi641"
                     tileSize={256}
                 />
