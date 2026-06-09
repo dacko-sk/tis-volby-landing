@@ -9,13 +9,13 @@ import Dotenv from 'dotenv-webpack';
 import pkg from './package.json' with { type: 'json' };
 import appManifest from './public/manifest.json' with { type: 'json' };
 
-const { homepage } = pkg;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default (env, argv) => {
     const isEnvProduction = argv.mode === 'production';
-    const rootPath = homepage && isEnvProduction ? homepage : '/';
+    const rootPath = '/';
     const plugins = [
         new HtmlWebpackPlugin({
             template: 'public/index.html',
@@ -29,7 +29,7 @@ export default (env, argv) => {
         }),
         new WebpackManifestPlugin({
             fileName: 'asset-manifest.json',
-            publicPath: homepage,
+            publicPath: rootPath,
             generate: (seed, files, entrypoints) => {
                 const manifestFiles = files.reduce((manifest, file) => {
                     const m = manifest;
@@ -94,7 +94,7 @@ export default (env, argv) => {
                 disableDotRule: true,
             },
             hot: true,
-            open: [homepage],
+            open: [rootPath],
             port: 3000,
         },
         entry: './src/index.jsx',
@@ -163,7 +163,7 @@ export default (env, argv) => {
         },
         output: {
             clean: true,
-            path: path.join(__dirname, '/build'),
+            path: path.join(__dirname, 'build'),
             pathinfo: !isEnvProduction,
             publicPath: rootPath,
             filename: isEnvProduction
